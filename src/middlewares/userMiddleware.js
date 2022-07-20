@@ -6,8 +6,8 @@ import { SUBMIT_LOGIN, submitLoginSuccess } from 'src/actions/user';
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
-      store.dispatch(submitLoginSuccess());
       next(action);
+      store.dispatch(submitLoginSuccess());
       break;
     }
     default:
