@@ -1,11 +1,15 @@
 // == Import
+import { Routes } from 'react-router-dom';
+
 import './styles.css';
 
 // == Composant
 function App() {
   return (
     <div className="app">
-      <h1>Composant : App</h1>
+      <Routes>
+        <h1>Composant : App</h1>
+      </Routes>
     </div>
   );
 }
