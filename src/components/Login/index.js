@@ -5,9 +5,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 
 import './style.scss';
-import Field from '../InputField';
+import Field from 'src/components/InputField';
+import Header from 'src/components/Header';
 
-import { changeInputField, submitLogin } from '../../actions/user';
+import { changeInputField, submitLogin } from 'src/actions/user';
 
 export default function Login() {
   const {
@@ -19,6 +20,7 @@ export default function Login() {
 
   return (
     <>
+      <Header />
       <CssBaseline />
       <Container fixed>
         <Box
