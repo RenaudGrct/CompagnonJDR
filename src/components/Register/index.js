@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Field from 'src/components/InputField';
 import Header from 'src/components/Header';
 
-import { changeInputField, submitRegister } from '../../actions/user';
+import { changeInputField, submitRegister } from 'src/actions/user';
 
 export default function Register() {
   const {
