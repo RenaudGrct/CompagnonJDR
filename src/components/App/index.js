@@ -1,8 +1,9 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
 
-import SignUp from 'src/components/SignUp';
-import SignIn from 'src/components/SignIn';
+import Register from 'src/components/Register';
+import Login from 'src/components/Login';
+import HomePage from 'src/components/HomePage';
 
 import './styles.css';
 
@@ -11,8 +12,9 @@ function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

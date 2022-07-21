@@ -1,12 +1,12 @@
-export const CHANGE_LOGIN_FIELD = 'CHANGE_SIGN_IN_FIELD';
+export const CHANGE_INPUT_FIELD = 'CHANGE_INPUT_FIELD';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const SUBMIT_LOGIN_SUCCESS = 'SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
 export const SUBMIT_REGISTER_SUCESS = 'SUBMIT_REGISTER_SUCESS';
 export const LOG_OUT = 'SUBMIT_LOGIN';
 
-export const changeSignInField = (newValue, fieldName) => ({
-  type: CHANGE_LOGIN_FIELD,
+export const changeInputField = (newValue, fieldName) => ({
+  type: CHANGE_INPUT_FIELD,
   newValue,
   fieldName,
 });
