@@ -11,6 +11,7 @@ function Homepage() {
       <CssBaseline />
       <Container fixed>
         <Box
+          color="primary"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -24,6 +25,7 @@ function Homepage() {
         >
           <Link to="/login">
             <Button
+              color="secondary"
               variant="contained"
               type="submit"
               sx={{

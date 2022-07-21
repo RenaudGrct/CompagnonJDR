@@ -28,6 +28,17 @@ export default function TestComponent() {
       <Container fixed>
         <Box
           sx={{
+
+            // // test
+            // color: 'primary.main',
+            // backgroundColor: 'primary.dark',
+            // '&:hover': {
+            //   backgroundColor: 'primary.main',
+            //   opacity: [0.9, 0.8, 0.7],
+            // },
+            // // fin du test
+
+
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -39,6 +50,16 @@ export default function TestComponent() {
           <Box
             component="form"
             sx={{
+
+              // // test
+              // color: 'primary.main',
+              // backgroundColor: 'primary.dark',
+              // '&:hover': {
+              //   backgroundColor: 'primary.main',
+              //   opacity: [0.9, 0.8, 0.7],
+              // },
+              // // fin du test
+
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -159,8 +180,9 @@ export default function TestComponent() {
             <Button
               variant="contained"
               type="button"
+              color="error"
             >
-              Supprimer
+              Supprimer le compte
             </Button>
           </Box>
         </Box>
