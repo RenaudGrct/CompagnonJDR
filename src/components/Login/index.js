@@ -12,8 +12,8 @@ import { changeInputField, submitLogin } from 'src/actions/user';
 
 export default function Login() {
   const {
-    email,
-    password,
+    userEmail,
+    userPassword,
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -53,18 +53,18 @@ export default function Login() {
               required
               id="outlined-required"
               label="E-mail"
-              name="email"
+              name="userEmail"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={email}
+              value={userEmail}
             />
             <Field
               required
               id="outlined-required"
               label="Mot de passe"
               type="password"
-              name="password"
+              name="userPassword"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={password}
+              value={userPassword}
             />
             <div>
               <Button

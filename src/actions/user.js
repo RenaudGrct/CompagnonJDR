@@ -4,6 +4,7 @@ export const SUBMIT_LOGIN_SUCCESS = 'SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
 export const SUBMIT_REGISTER_SUCESS = 'SUBMIT_REGISTER_SUCESS';
 export const LOG_OUT = 'SUBMIT_LOGIN';
+export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
 
 export const changeInputField = (newValue, fieldName) => ({
   type: CHANGE_INPUT_FIELD,
@@ -29,4 +30,8 @@ export const submitRegister = () => ({
 
 export const submitRegisterSuccess = () => ({
   type: SUBMIT_REGISTER_SUCESS,
+});
+
+export const toggleIsReadOnly = () => ({
+  type: TOGGLE_IS_READONLY,
 });

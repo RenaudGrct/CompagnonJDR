@@ -3,13 +3,17 @@ import {
   SUBMIT_LOGIN_SUCCESS,
   LOG_OUT,
   SUBMIT_REGISTER_SUCESS,
+  TOGGLE_IS_READONLY,
 } from 'src/actions/user';
 
 export const initialState = {
 
-  email: '',
-  password: '',
+  userName: '',
+  userEmail: '',
+  userPassword: '',
+  userConfirmPassword: '',
   isLogged: false,
+  isReadOnly: true,
   registerName: '',
   registerEmail: '',
   registerPassword: '',
@@ -47,6 +51,15 @@ const reducer = (state = initialState, action = {}) => {
         registerEmail: '',
         registerPassword: '',
         registerConfirmPassword: '',
+      };
+    case TOGGLE_IS_READONLY:
+      return {
+        ...state,
+        userName: '',
+        userEmail: '',
+        userPassword: '',
+        userConfirmPassword: '',
+        isReadOnly: !state.isReadOnly,
       };
     default:
       return state;

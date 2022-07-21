@@ -13,6 +13,7 @@ function Field({
   type,
   label,
   name,
+  placeholder,
   onChange,
 }) {
   const handleChange = (evt) => {
@@ -28,6 +29,7 @@ function Field({
 
     <>
       <TextField
+        // readonly="readonly"
         required
         id="outlined-required"
         label={label}
@@ -35,6 +37,7 @@ function Field({
         value={value}
         type={type}
         onChange={handleChange}
+        placeholder={placeholder}
       />
 
       {/* <label
@@ -51,6 +54,7 @@ Field.propTypes = {
   value: PropTypes.string,
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
 };
@@ -59,6 +63,7 @@ Field.propTypes = {
 Field.defaultProps = {
   value: '',
   type: 'text',
+  placeholder: '',
 };
 
 // == Export
