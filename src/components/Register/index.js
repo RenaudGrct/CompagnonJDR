@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
 import Field from 'src/components/InputField';
+import Header from 'src/components/Header';
 
 import { changeInputField, submitRegister } from '../../actions/user';
 
@@ -20,6 +21,7 @@ export default function Register() {
 
   return (
     <>
+      <Header />
       <CssBaseline />
       <Container fixed>
         <Box
