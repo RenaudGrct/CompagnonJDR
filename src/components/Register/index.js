@@ -8,7 +8,7 @@ import Field from 'src/components/InputField';
 
 import { changeInputField, submitRegister } from '../../actions/user';
 
-function Register() {
+export default function Register() {
   const {
     registerName,
     registerEmail,
@@ -85,7 +85,7 @@ function Register() {
               variant="contained"
               type="submit"
             >
-              S'enregistrer
+              Créer compte
             </Button>
 
           </Box>
@@ -94,5 +94,3 @@ function Register() {
     </>
   );
 }
-
-export default SignUp;

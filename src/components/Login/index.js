@@ -7,9 +7,9 @@ import Container from '@mui/material/Container';
 import './style.scss';
 import Field from '../InputField';
 
-import { changeSignInField, submitLogin } from '../../actions/user';
+import { changeInputField, submitLogin } from '../../actions/user';
 
-export default function SignIn() {
+export default function Login() {
   const {
     email,
     password,
@@ -52,7 +52,7 @@ export default function SignIn() {
               id="outlined-required"
               label="E-mail"
               name="email"
-              onChange={(newValue, fieldName) => dispatch(changeSignInField(newValue, fieldName))}
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={email}
             />
             <Field
@@ -61,7 +61,7 @@ export default function SignIn() {
               label="Mot de passe"
               type="password"
               name="password"
-              onChange={(newValue, fieldName) => dispatch(changeSignInField(newValue, fieldName))}
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={password}
             />
             <div>

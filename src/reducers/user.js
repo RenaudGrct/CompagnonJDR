@@ -1,5 +1,5 @@
 import {
-  CHANGE_LOGIN_FIELD,
+  CHANGE_INPUT_FIELD,
   SUBMIT_LOGIN_SUCCESS,
   LOG_OUT,
   SUBMIT_REGISTER_SUCESS,
@@ -19,7 +19,7 @@ export const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_LOGIN_FIELD:
+    case CHANGE_INPUT_FIELD:
       return {
         ...state,
         [action.fieldName]: action.newValue,
