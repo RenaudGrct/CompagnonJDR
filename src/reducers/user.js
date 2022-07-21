@@ -1,10 +1,19 @@
-import { CHANGE_LOGIN_FIELD, SUBMIT_LOGIN_SUCCESS, LOG_OUT } from 'src/actions/user';
+import {
+  CHANGE_LOGIN_FIELD,
+  SUBMIT_LOGIN_SUCCESS,
+  LOG_OUT,
+  SUBMIT_REGISTER_SUCESS,
+} from 'src/actions/user';
 
 export const initialState = {
 
   email: '',
   password: '',
   isLogged: false,
+  registerName: '',
+  registerEmail: '',
+  registerPassword: '',
+  registerConfirmPassword: '',
 
 };
 
@@ -30,6 +39,14 @@ const reducer = (state = initialState, action = {}) => {
         email: '',
         password: '',
         isLogged: false,
+      };
+    case SUBMIT_REGISTER_SUCESS:
+      return {
+        ...state,
+        registerName: '',
+        registerEmail: '',
+        registerPassword: '',
+        registerConfirmPassword: '',
       };
     default:
       return state;
