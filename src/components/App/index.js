@@ -5,6 +5,7 @@ import { grey } from '@mui/material/colors';
 
 import Register from 'src/components/Register';
 import Login from 'src/components/Login';
+import Header from 'src/components/Header';
 import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
 import TestComponent from 'src/components/TestComponent';
@@ -45,6 +46,7 @@ function App() {
 
     <div className="app">
       <ThemeProvider theme={theme}>
+        <Header />
         <Routes>
           <Route path="/test" element={<TestComponent />} />
           <Route path="/" element={<HomePage />} />

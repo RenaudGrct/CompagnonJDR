@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import Field from 'src/components/InputField';
-import Header from 'src/components/Header';
 
 import { changeInputField, submitRegister, toggleIsReadOnly } from 'src/actions/user';
 
@@ -23,115 +22,103 @@ export default function TestComponent() {
 
   return (
     <>
-      <Header />
       <CssBaseline />
       <Container fixed>
         <Box
+          component="form"
           sx={{
+            color: 'primary.main',
+            backgroundColor: 'primary.main',
+            opacity: [0.9, 0.8, 0.7],
+            height: '90vh',
+            marginTop: '5rem',
+            padding: '1rem',
+            gap: '2rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: '#cfe8fc',
-            height: '80vh',
-            color: 'primary.main',
-            backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
+          }}
+          noValidate
+          autoComplete="off"
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(submitRegister());
           }}
         >
-          <Box
-            component="form"
-            sx={{
+          {isReadOnly ? (
+            <TextField
+              sx={{
 
-              color: 'primary.main',
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
+                // color: 'primary.main',
+                backgroundColor: 'primary.main',
+                opacity: [0.9, 0.8, 0.7],
+              }}
+              disabled
+              id="outlined-disabled"
+              label="Nom d'utilisateur"
+              name="userName"
+              value={userName}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          ) : (
+            <Field
+              required
+              id="outlined-required"
+              label="Nom d'utilisateur"
+              name="userName"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userName}
+            />
+          )}
+          {isReadOnly ? (
+            <TextField
+              disabled
+              id="outlined-disabled"
+              label="Email"
+              name="userEmail"
+              value={userEmail}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          ) : (
+            <Field
+              required
+              id="outlined-required"
+              label="Email"
+              name="userEmail"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userEmail}
+            />
+          )}
+          {isReadOnly ? (
+            <TextField
+              disabled
+              id="filled-disabled"
+              label="Mot de passe"
+              type="password"
+              name="userPassword"
+              value={userPassword}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          ) : (
+            <Field
+              required
+              id="outlined-required"
+              label="Mot de passe"
+              type="password"
+              name="userPassword"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userPassword}
+            />
+          )}
 
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              '& > :not(style)': { m: '1rem', width: '30ch' },
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={(e) => {
-              e.preventDefault();
-              dispatch(submitRegister());
-            }}
-          >
-            {isReadOnly ? (
-              <TextField
-                sx={{
-
-                  // color: 'primary.main',
-                  backgroundColor: 'primary.main',
-                  opacity: [0.9, 0.8, 0.7],
-                }}
-                disabled
-                id="outlined-disabled"
-                label="Nom d'utilisateur"
-                name="userName"
-                value={userName}
-                InputProps={{
-                  readOnly: true,
-                }}
-              />
-            ) : (
-              <Field
-                required
-                id="outlined-required"
-                label="Nom d'utilisateur"
-                name="userName"
-                onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-                value={userName}
-              />
-            )}
-            {isReadOnly ? (
-              <TextField
-                disabled
-                id="outlined-disabled"
-                label="Email"
-                name="userEmail"
-                value={userEmail}
-                InputProps={{
-                  readOnly: true,
-                }}
-              />
-            ) : (
-              <Field
-                required
-                id="outlined-required"
-                label="Email"
-                name="userEmail"
-                onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-                value={userEmail}
-              />
-            )}
-            {isReadOnly ? (
-              <TextField
-                disabled
-                id="filled-disabled"
-                label="Mot de passe"
-                type="password"
-                name="userPassword"
-                value={userPassword}
-                InputProps={{
-                  readOnly: true,
-                }}
-              />
-            ) : (
-              <Field
-                required
-                id="outlined-required"
-                label="Mot de passe"
-                type="password"
-                name="userPassword"
-                onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-                value={userPassword}
-              />
-            )}
-
-            {!isReadOnly && (
+          {!isReadOnly && (
             <Field
               required
               id="outlined-required"
@@ -141,45 +128,44 @@ export default function TestComponent() {
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={userConfirmPassword}
             />
-            )}
-            {isReadOnly ? (
-              <Button
-                color="secondary"
-                variant="contained"
-                type="button"
-                onClick={() => dispatch(toggleIsReadOnly())}
-              >
-                Modifier
-              </Button>
-            ) : (
-              <Button
-                color="secondary"
-                variant="contained"
-                type="button"
-                onClick={() => dispatch(toggleIsReadOnly())}
-              >
-                Enregistrer
-              </Button>
-            )}
-
-            {isReadOnly ? null : (
-              <Button
-                color="secondary"
-                variant="contained"
-                type="button"
-                onClick={() => dispatch(toggleIsReadOnly())}
-              >
-                Annuler
-              </Button>
-            )}
+          )}
+          {isReadOnly ? (
             <Button
+              color="secondary"
               variant="contained"
               type="button"
-              color="error"
+              onClick={() => dispatch(toggleIsReadOnly())}
             >
-              Supprimer le compte
+              Modifier
             </Button>
-          </Box>
+          ) : (
+            <Button
+              color="secondary"
+              variant="contained"
+              type="button"
+              onClick={() => dispatch(toggleIsReadOnly())}
+            >
+              Enregistrer
+            </Button>
+          )}
+
+          {isReadOnly ? null : (
+            <Button
+              color="secondary"
+              variant="contained"
+              type="button"
+              onClick={() => dispatch(toggleIsReadOnly())}
+            >
+              Annuler
+            </Button>
+          )}
+          <Button
+            variant="contained"
+            type="button"
+            color="error"
+          >
+            Supprimer le compte
+          </Button>
         </Box>
       </Container>
     </>

@@ -60,9 +60,9 @@ export default function Header() {
           >
             <Link to="/">COMPAGNON JDR</Link>
           </Typography>
-          {isGuest && (
+          {!isGuest && (
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Ouvrir Menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Avatar" src={avatar} />
               </IconButton>

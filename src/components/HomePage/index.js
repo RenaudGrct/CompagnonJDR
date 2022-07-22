@@ -9,7 +9,14 @@ function Homepage() {
 
     <>
       <CssBaseline />
-      <Container fixed>
+      <Container
+        fixed
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Box
           color="primary"
           sx={{
@@ -17,8 +24,9 @@ function Homepage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: '#cfe8fc',
-            height: '80vh',
+            height: '50vh',
+            marginTop: '10rem',
+            padding: '1rem',
             gap: '2rem',
             color: 'primary.main',
             backgroundColor: 'primary.main',

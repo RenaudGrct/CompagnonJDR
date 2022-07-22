@@ -6,7 +6,6 @@ import Container from '@mui/material/Container';
 
 import './style.scss';
 import Field from 'src/components/InputField';
-import Header from 'src/components/Header';
 
 import { changeInputField, submitLogin } from 'src/actions/user';
 
@@ -20,69 +19,65 @@ export default function Login() {
 
   return (
     <>
-      <Header />
       <CssBaseline />
-      <Container fixed>
+      <Container
+        fixed
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Box
+          component="form"
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             bgcolor: '#cfe8fc',
-            height: '80vh',
+            height: '50vh',
+            marginTop: '10rem',
+            padding: '3rem',
+            gap: '2rem',
             color: 'primary.main',
             backgroundColor: 'primary.main',
             opacity: [0.9, 0.8, 0.7],
           }}
+          noValidate
+          autoComplete="off"
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(submitLogin());
+          }}
         >
-          <Box
-            component="form"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              '& > :not(style)': { m: '1rem', width: '30ch' },
-              color: 'primary.main',
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={(e) => {
-              e.preventDefault();
-              dispatch(submitLogin());
-            }}
-          >
 
-            <Field
-              required
-              id="outlined-required"
-              label="E-mail"
-              name="userEmail"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userEmail}
-            />
-            <Field
-              required
-              id="outlined-required"
-              label="Mot de passe"
-              type="password"
-              name="userPassword"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userPassword}
-            />
-            <div>
-              <Button
-                color="secondary"
-                variant="contained"
-                type="submit"
-              >Se connecter
-              </Button>
-            </div>
-          </Box>
+          <Field
+            required
+            id="outlined-required"
+            label="E-mail"
+            name="userEmail"
+            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+            value={userEmail}
+          />
+          <Field
+            required
+            id="outlined-required"
+            label="Mot de passe"
+            type="password"
+            name="userPassword"
+            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+            value={userPassword}
+          />
+          <div>
+            <Button
+              color="secondary"
+              variant="contained"
+              type="submit"
+            >Se connecter
+            </Button>
+          </div>
         </Box>
-
       </Container>
     </>
 
