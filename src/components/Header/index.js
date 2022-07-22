@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,9 +13,23 @@ import MenuItem from '@mui/material/MenuItem';
 import avatar from 'src/assets/images/elfe.png';
 import { Link } from 'react-router-dom';
 
-const settings = ['Mon compte', 'Mes perso', 'Se deconnecter'];
+const settings = [
+  {
+    label: 'Mon compte',
+    url: '/profile',
+  }, {
+    label: 'Mes perso',
+    url: '/characters',
+  }, {
+    label: 'Se deconnecter',
+    url: '/logout',
+  }];
 
 export default function Header() {
+  const {
+    isGuest,
+  } = useSelector((state) => state.user);
+
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -45,6 +60,7 @@ export default function Header() {
           >
             <Link to="/">COMPAGNON JDR</Link>
           </Typography>
+          {isGuest && (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -73,19 +89,23 @@ export default function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem
-                  sx={{
-                    backgroundColor: 'primary.main',
-                    color: '#fff',
-                  }}
-                  key={setting}
-                  onClick={handleCloseUserMenu}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+
+                <Link to={setting.url}>
+                  <MenuItem
+                    sx={{
+                      backgroundColor: 'primary.main',
+                      color: '#fff',
+                    }}
+                    key={setting.label}
+                    onClick={handleCloseUserMenu}
+                  >
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

@@ -28,8 +28,9 @@ export const submitRegister = () => ({
   type: SUBMIT_REGISTER,
 });
 
-export const submitRegisterSuccess = () => ({
+export const submitRegisterSuccess = (response) => ({
   type: SUBMIT_REGISTER_SUCESS,
+  ...response,
 });
 
 export const toggleIsReadOnly = () => ({

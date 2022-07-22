@@ -14,10 +14,7 @@ export const initialState = {
   userConfirmPassword: '',
   isLogged: false,
   isReadOnly: true,
-  registerName: '',
-  registerEmail: '',
-  registerPassword: '',
-  registerConfirmPassword: '',
+  isGuest: true,
 
 };
 
@@ -47,10 +44,12 @@ const reducer = (state = initialState, action = {}) => {
     case SUBMIT_REGISTER_SUCESS:
       return {
         ...state,
-        registerName: '',
-        registerEmail: '',
-        registerPassword: '',
-        registerConfirmPassword: '',
+        isLogged: true,
+        userName: action.response.data.name,
+        userEmail: action.response.data.email,
+        userPassword: '',
+        userConfirmPassword: '',
+        isGuest: false,
       };
     case TOGGLE_IS_READONLY:
       return {

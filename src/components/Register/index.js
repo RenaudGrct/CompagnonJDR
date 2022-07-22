@@ -11,10 +11,10 @@ import { changeInputField, submitRegister } from 'src/actions/user';
 
 export default function Register() {
   const {
-    registerName,
-    registerEmail,
-    registerPassword,
-    registerConfirmPassword,
+    userName,
+    userEmail,
+    userPassword,
+    userConfirmPassword,
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -59,35 +59,35 @@ export default function Register() {
               required
               id="outlined-required"
               label="Nom d'utilisateur"
-              name="registerName"
+              name="userName"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={registerName}
+              value={userName}
             />
             <Field
               required
               id="outlined-required"
               label="E-mail"
-              name="registerEmail"
+              name="userEmail"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={registerEmail}
+              value={userEmail}
             />
             <Field
               required
               id="outlined-required"
               label="Mot de passe"
               type="password"
-              name="registerPassword"
+              name="userPassword"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={registerPassword}
+              value={userPassword}
             />
             <Field
               required
               id="outlined-required"
               label="Confirmation mot de passe"
               type="password"
-              name="registerConfirmPassword"
+              name="userConfirmPassword"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={registerConfirmPassword}
+              value={userConfirmPassword}
             />
             <Button
               color="secondary"
