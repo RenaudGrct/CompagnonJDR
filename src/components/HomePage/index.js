@@ -20,6 +20,9 @@ function Homepage() {
             bgcolor: '#cfe8fc',
             height: '80vh',
             gap: '2rem',
+            color: 'primary.main',
+            backgroundColor: 'primary.main',
+            opacity: [0.9, 0.8, 0.7],
 
           }}
         >
@@ -37,17 +40,19 @@ function Homepage() {
           </Link>
           <Link to="/register">
             <Button
+              color="secondary"
               variant="contained"
               type="submit"
               sx={{
                 width: '20rem',
               }}
             >
-              Créer un compte
+              Créer compte
             </Button>
           </Link>
           <Link to="/register">
             <Button
+              color="secondary"
               variant="contained"
               type="submit"
               sx={{

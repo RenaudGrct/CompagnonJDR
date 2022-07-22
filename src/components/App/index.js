@@ -1,7 +1,7 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { orange, deepPurple } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 import Register from 'src/components/Register';
 import Login from 'src/components/Login';
@@ -14,12 +14,28 @@ import './styles.css';
 const theme = createTheme({
 
   palette: {
+    type: 'light',
     primary: {
-      main: orange[500],
-      dark: deepPurple[900],
+      main: grey[900],
+      // dark: grey[900],
+      // light: grey[900],
+    },
+    // secondary controle la couleur des boutons
+    secondary: {
+      main: '#000000',
+    },
+    // text controle la couleur du texte
+    text: {
+      primary: '#fff',
+      secondary: '#fff',
+      disabled: '#fff',
+      // primary: orange[900],
+      // secondary: orange[900],
+      // disabled: orange[900],
 
     },
   },
+
 });
 
 // == Composant

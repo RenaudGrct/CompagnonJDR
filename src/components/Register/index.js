@@ -32,6 +32,9 @@ export default function Register() {
             justifyContent: 'center',
             bgcolor: '#cfe8fc',
             height: '80vh',
+            color: 'primary.main',
+            backgroundColor: 'primary.main',
+            opacity: [0.9, 0.8, 0.7],
           }}
         >
           <Box
@@ -41,6 +44,9 @@ export default function Register() {
               flexDirection: 'column',
               alignItems: 'center',
               '& > :not(style)': { m: '1rem', width: '30ch' },
+              color: 'primary.main',
+              backgroundColor: 'primary.main',
+              opacity: [0.9, 0.8, 0.7],
             }}
             noValidate
             autoComplete="off"
@@ -77,13 +83,14 @@ export default function Register() {
             <Field
               required
               id="outlined-required"
-              label="Confirmation mort de passe"
+              label="Confirmation mot de passe"
               type="password"
               name="registerConfirmPassword"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={registerConfirmPassword}
             />
             <Button
+              color="secondary"
               variant="contained"
               type="submit"
             >

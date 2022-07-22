@@ -31,6 +31,9 @@ export default function Login() {
             justifyContent: 'center',
             bgcolor: '#cfe8fc',
             height: '80vh',
+            color: 'primary.main',
+            backgroundColor: 'primary.main',
+            opacity: [0.9, 0.8, 0.7],
           }}
         >
           <Box
@@ -40,6 +43,9 @@ export default function Login() {
               flexDirection: 'column',
               alignItems: 'center',
               '& > :not(style)': { m: '1rem', width: '30ch' },
+              color: 'primary.main',
+              backgroundColor: 'primary.main',
+              opacity: [0.9, 0.8, 0.7],
             }}
             noValidate
             autoComplete="off"
@@ -68,6 +74,7 @@ export default function Login() {
             />
             <div>
               <Button
+                color="secondary"
                 variant="contained"
                 type="submit"
               >Se connecter

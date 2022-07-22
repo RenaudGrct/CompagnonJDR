@@ -52,7 +52,12 @@ export default function Header() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{
+                // backgroundColor: 'primary.main',
+                // color: 'primary.main',
+                opacity: [0.1, 0.1, 0.1],
+                mt: '45px',
+              }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -68,7 +73,14 @@ export default function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  sx={{
+                    backgroundColor: 'primary.main',
+                    color: '#fff',
+                  }}
+                  key={setting}
+                  onClick={handleCloseUserMenu}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

@@ -131,6 +131,7 @@ export default function TestComponent() {
             )}
             {isReadOnly ? (
               <Button
+                color="secondary"
                 variant="contained"
                 type="button"
                 onClick={() => dispatch(toggleIsReadOnly())}

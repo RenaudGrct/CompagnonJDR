@@ -28,37 +28,24 @@ export default function TestComponent() {
       <Container fixed>
         <Box
           sx={{
-
-            // // test
-            // color: 'primary.main',
-            // backgroundColor: 'primary.dark',
-            // '&:hover': {
-            //   backgroundColor: 'primary.main',
-            //   opacity: [0.9, 0.8, 0.7],
-            // },
-            // // fin du test
-
-
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             bgcolor: '#cfe8fc',
             height: '80vh',
+            color: 'primary.main',
+            backgroundColor: 'primary.main',
+            opacity: [0.9, 0.8, 0.7],
           }}
         >
           <Box
             component="form"
             sx={{
 
-              // // test
-              // color: 'primary.main',
-              // backgroundColor: 'primary.dark',
-              // '&:hover': {
-              //   backgroundColor: 'primary.main',
-              //   opacity: [0.9, 0.8, 0.7],
-              // },
-              // // fin du test
+              color: 'primary.main',
+              backgroundColor: 'primary.main',
+              opacity: [0.9, 0.8, 0.7],
 
               display: 'flex',
               flexDirection: 'column',
@@ -74,6 +61,12 @@ export default function TestComponent() {
           >
             {isReadOnly ? (
               <TextField
+                sx={{
+
+                  // color: 'primary.main',
+                  backgroundColor: 'primary.main',
+                  opacity: [0.9, 0.8, 0.7],
+                }}
                 disabled
                 id="outlined-disabled"
                 label="Nom d'utilisateur"
@@ -112,7 +105,6 @@ export default function TestComponent() {
                 name="userEmail"
                 onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
                 value={userEmail}
-
               />
             )}
             {isReadOnly ? (
@@ -152,6 +144,7 @@ export default function TestComponent() {
             )}
             {isReadOnly ? (
               <Button
+                color="secondary"
                 variant="contained"
                 type="button"
                 onClick={() => dispatch(toggleIsReadOnly())}
@@ -160,6 +153,7 @@ export default function TestComponent() {
               </Button>
             ) : (
               <Button
+                color="secondary"
                 variant="contained"
                 type="button"
                 onClick={() => dispatch(toggleIsReadOnly())}
@@ -170,6 +164,7 @@ export default function TestComponent() {
 
             {isReadOnly ? null : (
               <Button
+                color="secondary"
                 variant="contained"
                 type="button"
                 onClick={() => dispatch(toggleIsReadOnly())}

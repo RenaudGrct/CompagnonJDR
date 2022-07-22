@@ -27,26 +27,25 @@ function Field({
 
   return (
 
-    <>
-      <TextField
-        // readonly="readonly"
-        required
-        id="outlined-required"
-        label={label}
-        name={name}
-        value={value}
-        type={type}
-        onChange={handleChange}
-        placeholder={placeholder}
-      />
+    <TextField
+      sx={{
 
-      {/* <label
-          htmlFor={inputId}
-          className="field-label"
-        >truc
-        </label> */}
-
-    </>
+        // color: 'primary.main',
+        backgroundColor: 'primary.main',
+        // opacity: [0.9, 0.8, 0.7],
+        // '&:hover': {
+        //   backgroundColor: 'primary.dark',
+        // },
+      }}
+      required
+      id="outlined-required"
+      label={label}
+      name={name}
+      value={value}
+      type={type}
+      onChange={handleChange}
+      placeholder={placeholder}
+    />
   );
 }
 
