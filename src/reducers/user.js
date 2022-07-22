@@ -45,8 +45,8 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: true,
-        userName: action.response.data.name,
-        userEmail: action.response.data.email,
+        userName: action.name,
+        userEmail: action.email,
         userPassword: '',
         userConfirmPassword: '',
         isGuest: false,

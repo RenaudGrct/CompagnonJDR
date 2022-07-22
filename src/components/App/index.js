@@ -8,6 +8,7 @@ import Login from 'src/components/Login';
 import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
 import TestComponent from 'src/components/TestComponent';
+import Footer from 'src/components/Footer';
 
 import './styles.css';
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
+        <Footer />
       </ThemeProvider>
     </div>
   );

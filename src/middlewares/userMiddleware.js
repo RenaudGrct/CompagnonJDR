@@ -13,7 +13,7 @@ const userMiddleware = (store) => (next) => (action) => {
 
       next(action);
       const config = {
-        method: 'post',
+        method: 'get',
         url: 'https://compagnon-jdr.herokuapp.com/api/profile/login',
         headers: { 'Content-Type': 'application/json' },
         data: { email: 'latulipedu78@hotmail.com', password: 'tulipette78' },
@@ -32,8 +32,9 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
     case SUBMIT_REGISTER: {
-      const { user } = store.getState();
       next(action);
+      const { user } = store.getState();
+      console.log('cc0');
       const config = {
 
         method: 'post',
@@ -43,12 +44,12 @@ const userMiddleware = (store) => (next) => (action) => {
         },
         data: { email: user.userEmail, username: user.userName, password: user.userPassword },
       };
-
+      console.log(config);
       axios(config)
-        .then(console.log(config))
         .then((response) => {
-          console.log(response);
           store.dispatch(submitRegisterSuccess(response.data));
+          console.log(response);
+          console.log('cc');
         })
         .catch((error) => {
           console.log(error);
