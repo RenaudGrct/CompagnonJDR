@@ -4,6 +4,8 @@ import {
   submitLoginSuccess,
   SUBMIT_REGISTER,
   submitRegisterSuccess,
+  submitRegisterError,
+  handleIsLoading,
 } from 'src/actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -22,6 +24,7 @@ const userMiddleware = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(submitLoginSuccess(response.data));
+          console.log(response);
         })
         .catch((error) => {
           console.log(error);
@@ -34,25 +37,27 @@ const userMiddleware = (store) => (next) => (action) => {
     case SUBMIT_REGISTER: {
       next(action);
       const { user } = store.getState();
-      console.log('cc0');
       const config = {
 
         method: 'post',
         url: 'https://compagnon-jdr.herokuapp.com/api/profile/register',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
         data: { email: user.userEmail, username: user.userName, password: user.userPassword },
       };
-      console.log(config);
+
       axios(config)
         .then((response) => {
           store.dispatch(submitRegisterSuccess(response.data));
           console.log(response);
-          console.log('cc');
         })
         .catch((error) => {
+          store.dispatch(submitRegisterError());
           console.log(error);
+        })
+        .finally(() => {
+          store.dispatch(handleIsLoading());
         });
       break;
     }

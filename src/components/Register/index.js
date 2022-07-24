@@ -1,12 +1,15 @@
+// import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitRegister } from 'src/actions/user';
+import { changeInputField, submitRegister, handleIsSamePassword } from 'src/actions/user';
 
 export default function Register() {
   const {
@@ -14,9 +17,24 @@ export default function Register() {
     userEmail,
     userPassword,
     userConfirmPassword,
+    isSamePassword,
+    submitError,
+    isLoading,
   } = useSelector((state) => state.user);
 
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (userPassword === userConfirmPassword) {
+      await dispatch(submitRegister());
+      // navigate('/', { replace: true });
+    }
+    else {
+      dispatch(handleIsSamePassword());
+    }
+  }
 
   return (
     <>
@@ -39,11 +57,12 @@ export default function Register() {
           }}
           noValidate
           autoComplete="off"
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(submitRegister());
+          onSubmit={(event) => {
+            handleSubmit(event);
           }}
         >
+          {isLoading && <CircularProgress />}
+          {submitError && <Alert severity="error">e-mail ou mot de passe au mauvais format!</Alert>}
           <Field
             required
             id="outlined-required"
@@ -78,6 +97,8 @@ export default function Register() {
             onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
             value={userConfirmPassword}
           />
+          {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identique !</Alert>}
+
           <Button
             color="secondary"
             variant="contained"

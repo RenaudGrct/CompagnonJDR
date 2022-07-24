@@ -2,8 +2,12 @@ import {
   CHANGE_INPUT_FIELD,
   SUBMIT_LOGIN_SUCCESS,
   LOG_OUT,
+  SUBMIT_REGISTER,
   SUBMIT_REGISTER_SUCESS,
+  SUBMIT_REGISTER_ERROR,
   TOGGLE_IS_READONLY,
+  HANDLE_IS_SAME_PASSWORD,
+  HANDLE_IS_LOADING,
 } from 'src/actions/user';
 
 export const initialState = {
@@ -15,6 +19,9 @@ export const initialState = {
   isLogged: false,
   isReadOnly: true,
   isGuest: true,
+  isSamePassword: false,
+  submitError: false,
+  isLoading: false,
 
 };
 
@@ -41,6 +48,11 @@ const reducer = (state = initialState, action = {}) => {
         password: '',
         isLogged: false,
       };
+    case SUBMIT_REGISTER:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case SUBMIT_REGISTER_SUCESS:
       return {
         ...state,
@@ -50,6 +62,15 @@ const reducer = (state = initialState, action = {}) => {
         userPassword: '',
         userConfirmPassword: '',
         isGuest: false,
+        isSamePassword: false,
+        submitError: false,
+        isLoading: false,
+      };
+    case SUBMIT_REGISTER_ERROR:
+      return {
+        ...state,
+        submitError: true,
+        isLoading: false,
       };
     case TOGGLE_IS_READONLY:
       return {
@@ -59,6 +80,18 @@ const reducer = (state = initialState, action = {}) => {
         userPassword: '',
         userConfirmPassword: '',
         isReadOnly: !state.isReadOnly,
+      };
+    case HANDLE_IS_SAME_PASSWORD:
+      return {
+        ...state,
+        userPassword: '',
+        userConfirmPassword: '',
+        isSamePassword: true,
+      };
+    case HANDLE_IS_LOADING:
+      return {
+        ...state,
+        isLoading: false,
       };
     default:
       return state;
