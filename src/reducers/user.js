@@ -8,10 +8,7 @@ import {
   TOGGLE_IS_READONLY,
   VERIFY_PASSWORD,
   HANDLE_IS_LOADING,
-  SAVE_USER_PROFILE,
-  DELETE_USER_PROFILE,
-  DELETE_USER_PROFILE_SUCCESS,
-  DELETE_USER_PROFILE_ERROR,
+
 } from 'src/actions/user';
 
 export const initialState = {
@@ -27,6 +24,8 @@ export const initialState = {
   isSamePassword: false,
   submitError: false,
   isLoading: false,
+  errorMessage: '',
+  isRedirect: false,
 
 };
 
@@ -37,13 +36,29 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.fieldName]: action.newValue,
       };
+    case SUBMIT_LOGIN:
+      return {
+        ...state,
+        submitError: false,
+        isLoading: true,
+      };
 
     case SUBMIT_LOGIN_SUCCESS:
       return {
         ...state,
         isLogged: true,
-        email: '',
-        password: '',
+        isGuest: false,
+        userName: '',
+        userEmail: '',
+        userPassword: '',
+        isRedirect: true,
+      };
+    case SUBMIT_LOGIN_ERROR:
+      return {
+        ...state,
+        submitError: true,
+        errorMessage: action.message,
+        isLoading: false,
       };
 
     case LOG_OUT:
@@ -56,25 +71,30 @@ const reducer = (state = initialState, action = {}) => {
     case SUBMIT_REGISTER:
       return {
         ...state,
+        isSamePassword: false,
+        submitError: false,
         isLoading: true,
+        isRedirect: false,
       };
     case SUBMIT_REGISTER_SUCCESS:
       return {
         ...state,
         isLogged: true,
-        userName: action.name,
-        userEmail: action.email,
+        userName: '',
+        userEmail: '',
         userPassword: '',
         userConfirmPassword: '',
         isGuest: false,
         isSamePassword: false,
         submitError: false,
         isLoading: false,
+        isRedirect: true,
       };
     case SUBMIT_REGISTER_ERROR:
       return {
         ...state,
         submitError: true,
+        errorMessage: action.message,
         isLoading: false,
       };
     case TOGGLE_IS_READONLY:
@@ -97,28 +117,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: false,
-      };
-
-    case SAVE_USER_PROFILE:
-      return {
-        userName: action.name,
-        userEmail: action.email,
-        ...state,
-      };
-
-    case DELETE_USER_PROFILE:
-      return {
-        ...state,
-      };
-    case DELETE_USER_PROFILE_SUCCESS:
-      return {
-        ...state,
-        isLogged: false,
-      };
-
-    case DELETE_USER_PROFILE_ERROR:
-      return {
-        ...state,
       };
 
     default:

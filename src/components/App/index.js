@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 
+import CharacterManagement from 'src/components/CharacterManagement';
 import Register from 'src/components/Register';
 import Login from 'src/components/Login';
 import Header from 'src/components/Header';
@@ -19,6 +20,7 @@ const theme = createTheme({
     type: 'light',
     primary: {
       main: grey[900],
+      // secondary: '#fff',
       // dark: grey[900],
       // light: grey[900],
     },
@@ -53,6 +55,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/character-management" element={<CharacterManagement />} />
         </Routes>
         <Footer />
       </ThemeProvider>

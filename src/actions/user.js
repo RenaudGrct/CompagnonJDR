@@ -2,6 +2,8 @@ export const CHANGE_INPUT_FIELD = 'CHANGE_INPUT_FIELD';
 export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
 export const VERIFY_PASSWORD = 'VERIFY_PASSWORD';
 export const HANDLE_IS_LOADING = 'HANDLE_IS_LOADING';
+export const SUBMIT_LOGIN_ERROR = 'SUBMIT_LOGIN_ERROR';
+export const HANDLE_IS_REDIRECT = 'HANDLE_IS_REDIRECT';
 
 // USER CRUD
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
@@ -34,8 +36,9 @@ export const submitLogin = () => ({
   type: SUBMIT_LOGIN,
 });
 
-export const submitLoginSuccess = () => ({
+export const submitLoginSuccess = (response) => ({
   type: SUBMIT_LOGIN_SUCCESS,
+  ...response,
 });
 
 export const logOut = () => ({
@@ -62,8 +65,13 @@ export const submitRegisterSuccess = (response) => ({
   ...response,
 });
 
-export const submitRegisterError = () => ({
   type: SUBMIT_REGISTER_ERROR,
+  ...response,
+});
+
+export const submitLoginError = (response) => ({
+  type: SUBMIT_LOGIN_ERROR,
+  ...response,
 });
 
 export const getUserProfile = () => ({
@@ -97,4 +105,8 @@ export const updateUserProfileError = () => ({
 
 export const updateUserProfileSuccess = () => ({
   type: UPDATE_USER_PROFILE_SUCCESS,
+});
+
+export const handleIsRedirect = () => ({
+  type: HANDLE_IS_REDIRECT,
 });

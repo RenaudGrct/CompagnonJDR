@@ -22,9 +22,7 @@ import {
   // Get user
   GET_USER_PROFILE,
   handleIsLoading,
-  saveUserProfile,
 
-  logOut,
 } from 'src/actions/user';
 
 const instance = axios.create({
@@ -34,29 +32,7 @@ const instance = axios.create({
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
-      const { user } = store.getState();
 
-      next(action);
-      // const config = {
-      //   method: 'get',
-      //   url: `${instance}login`,
-      //   headers: { 'Content-Type': 'application/json' },
-      //   data: { email: user.userEmail, password: user.userPassword },
-      // };
-
-      // axios(config)
-      //   .then((response) => {
-      //     store.dispatch(submitLoginSuccess(response.data));
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-
-      try {
-        const response = await instance.post('login', {
-          email: user.userEmail,
-          password: user.userPassword,
         });
         store.dispatch(submitLoginSuccess(response.data));
         console.log(response);
@@ -89,7 +65,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(response);
         })
         .catch((error) => {
-          store.dispatch(submitRegisterError());
+          store.dispatch(submitRegisterError(error.response.data));
           console.log(error);
         })
         .finally(() => {

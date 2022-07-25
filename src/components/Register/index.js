@@ -1,4 +1,5 @@
-// import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -9,8 +10,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitRegister, verifyPassword } from 'src/actions/user';
-
 export default function Register() {
   const {
     userName,
@@ -20,26 +19,34 @@ export default function Register() {
     isSamePassword,
     submitError,
     isLoading,
+    errorMessage,
+    isRedirect,
   } = useSelector((state) => state.user);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (userPassword === userConfirmPassword) {
       await dispatch(submitRegister());
-      // navigate('/', { replace: true });
     }
     else {
       dispatch(verifyPassword());
     }
   }
 
+  useEffect(() => {
+    if (isRedirect) {
+      navigate('/character-management');
+    }
+  }, [isRedirect]);
+
   return (
     <>
       <CssBaseline />
       <Container fixed>
+        {isLoading && <CircularProgress />}
         <Box
           component="form"
           sx={{
@@ -61,8 +68,7 @@ export default function Register() {
             handleSubmit(event);
           }}
         >
-          {isLoading && <CircularProgress />}
-          {submitError && <Alert severity="error">e-mail ou mot de passe au mauvais format!</Alert>}
+          {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           <Field
             required
             id="outlined-required"
