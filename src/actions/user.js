@@ -8,6 +8,8 @@ export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
 export const HANDLE_IS_SAME_PASSWORD = 'HANDLE_IS_SAME_PASSWORD';
 export const SUBMIT_REGISTER_ERROR = 'SUBMIT_REGISTER_ERROR';
 export const HANDLE_IS_LOADING = 'HANDLE_IS_LOADING';
+export const SUBMIT_LOGIN_ERROR = 'SUBMIT_LOGIN_ERROR';
+export const HANDLE_IS_REDIRECT = 'HANDLE_IS_REDIRECT';
 
 export const changeInputField = (newValue, fieldName) => ({
   type: CHANGE_INPUT_FIELD,
@@ -19,8 +21,9 @@ export const submitLogin = () => ({
   type: SUBMIT_LOGIN,
 });
 
-export const submitLoginSuccess = () => ({
+export const submitLoginSuccess = (response) => ({
   type: SUBMIT_LOGIN_SUCCESS,
+  ...response,
 });
 
 export const logOut = () => ({
@@ -44,10 +47,20 @@ export const toggleIsReadOnly = () => ({
   type: TOGGLE_IS_READONLY,
 });
 
-export const submitRegisterError = () => ({
+export const submitRegisterError = (response) => ({
   type: SUBMIT_REGISTER_ERROR,
+  ...response,
+});
+
+export const submitLoginError = (response) => ({
+  type: SUBMIT_LOGIN_ERROR,
+  ...response,
 });
 
 export const handleIsLoading = () => ({
   type: HANDLE_IS_LOADING,
+});
+
+export const handleIsRedirect = () => ({
+  type: HANDLE_IS_REDIRECT,
 });

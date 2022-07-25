@@ -3,8 +3,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import {
+  handleIsRedirect,
+} from 'src/actions/user';
 
 function Homepage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(handleIsRedirect());
+  }, []);
   return (
 
     <>

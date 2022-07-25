@@ -6,19 +6,19 @@ import {
   submitRegisterSuccess,
   submitRegisterError,
   handleIsLoading,
+  submitLoginError,
 } from 'src/actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
-      // const { user } = store.getState();
-
       next(action);
+      const { user } = store.getState();
       const config = {
-        method: 'get',
-        url: 'https://compagnon-jdr.herokuapp.com/api/profile/login',
+        method: 'post',
+        url: 'https://api-compagnon-jdr.herokuapp.com/api/profile/login',
         headers: { 'Content-Type': 'application/json' },
-        data: { email: 'latulipedu78@hotmail.com', password: 'tulipette78' },
+        data: { email: user.userEmail, password: user.userPassword },
       };
 
       axios(config)
@@ -27,7 +27,11 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
         })
         .catch((error) => {
+          store.dispatch(submitLoginError(error.response.data));
           console.log(error);
+        })
+        .finally(() => {
+          store.dispatch(handleIsLoading());
         });
 
       // si je veux gérer un état de loading, je peux nexter aussi
@@ -53,7 +57,7 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
         })
         .catch((error) => {
-          store.dispatch(submitRegisterError());
+          store.dispatch(submitRegisterError(error.response.data));
           console.log(error);
         })
         .finally(() => {

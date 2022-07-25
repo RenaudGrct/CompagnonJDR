@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import './style.scss';
 import Field from 'src/components/InputField';
@@ -13,9 +17,20 @@ export default function Login() {
   const {
     userEmail,
     userPassword,
+    isLoading,
+    errorMessage,
+    submitError,
+    isRedirect,
   } = useSelector((state) => state.user);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isRedirect) {
+      navigate('/');
+    }
+  }, [isRedirect]);
 
   return (
     <>
@@ -28,6 +43,7 @@ export default function Login() {
           alignItems: 'center',
         }}
       >
+        {isLoading && <CircularProgress />}
         <Box
           component="form"
           sx={{
@@ -51,7 +67,7 @@ export default function Login() {
             dispatch(submitLogin());
           }}
         >
-
+          {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           <Field
             required
             id="outlined-required"
