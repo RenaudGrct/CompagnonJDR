@@ -40,7 +40,7 @@ const userMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'post',
-        url: 'https://compagnon-jdr.herokuapp.com/api/profile/register',
+        url: 'https://api-compagnon-jdr.herokuapp.com/api/profile/register',
         headers: {
           'Content-Type': 'application/json',
         },
