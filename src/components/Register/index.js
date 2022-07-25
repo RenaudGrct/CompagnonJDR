@@ -10,12 +10,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
-import {
-  changeInputField,
-  submitRegister,
-  handleIsSamePassword,
-} from 'src/actions/user';
-
 export default function Register() {
   const {
     userName,
@@ -38,7 +32,7 @@ export default function Register() {
       await dispatch(submitRegister());
     }
     else {
-      dispatch(handleIsSamePassword());
+      dispatch(verifyPassword());
     }
   }
 

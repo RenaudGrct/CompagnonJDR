@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -7,10 +8,13 @@ import TextField from '@mui/material/TextField';
 
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitRegister, toggleIsReadOnly } from 'src/actions/user';
+import {
+  changeInputField, submitRegister, toggleIsReadOnly, getUserProfile, deleteUserProfile,
+} from 'src/actions/user';
 
 export default function TestComponent() {
   const {
+    userId,
     userName,
     userEmail,
     userPassword,
@@ -19,6 +23,11 @@ export default function TestComponent() {
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+
+  const handleUserDeletion = () => {
+    dispatch(deleteUserProfile());
+    console.log(`je delete ${userId}`);
+  };
 
   return (
     <>
@@ -143,7 +152,7 @@ export default function TestComponent() {
               color="secondary"
               variant="contained"
               type="button"
-              onClick={() => dispatch(toggleIsReadOnly())}
+              onClick={() => console.log('je suis le bouton enregistrer')}
             >
               Enregistrer
             </Button>
@@ -163,6 +172,7 @@ export default function TestComponent() {
             variant="contained"
             type="button"
             color="error"
+            onClick={() => handleUserDeletion()}
           >
             Supprimer le compte
           </Button>
