@@ -1,15 +1,16 @@
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
 import {
-  changeInputField, submitRegister, toggleIsReadOnly, getUserProfile, deleteUserProfile,
+  changeInputField, submitRegister, toggleIsReadOnly, deleteUserProfile,
 } from 'src/actions/user';
 
 export default function TestComponent() {
@@ -20,6 +21,9 @@ export default function TestComponent() {
     userPassword,
     userConfirmPassword,
     isReadOnly,
+    errorMessage,
+    isLoading,
+    submitError,
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -33,6 +37,7 @@ export default function TestComponent() {
     <>
       <CssBaseline />
       <Container fixed>
+        {isLoading && <CircularProgress />}
         <Box
           component="form"
           sx={{
@@ -55,6 +60,7 @@ export default function TestComponent() {
             dispatch(submitRegister());
           }}
         >
+          {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           {isReadOnly ? (
             <TextField
               sx={{
@@ -168,14 +174,17 @@ export default function TestComponent() {
               Annuler
             </Button>
           )}
-          <Button
-            variant="contained"
-            type="button"
-            color="error"
-            onClick={() => handleUserDeletion()}
-          >
-            Supprimer le compte
-          </Button>
+
+          {isReadOnly ? null : (
+            <Button
+              variant="contained"
+              type="button"
+              color="error"
+              onClick={() => handleUserDeletion()}
+            >
+              Supprimer le compte
+            </Button>
+          )}
         </Box>
       </Container>
     </>

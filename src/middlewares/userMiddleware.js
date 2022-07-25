@@ -1,8 +1,10 @@
 import axios from 'axios';
+
 import {
 // Login user
   SUBMIT_LOGIN,
   submitLoginSuccess,
+  submitLoginError,
 
   // Register user
   SUBMIT_REGISTER,
@@ -23,6 +25,8 @@ import {
   GET_USER_PROFILE,
   handleIsLoading,
 
+  logOut,
+
 } from 'src/actions/user';
 
 const instance = axios.create({
@@ -32,14 +36,22 @@ const instance = axios.create({
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
+      const { user } = store.getState();
 
+      next(action);
+      try {
+        const response = await instance.post('login', {
+          email: user.userEmail,
+          password: user.userPassword,
         });
         store.dispatch(submitLoginSuccess(response.data));
         console.log(response);
       }
       catch (error) {
+        store.dispatch(submitLoginError(error.response.data));
         console.log(error);
       }
+      store.dispatch(handleIsLoading());
 
       // si je veux gérer un état de loading, je peux nexter aussi
       // SUBMIT_LOGIN
@@ -126,6 +138,7 @@ const userMiddleware = (store) => (next) => async (action) => {
 
       try {
         const response = await instance.get(`${user.userId}`);
+        console.log(response);
         // store.dispatch(saveUserProfile(response));
         // console.log(response.data)
         // console.log(`User email is ${user.userEmail}`);

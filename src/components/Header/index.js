@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import avatar from 'src/assets/images/elfe.png';
 import { Link } from 'react-router-dom';
 
+import { logOut } from 'src/actions/user';
+
 const settings = [
   {
     label: 'Mon compte',
@@ -20,15 +22,14 @@ const settings = [
   }, {
     label: 'Mes perso',
     url: '/characters',
-  }, {
-    label: 'Se deconnecter',
-    url: '/logout',
   }];
 
 export default function Header() {
   const {
-    isGuest,
+    isLogged,
   } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -38,6 +39,12 @@ export default function Header() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleDisconnect = () => {
+    console.log('je clique sur le bouton');
+    dispatch(logOut());
+    handleCloseUserMenu();
   };
 
   return (
@@ -60,7 +67,7 @@ export default function Header() {
           >
             <Link to="/">COMPAGNON JDR</Link>
           </Typography>
-          {!isGuest && (
+          {isLogged && (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Ouvrir Menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -88,6 +95,20 @@ export default function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+
+              <Link to="/">
+                <MenuItem
+                  sx={{
+                    backgroundColor: 'primary.main',
+                    color: '#fff',
+                  }}
+                  key="Se déconnecter"
+                  onClick={handleDisconnect}
+                >
+                  <Typography textAlign="center">Se déconnecter</Typography>
+                </MenuItem>
+              </Link>
+
               {settings.map((setting) => (
 
                 <Link to={setting.url}>

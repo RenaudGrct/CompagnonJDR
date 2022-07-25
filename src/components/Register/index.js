@@ -10,6 +10,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
+import { changeInputField, submitRegister, verifyPassword } from 'src/actions/user';
+
 export default function Register() {
   const {
     userName,

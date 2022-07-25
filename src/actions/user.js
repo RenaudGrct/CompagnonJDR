@@ -25,7 +25,6 @@ export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 export const UPDATE_USER_PROFILE_SUCCESS = 'UPDATE_USER_PROFILE_SUCCESS';
 export const UPDATE_USER_PROFILE_ERROR = 'UPDATE_USER_PROFILE_ERROR';
 
-
 export const changeInputField = (newValue, fieldName) => ({
   type: CHANGE_INPUT_FIELD,
   newValue,
@@ -56,16 +55,18 @@ export const toggleIsReadOnly = () => ({
 export const handleIsLoading = () => ({
   type: HANDLE_IS_LOADING,
 });
+
 export const submitRegister = () => ({
   type: SUBMIT_REGISTER,
 });
 
-export const submitRegisterSuccess = (response) => ({
-  type: SUBMIT_REGISTER_SUCCESS,
+export const submitRegisterError = (response) => ({
+  type: SUBMIT_REGISTER_ERROR,
   ...response,
 });
 
-  type: SUBMIT_REGISTER_ERROR,
+export const submitRegisterSuccess = (response) => ({
+  type: SUBMIT_REGISTER_SUCCESS,
   ...response,
 });
 

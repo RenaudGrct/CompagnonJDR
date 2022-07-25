@@ -1,5 +1,7 @@
 import {
   CHANGE_INPUT_FIELD,
+  SUBMIT_LOGIN,
+  SUBMIT_LOGIN_ERROR,
   SUBMIT_LOGIN_SUCCESS,
   LOG_OUT,
   SUBMIT_REGISTER,
@@ -17,7 +19,7 @@ export const initialState = {
   userEmail: '',
   userPassword: '',
   userConfirmPassword: '',
-  userId: 55,
+  userId: 62,
   isLogged: true,
   isReadOnly: true,
   isGuest: false,
@@ -64,8 +66,8 @@ const reducer = (state = initialState, action = {}) => {
     case LOG_OUT:
       return {
         ...state,
-        email: '',
-        password: '',
+        userEmail: '',
+        userPassword: '',
         isLogged: false,
       };
     case SUBMIT_REGISTER:

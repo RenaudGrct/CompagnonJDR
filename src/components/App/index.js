@@ -1,5 +1,6 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 
@@ -44,6 +45,7 @@ const theme = createTheme({
 
 // == Composant
 function App() {
+  const { isLogged } = useSelector((state) => state.user)
   return (
 
     <div className="app">
@@ -54,8 +56,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/character-management" element={<CharacterManagement />} />
+          {isLogged && <Route path="/profile" element={<Profile />} />}
+          {isLogged && <Route path="/character-management" element={<CharacterManagement />} />}
         </Routes>
         <Footer />
       </ThemeProvider>
