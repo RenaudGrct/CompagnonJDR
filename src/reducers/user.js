@@ -3,11 +3,15 @@ import {
   SUBMIT_LOGIN_SUCCESS,
   LOG_OUT,
   SUBMIT_REGISTER,
-  SUBMIT_REGISTER_SUCESS,
+  SUBMIT_REGISTER_SUCCESS,
   SUBMIT_REGISTER_ERROR,
   TOGGLE_IS_READONLY,
-  HANDLE_IS_SAME_PASSWORD,
+  VERIFY_PASSWORD,
   HANDLE_IS_LOADING,
+  SAVE_USER_PROFILE,
+  DELETE_USER_PROFILE,
+  DELETE_USER_PROFILE_SUCCESS,
+  DELETE_USER_PROFILE_ERROR,
 } from 'src/actions/user';
 
 export const initialState = {
@@ -16,9 +20,10 @@ export const initialState = {
   userEmail: '',
   userPassword: '',
   userConfirmPassword: '',
-  isLogged: false,
+  userId: 55,
+  isLogged: true,
   isReadOnly: true,
-  isGuest: true,
+  isGuest: false,
   isSamePassword: false,
   submitError: false,
   isLoading: false,
@@ -53,7 +58,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: true,
       };
-    case SUBMIT_REGISTER_SUCESS:
+    case SUBMIT_REGISTER_SUCCESS:
       return {
         ...state,
         isLogged: true,
@@ -81,7 +86,7 @@ const reducer = (state = initialState, action = {}) => {
         userConfirmPassword: '',
         isReadOnly: !state.isReadOnly,
       };
-    case HANDLE_IS_SAME_PASSWORD:
+    case VERIFY_PASSWORD:
       return {
         ...state,
         userPassword: '',
@@ -93,6 +98,29 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
       };
+
+    case SAVE_USER_PROFILE:
+      return {
+        userName: action.name,
+        userEmail: action.email,
+        ...state,
+      };
+
+    case DELETE_USER_PROFILE:
+      return {
+        ...state,
+      };
+    case DELETE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLogged: false,
+      };
+
+    case DELETE_USER_PROFILE_ERROR:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }
