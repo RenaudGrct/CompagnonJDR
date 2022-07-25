@@ -28,7 +28,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isRedirect) {
-      navigate('/');
+      navigate('/character-management');
     }
   }, [isRedirect]);
 

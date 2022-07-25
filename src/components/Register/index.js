@@ -44,7 +44,7 @@ export default function Register() {
 
   useEffect(() => {
     if (isRedirect) {
-      navigate('/');
+      navigate('/character-management');
     }
   }, [isRedirect]);
 
