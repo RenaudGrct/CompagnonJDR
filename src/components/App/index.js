@@ -2,7 +2,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 
 import CharacterManagement from 'src/components/CharacterManagement';
 import Register from 'src/components/Register';
@@ -20,32 +19,58 @@ const theme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: grey[900],
-      // secondary: '#fff',
-      // dark: grey[900],
-      // light: grey[900],
-    },
-    // secondary controle la couleur des boutons
-    secondary: {
       main: '#000000',
+      contrastText: '#ffffff',
     },
-    // text controle la couleur du texte
-    text: {
-      primary: '#fff',
-      secondary: '#fff',
-      disabled: '#fff',
-      // primary: orange[900],
-      // secondary: orange[900],
-      // disabled: orange[900],
-
+    secondary: {
+      main: '#ff7a00',
+    },
+    background: {
+      paper: '#ffffff',
+    },
+    error: {
+      main: '#ff1200',
+    },
+    warning: {
+      main: '#af15a6',
+    },
+    info: {
+      main: '#0988ec',
+    },
+    success: {
+      main: '#149418',
     },
   },
+
+  // palette: {
+  //   type: 'light',
+  //   primary: {
+  //     main: grey[900],
+  //     // secondary: '#fff',
+  //     // dark: grey[900],
+  //     // light: grey[900],
+  //   },
+  //   // secondary controle la couleur des boutons
+  //   secondary: {
+  //     main: '#000000',
+  //   },
+  //   // text controle la couleur du texte
+  //   text: {
+  //     primary: '#fff',
+  //     secondary: '#fff',
+  //     disabled: '#fff',
+  //     // primary: orange[900],
+  //     // secondary: orange[900],
+  //     // disabled: orange[900],
+
+  //   },
+  // },
 
 });
 
 // == Composant
 function App() {
-  const { isLogged } = useSelector((state) => state.user)
+  const { isLogged } = useSelector((state) => state.user);
   return (
 
     <div className="app">

@@ -52,14 +52,11 @@ export default function Login() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: '#cfe8fc',
-            height: '50vh',
             marginTop: '10rem',
-            padding: '3rem',
+            padding: '1rem',
             gap: '2rem',
-            color: 'primary.main',
             backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
+            opacity: [0.7, 0.7, 0.7],
           }}
           noValidate
           autoComplete="off"

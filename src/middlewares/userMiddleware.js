@@ -4,12 +4,11 @@ import {
 // Login user
   SUBMIT_LOGIN,
   submitLoginSuccess,
-  submitLoginError,
+  submitError,
 
   // Register user
   SUBMIT_REGISTER,
   submitRegisterSuccess,
-  submitRegisterError,
 
   // Delete user
   DELETE_USER_PROFILE,
@@ -48,7 +47,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         console.log(response);
       }
       catch (error) {
-        store.dispatch(submitLoginError(error.response.data));
+        store.dispatch(submitError(error.response.data));
         console.log(error);
       }
       store.dispatch(handleIsLoading());
@@ -77,7 +76,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(response);
         })
         .catch((error) => {
-          store.dispatch(submitRegisterError(error.response.data));
+          store.dispatch(submitError(error.response.data));
           console.log(error);
         })
         .finally(() => {

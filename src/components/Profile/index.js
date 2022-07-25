@@ -41,10 +41,8 @@ export default function TestComponent() {
         <Box
           component="form"
           sx={{
-            color: 'primary.main',
             backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
-            height: '90vh',
+            opacity: [0.7, 0.7, 0.7],
             marginTop: '5rem',
             padding: '1rem',
             gap: '2rem',
@@ -63,12 +61,8 @@ export default function TestComponent() {
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           {isReadOnly ? (
             <TextField
-              sx={{
-
-                // color: 'primary.main',
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              }}
+              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+              color="secondary"
               disabled
               id="outlined-disabled"
               label="Nom d'utilisateur"
@@ -90,6 +84,8 @@ export default function TestComponent() {
           )}
           {isReadOnly ? (
             <TextField
+              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+              color="secondary"
               disabled
               id="outlined-disabled"
               label="Email"
@@ -111,6 +107,8 @@ export default function TestComponent() {
           )}
           {isReadOnly ? (
             <TextField
+              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+              color="secondary"
               disabled
               id="filled-disabled"
               label="Mot de passe"
@@ -146,6 +144,9 @@ export default function TestComponent() {
           )}
           {isReadOnly ? (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               color="secondary"
               variant="contained"
               type="button"
@@ -155,6 +156,9 @@ export default function TestComponent() {
             </Button>
           ) : (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               color="secondary"
               variant="contained"
               type="button"
@@ -166,6 +170,9 @@ export default function TestComponent() {
 
           {isReadOnly ? null : (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               color="secondary"
               variant="contained"
               type="button"
@@ -177,6 +184,9 @@ export default function TestComponent() {
 
           {isReadOnly ? null : (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               variant="contained"
               type="button"
               color="error"

@@ -34,7 +34,6 @@ function Homepage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '50vh',
             marginTop: '10rem',
             padding: '1rem',
             gap: '2rem',

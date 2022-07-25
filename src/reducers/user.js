@@ -1,15 +1,14 @@
 import {
   CHANGE_INPUT_FIELD,
   SUBMIT_LOGIN,
-  SUBMIT_LOGIN_ERROR,
   SUBMIT_LOGIN_SUCCESS,
   LOG_OUT,
   SUBMIT_REGISTER,
   SUBMIT_REGISTER_SUCCESS,
-  SUBMIT_REGISTER_ERROR,
   TOGGLE_IS_READONLY,
   VERIFY_PASSWORD,
   HANDLE_IS_LOADING,
+  SUBMIT_ERROR,
 
 } from 'src/actions/user';
 
@@ -55,13 +54,6 @@ const reducer = (state = initialState, action = {}) => {
         userPassword: '',
         isRedirect: true,
       };
-    case SUBMIT_LOGIN_ERROR:
-      return {
-        ...state,
-        submitError: true,
-        errorMessage: action.message,
-        isLoading: false,
-      };
 
     case LOG_OUT:
       return {
@@ -92,7 +84,7 @@ const reducer = (state = initialState, action = {}) => {
         isLoading: false,
         isRedirect: true,
       };
-    case SUBMIT_REGISTER_ERROR:
+    case SUBMIT_ERROR:
       return {
         ...state,
         submitError: true,

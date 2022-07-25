@@ -2,12 +2,11 @@ export const CHANGE_INPUT_FIELD = 'CHANGE_INPUT_FIELD';
 export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
 export const VERIFY_PASSWORD = 'VERIFY_PASSWORD';
 export const HANDLE_IS_LOADING = 'HANDLE_IS_LOADING';
-export const SUBMIT_LOGIN_ERROR = 'SUBMIT_LOGIN_ERROR';
 export const HANDLE_IS_REDIRECT = 'HANDLE_IS_REDIRECT';
 
 // USER CRUD
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
-export const SUBMIT_REGISTER_ERROR = 'SUBMIT_REGISTER_ERROR';
+export const SUBMIT_ERROR = 'SUBMIT_ERROR';
 export const SUBMIT_REGISTER_SUCCESS = 'SUBMIT_REGISTER_SUCCESS';
 
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
@@ -60,18 +59,13 @@ export const submitRegister = () => ({
   type: SUBMIT_REGISTER,
 });
 
-export const submitRegisterError = (response) => ({
-  type: SUBMIT_REGISTER_ERROR,
+export const submitError = (response) => ({
+  type: SUBMIT_ERROR,
   ...response,
 });
 
 export const submitRegisterSuccess = (response) => ({
   type: SUBMIT_REGISTER_SUCCESS,
-  ...response,
-});
-
-export const submitLoginError = (response) => ({
-  type: SUBMIT_LOGIN_ERROR,
   ...response,
 });
 

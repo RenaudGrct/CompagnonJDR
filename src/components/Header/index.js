@@ -76,9 +76,6 @@ export default function Header() {
             </Tooltip>
             <Menu
               sx={{
-                // backgroundColor: 'primary.main',
-                // color: 'primary.main',
-                opacity: [0.1, 0.1, 0.1],
                 mt: '45px',
               }}
               id="menu-appbar"
@@ -95,28 +92,10 @@ export default function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-
-              <Link to="/">
-                <MenuItem
-                  sx={{
-                    backgroundColor: 'primary.main',
-                    color: '#fff',
-                  }}
-                  key="Se déconnecter"
-                  onClick={handleDisconnect}
-                >
-                  <Typography textAlign="center">Se déconnecter</Typography>
-                </MenuItem>
-              </Link>
-
               {settings.map((setting) => (
 
                 <Link to={setting.url}>
                   <MenuItem
-                    sx={{
-                      backgroundColor: 'primary.main',
-                      color: '#fff',
-                    }}
                     key={setting.label}
                     onClick={handleCloseUserMenu}
                   >
@@ -124,6 +103,13 @@ export default function Header() {
                   </MenuItem>
                 </Link>
               ))}
+              <Link to="/">
+                <MenuItem
+                  onClick={handleDisconnect}
+                >
+                  <Typography textAlign="center">Me déconnecter</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
           )}

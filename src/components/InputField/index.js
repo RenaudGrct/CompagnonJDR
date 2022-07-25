@@ -28,17 +28,9 @@ function Field({
   return (
 
     <TextField
-      sx={{
-
-        // color: 'primary.main',
-        backgroundColor: 'primary.main',
-        // opacity: [0.9, 0.8, 0.7],
-        // '&:hover': {
-        //   backgroundColor: 'primary.dark',
-        // },
-      }}
+      sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+      color="secondary"
       required
-      id="outlined-required"
       label={label}
       name={name}
       value={value}

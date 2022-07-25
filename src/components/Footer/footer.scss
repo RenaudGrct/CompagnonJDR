@@ -1,12 +1,18 @@
 .footer{
+  font-family: monospace;
   margin-top: 10rem;
   background-color: black;
-  &_div{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
   &_link{
+    &_container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
 
     &_text{
       margin-top: 1rem;
@@ -16,9 +22,9 @@
     }
 
     &_image{
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       border-radius: 100%;
-      width: 5rem;
+      width: 3rem;
       margin-bottom: 1rem;
     }
   }

@@ -56,13 +56,11 @@ export default function Register() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '70vh',
             marginTop: '5rem',
             padding: '1rem',
             gap: '2rem',
-            color: 'primary.main',
             backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
+            opacity: [0.7, 0.7, 0.7],
           }}
           noValidate
           autoComplete="off"
