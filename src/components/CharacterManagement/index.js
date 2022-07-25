@@ -17,7 +17,7 @@ import {
   handleIsRedirect,
 } from 'src/actions/user';
 
-import logo from 'src/assets/images/elfe.png';
+import logo from 'src/assets/images/drakeide.jpg';
 
 export default function CharacterManagement() {
   const dispatch = useDispatch();
@@ -43,10 +43,10 @@ export default function CharacterManagement() {
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" color="secondary.main">
-            Elfe_du_Royaume
+          <Typography gutterBottom variant="h5" component="div">
+            Drakéide_du_Royaume
           </Typography>
-          <Typography variant="body2" color="secondary.main">
+          <Typography variant="body2">
             force: 11 vitesse: 16 ...
           </Typography>
           <Box sx={{
@@ -57,13 +57,13 @@ export default function CharacterManagement() {
           }}
           >
             <IconButton>
-              <VisibilityIcon fontSize="inherit" />
+              <VisibilityIcon fontSize="inherit" color="primary" />
             </IconButton>
             <IconButton>
-              <ModeEditIcon fontSize="inherit" />
+              <ModeEditIcon fontSize="inherit" color="primary" />
             </IconButton>
             <IconButton>
-              <DeleteForeverIcon fontSize="inherit" />
+              <DeleteForeverIcon fontSize="inherit" color="primary" />
             </IconButton>
           </Box>
         </CardContent>

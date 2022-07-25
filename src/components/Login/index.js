@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './style.scss';
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitLogin } from 'src/actions/user';
+import { changeInputField, submitLogin, handleIsRedirect } from 'src/actions/user';
 
 export default function Login() {
   const {
@@ -20,17 +20,21 @@ export default function Login() {
     isLoading,
     errorMessage,
     submitError,
-    isRedirect,
+    isLogged,
   } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isRedirect) {
-      navigate('/character-management');
+    dispatch(handleIsRedirect());
+  }, []);
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate('/characters');
     }
-  }, [isRedirect]);
+  }, [isLogged]);
 
   return (
     <>

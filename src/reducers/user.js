@@ -9,6 +9,7 @@ import {
   VERIFY_PASSWORD,
   HANDLE_IS_LOADING,
   SUBMIT_ERROR,
+  HANDLE_IS_REDIRECT,
 
 } from 'src/actions/user';
 
@@ -19,7 +20,7 @@ export const initialState = {
   userPassword: '',
   userConfirmPassword: '',
   userId: 62,
-  isLogged: true,
+  isLogged: false,
   isReadOnly: true,
   isGuest: false,
   isSamePassword: false,
@@ -73,7 +74,6 @@ const reducer = (state = initialState, action = {}) => {
     case SUBMIT_REGISTER_SUCCESS:
       return {
         ...state,
-        isLogged: true,
         userName: '',
         userEmail: '',
         userPassword: '',
@@ -112,7 +112,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
       };
-
+    case HANDLE_IS_REDIRECT:
+      return {
+        ...state,
+        isRedirect: false,
+      };
     default:
       return state;
   }

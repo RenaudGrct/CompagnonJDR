@@ -82,7 +82,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           {isLogged && <Route path="/profile" element={<Profile />} />}
-          {isLogged && <Route path="/character-management" element={<CharacterManagement />} />}
+          {isLogged && <Route path="/characters" element={<CharacterManagement />} />}
         </Routes>
         <Footer />
       </ThemeProvider>

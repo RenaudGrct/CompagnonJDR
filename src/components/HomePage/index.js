@@ -4,13 +4,14 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   handleIsRedirect,
 } from 'src/actions/user';
 
 function Homepage() {
+  const { isLogged } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleIsRedirect());
@@ -43,6 +44,7 @@ function Homepage() {
 
           }}
         >
+          { !isLogged && (
           <Link to="/login">
             <Button
               color="secondary"
@@ -55,6 +57,7 @@ function Homepage() {
               Se connecter
             </Button>
           </Link>
+          ) }
           <Link to="/register">
             <Button
               color="secondary"
@@ -67,6 +70,7 @@ function Homepage() {
               Créer compte
             </Button>
           </Link>
+          { !isLogged && (
           <Link to="/register">
             <Button
               color="secondary"
@@ -79,6 +83,7 @@ function Homepage() {
               Se connecter en tant qu'invité
             </Button>
           </Link>
+          )}
 
         </Box>
       </Container>

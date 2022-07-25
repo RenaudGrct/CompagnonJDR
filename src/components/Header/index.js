@@ -42,7 +42,6 @@ export default function Header() {
   };
 
   const handleDisconnect = () => {
-    console.log('je clique sur le bouton');
     dispatch(logOut());
     handleCloseUserMenu();
   };
@@ -54,8 +53,6 @@ export default function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
             sx={{
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -105,6 +102,7 @@ export default function Header() {
               ))}
               <Link to="/">
                 <MenuItem
+                  key="Me deconnecter"
                   onClick={handleDisconnect}
                 >
                   <Typography textAlign="center">Me déconnecter</Typography>
