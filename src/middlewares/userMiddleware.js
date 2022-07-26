@@ -27,6 +27,10 @@ import {
   handleIsLoading,
   logOut,
 
+  LOG_AS_GUEST,
+  logAsGuestSuccess,
+  logAsGuestError,
+
 } from 'src/actions/user';
 
 const instance = axios.create({
@@ -135,7 +139,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
-          console.log(error);
+          console.log(error.response.data);
         })
         .finally(() => {
           console.log('je suis le finally');
@@ -143,21 +147,49 @@ const userMiddleware = (store) => (next) => async (action) => {
     }
       break;
 
-      // case GET_USER_PROFILE: {
-      //   const { user } = store.getState();
+    case LOG_AS_GUEST: {
+      next(action);
 
-      //   try {
-      //     const response = await instance.get(`${user.userId}`);
-      //     console.log(response);
-      //     store.dispatch(saveUserProfile(response.data));
-      //     // console.log(response.data)
-      //     console.log(`User email is ${response.data.email}`);
-      //   }
-      //   catch (error) {
-      //     console.log(error);
-      //   }
-      // }
-      //   break;
+      const config = {
+
+        method: 'post',
+        url: 'https://api-compagnon-jdr.herokuapp.com/api/profile/guest',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(logAsGuestSuccess(response.data));
+          console.log(response);
+        })
+        .catch((error) => {
+          store.dispatch(logAsGuestError(error.response.data));
+          console.log(error.response.data);
+        })
+        .finally(() => {
+          store.dispatch(handleIsLoading());
+        });
+
+      break;
+    }
+
+    // case GET_USER_PROFILE: {
+    //   const { user } = store.getState();
+
+    //   try {
+    //     const response = await instance.get(`${user.userId}`);
+    //     console.log(response);
+    //     store.dispatch(saveUserProfile(response.data));
+    //     // console.log(response.data)
+    //     console.log(`User email is ${response.data.email}`);
+    //   }
+    //   catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    //   break;
 
     default:
       next(action);

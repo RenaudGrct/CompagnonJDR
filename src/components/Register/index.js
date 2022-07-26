@@ -103,7 +103,7 @@ export default function Register() {
             onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
             value={userConfirmPassword}
           />
-          {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identique !</Alert>}
+          {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identiques !</Alert>}
 
           <Button
             color="secondary"

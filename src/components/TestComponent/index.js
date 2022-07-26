@@ -6,13 +6,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
-// import * as React from 'react';
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-// import DialogTitle from '@mui/material/DialogTitle';
-// import Slide from '@mui/material/Slide';
 import Field from 'src/components/InputField';
 import ProfileDeleteAlert from 'src/components/ProfileDeleteAlert';
 
@@ -20,13 +13,11 @@ import {
   changeInputField,
   submitRegister,
   toggleIsReadOnly,
-  // deleteUserProfile,
   updateUserProfile,
 } from 'src/actions/user';
 
 export default function TestComponent() {
   const {
-    // userId,
     userName,
     userEmail,
     userPassword,
@@ -38,23 +29,6 @@ export default function TestComponent() {
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-
-  // const handleUserDeletion = () => {
-  //   dispatch(deleteUserProfile());
-  //   console.log(`je delete ${userId}`);
-  // };
-
-  // const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-
-  // const [open, setOpen] = React.useState(false);
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   return (
 
@@ -209,52 +183,8 @@ export default function TestComponent() {
 
           {isReadOnly ? null : (
 
-            // <div>
-            //   <Button
-            //     sx={{
-            //       width: '15rem',
-            //     }}
-            //     variant="contained"
-            //     type="button"
-            //     color="error"
-            //     onClick={() => handleClickOpen()}
-            //   >
+            <ProfileDeleteAlert />
 
-            //     Supprimer le compte
-            //   </Button>
-            //   <Dialog
-            //     open={open}
-            //     TransitionComponent={Transition}
-            //     keepMounted
-            //     onClose={handleClose}
-            //     aria-describedby="alert-dialog-slide-description"
-            //   >
-            //     <DialogTitle>Etes-vous sûr de vouloir supprimer le compte ?</DialogTitle>
-            //     <DialogContent>
-            //       <DialogContentText id="alert-dialog-slide-description">
-            //         Cette action est définitive et vous perdrez tous vos personnages.
-            //       </DialogContentText>
-            //     </DialogContent>
-            //     <DialogActions>
-            //       <Button onClick={handleClose}>Annuler</Button>
-            //       <Button onClick={handleUserDeletion}>SUPPRIMER COMPTE</Button>
-            //     </DialogActions>
-            //   </Dialog>
-            // </div>
-
-<ProfileDeleteAlert />
-
-          // <Button
-          //   sx={{
-          //     width: '15rem',
-          //   }}
-          //   variant="contained"
-          //   type="button"
-          //   color="error"
-          //   onClick={() => handleUserDeletion()}
-          // >
-          //   Supprimer le compte
-          // </Button>
           )}
 
         </Box>

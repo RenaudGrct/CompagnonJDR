@@ -1,6 +1,6 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import CharacterManagement from 'src/components/CharacterManagement';
@@ -70,7 +70,7 @@ const theme = createTheme({
 
 // == Composant
 function App() {
-  const { isLogged } = useSelector((state) => state.user);
+  // const { isLogged } = useSelector((state) => state.user);
   return (
 
     <div className="app">
@@ -82,7 +82,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
-          {isLogged && <Route path="/characters" element={<CharacterManagement />} />}
+          <Route path="/characters" element={<CharacterManagement />} />
         </Routes>
         <Footer />
       </ThemeProvider>

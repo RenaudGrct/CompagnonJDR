@@ -26,6 +26,10 @@ export const UPDATE_USER_PROFILE_ERROR = 'UPDATE_USER_PROFILE_ERROR';
 
 export const MODIFY_PROFILE = 'MODIFY_PROFILE';
 
+export const LOG_AS_GUEST = 'LOG_AS_GUEST';
+export const LOG_AS_GUEST_ERROR = 'LOG_AS_GUEST_ERROR';
+export const LOG_AS_GUEST_SUCCESS = 'LOG_AS_GUEST_SUCCESS';
+
 export const changeInputField = (newValue, fieldName) => ({
   type: CHANGE_INPUT_FIELD,
   newValue,
@@ -106,4 +110,18 @@ export const updateUserProfileSuccess = () => ({
 
 export const handleIsRedirect = () => ({
   type: HANDLE_IS_REDIRECT,
+});
+
+export const logAsGuest = () => ({
+  type: LOG_AS_GUEST,
+});
+
+export const logAsGuestSuccess = (response) => ({
+  type: LOG_AS_GUEST_SUCCESS,
+  ...response,
+});
+
+export const logAsGuestError = (response) => ({
+  type: LOG_AS_GUEST_ERROR,
+  ...response,
 });

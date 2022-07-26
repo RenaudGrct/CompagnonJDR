@@ -14,6 +14,9 @@ import {
   UPDATE_USER_PROFILE_SUCCESS,
   DELETE_USER_PROFILE_SUCCESS,
   DELETE_USER_PROFILE_ERROR,
+  LOG_AS_GUEST,
+  LOG_AS_GUEST_SUCCESS,
+  LOG_AS_GUEST_ERROR,
 
 } from 'src/actions/user';
 
@@ -23,7 +26,7 @@ export const initialState = {
   userEmail: '',
   userPassword: '',
   userConfirmPassword: '',
-  userId: 62,
+  userId: '',
   isLogged: false,
   isReadOnly: true,
   isGuest: false,
@@ -32,6 +35,7 @@ export const initialState = {
   isLoading: false,
   errorMessage: '',
   isRedirect: false,
+  token: '',
 
 };
 
@@ -148,6 +152,29 @@ const reducer = (state = initialState, action = {}) => {
         submitError: true,
         errorMessage: action.message,
 
+      };
+    case LOG_AS_GUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case LOG_AS_GUEST_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+        userId: action.user.id,
+        userName: action.user.username,
+        userEmail: action.user.email,
+        token: action.accesToken,
+        userPassword: '',
+        submitError: false,
+        errorMessage: '',
+      };
+    case LOG_AS_GUEST_ERROR:
+      return {
+        ...state,
+        submitError: true,
+        errorMessage: action.message,
       };
     default:
       return state;
