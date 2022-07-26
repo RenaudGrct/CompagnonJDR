@@ -6,6 +6,8 @@ import {
   SUBMIT_REGISTER,
   SUBMIT_REGISTER_SUCCESS,
   TOGGLE_IS_READONLY,
+  TOGGLE_IS_CHANGE_PASSWORD,
+  HANDLE_PROFILE_MENU,
   VERIFY_PASSWORD,
   HANDLE_IS_LOADING,
   SUBMIT_ERROR,
@@ -13,6 +15,7 @@ import {
   HANDLE_IS_SUBMIT_ERROR,
   SAVE_USER_PROFILE,
   UPDATE_USER_PROFILE_SUCCESS,
+  UPDATE_USER_PROFILE_ERROR,
   DELETE_USER_PROFILE_SUCCESS,
   DELETE_USER_PROFILE_ERROR,
   LOG_AS_GUEST,
@@ -30,6 +33,7 @@ export const initialState = {
   userId: '',
   isLogged: false,
   isReadOnly: true,
+  isChangePassword: false,
   isGuest: false,
   isSamePassword: false,
   submitError: false,
@@ -111,6 +115,17 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isReadOnly: !state.isReadOnly,
       };
+    case TOGGLE_IS_CHANGE_PASSWORD:
+      return {
+        ...state,
+        isChangePassword: !state.isChangePassword,
+      };
+    case HANDLE_PROFILE_MENU:
+      return {
+        ...state,
+        isReadOnly: true,
+        isChangePassword: false,
+      };
     case VERIFY_PASSWORD:
       return {
         ...state,
@@ -144,6 +159,18 @@ const reducer = (state = initialState, action = {}) => {
     case UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,
+        isSamePassword: false,
+        userPassword: '',
+        userConfirmPassword: '',
+
+      };
+    case UPDATE_USER_PROFILE_ERROR:
+      return {
+        ...state,
+        isSamePassword: false,
+        userPassword: '',
+        userConfirmPassword: '',
+        errorMessage: action.message,
 
       };
     case DELETE_USER_PROFILE_SUCCESS:

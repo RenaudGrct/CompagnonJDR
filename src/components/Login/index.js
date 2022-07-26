@@ -53,7 +53,6 @@ export default function Login() {
           alignItems: 'center',
         }}
       >
-        {isLoading && <CircularProgress />}
         <Box
           component="form"
           sx={{
@@ -75,6 +74,8 @@ export default function Login() {
             // dispatch(getUserProfile());
           }}
         >
+          {isLoading && <CircularProgress color="secondary" />}
+
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           <Field
             required

@@ -10,7 +10,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitRegister, verifyPassword } from 'src/actions/user';
+import {
+  changeInputField,
+  submitRegister,
+  verifyPassword,
+  handleIsSubmitError,
+} from 'src/actions/user';
 
 export default function Register() {
   const {
@@ -43,6 +48,10 @@ export default function Register() {
       navigate('/login');
     }
   }, [isRedirect]);
+
+  useEffect(() => {
+    dispatch(handleIsSubmitError());
+  }, []);
 
   return (
     <>

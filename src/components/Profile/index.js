@@ -14,9 +14,12 @@ import Field from 'src/components/InputField';
 
 import {
   changeInputField,
-  submitRegister,
   toggleIsReadOnly,
+  toggleIsChangePassword,
   updateUserProfile,
+  updateUserPassword,
+  handleProfileMenu,
+  verifyPassword,
 } from 'src/actions/user';
 
 export default function Profile() {
@@ -26,6 +29,7 @@ export default function Profile() {
     userPassword,
     userConfirmPassword,
     isReadOnly,
+    isChangePassword,
     errorMessage,
     isLoading,
     submitError,
@@ -33,6 +37,7 @@ export default function Profile() {
   } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isLogged) {
@@ -40,13 +45,19 @@ export default function Profile() {
     }
   }, [isLogged]);
 
-  const dispatch = useDispatch();
+  async function handleSubmitChangePassword() {
+    if (userPassword === userConfirmPassword) {
+      await dispatch(updateUserPassword());
+    }
+    else {
+      dispatch(verifyPassword());
+    }
+  }
 
   return (
     <>
       <CssBaseline />
       <Container fixed>
-        {isLoading && <CircularProgress />}
         <Box
           component="form"
           sx={{
@@ -62,14 +73,13 @@ export default function Profile() {
           }}
           noValidate
           autoComplete="off"
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(submitRegister());
-          }}
         >
+          {isLoading && <CircularProgress color="secondary" />}
+
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
-          {isReadOnly ? (
-            <TextField
+
+          { isReadOnly && !isChangePassword && (
+            <><TextField
               sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
               color="secondary"
               disabled
@@ -81,103 +91,112 @@ export default function Profile() {
                 readOnly: true,
               }}
             />
-          ) : (
-            <Field
-              required
-              id="outlined-required"
-              label="Nom d'utilisateur"
-              name="userName"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userName}
-            />
-          )}
-          {isReadOnly ? (
-            <TextField
-              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
-              color="secondary"
-              disabled
-              id="outlined-disabled"
-              label="Email"
-              name="userEmail"
-              value={userEmail}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          ) : (
-            <Field
-              required
-              id="outlined-required"
-              label="Email"
-              name="userEmail"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userEmail}
-            />
-          )}
-          {isReadOnly ? (
-            <TextField
-              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
-              color="secondary"
-              disabled
-              id="filled-disabled"
-              label="Mot de passe"
-              type="password"
-              name="userPassword"
-              value={userPassword}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          ) : (
-            <Field
-              required
-              id="outlined-required"
-              label="Mot de passe"
-              type="password"
-              name="userPassword"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userPassword}
-            />
+              <TextField
+                sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+                color="secondary"
+                disabled
+                id="outlined-disabled"
+                label="Email"
+                name="userEmail"
+                value={userEmail}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <Button
+                sx={{
+                  width: '15rem',
+                }}
+                color="secondary"
+                variant="contained"
+                type="button"
+                onClick={() => dispatch(toggleIsReadOnly())}
+              >
+                Modifier mon identité
+              </Button>
+              <Button
+                sx={{
+                  width: '15rem',
+                }}
+                color="secondary"
+                variant="contained"
+                type="button"
+                onClick={() => dispatch(toggleIsChangePassword())}
+              >
+                Modifier mon mot de passe
+              </Button>
+            </>
           )}
 
           {!isReadOnly && (
-            <Field
-              required
-              id="outlined-required"
-              label="Confirmation mot de passe"
-              type="password"
-              name="userConfirmPassword"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userConfirmPassword}
-            />
-          )}
-          {isReadOnly ? (
-            <Button
-              sx={{
-                width: '15rem',
-              }}
-              color="secondary"
-              variant="contained"
-              type="button"
-              onClick={() => dispatch(toggleIsReadOnly())}
-            >
-              Modifier
-            </Button>
-          ) : (
-            <Button
-              sx={{
-                width: '15rem',
-              }}
-              color="secondary"
-              variant="contained"
-              type="button"
-              onClick={() => dispatch(updateUserProfile())}
-            >
-              Enregistrer
-            </Button>
+          <><Field
+            required
+            id="outlined-required"
+            label="Nom d'utilisateur"
+            name="userName"
+            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+            value={userName}
+          /><Field
+            required
+            id="outlined-required"
+            label="Email"
+            name="userEmail"
+            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+            value={userEmail}
+          />
+          </>
           )}
 
-          {isReadOnly ? null : (
+          {isChangePassword && (
+          <><Field
+            required
+            id="outlined-required"
+            label="Mot de passe"
+            type="password"
+            name="userPassword"
+            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+            value={userPassword}
+          /><Field
+            required
+            id="outlined-required"
+            label="Confirmation mot de passe"
+            type="password"
+            name="userConfirmPassword"
+            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+            value={userConfirmPassword}
+          />
+          </>
+          )}
+
+          { !isReadOnly && (
+          <Button
+            sx={{
+              width: '15rem',
+            }}
+            color="secondary"
+            variant="contained"
+            type="submit"
+            onClick={() => dispatch(updateUserProfile())}
+          >
+            Enregistrer
+          </Button>
+          )}
+          { isChangePassword && (
+          <Button
+            sx={{
+              width: '15rem',
+            }}
+            color="secondary"
+            variant="contained"
+            type="submit"
+            onClick={() => handleSubmitChangePassword()}
+          >
+            Enregistrer
+          </Button>
+          )}
+
+          {(!isReadOnly || isChangePassword) && (
+          <>
             <Button
               sx={{
                 width: '15rem',
@@ -185,16 +204,12 @@ export default function Profile() {
               color="secondary"
               variant="contained"
               type="button"
-              onClick={() => dispatch(toggleIsReadOnly())}
+              onClick={() => dispatch(handleProfileMenu())}
             >
               Annuler
             </Button>
-          )}
-
-          {isReadOnly ? null : (
-
             <ProfileDeleteAlert />
-
+          </>
           )}
         </Box>
       </Container>
