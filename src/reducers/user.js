@@ -10,6 +10,7 @@ import {
   HANDLE_IS_LOADING,
   SUBMIT_ERROR,
   HANDLE_IS_REDIRECT,
+  HANDLE_IS_SUBMIT_ERROR,
   SAVE_USER_PROFILE,
   UPDATE_USER_PROFILE_SUCCESS,
   DELETE_USER_PROFILE_SUCCESS,
@@ -103,6 +104,7 @@ const reducer = (state = initialState, action = {}) => {
         submitError: true,
         errorMessage: action.message,
         isLoading: false,
+        isSamePassword: false,
       };
     case TOGGLE_IS_READONLY:
       return {
@@ -125,6 +127,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isRedirect: false,
+      };
+    case HANDLE_IS_SUBMIT_ERROR:
+      return {
+        ...state,
+        submitError: false,
       };
     case SAVE_USER_PROFILE:
       return {

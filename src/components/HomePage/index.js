@@ -10,6 +10,7 @@ import Alert from '@mui/material/Alert';
 import {
   handleIsRedirect,
   logAsGuest,
+  handleIsSubmitError,
 } from 'src/actions/user';
 
 function Homepage() {
@@ -17,6 +18,7 @@ function Homepage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleIsRedirect());
+    dispatch(handleIsSubmitError());
   }, []);
   return (
 

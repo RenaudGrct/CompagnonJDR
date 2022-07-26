@@ -3,6 +3,7 @@ export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
 export const VERIFY_PASSWORD = 'VERIFY_PASSWORD';
 export const HANDLE_IS_LOADING = 'HANDLE_IS_LOADING';
 export const HANDLE_IS_REDIRECT = 'HANDLE_IS_REDIRECT';
+export const HANDLE_IS_SUBMIT_ERROR = 'HANDLE_IS_SUBMIT_ERROR';
 
 // USER CRUD
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
@@ -110,6 +111,9 @@ export const updateUserProfileSuccess = () => ({
 
 export const handleIsRedirect = () => ({
   type: HANDLE_IS_REDIRECT,
+});
+export const handleIsSubmitError = () => ({
+  type: HANDLE_IS_SUBMIT_ERROR,
 });
 
 export const logAsGuest = () => ({
