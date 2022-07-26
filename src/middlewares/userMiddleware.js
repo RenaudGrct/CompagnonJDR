@@ -21,9 +21,10 @@ import {
   updateUserProfileError,
 
   // Get user
-  GET_USER_PROFILE,
-  handleIsLoading,
+  // GET_USER_PROFILE,
+  // saveUserProfile,
 
+  handleIsLoading,
   logOut,
 
 } from 'src/actions/user';
@@ -31,6 +32,15 @@ import {
 const instance = axios.create({
   baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/profile/',
 });
+
+// const setInstanceAuthorization = () => {
+//   if (localStorage.getItem('token')) {
+//     const token = localStorage.getItem('token');
+//     instance.defaults.headers.common.authorization = token;
+//     console.log(instance.defaults.headers.common);
+//   }
+// }
+// setInstanceAuthorization();
 
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -114,7 +124,8 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
-        headers: { },
+        headers: { 'Content-Type': 'application/json' },
+        data: { email: user.userEmail, username: user.userName, password: user.userPassword },
       };
 
       axios(config)
@@ -123,7 +134,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(response);
         })
         .catch((error) => {
-          store.dispatch(updateUserProfileError());
+          store.dispatch(updateUserProfileError(error.response.data));
           console.log(error);
         })
         .finally(() => {
@@ -132,21 +143,21 @@ const userMiddleware = (store) => (next) => async (action) => {
     }
       break;
 
-    case GET_USER_PROFILE: {
-      const { user } = store.getState();
+      // case GET_USER_PROFILE: {
+      //   const { user } = store.getState();
 
-      try {
-        const response = await instance.get(`${user.userId}`);
-        console.log(response);
-        // store.dispatch(saveUserProfile(response));
-        // console.log(response.data)
-        // console.log(`User email is ${user.userEmail}`);
-      }
-      catch (error) {
-        console.log(error);
-      }
-    }
-      break;
+      //   try {
+      //     const response = await instance.get(`${user.userId}`);
+      //     console.log(response);
+      //     store.dispatch(saveUserProfile(response.data));
+      //     // console.log(response.data)
+      //     console.log(`User email is ${response.data.email}`);
+      //   }
+      //   catch (error) {
+      //     console.log(error);
+      //   }
+      // }
+      //   break;
 
     default:
       next(action);

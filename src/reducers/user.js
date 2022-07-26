@@ -10,6 +10,10 @@ import {
   HANDLE_IS_LOADING,
   SUBMIT_ERROR,
   HANDLE_IS_REDIRECT,
+  SAVE_USER_PROFILE,
+  UPDATE_USER_PROFILE_SUCCESS,
+  DELETE_USER_PROFILE_SUCCESS,
+  DELETE_USER_PROFILE_ERROR,
 
 } from 'src/actions/user';
 
@@ -50,15 +54,19 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLogged: true,
         isGuest: false,
-        userName: '',
-        userEmail: '',
+        userId: action.user.id,
+        userName: action.user.username,
+        userEmail: action.user.email,
         userPassword: '',
         isRedirect: true,
+        submitError: false,
+        errorMessage: '',
       };
 
     case LOG_OUT:
       return {
         ...state,
+        userName: '',
         userEmail: '',
         userPassword: '',
         isLogged: false,
@@ -83,6 +91,7 @@ const reducer = (state = initialState, action = {}) => {
         submitError: false,
         isLoading: false,
         isRedirect: true,
+        errorMessage: '',
       };
     case SUBMIT_ERROR:
       return {
@@ -94,10 +103,6 @@ const reducer = (state = initialState, action = {}) => {
     case TOGGLE_IS_READONLY:
       return {
         ...state,
-        userName: '',
-        userEmail: '',
-        userPassword: '',
-        userConfirmPassword: '',
         isReadOnly: !state.isReadOnly,
       };
     case VERIFY_PASSWORD:
@@ -116,6 +121,33 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isRedirect: false,
+      };
+    case SAVE_USER_PROFILE:
+      return {
+        ...state,
+        userName: action.username,
+        userEmail: action.email,
+        userId: action.id,
+        isLoading: false,
+      };
+    case UPDATE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+
+      };
+    case DELETE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLogged: false,
+        submitError: false,
+        errorMessage: '',
+      };
+    case DELETE_USER_PROFILE_ERROR:
+      return {
+        ...state,
+        submitError: true,
+        errorMessage: action.message,
+
       };
     default:
       return state;

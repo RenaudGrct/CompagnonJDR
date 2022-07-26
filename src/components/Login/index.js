@@ -11,7 +11,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './style.scss';
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitLogin, handleIsRedirect } from 'src/actions/user';
+import {
+  changeInputField,
+  submitLogin,
+  handleIsRedirect,
+  // getUserProfile,
+} from 'src/actions/user';
 
 export default function Login() {
   const {
@@ -67,6 +72,7 @@ export default function Login() {
           onSubmit={(e) => {
             e.preventDefault();
             dispatch(submitLogin());
+            // dispatch(getUserProfile());
           }}
         >
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}

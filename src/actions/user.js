@@ -24,6 +24,8 @@ export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 export const UPDATE_USER_PROFILE_SUCCESS = 'UPDATE_USER_PROFILE_SUCCESS';
 export const UPDATE_USER_PROFILE_ERROR = 'UPDATE_USER_PROFILE_ERROR';
 
+export const MODIFY_PROFILE = 'MODIFY_PROFILE';
+
 export const changeInputField = (newValue, fieldName) => ({
   type: CHANGE_INPUT_FIELD,
   newValue,
