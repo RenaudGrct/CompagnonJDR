@@ -10,6 +10,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Field from 'src/components/InputField';
 
+import { changeInputField, submitRegister, verifyPassword } from 'src/actions/user';
+
 export default function Register() {
   const {
     userName,
@@ -38,7 +40,7 @@ export default function Register() {
 
   useEffect(() => {
     if (isRedirect) {
-      navigate('/character-management');
+      navigate('/login');
     }
   }, [isRedirect]);
 
@@ -54,13 +56,11 @@ export default function Register() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '70vh',
             marginTop: '5rem',
             padding: '1rem',
             gap: '2rem',
-            color: 'primary.main',
             backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
+            opacity: [0.7, 0.7, 0.7],
           }}
           noValidate
           autoComplete="off"
@@ -103,7 +103,7 @@ export default function Register() {
             onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
             value={userConfirmPassword}
           />
-          {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identique !</Alert>}
+          {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identiques !</Alert>}
 
           <Button
             color="secondary"

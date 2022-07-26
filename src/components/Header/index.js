@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import avatar from 'src/assets/images/elfe.png';
 import { Link } from 'react-router-dom';
 
+import { logOut } from 'src/actions/user';
+
 const settings = [
   {
     label: 'Mon compte',
@@ -20,15 +22,14 @@ const settings = [
   }, {
     label: 'Mes perso',
     url: '/characters',
-  }, {
-    label: 'Se deconnecter',
-    url: '/logout',
   }];
 
 export default function Header() {
   const {
-    isGuest,
+    isLogged,
   } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -40,6 +41,11 @@ export default function Header() {
     setAnchorElUser(null);
   };
 
+  const handleDisconnect = () => {
+    dispatch(logOut());
+    handleCloseUserMenu();
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -47,8 +53,6 @@ export default function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
             sx={{
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -60,7 +64,7 @@ export default function Header() {
           >
             <Link to="/">COMPAGNON JDR</Link>
           </Typography>
-          {!isGuest && (
+          {isLogged && (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Ouvrir Menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -69,9 +73,6 @@ export default function Header() {
             </Tooltip>
             <Menu
               sx={{
-                // backgroundColor: 'primary.main',
-                // color: 'primary.main',
-                opacity: [0.1, 0.1, 0.1],
                 mt: '45px',
               }}
               id="menu-appbar"
@@ -92,10 +93,6 @@ export default function Header() {
 
                 <Link to={setting.url}>
                   <MenuItem
-                    sx={{
-                      backgroundColor: 'primary.main',
-                      color: '#fff',
-                    }}
                     key={setting.label}
                     onClick={handleCloseUserMenu}
                   >
@@ -103,6 +100,14 @@ export default function Header() {
                   </MenuItem>
                 </Link>
               ))}
+              <Link to="/">
+                <MenuItem
+                  key="Me deconnecter"
+                  onClick={handleDisconnect}
+                >
+                  <Typography textAlign="center">Me déconnecter</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
           )}

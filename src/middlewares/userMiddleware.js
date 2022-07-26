@@ -1,13 +1,14 @@
 import axios from 'axios';
+
 import {
 // Login user
   SUBMIT_LOGIN,
   submitLoginSuccess,
+  submitError,
 
   // Register user
   SUBMIT_REGISTER,
   submitRegisterSuccess,
-  submitRegisterError,
 
   // Delete user
   DELETE_USER_PROFILE,
@@ -20,8 +21,15 @@ import {
   updateUserProfileError,
 
   // Get user
-  GET_USER_PROFILE,
+  // GET_USER_PROFILE,
+  // saveUserProfile,
+
   handleIsLoading,
+  logOut,
+
+  LOG_AS_GUEST,
+  logAsGuestSuccess,
+  logAsGuestError,
 
 } from 'src/actions/user';
 
@@ -29,17 +37,34 @@ const instance = axios.create({
   baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/profile/',
 });
 
+// const setInstanceAuthorization = () => {
+//   if (localStorage.getItem('token')) {
+//     const token = localStorage.getItem('token');
+//     instance.defaults.headers.common.authorization = token;
+//     console.log(instance.defaults.headers.common);
+//   }
+// }
+// setInstanceAuthorization();
+
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
+      const { user } = store.getState();
 
+      next(action);
+      try {
+        const response = await instance.post('login', {
+          email: user.userEmail,
+          password: user.userPassword,
         });
         store.dispatch(submitLoginSuccess(response.data));
         console.log(response);
       }
       catch (error) {
+        store.dispatch(submitError(error.response.data));
         console.log(error);
       }
+      store.dispatch(handleIsLoading());
 
       // si je veux gérer un état de loading, je peux nexter aussi
       // SUBMIT_LOGIN
@@ -65,7 +90,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(response);
         })
         .catch((error) => {
-          store.dispatch(submitRegisterError(error.response.data));
+          store.dispatch(submitError(error.response.data));
           console.log(error);
         })
         .finally(() => {
@@ -103,7 +128,8 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
-        headers: { },
+        headers: { 'Content-Type': 'application/json' },
+        data: { email: user.userEmail, username: user.userName, password: user.userPassword },
       };
 
       axios(config)
@@ -112,8 +138,8 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(response);
         })
         .catch((error) => {
-          store.dispatch(updateUserProfileError());
-          console.log(error);
+          store.dispatch(updateUserProfileError(error.response.data));
+          console.log(error.response.data);
         })
         .finally(() => {
           console.log('je suis le finally');
@@ -121,20 +147,49 @@ const userMiddleware = (store) => (next) => async (action) => {
     }
       break;
 
-    case GET_USER_PROFILE: {
-      const { user } = store.getState();
+    case LOG_AS_GUEST: {
+      next(action);
 
-      try {
-        const response = await instance.get(`${user.userId}`);
-        // store.dispatch(saveUserProfile(response));
-        // console.log(response.data)
-        // console.log(`User email is ${user.userEmail}`);
-      }
-      catch (error) {
-        console.log(error);
-      }
-    }
+      const config = {
+
+        method: 'post',
+        url: 'https://api-compagnon-jdr.herokuapp.com/api/profile/guest',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(logAsGuestSuccess(response.data));
+          console.log(response);
+        })
+        .catch((error) => {
+          store.dispatch(logAsGuestError(error.response.data));
+          console.log(error.response.data);
+        })
+        .finally(() => {
+          store.dispatch(handleIsLoading());
+        });
+
       break;
+    }
+
+    // case GET_USER_PROFILE: {
+    //   const { user } = store.getState();
+
+    //   try {
+    //     const response = await instance.get(`${user.userId}`);
+    //     console.log(response);
+    //     store.dispatch(saveUserProfile(response.data));
+    //     // console.log(response.data)
+    //     console.log(`User email is ${response.data.email}`);
+    //   }
+    //   catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    //   break;
 
     default:
       next(action);

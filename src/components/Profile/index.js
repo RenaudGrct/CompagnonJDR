@@ -1,45 +1,57 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import ProfileDeleteAlert from 'src/components/ProfileDeleteAlert';
 
 import Field from 'src/components/InputField';
 
 import {
-  changeInputField, submitRegister, toggleIsReadOnly, getUserProfile, deleteUserProfile,
+  changeInputField,
+  submitRegister,
+  toggleIsReadOnly,
+  updateUserProfile,
 } from 'src/actions/user';
 
-export default function TestComponent() {
+export default function Profile() {
   const {
-    userId,
     userName,
     userEmail,
     userPassword,
     userConfirmPassword,
     isReadOnly,
+    errorMessage,
+    isLoading,
+    submitError,
+    isLogged,
   } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleUserDeletion = () => {
-    dispatch(deleteUserProfile());
-    console.log(`je delete ${userId}`);
-  };
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/');
+    }
+  }, [isLogged]);
+
+  const dispatch = useDispatch();
 
   return (
     <>
       <CssBaseline />
       <Container fixed>
+        {isLoading && <CircularProgress />}
         <Box
           component="form"
           sx={{
-            color: 'primary.main',
             backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
-            height: '90vh',
+            opacity: [0.7, 0.7, 0.7],
             marginTop: '5rem',
             padding: '1rem',
             gap: '2rem',
@@ -55,14 +67,11 @@ export default function TestComponent() {
             dispatch(submitRegister());
           }}
         >
+          {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           {isReadOnly ? (
             <TextField
-              sx={{
-
-                // color: 'primary.main',
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              }}
+              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+              color="secondary"
               disabled
               id="outlined-disabled"
               label="Nom d'utilisateur"
@@ -84,6 +93,8 @@ export default function TestComponent() {
           )}
           {isReadOnly ? (
             <TextField
+              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+              color="secondary"
               disabled
               id="outlined-disabled"
               label="Email"
@@ -105,6 +116,8 @@ export default function TestComponent() {
           )}
           {isReadOnly ? (
             <TextField
+              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+              color="secondary"
               disabled
               id="filled-disabled"
               label="Mot de passe"
@@ -140,6 +153,9 @@ export default function TestComponent() {
           )}
           {isReadOnly ? (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               color="secondary"
               variant="contained"
               type="button"
@@ -149,10 +165,13 @@ export default function TestComponent() {
             </Button>
           ) : (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               color="secondary"
               variant="contained"
               type="button"
-              onClick={() => console.log('je suis le bouton enregistrer')}
+              onClick={() => dispatch(updateUserProfile())}
             >
               Enregistrer
             </Button>
@@ -160,6 +179,9 @@ export default function TestComponent() {
 
           {isReadOnly ? null : (
             <Button
+              sx={{
+                width: '15rem',
+              }}
               color="secondary"
               variant="contained"
               type="button"
@@ -168,14 +190,12 @@ export default function TestComponent() {
               Annuler
             </Button>
           )}
-          <Button
-            variant="contained"
-            type="button"
-            color="error"
-            onClick={() => handleUserDeletion()}
-          >
-            Supprimer le compte
-          </Button>
+
+          {isReadOnly ? null : (
+
+            <ProfileDeleteAlert />
+
+          )}
         </Box>
       </Container>
     </>

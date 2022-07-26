@@ -4,13 +4,16 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from '@mui/material/Alert';
 
 import {
   handleIsRedirect,
+  logAsGuest,
 } from 'src/actions/user';
 
 function Homepage() {
+  const { isLogged, submitError, errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleIsRedirect());
@@ -34,7 +37,6 @@ function Homepage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '50vh',
             marginTop: '10rem',
             padding: '1rem',
             gap: '2rem',
@@ -44,6 +46,7 @@ function Homepage() {
 
           }}
         >
+          { !isLogged && (
           <Link to="/login">
             <Button
               color="secondary"
@@ -56,6 +59,7 @@ function Homepage() {
               Se connecter
             </Button>
           </Link>
+          ) }
           <Link to="/register">
             <Button
               color="secondary"
@@ -68,8 +72,10 @@ function Homepage() {
               Créer compte
             </Button>
           </Link>
-          <Link to="/register">
+          {submitError && <Alert severity="error">{errorMessage}!</Alert>}
+          { !isLogged && (
             <Button
+              onClick={() => dispatch(logAsGuest())}
               color="secondary"
               variant="contained"
               type="submit"
@@ -79,7 +85,7 @@ function Homepage() {
             >
               Se connecter en tant qu'invité
             </Button>
-          </Link>
+          )}
 
         </Box>
       </Container>

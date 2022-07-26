@@ -11,7 +11,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './style.scss';
 import Field from 'src/components/InputField';
 
-import { changeInputField, submitLogin } from 'src/actions/user';
+import {
+  changeInputField,
+  submitLogin,
+  handleIsRedirect,
+  // getUserProfile,
+} from 'src/actions/user';
 
 export default function Login() {
   const {
@@ -20,17 +25,21 @@ export default function Login() {
     isLoading,
     errorMessage,
     submitError,
-    isRedirect,
+    isLogged,
   } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isRedirect) {
-      navigate('/character-management');
+    dispatch(handleIsRedirect());
+  }, []);
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate('/characters');
     }
-  }, [isRedirect]);
+  }, [isLogged]);
 
   return (
     <>
@@ -52,20 +61,18 @@ export default function Login() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: '#cfe8fc',
-            height: '50vh',
             marginTop: '10rem',
-            padding: '3rem',
+            padding: '1rem',
             gap: '2rem',
-            color: 'primary.main',
             backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
+            opacity: [0.7, 0.7, 0.7],
           }}
           noValidate
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
             dispatch(submitLogin());
+            // dispatch(getUserProfile());
           }}
         >
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
