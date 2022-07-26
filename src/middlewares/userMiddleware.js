@@ -19,6 +19,7 @@ import {
   UPDATE_USER_PROFILE,
   updateUserProfileSuccess,
   updateUserProfileError,
+  UPDATE_USER_PASSWORD,
 
   // Get user
   // GET_USER_PROFILE,
@@ -35,6 +36,7 @@ import {
 
 const instance = axios.create({
   baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/profile/',
+  // withCredentials: true,
 });
 
 // const setInstanceAuthorization = () => {
@@ -82,6 +84,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           'Content-Type': 'application/json',
         },
         data: { email: user.userEmail, username: user.userName, password: user.userPassword },
+        // withCredentials: true,
       };
 
       axios(config)
@@ -129,7 +132,8 @@ const userMiddleware = (store) => (next) => async (action) => {
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
         headers: { 'Content-Type': 'application/json' },
-        data: { email: user.userEmail, username: user.userName, password: user.userPassword },
+        data: { email: user.userEmail, username: user.userName },
+        // withCredentials: true,
       };
 
       axios(config)
@@ -142,7 +146,35 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(error.response.data);
         })
         .finally(() => {
-          console.log('je suis le finally');
+          store.dispatch(handleIsLoading());
+        });
+    }
+      break;
+
+    case UPDATE_USER_PASSWORD: {
+      const { user } = store.getState();
+
+      next(action);
+      const config = {
+
+        method: 'patch',
+        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        headers: { 'Content-Type': 'application/json' },
+        data: { password: user.userPassword },
+        // withCredentials: true,
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(updateUserProfileSuccess(response.data));
+          console.log(response);
+        })
+        .catch((error) => {
+          store.dispatch(updateUserProfileError(error.response.data));
+          console.log(error.response.data);
+        })
+        .finally(() => {
+          store.dispatch(handleIsLoading());
         });
     }
       break;
@@ -157,6 +189,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        // withCredentials: true,
       };
 
       axios(config)

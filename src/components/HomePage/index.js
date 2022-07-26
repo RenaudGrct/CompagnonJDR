@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import {
   handleIsRedirect,
@@ -14,12 +15,20 @@ import {
 } from 'src/actions/user';
 
 function Homepage() {
-  const { isLogged, submitError, errorMessage } = useSelector((state) => state.user);
+  const {
+    isLogged,
+    submitError,
+    errorMessage,
+    isLoading,
+  } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(handleIsRedirect());
     dispatch(handleIsSubmitError());
   }, []);
+
   return (
 
     <>
@@ -48,6 +57,7 @@ function Homepage() {
 
           }}
         >
+          {isLoading && <CircularProgress color="secondary" />}
           { !isLogged && (
           <Link to="/login">
             <Button

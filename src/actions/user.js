@@ -1,9 +1,11 @@
 export const CHANGE_INPUT_FIELD = 'CHANGE_INPUT_FIELD';
 export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
+export const TOGGLE_IS_CHANGE_PASSWORD = 'TOGGLE_IS_CHANGE_PASSWORD';
 export const VERIFY_PASSWORD = 'VERIFY_PASSWORD';
 export const HANDLE_IS_LOADING = 'HANDLE_IS_LOADING';
 export const HANDLE_IS_REDIRECT = 'HANDLE_IS_REDIRECT';
 export const HANDLE_IS_SUBMIT_ERROR = 'HANDLE_IS_SUBMIT_ERROR';
+export const HANDLE_PROFILE_MENU = 'HANDLE_PROFILE_MENU';
 
 // USER CRUD
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
@@ -24,6 +26,7 @@ export const DELETE_USER_PROFILE_ERROR = 'DELETE_USER_PROFILE_ERROR';
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 export const UPDATE_USER_PROFILE_SUCCESS = 'UPDATE_USER_PROFILE_SUCCESS';
 export const UPDATE_USER_PROFILE_ERROR = 'UPDATE_USER_PROFILE_ERROR';
+export const UPDATE_USER_PASSWORD = 'UPDATE_USER_PASSWORD';
 
 export const MODIFY_PROFILE = 'MODIFY_PROFILE';
 
@@ -54,8 +57,16 @@ export const verifyPassword = () => ({
   type: VERIFY_PASSWORD,
 });
 
+export const toggleIsChangePassword = () => ({
+  type: TOGGLE_IS_CHANGE_PASSWORD,
+});
+
 export const toggleIsReadOnly = () => ({
   type: TOGGLE_IS_READONLY,
+});
+
+export const handleProfileMenu = () => ({
+  type: HANDLE_PROFILE_MENU,
 });
 
 export const handleIsLoading = () => ({
@@ -101,12 +112,18 @@ export const updateUserProfile = () => ({
   type: UPDATE_USER_PROFILE,
 });
 
-export const updateUserProfileError = () => ({
-  type: UPDATE_USER_PROFILE_ERROR,
+export const updateUserPassword = () => ({
+  type: UPDATE_USER_PASSWORD,
 });
 
-export const updateUserProfileSuccess = () => ({
+export const updateUserProfileError = (response) => ({
+  type: UPDATE_USER_PROFILE_ERROR,
+  ...response,
+});
+
+export const updateUserProfileSuccess = (response) => ({
   type: UPDATE_USER_PROFILE_SUCCESS,
+  ...response,
 });
 
 export const handleIsRedirect = () => ({
