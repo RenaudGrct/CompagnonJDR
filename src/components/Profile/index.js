@@ -34,6 +34,7 @@ export default function Profile() {
     isLoading,
     submitError,
     isLogged,
+    isSamePassword,
   } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
@@ -146,7 +147,7 @@ export default function Profile() {
           />
           </>
           )}
-
+          {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identiques !</Alert>}
           {isChangePassword && (
           <><Field
             required
@@ -175,7 +176,7 @@ export default function Profile() {
             }}
             color="secondary"
             variant="contained"
-            type="submit"
+            type="button"
             onClick={() => dispatch(updateUserProfile())}
           >
             Enregistrer
@@ -188,7 +189,7 @@ export default function Profile() {
             }}
             color="secondary"
             variant="contained"
-            type="submit"
+            type="button"
             onClick={() => handleSubmitChangePassword()}
           >
             Enregistrer
