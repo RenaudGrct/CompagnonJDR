@@ -8,7 +8,6 @@ import Login from 'src/components/Login';
 import Header from 'src/components/Header';
 import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
-import CharactersRace from 'src/components/CharactersRace';
 import Footer from 'src/components/Footer';
 import CharacterCreation from 'src/components/CharacterCreation';
 import Name from 'src/components/CharacterCreation/Name';
@@ -50,31 +49,6 @@ const theme = createTheme({
       primary: 'rgba(255,255,255,0.87)',
     },
   },
-
-  // palette: {
-  //   type: 'light',
-  //   primary: {
-  //     main: grey[900],
-  //     // secondary: '#fff',
-  //     // dark: grey[900],
-  //     // light: grey[900],
-  //   },
-  //   // secondary controle la couleur des boutons
-  //   secondary: {
-  //     main: '#000000',
-  //   },
-  //   // text controle la couleur du texte
-  //   text: {
-  //     primary: '#fff',
-  //     secondary: '#fff',
-  //     disabled: '#fff',
-  //     // primary: orange[900],
-  //     // secondary: orange[900],
-  //     // disabled: orange[900],
-
-  //   },
-  // },
-
 });
 
 // == Composant
@@ -86,7 +60,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <Header />
         <Routes>
-          <Route path="/race" element={<CharactersRace />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -99,8 +72,6 @@ function App() {
           <Route path="/creation/background" element={<Background />} />
           <Route path="/creation/stats" element={<Stats />} />
           <Route path="/creation/validate" element={<Validate />} />
-
-
         </Routes>
         <Footer />
       </ThemeProvider>
