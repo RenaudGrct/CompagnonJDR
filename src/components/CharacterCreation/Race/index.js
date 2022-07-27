@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 
 import avatar from 'src/assets/images/elfe.png';
 
+import races from 'src/assets/D&D/raceList';
+
 export default function Race() {
   return (
     <>
@@ -38,7 +40,7 @@ export default function Race() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'text.primary',
+              // color: 'primary.contrastText',
               textDecoration: 'none',
               marginBottom: '5rem',
             }}
@@ -49,47 +51,31 @@ export default function Race() {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
             sx={{
-              color: 'text.primary',
-              gap: '3rem',
+              // color: 'primary.contrastText',
+              gap: '6rem',
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
+              width: '60%',
             }}
           >
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Avatar alt="User Avatar" src={avatar} sx={{ width: 84, height: 84 }} />
-              <FormControlLabel value="elf" control={<Radio sx={{ color: 'text.primary' }} />} label="elf" labelPlacement="top" />
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Avatar alt="User Avatar" src={avatar} sx={{ width: 84, height: 84 }} />
-              <FormControlLabel value="nain" control={<Radio sx={{ color: 'text.primary' }} />} label="nain" labelPlacement="top" />
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Avatar alt="User Avatar" src={avatar} sx={{ width: 84, height: 84 }} />
-              <FormControlLabel value="drakeide" control={<Radio sx={{ color: 'text.primary' }} />} label="drakeide" labelPlacement="top" />
-            </Box>
+            {
+              races.map((race) => (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Avatar alt="User Avatar" src={avatar} sx={{ width: 84, height: 84 }} />
+                  <FormControlLabel value={`${race.label}`} control={<Radio sx={{ color: 'primary.contrastText' }} />} label={`${race.label}`} labelPlacement="top" />
+                </Box>
+
+              ))
+            }
           </RadioGroup>
         </FormControl>
       </Container>
