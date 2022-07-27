@@ -45,9 +45,9 @@ const theme = createTheme({
     success: {
       main: '#149418',
     },
-    text: {
-      primary: 'rgba(255,255,255,0.87)',
-    },
+    // text: {
+    //   primary: 'rgba(255,255,255,0.87)',
+    // },
   },
 });
 

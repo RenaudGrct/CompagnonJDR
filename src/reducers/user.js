@@ -74,6 +74,7 @@ const reducer = (state = initialState, action = {}) => {
         isRedirect: true,
         submitError: false,
         errorMessage: '',
+        token: action.accessToken,
       };
 
     case LOG_OUT:

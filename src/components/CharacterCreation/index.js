@@ -5,6 +5,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { NavLink } from 'react-router-dom';
 
+import './characterCreation.scss';
+
 export default function CharacterCreation() {
   const [value, setValue] = React.useState('1');
 

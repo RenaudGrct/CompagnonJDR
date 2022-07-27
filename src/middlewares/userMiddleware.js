@@ -35,8 +35,8 @@ import {
 } from 'src/actions/user';
 
 const instance = axios.create({
-  baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/profile/',
-  // withCredentials: true,
+  baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/',
+  withCredentials: true,
 });
 
 // const setInstanceAuthorization = () => {
@@ -55,7 +55,7 @@ const userMiddleware = (store) => (next) => async (action) => {
 
       next(action);
       try {
-        const response = await instance.post('login', {
+        const response = await instance.post('auth/login', {
           email: user.userEmail,
           password: user.userPassword,
         });
@@ -79,12 +79,12 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'post',
-        url: 'https://api-compagnon-jdr.herokuapp.com/api/profile/register',
+        url: 'https://api-compagnon-jdr.herokuapp.com/api/auth/register',
         headers: {
           'Content-Type': 'application/json',
         },
         data: { email: user.userEmail, username: user.userName, password: user.userPassword },
-        // withCredentials: true,
+        withCredentials: true,
       };
 
       axios(config)
@@ -110,7 +110,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       next(action);
 
       try {
-        const response = await instance.delete(`${user.userId}`);
+        const response = await instance.delete(`profile/${user.userId}`);
         store.dispatch(deleteUserProfileSuccess(response.data));
         console.log(response);
       }
@@ -131,9 +131,16 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
-        headers: { 'Content-Type': 'application/json' },
-        data: { email: user.userEmail, username: user.userName, password: user.userPassword },
-        // withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${user.token}`,
+        },
+        data: {
+          email: user.userEmail,
+          username: user.userName,
+          password: user.userPassword,
+        },
+        withCredentials: true,
       };
 
       axios(config)
@@ -143,7 +150,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
-          console.log(error.response.data);
+          console.log(error);
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
@@ -159,9 +166,12 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${user.token}`,
+        },
         data: { password: user.userPassword, newPassword: user.userNewPassword },
-        // withCredentials: true,
+        withCredentials: true,
       };
 
       axios(config)
@@ -171,7 +181,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
-          console.log(error.response.data);
+          console.log(error);
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
@@ -185,11 +195,11 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'post',
-        url: 'https://api-compagnon-jdr.herokuapp.com/api/profile/guest',
+        url: 'https://api-compagnon-jdr.herokuapp.com/api/auth/guest',
         headers: {
           'Content-Type': 'application/json',
         },
-        // withCredentials: true,
+        withCredentials: true,
       };
 
       axios(config)
@@ -199,7 +209,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(logAsGuestError(error.response.data));
-          console.log(error.response.data);
+          console.log(error);
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
