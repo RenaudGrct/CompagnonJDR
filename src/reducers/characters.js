@@ -1,5 +1,11 @@
-/* eslint-disable no-unused-vars */
+import {
+
+} from 'src/actions/characters';
+
 export const initialState = {
+
+  characterName: '',  
+
 };
 
 const reducer = (state = initialState, action = {}) => state;
