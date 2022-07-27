@@ -14,6 +14,8 @@ import {
   HANDLE_IS_REDIRECT,
   HANDLE_IS_SUBMIT_ERROR,
   SAVE_USER_PROFILE,
+  UPDATE_USER_PASSWORD,
+  UPDATE_USER_PROFILE,
   UPDATE_USER_PROFILE_SUCCESS,
   UPDATE_USER_PROFILE_ERROR,
   DELETE_USER_PROFILE_SUCCESS,
@@ -30,6 +32,7 @@ export const initialState = {
   userEmail: '',
   userPassword: '',
   userConfirmPassword: '',
+  userNewPassword: '',
   userId: '',
   isLogged: false,
   isReadOnly: true,
@@ -41,6 +44,7 @@ export const initialState = {
   errorMessage: '',
   isRedirect: false,
   token: '',
+  isSucces: false,
 
 };
 
@@ -105,6 +109,8 @@ const reducer = (state = initialState, action = {}) => {
     case SUBMIT_ERROR:
       return {
         ...state,
+        userPassword: '',
+        userConfirmPassword: '',
         submitError: true,
         errorMessage: action.message,
         isLoading: false,
@@ -156,12 +162,27 @@ const reducer = (state = initialState, action = {}) => {
         userId: action.id,
         isLoading: false,
       };
+    case UPDATE_USER_PASSWORD:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,
         isSamePassword: false,
         userPassword: '',
         userConfirmPassword: '',
+        userNewPassword: '',
+        submitError: false,
+        isLoading: false,
+        isRedirect: true,
+        isSucces: true,
 
       };
     case UPDATE_USER_PROFILE_ERROR:
@@ -170,7 +191,10 @@ const reducer = (state = initialState, action = {}) => {
         isSamePassword: false,
         userPassword: '',
         userConfirmPassword: '',
+        userNewPassword: '',
+        submitError: true,
         errorMessage: action.message,
+        isLoading: false,
 
       };
     case DELETE_USER_PROFILE_SUCCESS:

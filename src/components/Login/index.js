@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,6 +15,7 @@ import {
   changeInputField,
   submitLogin,
   handleIsRedirect,
+  handleIsSubmitError,
   // getUserProfile,
 } from 'src/actions/user';
 
@@ -33,6 +34,7 @@ export default function Login() {
 
   useEffect(() => {
     dispatch(handleIsRedirect());
+    dispatch(handleIsSubmitError());
   }, []);
 
   useEffect(() => {
@@ -94,14 +96,27 @@ export default function Login() {
             onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
             value={userPassword}
           />
-          <div>
+          <Button
+            color="secondary"
+            variant="contained"
+            type="submit"
+            sx={{
+              width: '15rem',
+            }}
+          >Se connecter
+          </Button>
+          <Link to="/register">
             <Button
               color="secondary"
               variant="contained"
-              type="submit"
-            >Se connecter
+              type="button"
+              sx={{
+                width: '15rem',
+              }}
+            >
+              Créer compte
             </Button>
-          </div>
+          </Link>
         </Box>
       </Container>
     </>

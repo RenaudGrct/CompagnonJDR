@@ -9,9 +9,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
+import Alert from '@mui/material/Alert';
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   handleIsRedirect,
@@ -20,6 +21,10 @@ import {
 import logo from 'src/assets/images/drakeide.jpg';
 
 export default function CharacterManagement() {
+  const {
+    isSucces,
+  } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +39,7 @@ export default function CharacterManagement() {
       justifyContent: 'center',
     }}
     >
+      {isSucces && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
       <Card sx={{ maxWidth: 345, margin: '2rem' }}>
 
         <CardMedia

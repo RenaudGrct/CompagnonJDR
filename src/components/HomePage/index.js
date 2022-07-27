@@ -63,7 +63,7 @@ function Homepage() {
             <Button
               color="secondary"
               variant="contained"
-              type="submit"
+              type="button"
               sx={{
                 width: '20rem',
               }}
@@ -76,7 +76,7 @@ function Homepage() {
             <Button
               color="secondary"
               variant="contained"
-              type="submit"
+              type="button"
               sx={{
                 width: '20rem',
               }}
@@ -90,7 +90,7 @@ function Homepage() {
               onClick={() => dispatch(logAsGuest())}
               color="secondary"
               variant="contained"
-              type="submit"
+              type="button"
               sx={{
                 width: '20rem',
               }}

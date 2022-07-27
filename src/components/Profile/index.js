@@ -28,12 +28,13 @@ export default function Profile() {
     userEmail,
     userPassword,
     userConfirmPassword,
+    userNewPassword,
     isReadOnly,
     isChangePassword,
     errorMessage,
     isLoading,
     submitError,
-    isLogged,
+    isRedirect,
     isSamePassword,
   } = useSelector((state) => state.user);
 
@@ -41,13 +42,13 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isLogged) {
-      navigate('/');
+    if (isRedirect) {
+      navigate('/characters');
     }
-  }, [isLogged]);
+  }, [isRedirect]);
 
   async function handleSubmitChangePassword() {
-    if (userPassword === userConfirmPassword) {
+    if (userNewPassword === userConfirmPassword) {
       await dispatch(updateUserPassword());
     }
     else {
@@ -145,7 +146,17 @@ export default function Profile() {
             onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
             value={userEmail}
           />
+            <Field
+              required
+              id="outlined-required"
+              label="Mot de passe"
+              type="password"
+              name="userPassword"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userPassword}
+            />
           </>
+
           )}
           {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identiques !</Alert>}
           {isChangePassword && (
@@ -157,15 +168,25 @@ export default function Profile() {
             name="userPassword"
             onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
             value={userPassword}
-          /><Field
-            required
-            id="outlined-required"
-            label="Confirmation mot de passe"
-            type="password"
-            name="userConfirmPassword"
-            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-            value={userConfirmPassword}
           />
+            <Field
+              required
+              id="outlined-required"
+              label="Nouveau mot de passe"
+              type="password"
+              name="newPassword"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userNewPassword}
+            />
+            <Field
+              required
+              id="outlined-required"
+              label="Confirmation mot de passe"
+              type="password"
+              name="userConfirmPassword"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userConfirmPassword}
+            />
           </>
           )}
 

@@ -132,7 +132,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
         headers: { 'Content-Type': 'application/json' },
-        data: { email: user.userEmail, username: user.userName },
+        data: { email: user.userEmail, username: user.userName, password: user.userPassword },
         // withCredentials: true,
       };
 
@@ -160,7 +160,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         method: 'patch',
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
         headers: { 'Content-Type': 'application/json' },
-        data: { password: user.userPassword },
+        data: { password: user.userPassword, newPassword: user.userNewPassword },
         // withCredentials: true,
       };
 
