@@ -9,7 +9,7 @@ import Login from 'src/components/Login';
 import Header from 'src/components/Header';
 import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
-import TestComponent from 'src/components/TestComponent';
+import CharactersRace from 'src/components/CharactersRace';
 import Footer from 'src/components/Footer';
 
 import './styles.css';
@@ -39,6 +39,9 @@ const theme = createTheme({
     },
     success: {
       main: '#149418',
+    },
+    text: {
+      primary: 'rgba(255,255,255,0.87)',
     },
   },
 
@@ -77,7 +80,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Header />
         <Routes>
-          <Route path="/test" element={<TestComponent />} />
+          <Route path="/race" element={<CharactersRace />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
