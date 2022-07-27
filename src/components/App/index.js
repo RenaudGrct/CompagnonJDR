@@ -1,6 +1,5 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import CharacterManagement from 'src/components/CharacterManagement';
@@ -11,6 +10,13 @@ import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
 import TestComponent from 'src/components/TestComponent';
 import Footer from 'src/components/Footer';
+import CharacterCreation from 'src/components/CharacterCreation';
+import Name from 'src/components/CharacterCreation/Name';
+import Class from 'src/components/CharacterCreation/Class';
+import Race from 'src/components/CharacterCreation/Race';
+import Background from 'src/components/CharacterCreation/Background';
+import Stats from 'src/components/CharacterCreation/Stats';
+import Validate from 'src/components/CharacterCreation/Validate';
 
 import './styles.css';
 
@@ -83,6 +89,15 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/characters" element={<CharacterManagement />} />
+          <Route path="/creation" element={<CharacterCreation />} />
+          <Route path="/creation/name" element={<Name />} />
+          <Route path="/creation/class" element={<Class />} />
+          <Route path="/creation/race" element={<Race />} />
+          <Route path="/creation/background" element={<Background />} />
+          <Route path="/creation/stats" element={<Stats />} />
+          <Route path="/creation/validate" element={<Validate />} />
+
+
         </Routes>
         <Footer />
       </ThemeProvider>
