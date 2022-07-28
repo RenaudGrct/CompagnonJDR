@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
-import ProfileDeleteAlert from 'src/components/ProfileDeleteAlert';
+import ProfileDeleteAlert from 'src/components/Profile/ProfileDeleteAlert';
 
 import Field from 'src/components/InputField';
 
@@ -119,7 +119,7 @@ export default function Profile() {
                 type="button"
                 onClick={() => dispatch(toggleIsReadOnly())}
               >
-                Modifier mon identité
+                Modifier identité
               </Button>
               <Button
                 sx={{
@@ -130,8 +130,9 @@ export default function Profile() {
                 type="button"
                 onClick={() => dispatch(toggleIsChangePassword())}
               >
-                Modifier mon mot de passe
+                Modifier mot de passe
               </Button>
+              <ProfileDeleteAlert />
             </>
           )}
 
@@ -223,20 +224,17 @@ export default function Profile() {
           )}
 
           {(!isReadOnly || isChangePassword) && (
-          <>
-            <Button
-              sx={{
-                width: '15rem',
-              }}
-              color="secondary"
-              variant="contained"
-              type="button"
-              onClick={() => dispatch(handleProfileMenu())}
-            >
-              Annuler
-            </Button>
-            <ProfileDeleteAlert />
-          </>
+          <Button
+            sx={{
+              width: '15rem',
+            }}
+            color="secondary"
+            variant="contained"
+            type="button"
+            onClick={() => dispatch(handleProfileMenu())}
+          >
+            Annuler
+          </Button>
           )}
         </Box>
       </Container>

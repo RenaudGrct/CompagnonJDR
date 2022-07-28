@@ -46,7 +46,7 @@ export const initialState = {
   errorMessage: '',
   isRedirect: false,
   token: '',
-  isSucces: false,
+  isSuccess: false,
 
 };
 
@@ -204,7 +204,7 @@ const reducer = (state = initialState, action = {}) => {
         submitError: false,
         isLoading: false,
         isRedirect: true,
-        isSucces: true,
+        isSuccess: true,
 
       };
     case UPDATE_USER_PROFILE_ERROR:

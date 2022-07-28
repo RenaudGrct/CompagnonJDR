@@ -42,7 +42,7 @@ export default function ProfileDeleteAlert() {
         variant="contained"
         type="button"
         color="error"
-      > Supprimer
+      > SUPPRIMER COMPTE
       </Button>
       <Dialog
         open={open}
