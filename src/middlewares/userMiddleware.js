@@ -22,10 +22,11 @@ import {
   UPDATE_USER_PASSWORD,
 
   // Get user
-  // GET_USER_PROFILE,
-  // saveUserProfile,
+  GET_USER_PROFILE,
+  saveUserProfile,
 
   handleIsLoading,
+  LOG_OUT,
   logOut,
 
   LOG_AS_GUEST,
@@ -39,13 +40,18 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+// instance.interceptors.response.use(() => {
+//   console.log('cc');
+// });
+
 // const setInstanceAuthorization = () => {
 //   if (localStorage.getItem('token')) {
+//     console.log(localStorage);
 //     const token = localStorage.getItem('token');
 //     instance.defaults.headers.common.authorization = token;
 //     console.log(instance.defaults.headers.common);
 //   }
-// }
+// };
 // setInstanceAuthorization();
 
 const userMiddleware = (store) => (next) => async (action) => {
@@ -60,6 +66,9 @@ const userMiddleware = (store) => (next) => async (action) => {
           password: user.userPassword,
         });
         store.dispatch(submitLoginSuccess(response.data));
+        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('userId', response.data.user.id);
+        // setInstanceAuthorization();
         console.log(response);
       }
       catch (error) {
@@ -70,6 +79,15 @@ const userMiddleware = (store) => (next) => async (action) => {
 
       // si je veux gérer un état de loading, je peux nexter aussi
       // SUBMIT_LOGIN
+      break;
+    }
+
+    case LOG_OUT: {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      store.dispatch(logOut());
+
+      next(action);
       break;
     }
     case SUBMIT_REGISTER: {
@@ -104,24 +122,26 @@ const userMiddleware = (store) => (next) => async (action) => {
       // SUBMIT_LOGIN
       break;
     }
-    case DELETE_USER_PROFILE: {
-      const { user } = store.getState();
+    // case DELETE_USER_PROFILE: {
+    //   const { user } = store.getState();
 
-      next(action);
+    //   next(action);
 
-      try {
-        const response = await instance.delete(`profile/${user.userId}`);
-        store.dispatch(deleteUserProfileSuccess(response.data));
-        console.log(response);
-      }
-      catch (error) {
-        store.dispatch(deleteUserProfileError());
-        console.log(error);
-      }
+    //   try {
+    //     const response = await instance.delete(`profile/${user.userId}`);
+    //     store.dispatch(deleteUserProfileSuccess(response.data));
+    //     localStorage.removeItem('token');
+    //     localStorage.removeItem('userId');
+    //     console.log(response);
+    //   }
+    //   catch (error) {
+    //     store.dispatch(deleteUserProfileError());
+    //     console.log(error);
+    //   }
 
-      store.dispatch(logOut());
-    }
-      break;
+    //   store.dispatch(logOut());
+    // }
+    //   break;
 
     case UPDATE_USER_PROFILE: {
       const { user } = store.getState();
@@ -154,6 +174,38 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
+        });
+    }
+      break;
+
+    case DELETE_USER_PROFILE: {
+      const { user } = store.getState();
+
+      next(action);
+      const config = {
+
+        method: 'delete',
+        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${user.token}`,
+        },
+        withCredentials: true,
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(deleteUserProfileSuccess(response.data));
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          console.log(response);
+        })
+        .catch((error) => {
+          store.dispatch(deleteUserProfileError(error.response.data));
+          console.log(error);
+        })
+        .finally(() => {
+          store.dispatch(logOut());
         });
     }
       break;
@@ -191,6 +243,7 @@ const userMiddleware = (store) => (next) => async (action) => {
 
     case LOG_AS_GUEST: {
       next(action);
+      const { user } = store.getState();
 
       const config = {
 
@@ -198,6 +251,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         url: 'https://api-compagnon-jdr.herokuapp.com/api/auth/guest',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `bearer ${user.token}`,
         },
         withCredentials: true,
       };
@@ -218,14 +272,42 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
     }
 
-    // case GET_USER_PROFILE: {
+    case GET_USER_PROFILE: {
+      const { user } = store.getState();
+
+      const config = {
+
+        method: 'get',
+        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${user.token}`,
+        },
+        withCredentials: true,
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(saveUserProfile(response.data));
+          console.log('cc');
+          console.log(response.data);
+          console.log(response.data.email);
+
+          console.log('cc');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+    }
+
+    // case GET_USER_PROFILE2: {
     //   const { user } = store.getState();
 
     //   try {
     //     const response = await instance.get(`${user.userId}`);
     //     console.log(response);
     //     store.dispatch(saveUserProfile(response.data));
-    //     // console.log(response.data)
     //     console.log(`User email is ${response.data.email}`);
     //   }
     //   catch (error) {
@@ -240,3 +322,30 @@ const userMiddleware = (store) => (next) => async (action) => {
 };
 
 export default userMiddleware;
+
+// case GET_USER_PROFILE: {
+//   const { user } = store.getState();
+
+// const config = {
+
+//   method: 'post',
+//   url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+//   headers: {
+//     'Content-Type': 'application/json',
+//     Authorization: `bearer ${user.token}`,
+//   },
+//   withCredentials: true,
+// };
+
+// axios(config)
+//   .then((response) => {
+//     store.dispatch(saveUserProfile(response.data));
+//     console.log(response);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+
+//   })
+
+// break;
+// }

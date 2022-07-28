@@ -23,6 +23,8 @@ import {
   LOG_AS_GUEST,
   LOG_AS_GUEST_SUCCESS,
   LOG_AS_GUEST_ERROR,
+  VERIFY_TOKEN,
+  RETRIEVE_USER_DATA_FROM_LOCALSTORAGE,
 
 } from 'src/actions/user';
 
@@ -60,6 +62,22 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         submitError: false,
         isLoading: true,
+      };
+
+    case VERIFY_TOKEN:
+      return {
+        ...state,
+        token: action.token,
+        userId: action.userId,
+
+      };
+
+    case RETRIEVE_USER_DATA_FROM_LOCALSTORAGE:
+      return {
+        ...state,
+        token: action.token,
+        userId: action.userId,
+
       };
 
     case SUBMIT_LOGIN_SUCCESS:
@@ -161,6 +179,7 @@ const reducer = (state = initialState, action = {}) => {
         userName: action.username,
         userEmail: action.email,
         userId: action.id,
+        isLogged: true,
         isLoading: false,
       };
     case UPDATE_USER_PASSWORD:
@@ -228,6 +247,7 @@ const reducer = (state = initialState, action = {}) => {
         userPassword: '',
         submitError: false,
         errorMessage: '',
+        isGuest: true,
       };
     case LOG_AS_GUEST_ERROR:
       return {
