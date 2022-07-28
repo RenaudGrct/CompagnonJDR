@@ -13,6 +13,9 @@ export const SUBMIT_ERROR = 'SUBMIT_ERROR';
 export const SUBMIT_REGISTER_SUCCESS = 'SUBMIT_REGISTER_SUCCESS';
 
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
+export const RETRIEVE_USER_DATA_FROM_LOCALSTORAGE = 'RETRIEVE_USER_DATA_FROM_LOCALSTORAGE';
+export const VERIFY_TOKEN = 'VERIFY_TOKEN';
+
 export const LOG_OUT = 'LOG_OUT';
 export const SUBMIT_LOGIN_SUCCESS = 'SUBMIT_LOGIN_SUCCESS';
 
@@ -145,4 +148,18 @@ export const logAsGuestSuccess = (response) => ({
 export const logAsGuestError = (response) => ({
   type: LOG_AS_GUEST_ERROR,
   ...response,
+});
+
+export const verifyToken = (token, userId) => ({
+
+  type: VERIFY_TOKEN,
+  token,
+  userId,
+});
+
+export const retrieveUserDataFromLocalStorage = (token, userId) => ({
+
+  type: RETRIEVE_USER_DATA_FROM_LOCALSTORAGE,
+  token,
+  userId,
 });

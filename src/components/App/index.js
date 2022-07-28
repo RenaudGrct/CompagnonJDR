@@ -1,6 +1,9 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useEffect } from 'react';
+
+import { useDispatch } from 'react-redux';
 
 import CharacterManagement from 'src/components/CharacterManagement';
 import Register from 'src/components/Register';
@@ -19,6 +22,8 @@ import Validate from 'src/components/CharacterCreation/Validate';
 import Avatar from 'src/components/CharacterCreation/Name/Avatar';
 
 import './styles.css';
+
+import { verifyToken, retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
 
 const theme = createTheme({
 
@@ -54,7 +59,22 @@ const theme = createTheme({
 
 // == Composant
 function App() {
-  // const { isLogged } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  // const { token } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+      const token = localStorage.getItem('token');
+      const userId = localStorage.getItem('userId');
+
+      // dispatch(verifyToken(token, userId));
+      dispatch(retrieveUserDataFromLocalStorage(token, userId));
+      dispatch(getUserProfile());
+      // dispatch(isLogged());
+    }
+  }, []);
+
   return (
 
     <div className="app">
