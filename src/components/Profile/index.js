@@ -20,6 +20,7 @@ import {
   updateUserPassword,
   handleProfileMenu,
   verifyPassword,
+  handleIsSubmitError,
 } from 'src/actions/user';
 
 export default function Profile() {
@@ -46,6 +47,10 @@ export default function Profile() {
       navigate('/characters');
     }
   }, [isRedirect]);
+
+  useEffect(() => {
+    dispatch(handleIsSubmitError());
+  }, [isReadOnly, isChangePassword]);
 
   async function handleSubmitChangePassword() {
     if (userNewPassword === userConfirmPassword) {
@@ -174,7 +179,7 @@ export default function Profile() {
               id="outlined-required"
               label="Nouveau mot de passe"
               type="password"
-              name="newPassword"
+              name="userNewPassword"
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={userNewPassword}
             />
