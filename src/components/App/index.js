@@ -23,7 +23,7 @@ import Avatar from 'src/components/CharacterCreation/Name/Avatar';
 
 import './styles.css';
 
-import { verifyToken, retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
+import { retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
 
 const theme = createTheme({
 
@@ -61,7 +61,24 @@ const theme = createTheme({
 function App() {
   const dispatch = useDispatch();
 
-  // const { token } = useSelector((state) => state.user);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   const userId = localStorage.getItem('userId');
+  //   const guest = localStorage.getItem('guest');
+
+  //   // if (token && userId && guest) {
+  //   //   dispatch(getUserProfile());
+  //   //   // coder une autre methode pour le guest
+  //   //   dispatch(retrieveUserDataFromLocalStorage(token, userId));
+  //   //   console.log('je suis le guest');
+  //   // }
+
+  //   if (token && userId) {
+  //     dispatch(getUserProfile());
+  //     dispatch(retrieveUserDataFromLocalStorage(token, userId));
+  //     console.log('je suis le user');
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (localStorage.getItem('token') && localStorage.getItem('userId')) {
@@ -74,6 +91,7 @@ function App() {
       // dispatch(isLogged());
     }
   }, []);
+
 
   return (
 

@@ -23,10 +23,11 @@ const isLoggedSettings = [
     label: 'Personnages',
     url: '/characters',
   },
-  {
-    label: 'Se déconnecter',
-    url: '/logout',
-  }];
+  // {
+  //   label: 'Se déconnecter',
+  //   url: '/logout',
+  // }
+];
 
 const isGuestSettings = [
   {
@@ -126,7 +127,7 @@ export default function Header() {
                   key="Me deconnecter"
                   onClick={handleDisconnect}
                 >
-                  <Typography textAlign="center">Me déconnecter</Typography>
+                  <Typography textAlign="center">Se déconnecter</Typography>
                 </MenuItem>
               </Link>
             </Menu>
@@ -170,7 +171,7 @@ export default function Header() {
                   </MenuItem>
                 </Link>
               ))}
-              {isLogged && (
+              {/* {isLogged && (
               <Link to="/">
                 <MenuItem
                   key="Me deconnecter"
@@ -179,7 +180,7 @@ export default function Header() {
                   <Typography textAlign="center">Me déconnecter</Typography>
                 </MenuItem>
               </Link>
-              )}
+              )} */}
             </Menu>
           </Box>
           )}
