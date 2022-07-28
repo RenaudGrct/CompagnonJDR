@@ -4,8 +4,9 @@ import { changeNameInput } from 'src/actions/characters';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
+// import IconButton from '@mui/material/IconButton';
+// import AddIcon from '@mui/icons-material/Add';
+import Avatar from 'src/components/CharacterCreation/Name/Avatar';
 
 import CharacterCreation from 'src/components/CharacterCreation';
 
@@ -54,14 +55,7 @@ export default function Name() {
           Choix de l'avatar
         </Typography>
 
-        <IconButton
-          sx={{ transform: 'scale(2.5)' }}
-          color="secondary"
-          aria-label="delete"
-          size="large"
-        >
-          <AddIcon fontSize="inherit" />
-        </IconButton>
+        <Avatar />
 
       </Container>
 

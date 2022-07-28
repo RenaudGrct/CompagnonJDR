@@ -16,6 +16,7 @@ import Race from 'src/components/CharacterCreation/Race';
 import Background from 'src/components/CharacterCreation/Background';
 import Stats from 'src/components/CharacterCreation/Stats';
 import Validate from 'src/components/CharacterCreation/Validate';
+import Avatar from 'src/components/CharacterCreation/Name/Avatar';
 
 import './styles.css';
 
@@ -72,6 +73,7 @@ function App() {
           <Route path="/creation/background" element={<Background />} />
           <Route path="/creation/stats" element={<Stats />} />
           <Route path="/creation/validate" element={<Validate />} />
+          <Route path="/creation/avatar" element={<Avatar />} />
         </Routes>
         <Footer />
       </ThemeProvider>
