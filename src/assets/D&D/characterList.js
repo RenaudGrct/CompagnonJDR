@@ -33,11 +33,11 @@ const characterList = [
     level: 4,
     race: {
       name: 'Humain',
-      color: '#c0c0c0',
+      color: '#8a2be2',
     },
     class: {
       name: 'Sorcier',
-      color: '#7fffd4',
+      color: '#daa520',
     },
     avatar: 'www.trucmachin.com',
   },
@@ -51,7 +51,7 @@ const characterList = [
     },
     class: {
       name: 'Combattant',
-      color: '#b0e0e6',
+      color: '#2acaea',
     },
     avatar: 'www.trucmachin.com',
   },
@@ -61,11 +61,11 @@ const characterList = [
     level: 12,
     race: {
       name: 'Gnome',
-      color: '#008080',
+      color: '#800080',
     },
     class: {
       name: 'Magicien',
-      color: '#e6e6fa',
+      color: '#003366',
     },
     avatar: 'www.trucmachin.com',
   },
@@ -79,7 +79,7 @@ const characterList = [
     },
     class: {
       name: 'Moniale',
-      color: '#f0f8ff',
+      color: '#008080',
     },
     avatar: 'www.trucmachin.com',
   },
