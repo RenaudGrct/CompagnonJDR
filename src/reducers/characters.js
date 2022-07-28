@@ -4,7 +4,7 @@ import {
 
 export const initialState = {
 
-  characterName: '',  
+  characterName: '',
 
 };
 
