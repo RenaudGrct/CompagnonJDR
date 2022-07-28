@@ -15,18 +15,37 @@ import { Link } from 'react-router-dom';
 
 import { logOut } from 'src/actions/user';
 
-const settings = [
+const isLoggedSettings = [
   {
-    label: 'Mon compte',
+    label: 'Profil',
     url: '/profile',
   }, {
-    label: 'Mes perso',
+    label: 'Personnages',
     url: '/characters',
+  },
+  {
+    label: 'Se déconnecter',
+    url: '/logout',
+  }];
+
+const isGuestSettings = [
+  {
+    label: 'Personnages',
+    url: '/characters',
+  },
+  {
+    label: 'Valider inscription',
+    url: '/register',
+  },
+  {
+    label: 'Se connecter',
+    url: '/login',
   }];
 
 export default function Header() {
   const {
     isLogged,
+    isLoggedAsGuest,
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -64,6 +83,7 @@ export default function Header() {
           >
             <Link to="/">COMPAGNON JDR</Link>
           </Typography>
+
           {isLogged && (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Ouvrir Menu">
@@ -89,7 +109,8 @@ export default function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+
+              {isLoggedSettings.map((setting) => (
 
                 <Link to={setting.url}>
                   <MenuItem
@@ -108,6 +129,57 @@ export default function Header() {
                   <Typography textAlign="center">Me déconnecter</Typography>
                 </MenuItem>
               </Link>
+            </Menu>
+          </Box>
+          )}
+
+          {isLoggedAsGuest && (
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Ouvrir Menu">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="User Avatar" src={avatar} />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{
+                mt: '45px',
+              }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+
+              {isGuestSettings.map((setting) => (
+
+                <Link to={setting.url}>
+                  <MenuItem
+                    key={setting.label}
+                    onClick={handleCloseUserMenu}
+                  >
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </MenuItem>
+                </Link>
+              ))}
+              {isLogged && (
+              <Link to="/">
+                <MenuItem
+                  key="Me deconnecter"
+                  onClick={handleDisconnect}
+                >
+                  <Typography textAlign="center">Me déconnecter</Typography>
+                </MenuItem>
+              </Link>
+              )}
             </Menu>
           </Box>
           )}

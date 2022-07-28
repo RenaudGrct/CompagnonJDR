@@ -37,9 +37,9 @@ export const initialState = {
   userNewPassword: '',
   userId: '',
   isLogged: false,
+  isLoggedAsGuest: false,
   isReadOnly: true,
   isChangePassword: false,
-  isGuest: false,
   isSamePassword: false,
   submitError: false,
   isLoading: false,
@@ -84,7 +84,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: true,
-        isGuest: false,
+        isLoggedAsGuest: false,
         userId: action.user.id,
         userName: action.user.username,
         userEmail: action.user.email,
@@ -102,6 +102,8 @@ const reducer = (state = initialState, action = {}) => {
         userEmail: '',
         userPassword: '',
         isLogged: false,
+        isLoggedAsGuest: false,
+
       };
     case SUBMIT_REGISTER:
       return {
@@ -118,7 +120,7 @@ const reducer = (state = initialState, action = {}) => {
         userEmail: '',
         userPassword: '',
         userConfirmPassword: '',
-        isGuest: false,
+        isLoggedAsGuest: false,
         isSamePassword: false,
         submitError: false,
         isLoading: false,
@@ -239,7 +241,8 @@ const reducer = (state = initialState, action = {}) => {
     case LOG_AS_GUEST_SUCCESS:
       return {
         ...state,
-        isLogged: true,
+        isLogged: false,
+        isLoggedAsGuest: true,
         userId: action.user.id,
         userName: action.user.username,
         userEmail: action.user.email,
@@ -247,7 +250,7 @@ const reducer = (state = initialState, action = {}) => {
         userPassword: '',
         submitError: false,
         errorMessage: '',
-        isGuest: true,
+        isLoading: true,
       };
     case LOG_AS_GUEST_ERROR:
       return {
