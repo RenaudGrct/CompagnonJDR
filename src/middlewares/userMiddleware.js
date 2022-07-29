@@ -259,6 +259,8 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(logAsGuestSuccess(response.data));
+          localStorage.setItem('token', response.data.accessToken);
+          localStorage.setItem('userId', response.data.user.id);
           console.log(response);
         })
         .catch((error) => {

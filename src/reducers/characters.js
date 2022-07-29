@@ -13,15 +13,7 @@ export const initialState = {
       diceResult3: 5,
       diceResult4: 2,
     },
-    diceSum1: null,
-    diceSum2: null,
-    diceSum3: null,
-    diceSum4: null,
     isDiceSum1: false,
-    isDiceSum2: false,
-    isDiceSum3: false,
-    isDiceSum4: false,
-    listNumber: [],
   },
 
 };
