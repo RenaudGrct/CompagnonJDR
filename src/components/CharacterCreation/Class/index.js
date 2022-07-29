@@ -8,13 +8,19 @@ import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import Container from '@mui/material/Container';
 import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import CharacterCreation from 'src/components/CharacterCreation';
 
 import avatar from 'src/assets/images/elfe.png';
-import classes from 'src/assets/D&D/classList';
+import classes from 'src/assets/Data/classes.json';
 
-import { selectClass } from 'src/actions/characters';
+import { selectClass, handleModalIsClosed } from 'src/actions/characters';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,7 +33,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Class() {
   const dispatch = useDispatch();
-  const { characterClass } = useSelector((state) => state.characters);
+  const { characterClass, raceIsClosed } = useSelector((state) => state.characters);
+
+  const handleClose = () => {
+    dispatch(handleModalIsClosed());
+  };
 
   return (
     <>
@@ -76,66 +86,59 @@ export default function Class() {
             }}
           >
             {
-                 classes.map((cla) => (
-                   <Box
-                     sx={{
-                       display: 'flex',
-                       flexDirection: 'column',
-                       alignItems: 'center',
-                       justifyContent: 'center',
-                     }}
-                   >
-                     <Item sx={{
-                       display: 'flex',
-                       justifyContent: 'space-between',
-                       padding: '1rem',
-                       width: '20rem',
-                     }}
+                 classes.map((classe) => (
+                   <>
+                     <Box
+                       sx={{
+                         display: 'flex',
+                         flexDirection: 'column',
+                         alignItems: 'center',
+                         justifyContent: 'center',
+                       }}
                      >
-                       <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
-                       <FormControlLabel
-                         labelPlacement="start"
-                         value={cla.label}
-                         label={cla.label}
-                         checked={characterClass === cla.label}
-                         onChange={(event) => dispatch(selectClass(event.target.value))}
-                         control={<Radio sx={{ color: 'primary.contrastText' }} />}
-                         sx={{ display: 'flex', justifyContent: 'space-between' }}
-                       />
+                       <Item sx={{
+                         display: 'flex',
+                         justifyContent: 'space-between',
+                         padding: '1rem',
+                         width: '20rem',
+                       }}
+                       >
+                         <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
+                         <FormControlLabel
+                           labelPlacement="start"
+                           value={classe.name}
+                           label={classe.name}
+                           checked={characterClass === classe.name}
+                           onChange={(event) => dispatch(selectClass(event.target.value))}
+                           control={<Radio sx={{ color: 'primary.contrastText' }} />}
+                           sx={{ display: 'flex', justifyContent: 'space-between' }}
+                         />
 
-                     </Item>
-                   </Box>
+                       </Item>
+                     </Box>
+                     <Dialog
+                       open={!raceIsClosed && (characterClass === classe.name)}
+                       onClose={handleClose}
+                       aria-labelledby="alert-dialog-title"
+                       aria-describedby="alert-dialog-description"
+                     >
+                       <DialogTitle id="alert-dialog-title">
+                         {classe.name}
+                       </DialogTitle>
+                       <DialogContent>
+                         <DialogContentText id="alert-dialog-description">
+                           <p>blabla</p>
+                         </DialogContentText>
+                       </DialogContent>
+                       <DialogActions>
+                         <Button onClick={handleClose} autoFocus>
+                           OK
+                         </Button>
+                       </DialogActions>
+                     </Dialog>
+                   </>
                  ))
           }
-
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Item sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                padding: '1rem',
-                width: '20rem',
-              }}
-              >
-                <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
-                <FormControlLabel
-                  labelPlacement="start"
-                  checked
-                  value='zob'
-                  label='zob'
-                  onChange={(event) => dispatch(selectClass(event.target.value))}
-                  control={<Radio sx={{ color: 'primary.contrastText' }} />}
-                  sx={{ display: 'flex', justifyContent: 'space-between' }}
-                />
-
-              </Item>
-            </Box>
 
           </RadioGroup>
         </FormControl>

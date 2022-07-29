@@ -5,12 +5,15 @@ import {
   CHANGE_NAME_INPUT,
   SELECT_RACE,
   SELECT_CLASS,
+  HANDLE_MODAL_IS_CLOSED,
 } from 'src/actions/characters';
 
 export const initialState = {
 
   characterName: '',
   characterRace: '',
+  raceIsClosed: true,
+  classIsClosed: true,
   characterClass: '',
   dice: {
     result: {
@@ -58,11 +61,17 @@ const reducer = (state = initialState, action = {}) => {
           isDiceSum1: false,
         },
       };
+    case HANDLE_MODAL_IS_CLOSED:
+      return {
+        ...state,
+        raceIsClosed: true,
+      };
 
     case SELECT_RACE:
       return {
         ...state,
         characterRace: action.selectedRace,
+        raceIsClosed: false,
 
       };
 
@@ -70,6 +79,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         characterClass: action.selectedClass,
+        raceIsClosed: false,
 
       };
 
