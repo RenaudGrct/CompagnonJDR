@@ -1,194 +1,124 @@
-import { useSelector, useDispatch } from 'react-redux';
-import CssBaseline from '@mui/material/CssBaseline';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
-import CircularProgress from '@mui/material/CircularProgress';
-import Field from 'src/components/InputField';
-import ProfileDeleteAlert from 'src/components/ProfileDeleteAlert';
+import AddIcon from '@mui/icons-material/Add';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
-import {
-  changeInputField,
-  submitRegister,
-  toggleIsReadOnly,
-  updateUserProfile,
-} from 'src/actions/user';
+import logo from 'src/assets/images/drakeide.jpg';
+import characterList from 'src/assets/D&D/characterList';
 
-export default function TestComponent() {
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleIsRedirect } from 'src/actions/user';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+export default function CharacterManagement() {
   const {
-    userName,
-    userEmail,
-    userPassword,
-    userConfirmPassword,
-    isReadOnly,
-    errorMessage,
-    isLoading,
-    submitError,
+    isSuccess,
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(handleIsRedirect());
+  }, []);
+
   return (
 
     <>
+      {isSuccess && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
+      <IconButton
+        sx={{ transform: 'scale(3)' }}
+        color="secondary"
+        aria-label="delete"
+        size="large"
+      >
+        <AddIcon fontSize="inherit" />
+      </IconButton>
 
-      <CssBaseline />
-      <Container fixed>
-        {isLoading && <CircularProgress />}
-        <Box
-          component="form"
-          sx={{
-            backgroundColor: 'primary.main',
-            opacity: [0.7, 0.7, 0.7],
-            marginTop: '5rem',
-            padding: '1rem',
-            gap: '2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          noValidate
-          autoComplete="off"
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(submitRegister());
-          }}
-        >
-          {submitError && <Alert severity="error">{errorMessage}!</Alert>}
-          {isReadOnly ? (
-            <TextField
-              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
-              color="secondary"
-              disabled
-              id="outlined-disabled"
-              label="Nom d'utilisateur"
-              name="userName"
-              value={userName}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          ) : (
-            <Field
-              required
-              id="outlined-required"
-              label="Nom d'utilisateur"
-              name="userName"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userName}
-            />
-          )}
-          {isReadOnly ? (
-            <TextField
-              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
-              color="secondary"
-              disabled
-              id="outlined-disabled"
-              label="Email"
-              name="userEmail"
-              value={userEmail}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          ) : (
-            <Field
-              required
-              id="outlined-required"
-              label="Email"
-              name="userEmail"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userEmail}
-            />
-          )}
-          {isReadOnly ? (
-            <TextField
-              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
-              color="secondary"
-              disabled
-              id="filled-disabled"
-              label="Mot de passe"
-              type="password"
-              name="userPassword"
-              value={userPassword}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          ) : (
-            <Field
-              required
-              id="outlined-required"
-              label="Mot de passe"
-              type="password"
-              name="userPassword"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userPassword}
-            />
-          )}
+      <Box sx={{ flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
 
-          {!isReadOnly && (
-            <Field
-              required
-              id="outlined-required"
-              label="Confirmation mot de passe"
-              type="password"
-              name="userConfirmPassword"
-              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-              value={userConfirmPassword}
-            />
-          )}
-          {isReadOnly ? (
-            <Button
-              sx={{
-                width: '15rem',
-              }}
+          <Grid sx={{ display: 'flex', justifyContent: 'center' }} item xs={7} md={3}>
+            <IconButton
+              sx={{ transform: 'scale(3)' }}
               color="secondary"
-              variant="contained"
-              type="button"
-              onClick={() => dispatch(toggleIsReadOnly())}
+              aria-label="delete"
+              size="large"
             >
-              Modifier
-            </Button>
-          ) : (
-            <Button
-              sx={{
-                width: '15rem',
-              }}
-              color="secondary"
-              variant="contained"
-              type="button"
-              onClick={() => dispatch(updateUserProfile())}
-            >
-              Enregistrer
-            </Button>
-          )}
+              <AddIcon fontSize="inherit" />
 
-          {isReadOnly ? null : (
-            <Button
-              sx={{
-                width: '15rem',
-              }}
-              color="secondary"
-              variant="contained"
-              type="button"
-              onClick={() => dispatch(toggleIsReadOnly())}
-            >
-              Annuler
-            </Button>
-          )}
+            </IconButton>
 
-          {isReadOnly ? null : (
+          </Grid>
+          {characterList.map((character) => (
 
-            <ProfileDeleteAlert />
+            <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} md={3}>
+              <Card>
 
-          )}
+                <CardMedia
+                  component="img"
+                  image={logo}
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography align="center" gutterBottom variant="h4" component="div">
+                    {character.name}
+                  </Typography>
+                  <Typography color={character.class.color} align="center" gutterBottom variant="h5" component="div">
+                    {character.class.name}
+                  </Typography>
+                  <Typography color={character.race.color} align="center" gutterBottom variant="h5" component="div">
+                    {character.race.name}
+                  </Typography>
+                  <Typography align="center" gutterBottom variant="h5" component="div">
+                    {character.level}
+                  </Typography>
+                  <Box sx={{
+                    mt: '0.5rem',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                    gap: '1rem',
+                  }}
+                  >
+                    <IconButton>
+                      <VisibilityIcon fontSize="inherit" color="primary" />
+                    </IconButton>
+                    <IconButton>
+                      <ModeEditIcon fontSize="inherit" color="primary" />
+                    </IconButton>
+                    <IconButton>
+                      <DeleteForeverIcon fontSize="inherit" color="primary" />
+                    </IconButton>
+                  </Box>
+                </CardContent>
 
-        </Box>
-      </Container>
+              </Card>
+
+            </Grid>
+
+          ))}
+        </Grid>
+      </Box>
     </>
+
   );
 }
