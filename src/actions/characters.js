@@ -24,12 +24,12 @@ export const resetDice = () => ({
   type: RESET_DICE,
 });
 
-export const selectRace = (newValue) => ({
+export const selectRace = (selectedRace) => ({
   type: SELECT_RACE,
-  newValue,
+  selectedRace,
 });
 
-export const selectClass = (newValue) => ({
+export const selectClass = (selectedClass) => ({
   type: SELECT_CLASS,
-  newValue,
+  selectedClass,
 });

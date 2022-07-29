@@ -62,13 +62,15 @@ const reducer = (state = initialState, action = {}) => {
     case SELECT_RACE:
       return {
         ...state,
-        characterRace: action.newValue,
+        characterRace: action.selectedRace,
+
       };
 
     case SELECT_CLASS:
       return {
         ...state,
-        characterClass: action.newValue,
+        characterClass: action.selectedClass,
+
       };
 
     default:

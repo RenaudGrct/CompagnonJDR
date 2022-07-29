@@ -29,10 +29,6 @@ export default function Class() {
   const dispatch = useDispatch();
   const { characterClass } = useSelector((state) => state.characters);
 
-  const HandleClassSelection = (event) => {
-    dispatch(selectClass(event.target.value));
-  };
-
   return (
     <>
       <CharacterCreation />
@@ -101,6 +97,7 @@ export default function Class() {
                          labelPlacement="start"
                          value={cla.label}
                          label={cla.label}
+                         checked={characterClass === cla.label}
                          onChange={(event) => dispatch(selectClass(event.target.value))}
                          control={<Radio sx={{ color: 'primary.contrastText' }} />}
                          sx={{ display: 'flex', justifyContent: 'space-between' }}

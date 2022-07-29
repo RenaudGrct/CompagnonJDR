@@ -17,8 +17,8 @@ import { selectRace } from 'src/actions/characters';
 
 export default function Race() {
   const dispatch = useDispatch();
-  const { characterRace } = useSelector((state) => state.characters);
-
+  const { characterRace, checkedRace } = useSelector((state) => state.characters);
+ 
   return (
     <>
       <CharacterCreation />
@@ -80,7 +80,8 @@ export default function Race() {
                   <FormControlLabel
                     value={race.label}
                     label={race.label}
-                    onChange={(event) => dispatch(selectRace(event.target.value))}
+                    checked={characterRace === race.label}
+                    onClick={(event) => dispatch(selectRace(event.target.value))}
                     control={<Radio sx={{ color: 'primary.contrastText' }} />}
                     labelPlacement="top"
                   />
