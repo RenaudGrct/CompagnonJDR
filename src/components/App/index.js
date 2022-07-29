@@ -23,7 +23,7 @@ import Avatar from 'src/components/CharacterCreation/Name/Avatar';
 
 import './styles.css';
 
-import { verifyToken, retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
+import { retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
 
 const theme = createTheme({
 

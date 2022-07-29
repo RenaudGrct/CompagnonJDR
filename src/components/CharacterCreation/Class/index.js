@@ -55,7 +55,7 @@ export default function Class() {
               textDecoration: 'none',
               marginBottom: '5rem',
             }}
-          >Choix de la Race
+          >Choix de la Classe
           </Typography>
           <RadioGroup
           // row
