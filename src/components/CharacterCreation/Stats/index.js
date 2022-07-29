@@ -11,7 +11,7 @@ import FormControl from '@mui/material/FormControl';
 
 import './stats.scss';
 
-import { handleDiceClass, CalculDiceSum } from 'src/actions/characters';
+import { handleDiceClass, CalculDiceSum, resetDice } from 'src/actions/characters';
 
 function getRandomInt() {
   const randomNumber = Math.floor((Math.random() * (7 - 1)) + 1);
@@ -142,6 +142,15 @@ export default function Stats() {
                     <MenuItem value={30}>Charisme</MenuItem>
                   </Select>
                 </FormControl>
+                <button
+                  type="button"
+                  className="rollBtn"
+                  onClick={() => {
+                    dispatch(resetDice());
+                  }}
+                >
+                  retry
+                </button>
               </>
 
             )

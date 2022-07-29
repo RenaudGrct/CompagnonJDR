@@ -1,6 +1,7 @@
 import {
   HANDLE_DICE_CLASS,
   CALCUL_DICE_SUM,
+  RESET_DICE,
 } from 'src/actions/characters';
 
 export const initialState = {
@@ -37,6 +38,14 @@ const reducer = (state = initialState, action = {}) => {
         dice: {
           ...state.dice,
           isDiceSum1: true,
+        },
+      };
+    case RESET_DICE:
+      return {
+        ...state,
+        dice: {
+          ...state.dice,
+          isDiceSum1: false,
         },
       };
 
