@@ -22,13 +22,13 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function CharacterManagement() {
+export default function ResponsiveGrid() {
   return (
     <Box sx={{ flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
       <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
 
-        <Grid item xs={7} md={3}>
-          <IconButton
+        <Grid sx={{display: 'flex', justifyContent: 'center'}} item xs={7} md={3}>
+          <IconButton 
             sx={{ transform: 'scale(3)' }}
             color="secondary"
             aria-label="delete"
@@ -41,7 +41,7 @@ export default function CharacterManagement() {
         </Grid>
         {characterList.map((character) => (
 
-          <Grid sx={{ transform: 'scale(0.5)' }} item xs={7} md={3}>
+          <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} md={3}>
             <Card>
 
               <CardMedia

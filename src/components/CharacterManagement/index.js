@@ -9,17 +9,24 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
 import AddIcon from '@mui/icons-material/Add';
-
-
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import {
-  handleIsRedirect,
-} from 'src/actions/user';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 import logo from 'src/assets/images/drakeide.jpg';
 import characterList from 'src/assets/D&D/characterList';
+
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleIsRedirect } from 'src/actions/user';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function CharacterManagement() {
   const {
@@ -34,125 +41,82 @@ export default function CharacterManagement() {
 
   return (
 
-    <Box sx={{ transform: 'scale(0.70)' }}>
+    <>
+      {isSuccess && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
+      <IconButton
+        sx={{ transform: 'scale(3)' }}
+        color="secondary"
+        aria-label="delete"
+        size="large"
+      />
 
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '3rem',
-      }}
-      >
-        {isSuccess && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
-        <IconButton
-          sx={{ transform: 'scale(3)' }}
-          color="secondary"
-          aria-label="delete"
-          size="large"
-        >
-          <AddIcon fontSize="inherit" />
+      <Box sx={{ flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
 
-        </IconButton>
-        <Card sx={{
-          maxWidth: 200,
-          // margin: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-        }}
-        >
-
-          <CardMedia
-            component="img"
-            height="140"
-            image={logo}
-            alt="green iguana"
-          />
-          <CardContent>
-            <Typography align="center" gutterBottom variant="h5" component="div">
-              Morad
-            </Typography>
-            <Typography align="center" gutterBottom variant="h7" component="div">
-              Guerrier Drakéide
-            </Typography>
-            <Typography align="center" gutterBottom variant="h7" component="div">
-              Niveau 6
-            </Typography>
-            <Box sx={{
-              mt: '0.5rem',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              gap: '1.5rem',
-            }}
+          <Grid sx={{ display: 'flex', justifyContent: 'center' }} item xs={7} md={3}>
+            <IconButton
+              sx={{ transform: 'scale(3)' }}
+              color="secondary"
+              aria-label="delete"
+              size="large"
             >
-              <IconButton>
-                <VisibilityIcon fontSize="inherit" color="primary" />
-              </IconButton>
-              <IconButton>
-                <ModeEditIcon fontSize="inherit" color="primary" />
-              </IconButton>
-              <IconButton>
-                <DeleteForeverIcon fontSize="inherit" color="primary" />
-              </IconButton>
-            </Box>
-          </CardContent>
+              <AddIcon fontSize="inherit" />
 
-        </Card>
+            </IconButton>
 
-        <Card sx={{
-          maxWidth: 200,
-          // margin: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-        }}
-        >
+          </Grid>
+          {characterList.map((character) => (
 
-          <CardMedia
-            component="img"
-            height="140"
-            image={logo}
-            alt="green iguana"
-          />
-          <CardContent>
-            <Typography align="center" gutterBottom variant="h5" component="div">
-              Morad
-            </Typography>
-            <Typography align="center" gutterBottom variant="h7" component="div">
-              Guerrier Drakéide
-            </Typography>
-            <Typography align="center" gutterBottom variant="h7" component="div">
-              Niveau 6
-            </Typography>
-            <Box sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              mt: '1rem',
-              gap: '1rem',
-            }}
-            >
-              <IconButton>
-                <VisibilityIcon fontSize="inherit" color="primary" />
-              </IconButton>
-              <IconButton>
-                <ModeEditIcon fontSize="inherit" color="primary" />
-              </IconButton>
-              <IconButton>
-                <DeleteForeverIcon fontSize="inherit" color="primary" />
-              </IconButton>
-            </Box>
-          </CardContent>
+            <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} md={3}>
+              <Card>
 
-        </Card>
-        
+                <CardMedia
+                  component="img"
+                  image={logo}
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography align="center" gutterBottom variant="h4" component="div">
+                    {character.name}
+                  </Typography>
+                  <Typography color={character.class.color} align="center" gutterBottom variant="h5" component="div">
+                    {character.class.name}
+                  </Typography>
+                  <Typography color={character.race.color} align="center" gutterBottom variant="h5" component="div">
+                    {character.race.name}
+                  </Typography>
+                  <Typography align="center" gutterBottom variant="h5" component="div">
+                    {character.level}
+                  </Typography>
+                  <Box sx={{
+                    mt: '0.5rem',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                    gap: '1rem',
+                  }}
+                  >
+                    <IconButton>
+                      <VisibilityIcon fontSize="inherit" color="primary" />
+                    </IconButton>
+                    <IconButton>
+                      <ModeEditIcon fontSize="inherit" color="primary" />
+                    </IconButton>
+                    <IconButton>
+                      <DeleteForeverIcon fontSize="inherit" color="primary" />
+                    </IconButton>
+                  </Box>
+                </CardContent>
+
+              </Card>
+
+            </Grid>
+
+          ))}
+        </Grid>
       </Box>
-    </Box>
+    </>
+
   );
 }
