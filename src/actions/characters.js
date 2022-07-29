@@ -2,6 +2,8 @@ export const CHANGE_NAME_INPUT = 'CHANGE_NAME_INPUT';
 export const HANDLE_DICE_CLASS = 'HANDLE_DICE_CLASS';
 export const CALCUL_DICE_SUM = 'CALCUL_DICE_SUM1';
 export const RESET_DICE = 'RESET_DICE';
+export const SELECT_RACE = 'SELECT_RACE';
+export const SELECT_CLASS = 'SELECT_CLASS';
 
 export const changeNameInput = (newValue) => ({
   type: CHANGE_NAME_INPUT,
@@ -20,4 +22,14 @@ export const CalculDiceSum = () => ({
 
 export const resetDice = () => ({
   type: RESET_DICE,
+});
+
+export const selectRace = (newValue) => ({
+  type: SELECT_RACE,
+  newValue,
+});
+
+export const selectClass = (newValue) => ({
+  type: SELECT_CLASS,
+  newValue,
 });

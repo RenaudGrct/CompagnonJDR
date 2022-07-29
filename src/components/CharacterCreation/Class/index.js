@@ -12,7 +12,10 @@ import FormControl from '@mui/material/FormControl';
 import CharacterCreation from 'src/components/CharacterCreation';
 
 import avatar from 'src/assets/images/elfe.png';
-import classList from 'src/assets/D&D/classList';
+import classes from 'src/assets/D&D/classList';
+
+import { selectClass } from 'src/actions/characters';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(121,103,72,0.54)',
@@ -23,6 +26,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Class() {
+  const dispatch = useDispatch();
+  const { characterClass } = useSelector((state) => state.characters);
+
+  const HandleClassSelection = (event) => {
+    dispatch(selectClass(event.target.value));
+  };
+
   return (
     <>
       <CharacterCreation />
@@ -70,7 +80,7 @@ export default function Class() {
             }}
           >
             {
-                 classList.map((cla) => (
+                 classes.map((cla) => (
                    <Box
                      sx={{
                        display: 'flex',
@@ -89,8 +99,9 @@ export default function Class() {
                        <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
                        <FormControlLabel
                          labelPlacement="start"
-                         value={`${cla.label}`}
-                         label={`${cla.label}`}
+                         value={cla.label}
+                         label={cla.label}
+                         onChange={(event) => dispatch(selectClass(event.target.value))}
                          control={<Radio sx={{ color: 'primary.contrastText' }} />}
                          sx={{ display: 'flex', justifyContent: 'space-between' }}
                        />
@@ -99,6 +110,35 @@ export default function Class() {
                    </Box>
                  ))
           }
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Item sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '1rem',
+                width: '20rem',
+              }}
+              >
+                <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
+                <FormControlLabel
+                  labelPlacement="start"
+                  checked
+                  value='zob'
+                  label='zob'
+                  onChange={(event) => dispatch(selectClass(event.target.value))}
+                  control={<Radio sx={{ color: 'primary.contrastText' }} />}
+                  sx={{ display: 'flex', justifyContent: 'space-between' }}
+                />
+
+              </Item>
+            </Box>
 
           </RadioGroup>
         </FormControl>

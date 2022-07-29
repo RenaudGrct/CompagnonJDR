@@ -3,11 +3,15 @@ import {
   CALCUL_DICE_SUM,
   RESET_DICE,
   CHANGE_NAME_INPUT,
+  SELECT_RACE,
+  SELECT_CLASS,
 } from 'src/actions/characters';
 
 export const initialState = {
 
   characterName: '',
+  characterRace: '',
+  characterClass: '',
   dice: {
     result: {
       diceResult1: 1,
@@ -53,6 +57,18 @@ const reducer = (state = initialState, action = {}) => {
           ...state.dice,
           isDiceSum1: false,
         },
+      };
+
+    case SELECT_RACE:
+      return {
+        ...state,
+        characterRace: action.newValue,
+      };
+
+    case SELECT_CLASS:
+      return {
+        ...state,
+        characterClass: action.newValue,
       };
 
     default:

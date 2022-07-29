@@ -11,8 +11,14 @@ import Typography from '@mui/material/Typography';
 import avatar from 'src/assets/images/elfe.png';
 
 import races from 'src/assets/D&D/raceList';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { selectRace } from 'src/actions/characters';
 
 export default function Race() {
+  const dispatch = useDispatch();
+  const { characterRace } = useSelector((state) => state.characters);
+
   return (
     <>
       <CharacterCreation />
@@ -71,7 +77,13 @@ export default function Race() {
                   }}
                 >
                   <Avatar alt="User Avatar" src={avatar} sx={{ width: 84, height: 84 }} />
-                  <FormControlLabel value={`${race.label}`} control={<Radio sx={{ color: 'primary.contrastText' }} />} label={`${race.label}`} labelPlacement="top" />
+                  <FormControlLabel
+                    value={race.label}
+                    label={race.label}
+                    onChange={(event) => dispatch(selectRace(event.target.value))}
+                    control={<Radio sx={{ color: 'primary.contrastText' }} />}
+                    labelPlacement="top"
+                  />
                 </Box>
 
               ))
