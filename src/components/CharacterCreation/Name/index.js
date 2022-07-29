@@ -12,7 +12,7 @@ import CharacterCreation from 'src/components/CharacterCreation';
 
 export default function Name() {
   const dispatch = useDispatch();
-  const characterName = useSelector((state) => state.characterName);
+  const { characterName } = useSelector((state) => state.characters);
 
   return (
 
