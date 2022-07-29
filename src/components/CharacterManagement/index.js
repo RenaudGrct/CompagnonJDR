@@ -16,6 +16,7 @@ import Grid from '@mui/material/Grid';
 import logo from 'src/assets/images/drakeide.jpg';
 import characterList from 'src/assets/D&D/characterList';
 
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleIsRedirect } from 'src/actions/user';
@@ -40,7 +41,6 @@ export default function CharacterManagement() {
   }, []);
 
   return (
-
     <>
       {isSuccess && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
       <IconButton
@@ -117,6 +117,5 @@ export default function CharacterManagement() {
         </Grid>
       </Box>
     </>
-
-  );
+ );
 }
