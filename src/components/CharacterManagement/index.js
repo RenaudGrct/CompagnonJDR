@@ -11,6 +11,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
 
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -75,12 +76,14 @@ export default function CharacterManagement() {
         </CardContent>
 
       </Card>
-      <Button
-        color="secondary"
-        variant="contained"
-        type="submit"
-      >Créer un personnage
-      </Button>
+      <Link to="/creation/name">
+        <Button
+          color="secondary"
+          variant="contained"
+          type="submit"
+        >Créer un personnage
+        </Button>
+      </Link>
     </Box>
   );
 }
