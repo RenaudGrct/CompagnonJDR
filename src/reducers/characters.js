@@ -14,9 +14,8 @@ export const initialState = {
   characterName: '',
   characterRace: '',
   characterBackground: '',
-  raceIsClosed: true,
-  classIsClosed: true,
   characterClass: '',
+  raceIsClosed: true,
   dice: {
     result: {
       diceResult1: 1,
