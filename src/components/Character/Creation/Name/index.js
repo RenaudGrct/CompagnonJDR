@@ -4,13 +4,13 @@ import { changeNameInput } from 'src/actions/characters';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Avatar from 'src/components/Character/Creation/Name/Avatar';
+// import Avatar from 'src/components/Character/Creation/Name/Avatar';
 
 import CharacterCreation from 'src/components/Character/Creation';
 
 export default function Name() {
   const dispatch = useDispatch();
-  const { characterName } = useSelector((state) => state.characters);
+  const { characterName } = useSelector((state) => state.characters.character);
 
   return (
 
@@ -43,7 +43,7 @@ export default function Name() {
           color="secondary"
         />
 
-        <Typography
+        {/* <Typography
           variant="h4"
           color="white"
           gutterBottom
@@ -53,7 +53,7 @@ export default function Name() {
           Choix de l'avatar
         </Typography>
 
-        <Avatar />
+        <Avatar /> */}
 
       </Container>
 

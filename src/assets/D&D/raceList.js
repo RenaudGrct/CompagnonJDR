@@ -2,31 +2,48 @@
 const raceList = [
 
   {
-    label: 'Dragonborn',
+    label: 'Sang-Dragon',
+    avatar: 'src/assets/Images/races/Sang-Dragon.jpg',
   },
   {
-    label: 'Dwarf',
+    label: 'Nain',
+    avatar: 'src/assets/Images/races/Nain.jpg',
+
   },
   {
-    label: 'Elf',
+    label: 'Elfe',
+    avatar: 'src/assets/Images/races/Elfe.jpg',
+
   },
   {
     label: 'Gnome',
+    avatar: 'src/assets/Images/races/Gnome.jpg',
+
   },
   {
-    label: 'Half-Elf',
+    label: 'Demi-Elfe',
+    avatar: 'src/assets/Images/races/Demi-Elfe.jpg',
+
   },
   {
-    label: 'Halfling',
+    label: 'Halfelin',
+    avatar: 'src/assets/Images/races/Halfelin.jpg',
+
   },
   {
-    label: 'Half-Orc',
+    label: 'Demi-Orc',
+    avatar: 'src/assets/Images/races/Demi-Orc.jpg',
+
   },
   {
-    label: 'Human',
+    label: 'Humain',
+    avatar: 'src/assets/Images/races/Humain.jpg',
+
   },
   {
-    label: 'Tiefling',
+    label: 'Tieffelin',
+    avatar: 'src/assets/Images/races/Tieffelin.jpg',
+
   },
 ];
 

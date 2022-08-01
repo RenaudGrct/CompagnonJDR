@@ -25,7 +25,7 @@ import { selectRace, handleModalIsClosed } from 'src/actions/characters';
 export default function Race() {
   const dispatch = useDispatch();
 
-  const { characterRace, raceIsClosed } = useSelector((state) => state.characters);
+  const { raceC, modalIsClosed } = useSelector((state) => state.characters.character);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
@@ -94,14 +94,14 @@ export default function Race() {
                     <FormControlLabel
                       value={race.name}
                       label={race.name}
-                      checked={characterRace === race.name}
+                      checked={raceC === race.name}
                       onClick={(event) => dispatch(selectRace(event.target.value))}
                       control={<Radio sx={{ color: 'primary.contrastText' }} />}
                       labelPlacement="top"
                     />
                   </Box>
                   <Dialog
-                    open={!raceIsClosed && (characterRace === race.name)}
+                    open={!modalIsClosed && (raceC === race.name)}
                     onClose={handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"

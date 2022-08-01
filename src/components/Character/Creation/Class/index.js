@@ -33,7 +33,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Class() {
   const dispatch = useDispatch();
-  const { characterClass, raceIsClosed } = useSelector((state) => state.characters);
+  const { classC, modalIsClosed } = useSelector((state) => state.characters.character);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
@@ -108,7 +108,7 @@ export default function Class() {
                            labelPlacement="start"
                            value={classe.name}
                            label={classe.name}
-                           checked={characterClass === classe.name}
+                           checked={classC === classe.name}
                            onChange={(event) => dispatch(selectClass(event.target.value))}
                            control={<Radio sx={{ color: 'primary.contrastText' }} />}
                            sx={{ display: 'flex', justifyContent: 'space-between' }}
@@ -117,7 +117,7 @@ export default function Class() {
                        </Item>
                      </Box>
                      <Dialog
-                       open={!raceIsClosed && (characterClass === classe.name)}
+                       open={!modalIsClosed && (classC === classe.name)}
                        onClose={handleClose}
                        aria-labelledby="alert-dialog-title"
                        aria-describedby="alert-dialog-description"

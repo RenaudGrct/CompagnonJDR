@@ -2,22 +2,22 @@
 const statsList = [
 
   {
-    label: 'charisma',
+    label: 'charisme',
   },
   {
     label: 'constitution',
   },
   {
-    label: 'dexterity',
+    label: 'dexterité',
   },
   {
     label: 'intelligence',
   },
   {
-    label: 'strength',
+    label: 'force',
   },
   {
-    label: 'wisdom',
+    label: 'sagesse',
   },
 ];
 

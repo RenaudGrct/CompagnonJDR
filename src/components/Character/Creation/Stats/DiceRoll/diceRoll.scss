@@ -1,0 +1,28 @@
+.result_diceRoll{
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+
+  &_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.RollBtn{
+  font-family: monospace;
+  background:black;
+  color:orange;
+  border:none;
+  margin:auto 0;
+  padding: 0.5rem;
+  font-size:1.5em;
+  margin-top:1em;
+  width:100px;
+  border-radius: 30px;
+}

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import avatar from 'src/assets/images/elfe.png';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -14,6 +13,8 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
+import { useSelector } from 'react-redux';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -23,6 +24,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function CharacterDetails() {
+  const {
+    name,
+    raceC,
+    classC,
+    force,
+    dexterité,
+    constitution,
+    intelligence,
+    sagesse,
+    charisme,
+  } = useSelector((state) => state.characters.character);
+
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -41,17 +54,18 @@ export default function CharacterDetails() {
 
         <Avatar
           alt="User Avatar"
-          src={avatar}
+          src="images/Demi-Orc.jpg"
           sx={{ width: 100, height: 100 }}
         />
         <Box sx={{ width: '100%', maxWidth: 500 }}>
           <Typography variant="h4">
-            Morad
+            { name }
           </Typography>
           <Typography variant="h5">
-            Nain Paladin
+            { raceC }
           </Typography>
-          <Typography variant="h5">       Niveau 7
+          <Typography variant="h5">
+            { classC }
           </Typography>
         </Box>
 
@@ -64,17 +78,17 @@ export default function CharacterDetails() {
               Force
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              12
+              {force}
             </Typography>
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
           <Item sx={{ padding: '0.25rem' }}>
             <Typography variant="h7">
-              Dextérité
+              Dexterité
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              8
+              {dexterité}
             </Typography>
           </Item>
         </Grid>
@@ -84,7 +98,7 @@ export default function CharacterDetails() {
               Intelligence
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              9
+              {intelligence}
             </Typography>
           </Item>
         </Grid>
@@ -94,7 +108,7 @@ export default function CharacterDetails() {
               Sagesse
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              3
+              {sagesse}
             </Typography>
           </Item>
         </Grid>
@@ -104,7 +118,7 @@ export default function CharacterDetails() {
               Charisme
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              18
+              {charisme}
             </Typography>
           </Item>
         </Grid>
@@ -114,7 +128,7 @@ export default function CharacterDetails() {
               Constitution
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              12
+              {constitution}
             </Typography>
           </Item>
         </Grid>

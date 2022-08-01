@@ -4,10 +4,14 @@ import Details from 'src/components/Character/Details';
 import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import CharacterCreation from 'src/components/Character/Creation';
+
 export default function History() {
   return (
 
-    <><Details />
+    <>
+      <CharacterCreation />
+      <Details />
       <CssBaseline />
       <Container sx={{ mt: '2rem' }} maxWidth="sm">
         <Box sx={{ bgcolor: '#fefefe', height: '35vh' }}>

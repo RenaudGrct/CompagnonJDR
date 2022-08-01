@@ -8,12 +8,14 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
-import logo from 'src/assets/images/drakeide.jpg';
 import characterList from 'src/assets/D&D/characterList';
+// import avatar from 'src/assets/images/races/Demi-Elfe.jpg';
 
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleIsRedirect } from 'src/actions/user';
@@ -29,6 +31,8 @@ export default function CharacterManagement() {
     dispatch(handleIsRedirect());
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       {isSuccess && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
@@ -39,21 +43,29 @@ export default function CharacterManagement() {
         size="large"
       />
 
-      <Box sx={{ flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Box sx={{
+        flexGrow: 1,
+        flexWrap: 'wrap',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      >
+        <Link to="/creation/name">
+          <Button
+            color="secondary"
+            variant="contained"
+            type="button"
+            sx={{
+              width: '15rem',
+              marginTop: '5rem',
+            }}
+          >
+            Créer un Personnage
+          </Button>
+        </Link>
         <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
-
-          <Grid sx={{ display: 'flex', justifyContent: 'center' }} item xs={7} sm={6} md={3}>
-            <IconButton
-              sx={{ transform: 'scale(3)' }}
-              color="secondary"
-              aria-label="delete"
-              size="large"
-            >
-              <AddIcon fontSize="inherit" />
-
-            </IconButton>
-
-          </Grid>
           {characterList.map((character) => (
 
             <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
@@ -61,7 +73,7 @@ export default function CharacterManagement() {
 
                 <CardMedia
                   component="img"
-                  image={logo}
+                  src={`${character.avatar}`}
                   alt="green iguana"
                 />
                 <CardContent>
@@ -87,7 +99,13 @@ export default function CharacterManagement() {
                   }}
                   >
                     <IconButton>
-                      <VisibilityIcon fontSize="inherit" color="primary" />
+                      <VisibilityIcon
+                        onClick={() => {
+                          navigate('/character');
+                        }}
+                        fontSize="inherit"
+                        color="primary"
+                      />
                     </IconButton>
                     <IconButton>
                       <ModeEditIcon fontSize="inherit" color="primary" />

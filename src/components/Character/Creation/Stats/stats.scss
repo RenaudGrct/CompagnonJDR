@@ -12,15 +12,16 @@
 
 .rollBtn{
   font-family: monospace;
-  background:black;
-  color:orange;
+  background:red;
+  color:white;
   border:none;
-  margin:auto 0;
   padding: 0.5rem;
   font-size:1.5em;
   margin-top:1em;
   width:100px;
   border-radius: 30px;
+  margin-left: 80%;
+  margin-top: 2rem;
 }
 
 .cube {
@@ -80,9 +81,10 @@
 
 .result_dice {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 
   &_container {
     margin-top: 1rem;

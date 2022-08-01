@@ -32,7 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Background() {
   const dispatch = useDispatch();
-  const { characterBackground, raceIsClosed } = useSelector((state) => state.characters);
+  const { backgroundC, modalIsClosed } = useSelector((state) => state.characters.character);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
@@ -106,7 +106,7 @@ export default function Background() {
                       labelPlacement="start"
                       value={background.name}
                       label={background.name}
-                      checked={characterBackground === background.name}
+                      checked={backgroundC === background.name}
                       onChange={(event) => dispatch(selectBackground(event.target.value))}
                       control={<Radio sx={{ color: 'primary.contrastText' }} />}
                       sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
@@ -115,7 +115,7 @@ export default function Background() {
                   </Item>
                 </Box>
                 <Dialog
-                  open={!raceIsClosed && (characterBackground === background.name)}
+                  open={!modalIsClosed && (backgroundC === background.name)}
                   onClose={handleClose}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"

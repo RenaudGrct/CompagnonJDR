@@ -4,14 +4,15 @@ const characterList = [
     name: 'Morad',
     level: 3,
     race: {
-      name: 'Elfe des bois',
+      name: 'Sang-Dragon',
       color: '#ff80ed',
     },
     class: {
       name: 'Druide',
       color: '#065535',
     },
-    avatar: 'www.trucmachin.com',
+    avatar: '/images/Sang-Dragon.jpg',
+    // avatar: 'src/assets/images/races/Sang-Dragon.jpg',
   },
   {
     id: 2,
@@ -25,7 +26,10 @@ const characterList = [
       name: 'Clerc',
       color: '#ff0000',
     },
-    avatar: 'www.trucmachin.com',
+    avatar: 'images/Nain.jpg',
+    // avatar: 'public/races/Sang-Dragon.jpg',
+
+    // avatar: 'src/assets/images/races/Nain',
   },
   {
     id: 3,
@@ -39,21 +43,21 @@ const characterList = [
       name: 'Sorcier',
       color: '#daa520',
     },
-    avatar: 'www.trucmachin.com',
+    avatar: 'images/Humain.jpg',
   },
   {
     id: 4,
     name: 'Hadrien',
     level: 1,
     race: {
-      name: 'Demi-orc',
+      name: 'Humain',
       color: '#ff00ff',
     },
     class: {
-      name: 'Combattant',
+      name: 'Guerrier',
       color: '#2acaea',
     },
-    avatar: 'www.trucmachin.com',
+    avatar: 'images/Demi-Orc.jpg',
   },
   {
     id: 5,
@@ -67,7 +71,7 @@ const characterList = [
       name: 'Magicien',
       color: '#003366',
     },
-    avatar: 'www.trucmachin.com',
+    avatar: 'images/Gnome.jpg',
   },
   {
     id: 6,
@@ -81,7 +85,7 @@ const characterList = [
       name: 'Moniale',
       color: '#008080',
     },
-    avatar: 'www.trucmachin.com',
+    avatar: 'images/Elfe.jpg',
   },
 ];
 
