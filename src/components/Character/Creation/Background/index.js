@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { handleModalIsClosed, selectBackground } from 'src/actions/characters';
 
-import CharacterCreation from 'src/components/CharacterCreation';
+import CharacterCreation from 'src/components/Character/Creation';
 
 import backgrounds from 'src/assets/Data/backgrounds.json';
 

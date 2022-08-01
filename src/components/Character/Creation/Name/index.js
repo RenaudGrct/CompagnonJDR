@@ -4,9 +4,9 @@ import { changeNameInput } from 'src/actions/characters';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Avatar from 'src/components/CharacterCreation/Name/Avatar';
+import Avatar from 'src/components/Character/Creation/Name/Avatar';
 
-import CharacterCreation from 'src/components/CharacterCreation';
+import CharacterCreation from 'src/components/Character/Creation';
 
 export default function Name() {
   const dispatch = useDispatch();

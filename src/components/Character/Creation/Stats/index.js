@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CharacterCreation from 'src/components/CharacterCreation';
+import CharacterCreation from 'src/components/Character/Creation';
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';

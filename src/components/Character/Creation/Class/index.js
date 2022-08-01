@@ -15,7 +15,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import CharacterCreation from 'src/components/CharacterCreation';
+import CharacterCreation from 'src/components/Character/Creation';
 
 import avatar from 'src/assets/images/elfe.png';
 import classes from 'src/assets/Data/classes.json';

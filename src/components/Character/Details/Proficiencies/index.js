@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import CharacterDetails from 'src/components/Character';
+import CharacterDetails from 'src/components/Character/Details';
 import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 

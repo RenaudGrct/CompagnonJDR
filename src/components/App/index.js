@@ -5,28 +5,26 @@ import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import CharacterManagement from 'src/components/CharacterManagement';
+import CharacterManagement from 'src/components/Character/Management';
 import Register from 'src/components/Register';
 import Login from 'src/components/Login';
 import Header from 'src/components/Header';
 import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
 import Footer from 'src/components/Footer';
-import CharacterCreation from 'src/components/CharacterCreation';
-import Name from 'src/components/CharacterCreation/Name';
-import Class from 'src/components/CharacterCreation/Class';
-import Race from 'src/components/CharacterCreation/Race';
-import Background from 'src/components/CharacterCreation/Background';
-import Stats from 'src/components/CharacterCreation/Stats';
-import Validate from 'src/components/CharacterCreation/Validate';
-import Avatar from 'src/components/CharacterCreation/Name/Avatar';
-import Character from 'src/components/Character';
-import CharacterEquipment from 'src/components/Character/Equipment';
-import CharacterProficiencies from 'src/components/Character/Proficiencies';
-import CharacterHistory from 'src/components/Character/History';
+import CharacterCreation from 'src/components/Character/Creation';
+import Name from 'src/components/Character/Creation/Name';
+import Class from 'src/components/Character/Creation/Class';
+import Race from 'src/components/Character/Creation/Race';
+import Background from 'src/components/Character/Creation/Background';
+import Stats from 'src/components/Character/Creation/Stats';
+import Validate from 'src/components/Character/Creation/Validate';
+import Avatar from 'src/components/Character/Creation/Name/Avatar';
+import Character from 'src/components/Character/Details';
+import CharacterEquipment from 'src/components/Character/Details/Equipment';
+import CharacterProficiencies from 'src/components/Character/Details/Proficiencies';
+import CharacterHistory from 'src/components/Character/Details/History';
 
-import TestComponent2 from 'src/components/TestComponent2';
-import TestComponent from 'src/components/TestComponent';
 
 import './styles.css';
 
@@ -122,8 +120,6 @@ function App() {
           <Route path="/character/equipment" element={<CharacterEquipment />} />
           <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
           <Route path="/character/history" element={<CharacterHistory />} />
-
-          <Route path="/tests" element={<TestComponent2 />} />
 
         </Routes>
         <Footer />
