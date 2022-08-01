@@ -6,12 +6,14 @@ import {
   SELECT_RACE,
   SELECT_CLASS,
   HANDLE_MODAL_IS_CLOSED,
+  SELECT_BACKGROUND,
 } from 'src/actions/characters';
 
 export const initialState = {
 
   characterName: '',
   characterRace: '',
+  characterBackground: '',
   raceIsClosed: true,
   classIsClosed: true,
   characterClass: '',
@@ -79,6 +81,13 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         characterClass: action.selectedClass,
+        raceIsClosed: false,
+
+      };
+    case SELECT_BACKGROUND:
+      return {
+        ...state,
+        characterBackground: action.selectedBackground,
         raceIsClosed: false,
 
       };

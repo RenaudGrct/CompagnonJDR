@@ -115,13 +115,13 @@ export default function Race() {
                           <p key={ability.name}>{ability.description}</p>
                         ))}
                         <p>vitesse de : {race.speed}</p>
-                        <p>Bonus de Race</p>
+                        <p>Bonus de Race :</p>
                         {race.score_modifier.map((score) => (
-                          <p key={score.name}>{score.name}: {score.number}</p>
+                          <p key={score.name}>{score.name}: {score.number},</p>
                         ))}
                         <p>langue parlé :</p>
                         {race.language.map((lang) => (
-                          <p>{lang}</p>
+                          <p>{lang},</p>
                         ))}
                         <p>langue supplémentaire : {race.extra_language}</p>
                       </DialogContentText>

@@ -127,7 +127,35 @@ export default function Class() {
                        </DialogTitle>
                        <DialogContent>
                          <DialogContentText id="alert-dialog-description">
-                           <p>blabla</p>
+                           <p>Point de vie : {classe.name}</p>
+                           <p>competence de :</p>
+                           {
+                           classe.proficiencies.map((proficiencie) => (
+                             proficiencie.saving_throw.map((save) => (
+                               <p>{save.name},</p>
+                             ))
+                           ))
+}
+
+                           <p>aptitudes :</p>
+                           {classe.proficiencies.map((proficiencie) => (
+                             proficiencie.skills.map((skill) => (
+                               <p>{skill.name},</p>
+                             ))
+
+                           ))}
+
+                           <p>caracteristiques :</p>
+                           {classe.proficiencies.map((proficiencie) => (
+                             proficiencie.features.map((feature) => (
+                               <>
+                                 <p>{feature.name} : </p>
+                                 <p>{feature.description}</p>
+                                 <p>nombre d'utilistation: {feature.number_of_use}</p>
+                                 <p>réinitialisation : {feature.reset}</p>
+                               </>
+                             ))
+                           ))}
                          </DialogContentText>
                        </DialogContent>
                        <DialogActions>
