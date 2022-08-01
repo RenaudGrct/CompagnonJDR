@@ -4,6 +4,7 @@ export const CALCUL_DICE_SUM = 'CALCUL_DICE_SUM1';
 export const RESET_DICE = 'RESET_DICE';
 export const SELECT_RACE = 'SELECT_RACE';
 export const SELECT_CLASS = 'SELECT_CLASS';
+export const SELECT_BACKGROUND = 'SELECT_BACKGROUND';
 export const HANDLE_MODAL_IS_CLOSED = 'HANDLE_MODAL_IS_CLOSED';
 
 export const changeNameInput = (newValue) => ({
@@ -37,4 +38,9 @@ export const selectRace = (selectedRace) => ({
 export const selectClass = (selectedClass) => ({
   type: SELECT_CLASS,
   selectedClass,
+});
+
+export const selectBackground = (selectedBackground) => ({
+  type: SELECT_BACKGROUND,
+  selectedBackground,
 });
