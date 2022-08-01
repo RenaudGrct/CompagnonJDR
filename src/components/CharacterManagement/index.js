@@ -42,7 +42,7 @@ export default function CharacterManagement() {
       <Box sx={{ flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
         <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
 
-          <Grid sx={{ display: 'flex', justifyContent: 'center' }} item xs={7} md={3}>
+          <Grid sx={{ display: 'flex', justifyContent: 'center' }} item xs={7} sm={6} md={3}>
             <IconButton
               sx={{ transform: 'scale(3)' }}
               color="secondary"
@@ -56,7 +56,7 @@ export default function CharacterManagement() {
           </Grid>
           {characterList.map((character) => (
 
-            <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} md={3}>
+            <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
               <Card>
 
                 <CardMedia

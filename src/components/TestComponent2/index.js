@@ -1,18 +1,19 @@
-import { experimentalStyled as styled } from '@mui/material/styles';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import avatar from 'src/assets/images/elfe.png';
+import Typography from '@mui/material/Typography';
+import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import { NavLink } from 'react-router-dom';
+
+import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
-import characterList from 'src/assets/D&D/characterList';
-import logo from 'src/assets/images/drakeide.jpg';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,74 +23,173 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ResponsiveGrid() {
+export default function ImageAvatars() {
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
-      <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
 
-        <Grid sx={{display: 'flex', justifyContent: 'center'}} item xs={7} md={3}>
-          <IconButton 
-            sx={{ transform: 'scale(3)' }}
-            color="secondary"
-            aria-label="delete"
-            size="large"
-          >
-            <AddIcon fontSize="inherit" />
+    <Container
+      sx={{
+        mt: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem',
+      }}
+      maxWidth="lg"
+    >
+      <Stack direction="row" spacing={2}>
 
-          </IconButton>
+        <Avatar
+          alt="User Avatar"
+          src={avatar}
+          sx={{ width: 100, height: 100 }}
+        />
+        <Box sx={{ width: '100%', maxWidth: 500 }}>
+          <Typography variant="h4">
+            Morad
+          </Typography>
+          <Typography variant="h5">
+            Nain Paladin
+          </Typography>
+          <Typography variant="h5">       Niveau 7
+          </Typography>
+        </Box>
+
+      </Stack>
+      <Grid sx={{ justifyContent: 'center' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 36, sm: 24, md: 24 }}>
+
+        <Grid item xs={12} sm={4} md={4}>
+          <Item sx={{ padding: '0.25rem' }}>
+            <Typography variant="h7">
+              Force
+            </Typography>
+            <Typography sx={{ display: 'block' }} variant="h7">
+              12
+            </Typography>
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Item sx={{ padding: '0.25rem' }}>
+            <Typography variant="h7">
+              Dextérité
+            </Typography>
+            <Typography sx={{ display: 'block' }} variant="h7">
+              8
+            </Typography>
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Item sx={{ padding: '0.25rem' }}>
+            <Typography variant="h7">
+              Intelligence
+            </Typography>
+            <Typography sx={{ display: 'block' }} variant="h7">
+              9
+            </Typography>
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Item sx={{ padding: '0.25rem' }}>
+            <Typography variant="h7">
+              Sagesse
+            </Typography>
+            <Typography sx={{ display: 'block' }} variant="h7">
+              3
+            </Typography>
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Item sx={{ padding: '0.25rem' }}>
+            <Typography variant="h7">
+              Charisme
+            </Typography>
+            <Typography sx={{ display: 'block' }} variant="h7">
+              18
+            </Typography>
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Item sx={{ padding: '0.25rem' }}>
+            <Typography variant="h7">
+              Constitution
+            </Typography>
+            <Typography sx={{ display: 'block' }} variant="h7">
+              12
+            </Typography>
+          </Item>
+        </Grid>
+
+      </Grid>
+      <Grid sx={{ justifyContent: 'center' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 30, sm: 24, md: 12 }}>
+
+        <Grid item xs={12} sm={7} md={4}>
+          <Item sx={{ padding: '0.1rem' }}>
+            <TabContext value={value}>
+              <TabList
+                centered
+                onChange={handleChange}
+              >
+
+                <NavLink to="/details/stats">
+                  <Tab label="Caractéristiques" />
+
+                </NavLink>
+
+              </TabList>
+            </TabContext>
+
+          </Item>
 
         </Grid>
-        {characterList.map((character) => (
 
-          <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} md={3}>
-            <Card>
+        <Grid item xs={12} sm={7} md={4}>
+          <Item sx={{ padding: '0.1rem' }}>
+            <TabContext value={value}>
+              <TabList
+                centered
+                onChange={handleChange}
+              >
 
-              <CardMedia
-                component="img"
-                image={logo}
-                alt="green iguana"
-              />
-              <CardContent>
-                <Typography align="center" gutterBottom variant="h4" component="div">
-                  {character.name}
-                </Typography>
-                <Typography color={character.class.color} align="center" gutterBottom variant="h5" component="div">
-                  {character.class.name}
-                </Typography>
-                <Typography color={character.race.color} align="center" gutterBottom variant="h5" component="div">
-                  {character.race.name}
-                </Typography>
-                <Typography align="center" gutterBottom variant="h5" component="div">
-                  {character.level}
-                </Typography>
-                <Box sx={{
-                  mt: '0.5rem',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                  gap: '1rem',
-                }}
-                >
-                  <IconButton>
-                    <VisibilityIcon fontSize="inherit" color="primary" />
-                  </IconButton>
-                  <IconButton>
-                    <ModeEditIcon fontSize="inherit" color="primary" />
-                  </IconButton>
-                  <IconButton>
-                    <DeleteForeverIcon fontSize="inherit" color="primary" />
-                  </IconButton>
-                </Box>
-              </CardContent>
+                <NavLink to="/details/equipment">
+                  <Tab label="Équipement" />
 
-            </Card>
+                </NavLink>
 
-          </Grid>
+              </TabList>
+            </TabContext>
 
-        ))}
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={7} md={4}>
+          <Item sx={{ padding: '0.1rem' }}>
+            <TabContext value={value}>
+              <TabList
+                centered
+                onChange={handleChange}
+              >
+
+                <NavLink to="/details/history">
+                  <Tab label="historique" />
+
+                </NavLink>
+
+              </TabList>
+            </TabContext>
+
+          </Item>
+        </Grid>
+
       </Grid>
-    </Box>
-  // </Box>
+
+      <>
+        <CssBaseline />
+        <Container maxWidth="sm">
+          <Box sx={{ bgcolor: '#fefefe', height: '35vh' }} />
+        </Container>
+      </>
+
+    </Container>
+
   );
 }
