@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import avatar from 'src/assets/images/elfe.png';
 import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Tab from '@mui/material/Tab';
@@ -23,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ImageAvatars() {
+export default function CharacterDetails() {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -124,70 +123,59 @@ export default function ImageAvatars() {
       <Grid sx={{ justifyContent: 'center' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 30, sm: 24, md: 12 }}>
 
         <Grid item xs={12} sm={7} md={4}>
-          <Item sx={{ background: 'black', padding: '0.1rem' }}>
-            <TabContext value={value}>
-              <TabList
-                centered
-                onChange={handleChange}
-              >
+          <NavLink to="/character/proficiencies">
+            <Item sx={{ background: 'black', padding: '0.1rem' }}>
+              <TabContext value={value}>
+                <TabList
+                  centered
+                  onChange={handleChange}
+                >
 
-                <NavLink to="/details/stats">
-                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Caractéristiques" />
+                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Aptitutes" />
 
-                </NavLink>
+                </TabList>
+              </TabContext>
 
-              </TabList>
-            </TabContext>
-
-          </Item>
+            </Item>
+          </NavLink>
 
         </Grid>
 
         <Grid item xs={12} sm={7} md={4}>
-          <Item sx={{ background: 'black', padding: '0.1rem' }}>
-            <TabContext value={value}>
-              <TabList
-                centered
-                onChange={handleChange}
-              >
-
-                <NavLink to="/details/equipment">
+          <NavLink to="/character/equipment">
+            <Item sx={{ background: 'black', padding: '0.1rem' }}>
+              <TabContext value={value}>
+                <TabList
+                  centered
+                  onChange={handleChange}
+                >
                   <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Équipement" />
 
-                </NavLink>
+                </TabList>
+              </TabContext>
 
-              </TabList>
-            </TabContext>
-
-          </Item>
+            </Item>
+          </NavLink>
         </Grid>
         <Grid item xs={12} sm={7} md={4}>
-          <Item sx={{ background: 'black', padding: '0.1rem' }}>
-            <TabContext value={value}>
-              <TabList
-                centered
-                onChange={handleChange}
-              >
+          <NavLink to="/character/history">
+            <Item sx={{ background: 'black', padding: '0.1rem' }}>
+              <TabContext value={value}>
+                <TabList
+                  centered
+                  onChange={handleChange}
+                >
 
-                <NavLink to="/details/history">
                   <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="historique" />
 
-                </NavLink>
+                </TabList>
+              </TabContext>
 
-              </TabList>
-            </TabContext>
-
-          </Item>
+            </Item>
+          </NavLink>
         </Grid>
 
       </Grid>
-
-      <>
-        <CssBaseline />
-        <Container maxWidth="sm">
-          <Box sx={{ bgcolor: '#fefefe', height: '35vh' }} />
-        </Container>
-      </>
 
     </Container>
 
