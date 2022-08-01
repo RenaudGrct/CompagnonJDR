@@ -130,12 +130,14 @@ export default function Stats() {
           { isDiceSum1
             ? (
               <>
-                <div className="result_dice_sum">10</div>
-                <div className="result_dice_container">
-                  <div className="minicube__face">{diceResult1}</div>
-                  <div className="minicube__face">{diceResult2}</div>
-                  <div className="minicube__face">{diceResult3}</div>
-                  <div className="minicube__face">{diceResult4}</div>
+                <div className="result_dice1">
+                  <p>10</p>
+                  <div className="result_dice_container">
+                    <div className="minicube__face">{diceResult1}</div>
+                    <div className="minicube__face">{diceResult2}</div>
+                    <div className="minicube__face">{diceResult3}</div>
+                    <div className="minicube__face">{diceResult4}</div>
+                  </div>
                 </div>
                 <FormControl sx={{ width: 'auto', marginTop: '1rem' }}>
                   <InputLabel>1er</InputLabel>

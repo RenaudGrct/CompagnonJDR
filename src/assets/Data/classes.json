@@ -1,7 +1,7 @@
 [
   {
     "name" : "paladin" ,
-    "hit-point": 10,  
+    "hit_point": 10,  
     "proficiencies": [
       {
       "name": "paladin",

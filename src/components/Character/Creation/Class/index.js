@@ -127,7 +127,7 @@ export default function Class() {
                        </DialogTitle>
                        <DialogContent>
                          <DialogContentText id="alert-dialog-description">
-                           <p>Point de vie : {classe.name}</p>
+                           <p>Point de vie : {classe.hit_point}</p>
                            <p>competence de :</p>
                            {
                            classe.proficiencies.map((proficiencie) => (
