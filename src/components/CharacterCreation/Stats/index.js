@@ -71,6 +71,16 @@ export default function Stats() {
           }}
         >Choix des Statistiques
         </Typography>
+        <div className="maxiscene">
+          <div className="maxicube show-1">
+            <div className="maxicube__face maxicube__face--1">2</div>
+            <div className="maxicube__face maxicube__face--2">1</div>
+            <div className="maxicube__face maxicube__face--3">3</div>
+            <div className="maxicube__face maxicube__face--4">4</div>
+            <div className="maxicube__face maxicube__face--5">5</div>
+            <div className="maxicube__face maxicube__face--6">6</div>
+          </div>
+        </div>
         <div className="diceContainer">
           <div className="scene">
             <div value="diceResult1" className={`cube show-${diceResult1}`}>
