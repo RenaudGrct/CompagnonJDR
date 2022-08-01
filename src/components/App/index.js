@@ -20,8 +20,13 @@ import Background from 'src/components/CharacterCreation/Background';
 import Stats from 'src/components/CharacterCreation/Stats';
 import Validate from 'src/components/CharacterCreation/Validate';
 import Avatar from 'src/components/CharacterCreation/Name/Avatar';
-import TestComponent from 'src/components/TestComponent';
+import Character from 'src/components/Character';
+import CharacterEquipment from 'src/components/Character/Equipment';
+import CharacterProficiencies from 'src/components/Character/Proficiencies';
+import CharacterHistory from 'src/components/Character/History';
+
 import TestComponent2 from 'src/components/TestComponent2';
+import TestComponent from 'src/components/TestComponent';
 
 import './styles.css';
 
@@ -113,7 +118,11 @@ function App() {
           <Route path="/creation/stats" element={<Stats />} />
           <Route path="/creation/validate" element={<Validate />} />
           <Route path="/creation/avatar" element={<Avatar />} />
-          <Route path="/test" element={<TestComponent />} />
+          <Route path="/character/" element={<Character />} />
+          <Route path="/character/equipment" element={<CharacterEquipment />} />
+          <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
+          <Route path="/character/history" element={<CharacterHistory />} />
+
           <Route path="/tests" element={<TestComponent2 />} />
 
         </Routes>
