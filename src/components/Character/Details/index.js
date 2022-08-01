@@ -28,12 +28,12 @@ export default function CharacterDetails() {
     name,
     raceC,
     classC,
-    force,
-    dexterité,
+    strength,
+    dexterity,
     constitution,
     intelligence,
-    sagesse,
-    charisme,
+    wisdom,
+    charisma,
   } = useSelector((state) => state.characters.character);
 
   const [value, setValue] = React.useState('1');
@@ -78,7 +78,7 @@ export default function CharacterDetails() {
               Force
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {force}
+              {strength}
             </Typography>
           </Item>
         </Grid>
@@ -88,7 +88,7 @@ export default function CharacterDetails() {
               Dexterité
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {dexterité}
+              {dexterity}
             </Typography>
           </Item>
         </Grid>
@@ -108,7 +108,7 @@ export default function CharacterDetails() {
               Sagesse
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {sagesse}
+              {wisdom}
             </Typography>
           </Item>
         </Grid>
@@ -118,7 +118,7 @@ export default function CharacterDetails() {
               Charisme
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {charisme}
+              {charisma}
             </Typography>
           </Item>
         </Grid>

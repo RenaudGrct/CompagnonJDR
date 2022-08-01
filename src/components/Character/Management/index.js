@@ -74,7 +74,8 @@ export default function CharacterManagement() {
                 <CardMedia
                   component="img"
                   src={`${character.avatar}`}
-                  alt="green iguana"
+                  alt="green iguana"  
+                  height='300px'
                 />
                 <CardContent>
                   <Typography align="center" gutterBottom variant="h4" component="div">

@@ -4,7 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import PropTypes from 'prop-types';
 
-import stats from 'src/assets/D&D/statsList';
+import stats from 'src/assets/Data/stats.json';
 
 import './diceRoll.scss';
 
@@ -33,7 +33,7 @@ export default function DiceRoller({
         </div>
       </div>
       <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
-        <InputLabel>stats</InputLabel>
+        <InputLabel>Statistique</InputLabel>
         <Select
           value={statsDropdown}
           label="stats"
@@ -43,7 +43,7 @@ export default function DiceRoller({
           {
             stats.map((stat) => (
 
-              <MenuItem value={stat.label}>{stat.label}</MenuItem>
+              <MenuItem value={stat.sourceName}>{stat.localizedName}</MenuItem>
 
             ))
           }
@@ -56,7 +56,7 @@ export default function DiceRoller({
         className="RollBtn"
         onClick={diceRoll}
       >
-        Lancez
+        Lancer
       </button>
       )}
     </div>

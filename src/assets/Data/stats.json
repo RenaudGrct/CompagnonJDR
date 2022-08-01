@@ -1,20 +1,26 @@
 [
   {
-  "name": "force"
+  "sourceName": "strength",
+  "localizedName": "force"
   },
   {
-  "name": "dextérité"
+  "sourceName": "dexterity",
+  "localizedName": "dexterité"
   },
   {
-    "name": "constitution"
+    "sourceName": "constitution",
+    "localizedName": "constitution"
   },
   {
-    "name": "sagesse"
+    "sourceName": "wisdom",
+    "localizedName": "sagesse"
   },
   {
-    "name": "charisme"
+    "sourceName": "charisma",
+    "localizedName": "charisme"
   },
   {
-    "name": "intelligence"
+    "sourceName": "intelligence",
+    "localizedName": "intelligence"
   }
 ]
