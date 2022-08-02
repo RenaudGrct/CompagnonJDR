@@ -11,7 +11,7 @@ const characterList = [
       name: 'Druide',
       color: '#065535',
     },
-    avatar: '/images/Sang-Dragon.jpg',
+    avatar: 'images/Sang-Dragon.jpg',
     // avatar: 'src/assets/images/races/Sang-Dragon.jpg',
   },
   {

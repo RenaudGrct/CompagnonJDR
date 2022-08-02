@@ -10,7 +10,7 @@ import CharacterCreation from 'src/components/Character/Creation';
 
 export default function Name() {
   const dispatch = useDispatch();
-  const { characterName } = useSelector((state) => state.characters.character);
+  const { name } = useSelector((state) => state.characters.character);
 
   return (
 
@@ -37,7 +37,7 @@ export default function Name() {
           required
           label="Nom du personnage"
           name="name"
-          value={characterName}
+          value={name}
           onChange={(event) => dispatch(changeNameInput(event.target.value))}
           sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
           color="secondary"

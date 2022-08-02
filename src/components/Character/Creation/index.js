@@ -21,12 +21,12 @@ export default function CharacterCreation() {
       url: '/name',
     },
     {
-      label: 'Classe',
-      url: '/class',
-    },
-    {
       label: 'Race',
       url: '/race',
+    },
+    {
+      label: 'Classe',
+      url: '/class',
     },
     {
       label: 'Histoire',

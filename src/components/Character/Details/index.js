@@ -15,6 +15,8 @@ import Grid from '@mui/material/Grid';
 
 import { useSelector } from 'react-redux';
 
+import avatar from 'src/assets/images/Demi-Orc.jpg';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -54,7 +56,7 @@ export default function CharacterDetails() {
 
         <Avatar
           alt="User Avatar"
-          src="images/Demi-Orc.jpg"
+          src={avatar}
           sx={{ width: 100, height: 100 }}
         />
         <Box sx={{ width: '100%', maxWidth: 500 }}>
