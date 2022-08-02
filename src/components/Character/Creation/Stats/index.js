@@ -266,7 +266,7 @@ export default function Stats() {
             dispatch(resetThrows());
           }}
         >
-          retry
+          recommencer
         </button>
         <div className="result_dice">
 
