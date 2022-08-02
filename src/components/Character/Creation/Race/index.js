@@ -15,17 +15,25 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+
 import avatar from 'src/assets/images/elfe.png';
 
 import races from 'src/assets/Data/races.json';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectRace, handleModalIsClosed } from 'src/actions/characters';
+import { selectRace, handleModalIsClosed, selectStat } from 'src/actions/characters';
 
 export default function Race() {
   const dispatch = useDispatch();
 
-  const { raceC, modalIsClosed } = useSelector((state) => state.characters.character);
+  const {
+    raceC,
+    modalIsClosed,
+    racialAbility,
+  } = useSelector((state) => state.characters.character);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
@@ -112,7 +120,25 @@ export default function Race() {
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
                         {race.racial_ability.map((ability) => (
-                          <p key={ability.name}>{ability.description}</p>
+                          <>
+                            <p key={ability.name}>{ability.description}</p>
+                            <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
+                              <InputLabel>abilité</InputLabel>
+                              <Select
+                                value={racialAbility}
+                                label="stats"
+                                onChange={(e) => dispatch(selectStat('racialAbility', e.target.value))}
+                                sx={{ width: '10rem', marginTop: '1rem' }}
+                              >
+                                {ability.choice.map((choosen) => (
+
+                                  <MenuItem value={choosen}>{choosen}</MenuItem>
+
+                                ))}
+
+                              </Select>
+                            </FormControl>
+                          </>
                         ))}
                         <p>vitesse de : {race.speed}</p>
                         <p>Bonus de Race</p>

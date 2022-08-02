@@ -20,8 +20,12 @@ import CharacterCreation from 'src/components/Character/Creation';
 import avatar from 'src/assets/images/elfe.png';
 import classes from 'src/assets/Data/classes.json';
 
-import { selectClass, handleModalIsClosed } from 'src/actions/characters';
+import { selectClass, handleModalIsClosed, selectStat } from 'src/actions/characters';
 import { useDispatch, useSelector } from 'react-redux';
+
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(121,103,72,0.54)',
@@ -33,7 +37,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Class() {
   const dispatch = useDispatch();
-  const { classC, modalIsClosed } = useSelector((state) => state.characters.character);
+
+  const {
+    classC,
+    modalIsClosed,
+    classAbility,
+  } = useSelector((state) => state.characters.character);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
@@ -156,6 +165,37 @@ export default function Class() {
                                </>
                              ))
                            ))}
+                           {classe.proficiencies.map((proficiencie) => (
+                             proficiencie.features.map((feature) => (
+                               feature.choice.map((choose) => (
+                                 <>
+                                   <p>{choose.name} : </p>
+                                   <p>{choose.description}</p>
+                                 </>
+                               ))
+                             ))
+                           ))}
+
+                           <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
+                             <InputLabel>abilité</InputLabel>
+                             <Select
+                               value={classAbility}
+                               label="stats"
+                               onChange={(e) => dispatch(selectStat('classAbility', e.target.value))}
+                               sx={{ width: '10rem', marginTop: '1rem' }}
+                             >
+                               {classe.proficiencies.map((proficiencie) => (
+                                 proficiencie.features.map((feature) => (
+                                   feature.choice.map((choose) => (
+                                     <MenuItem value={choose.name}>
+                                       {choose.name}
+                                     </MenuItem>
+                                   ))
+                                 ))
+                               ))}
+                             </Select>
+                           </FormControl>
+
                          </DialogContentText>
                        </DialogContent>
                        <DialogActions>

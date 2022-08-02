@@ -23,13 +23,15 @@ export const initialState = {
     raceC: '',
     backgroundC: '',
     classC: '',
-    modalIsClosed: true,
+    racialAbility: '',
+    classAbility: '',
     strength: '',
     charisma: '',
     dexterity: '',
     wisdom: '',
     constitution: '',
     intelligence: '',
+    modalIsClosed: true,
   },
 
   dice: {
