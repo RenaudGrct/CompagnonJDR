@@ -212,6 +212,15 @@ const reducer = (state = initialState, action = {}) => {
     case RESET_THROWS:
       return {
         ...state,
+        character: {
+          ...state.character,
+          strength: '',
+          charisma: '',
+          dexterity: '',
+          wisdom: '',
+          constitution: '',
+          intelligence: '',
+        },
         dice: {
           ...state.dice,
           resultDisplay: {

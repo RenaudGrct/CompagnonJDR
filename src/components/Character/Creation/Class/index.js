@@ -118,7 +118,7 @@ export default function Class() {
                            value={classe.name}
                            label={classe.name}
                            checked={classC === classe.name}
-                           onChange={(event) => dispatch(selectClass(event.target.value))}
+                           onClick={(event) => dispatch(selectClass(event.target.value))}
                            control={<Radio sx={{ color: 'primary.contrastText' }} />}
                            sx={{ display: 'flex', justifyContent: 'space-between' }}
                          />

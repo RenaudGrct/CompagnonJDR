@@ -70,7 +70,7 @@ export default function Background() {
               textDecoration: 'none',
               marginBottom: '5rem',
             }}
-          >Choix de la Classe
+          >Choix de l'Histoire
           </Typography>
           <RadioGroup
           // row
@@ -107,7 +107,7 @@ export default function Background() {
                       value={background.name}
                       label={background.name}
                       checked={backgroundC === background.name}
-                      onChange={(event) => dispatch(selectBackground(event.target.value))}
+                      onClick={(event) => dispatch(selectBackground(event.target.value))}
                       control={<Radio sx={{ color: 'primary.contrastText' }} />}
                       sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
                     />
