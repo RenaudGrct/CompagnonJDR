@@ -14,13 +14,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 
-import { handleModalIsClosed, selectBackground } from 'src/actions/characters';
+import {
+  handleModalIsClosed,
+  selectBackground,
+  getBackground,
+} from 'src/actions/characters';
 
 import CharacterCreation from 'src/components/Character/Creation';
 
-import backgrounds from 'src/assets/Data/backgrounds.json';
+// import backgrounds from 'src/assets/Data/backgrounds.json';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(121,103,72,0.54)',
@@ -32,11 +38,21 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Background() {
   const dispatch = useDispatch();
-  const { backgroundC, modalIsClosed } = useSelector((state) => state.characters.character);
+  const {
+    backgroundC,
+    modalIsClosed,
+    backgrounds,
+    // backgroundIsFetched,
+  } = useSelector((state) => state.characters.character);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
   };
+
+  useEffect(() => {
+    dispatch(getBackground());
+  }, []);
+
   return (
 
     <>
@@ -58,35 +74,40 @@ export default function Background() {
             alignItems: 'center',
           }}
         >
-          <Typography
-            variant="h5"
-            noWrap
-            sx={{
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              // color: 'primary.contrastText',
-              textDecoration: 'none',
-              marginBottom: '5rem',
-            }}
-          >Choix de l'Histoire
-          </Typography>
-          <RadioGroup
+          <>
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                // color: 'primary.contrastText',
+                textDecoration: 'none',
+                marginBottom: '5rem',
+              }}
+            >Choix de l'Histoire
+            </Typography>
+            {/* {backgroundIsFetched
+          && ( */}
+            <RadioGroup
           // row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            sx={{
-              gap: '3rem',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {backgrounds.map((background) => (
-              <>
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              sx={{
+                gap: '3rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+
+              {backgrounds.map((background) => (
+
                 <Box
+                  key={background.name}
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -104,9 +125,9 @@ export default function Background() {
 
                     <FormControlLabel
                       labelPlacement="start"
-                      value={background.name}
+                      value={background.id}
                       label={background.name}
-                      checked={backgroundC === background.name}
+                      checked={Number(backgroundC) === background.id}
                       onClick={(event) => dispatch(selectBackground(event.target.value))}
                       control={<Radio sx={{ color: 'primary.contrastText' }} />}
                       sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
@@ -114,35 +135,47 @@ export default function Background() {
 
                   </Item>
                 </Box>
+              ))}
+              {backgrounds.map((background) => (
                 <Dialog
-                  open={!modalIsClosed && (backgroundC === background.name)}
+                  key={background.id}
+                  open={!modalIsClosed && (Number(backgroundC) === background.id)}
                   onClose={handleClose}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
-                  <DialogTitle id="alert-dialog-title">
+                  <DialogTitle sx={{
+                    backgroundColor: 'secondary.main',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontFamily: 'monospace',
+                  }}
+
+                  >
                     {background.name}
                   </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      <p>langue additionnelle : {background.additional_language}</p>
-                      <p>aptitudes :</p>
-                      {background.skills.map((skill) => (
-                        <p>{skill.name},</p>
-                      ))}
+                  <DialogContent sx={{ backgroundColor: 'primary.main' }}>
+                    <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
                       <p>abilité : {background.ability}</p>
+                      <p>{background.ability_description}</p>
+                      <p>langue additionnelle : {background.additional_language}</p>
+                      {/* {background.skills.map((skill) => (
+                      <p key={skill}>{skill},</p>
+                    ))} */}
 
                     </DialogContentText>
                   </DialogContent>
-                  <DialogActions>
+                  <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
                     <Button onClick={handleClose} autoFocus>
                       OK
                     </Button>
                   </DialogActions>
                 </Dialog>
-              </>
-            ))}
-          </RadioGroup>
+              ))}
+
+            </RadioGroup>
+          </>
+          {/* )} */}
         </FormControl>
       </Container>
     </>

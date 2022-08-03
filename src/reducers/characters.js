@@ -13,9 +13,20 @@ import {
   HANDLE_MODAL_IS_CLOSED,
   SELECT_BACKGROUND,
   SELECT_STAT,
+  GET_RACE_SUCCESS,
+  GET_CLASS_SUCCESS,
+  RACE_IS_FETCHED,
+  CLASS_IS_FETCHED,
+  TOGGLE_IS_FETCHED,
+  GET_BACKGROUND_SUCCESS,
+  BACKGROUND_IS_FETCHED,
 } from 'src/actions/characters';
 
 export const initialState = {
+
+  raceIsFetched: false,
+  classIsFetched: false,
+  backgroundIsFetched: false,
 
   character: {
 
@@ -32,6 +43,10 @@ export const initialState = {
     constitution: '',
     intelligence: '',
     modalIsClosed: true,
+    race: '',
+    characterClass: '',
+    backgrounds: '',
+
   },
 
   dice: {
@@ -283,6 +298,56 @@ const reducer = (state = initialState, action = {}) => {
         },
 
       };
+    case GET_CLASS_SUCCESS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          characterClass: action.response,
+        },
+      };
+
+    case GET_RACE_SUCCESS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          race: action.response,
+        },
+      };
+    case GET_BACKGROUND_SUCCESS:
+      return {
+        ...state,
+        backgroundIsFetched: true,
+        character: {
+          ...state.character,
+          backgrounds: action.response,
+        },
+      };
+    case RACE_IS_FETCHED:
+      return {
+        ...state,
+        raceIsFetched: true,
+      };
+    case CLASS_IS_FETCHED:
+      return {
+        ...state,
+        classIsFetched: true,
+      };
+    case BACKGROUND_IS_FETCHED:
+      return {
+        ...state,
+        backgroundIsFetched: true,
+      };
+
+    case TOGGLE_IS_FETCHED:
+      return {
+        ...state,
+        raceIsFetched: false,
+        classIsFetched: false,
+        backgroundIsFetched: false,
+      };
+
     default:
       return state;
   }

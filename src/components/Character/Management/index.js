@@ -68,14 +68,14 @@ export default function CharacterManagement() {
         <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
           {characterList.map((character) => (
 
-            <Grid sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
+            <Grid key={character.name} sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
               <Card>
 
                 <CardMedia
                   component="img"
                   src={`${character.avatar}`}
-                  alt="green iguana"  
-                  height='300px'
+                  alt="green iguana"
+                  height="300px"
                 />
                 <CardContent>
                   <Typography align="center" gutterBottom variant="h4" component="div">
@@ -99,11 +99,12 @@ export default function CharacterManagement() {
                     gap: '1rem',
                   }}
                   >
-                    <IconButton>
+                    <IconButton
+                      onClick={() => {
+                        navigate('/character');
+                      }}
+                    >
                       <VisibilityIcon
-                        onClick={() => {
-                          navigate('/character');
-                        }}
                         fontSize="inherit"
                         color="primary"
                       />

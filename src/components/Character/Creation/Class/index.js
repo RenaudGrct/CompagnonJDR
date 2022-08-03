@@ -14,18 +14,26 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useEffect } from 'react';
 
 import CharacterCreation from 'src/components/Character/Creation';
 
-import avatar from 'src/assets/images/elfe.png';
+import avatar from 'src/assets/images/guerrier.png';
 import classes from 'src/assets/Data/classes.json';
 
-import { selectClass, handleModalIsClosed, selectStat } from 'src/actions/characters';
+import {
+  selectClass,
+  handleModalIsClosed,
+  // selectStat,
+  getClass,
+  toggleIsFetched,
+} from 'src/actions/characters';
+
 import { useDispatch, useSelector } from 'react-redux';
 
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
+// import Select from '@mui/material/Select';
+// import MenuItem from '@mui/material/MenuItem';
+// import InputLabel from '@mui/material/InputLabel';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(121,103,72,0.54)',
@@ -38,11 +46,22 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Class() {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log('hello');
+    return () => {
+      dispatch(toggleIsFetched());
+    };
+  }, []);
+
   const {
+
     classC,
     modalIsClosed,
-    classAbility,
+    // classAbility,
+    characterClass,
+
   } = useSelector((state) => state.characters.character);
+  const { classIsFetched } = useSelector((state) => state.characters);
 
   const handleClose = () => {
     dispatch(handleModalIsClosed());
@@ -95,9 +114,10 @@ export default function Class() {
             }}
           >
             {
-                 classes.map((classe) => (
+                 classes.map((classSelected) => (
                    <>
                      <Box
+                       key={classSelected.name}
                        sx={{
                          display: 'flex',
                          flexDirection: 'column',
@@ -115,10 +135,13 @@ export default function Class() {
                          <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
                          <FormControlLabel
                            labelPlacement="start"
-                           value={classe.name}
-                           label={classe.name}
-                           checked={classC === classe.name}
-                           onClick={(event) => dispatch(selectClass(event.target.value))}
+                           value={classSelected.name}
+                           label={classSelected.name}
+                           checked={classC === classSelected.name}
+                           onClick={(event) => {
+                             dispatch(selectClass(event.target.value));
+                             dispatch(getClass());
+                           }}
                            control={<Radio sx={{ color: 'primary.contrastText' }} />}
                            sx={{ display: 'flex', justifyContent: 'space-between' }}
                          />
@@ -126,79 +149,83 @@ export default function Class() {
                        </Item>
                      </Box>
                      <Dialog
-                       open={!modalIsClosed && (classC === classe.name)}
+                       open={!modalIsClosed && (classC === classSelected.name)}
                        onClose={handleClose}
                        aria-labelledby="alert-dialog-title"
                        aria-describedby="alert-dialog-description"
                      >
-                       <DialogTitle id="alert-dialog-title">
-                         {classe.name}
-                       </DialogTitle>
-                       <DialogContent>
-                         <DialogContentText id="alert-dialog-description">
-                           <p>Point de vie : {classe.hit_point}</p>
-                           <p>competence de :</p>
-                           {
-                           classe.proficiencies.map((proficiencie) => (
-                             proficiencie.saving_throw.map((save) => (
-                               <p>{save.name},</p>
+
+                       { classIsFetched && (
+                       <>
+                         <DialogTitle sx={{
+                           backgroundColor: 'secondary.main',
+                           display: 'flex',
+                           justifyContent: 'space-between',
+                           fontFamily: 'monospace',
+                         }}
+                         >
+                           {characterClass.name}
+                           <Avatar alt="User Avatar" src={avatar} sx={{ width: 60, height: 60 }} />
+                         </DialogTitle>
+                         <DialogContent sx={{ backgroundColor: 'primary.main' }}>
+                           <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
+                             {/* <p>Point de vie : {characterClass.hit_point}</p> */}
+                             <p>competence de :</p>
+                             {
+                           characterClass.proficiencies.map((proficiency) => (
+                             proficiency.saving_throws.map((save) => (
+                               <p key={save}>{save},</p>
                              ))
                            ))
-}
+                            }
 
-                           <p>aptitudes :</p>
-                           {classe.proficiencies.map((proficiencie) => (
-                             proficiencie.skills.map((skill) => (
-                               <p>{skill.name},</p>
-                             ))
+                             {characterClass.proficiencies.map((proficiency) => (
+                               proficiency.skills.map((skill) => (
+                                 <p key={skill.name}>{skill.name},</p>
+                               ))
+                             ))}
 
-                           ))}
-
-                           <p>caracteristiques :</p>
-                           {classe.proficiencies.map((proficiencie) => (
-                             proficiencie.features.map((feature) => (
+                             <p>caracteristiques :</p>
+                             {characterClass.feature.map((feat) => (
                                <>
-                                 <p>{feature.name} : </p>
-                                 <p>{feature.description}</p>
-                                 <p>nombre d'utilistation: {feature.number_of_use}</p>
-                                 <p>réinitialisation : {feature.reset}</p>
+                                 <p key={feat.feature_name}>{feat.feature_name} : </p>
+                                 <p>{feat.description}</p>
+                                 <p>nombre d'utilistation: {feat.number_of_use}</p>
+                                 <p>réinitialisation : {feat.reset}</p>
                                </>
-                             ))
-                           ))}
-                           {classe.proficiencies.map((proficiencie) => (
-                             proficiencie.features.map((feature) => (
-                               feature.choice.map((choose) => (
+                             ))}
+                             {/* {characterClass.feature.map((feat) => (
+                               feat.choices.map((choice) => (
                                  <>
-                                   <p>{choose.name} : </p>
-                                   <p>{choose.description}</p>
+                                   <p>{choice.name}:</p>
+                                   <p>{choice.description}</p>
                                  </>
                                ))
-                             ))
-                           ))}
+                             ))} */}
 
-                           <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
-                             <InputLabel>abilité</InputLabel>
-                             <Select
-                               value={classAbility}
-                               label="stats"
-                               onChange={(e) => dispatch(selectStat('classAbility', e.target.value))}
-                               sx={{ width: '10rem', marginTop: '1rem' }}
-                             >
-                               {classe.proficiencies.map((proficiencie) => (
-                                 proficiencie.features.map((feature) => (
-                                   feature.choice.map((choose) => (
-                                     <MenuItem value={choose.name}>
-                                       {choose.name}
-                                     </MenuItem>
-                                   ))
-                                 ))
-                               ))}
-                             </Select>
-                           </FormControl>
-
-                         </DialogContentText>
-                       </DialogContent>
-                       <DialogActions>
+                             {/* <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
+                                 <InputLabel>abilité</InputLabel>
+                                 <Select
+                                   value={characterClassAbility}
+                                   label="stats"
+                                   onChange={(e) =>
+                                    dispatch(selectStat('characterClassAbility', e.target.value))}
+                                   sx={{ width: '10rem', marginTop: '1rem' }}
+                                 >
+                                   {characterClass.feature.map((feat) => (
+                                     feat.choices.map((choice) => (
+                                         <MenuItem value={choice.id}>
+                                           {choice.name}
+                                         </MenuItem>
+                                     ))
+                                   ))}
+                                 </Select>
+                               </FormControl> */}
+                           </DialogContentText>
+                         </DialogContent>
+                       </>
+                       )}
+                       <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
                          <Button onClick={handleClose} autoFocus>
                            OK
                          </Button>

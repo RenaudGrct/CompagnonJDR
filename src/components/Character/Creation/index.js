@@ -19,26 +19,32 @@ export default function CharacterCreation() {
     {
       label: 'Nom',
       url: '/name',
+      value: 0,
     },
     {
       label: 'Race',
       url: '/race',
+      value: 1,
     },
     {
       label: 'Classe',
       url: '/class',
+      value: 2,
     },
     {
       label: 'Histoire',
       url: '/background',
+      value: 3,
     },
     {
       label: 'Stats',
       url: '/stats',
+      value: 4,
     },
     {
       label: 'Valider',
       url: '/validate',
+      value: 5,
     },
   ];
 
@@ -55,10 +61,11 @@ export default function CharacterCreation() {
 
             {tabsList.map((tab) => (
 
-              <NavLink to={`/creation${tab.url}`}>
+              <NavLink key={tab.label} to={`/creation${tab.url}`}>
                 <Tab
                   sx={{ fontWeight: 'bold', fontStyle: 'italic' }}
                   label={`${tab.label}`}
+                  value={`${tab.value}`}
                 />
               </NavLink>
 

@@ -12,6 +12,16 @@ export const SELECT_CLASS = 'SELECT_CLASS';
 export const SELECT_BACKGROUND = 'SELECT_BACKGROUND';
 export const HANDLE_MODAL_IS_CLOSED = 'HANDLE_MODAL_IS_CLOSED';
 export const SELECT_STAT = 'SELECT_STAT';
+export const GET_RACE = 'GET_RACE';
+export const GET_RACE_SUCCESS = 'GET_RACE_SUCCESS';
+export const GET_CLASS = 'GET_CLASS';
+export const GET_CLASS_SUCCESS = 'GET_CLASS_SUCCESS';
+export const GET_BACKGROUND = 'GET_BACKGROUND';
+export const GET_BACKGROUND_SUCCESS = 'GET_BACKGROUND_SUCCESS';
+export const RACE_IS_FETCHED = 'RACE_IS_FETCHED';
+export const CLASS_IS_FETCHED = 'CLASS_IS_FETCHED';
+export const BACKGROUND_IS_FETCHED = 'BACKGROUND_IS_FETCHED';
+export const TOGGLE_IS_FETCHED = 'TOGGLE_IS_FETCHED';
 
 export const changeNameInput = (newValue) => ({
   type: CHANGE_NAME_INPUT,
@@ -77,4 +87,47 @@ export const selectStat = (key, number) => ({
   type: SELECT_STAT,
   key,
   number,
+});
+
+export const getRace = () => ({
+  type: GET_RACE,
+});
+
+export const getRaceSuccess = (response) => ({
+  type: GET_RACE_SUCCESS,
+  response,
+});
+
+export const getClass = () => ({
+  type: GET_CLASS,
+});
+
+export const getClassSuccess = (response) => ({
+  type: GET_CLASS_SUCCESS,
+  response,
+});
+
+export const getBackground = () => ({
+  type: GET_BACKGROUND,
+});
+
+export const getBackgroundSuccess = (response) => ({
+  type: GET_BACKGROUND_SUCCESS,
+  response,
+});
+
+export const raceIsFetched = () => ({
+  type: RACE_IS_FETCHED,
+});
+
+export const classIsFetched = () => ({
+  type: CLASS_IS_FETCHED,
+});
+
+export const backgroundIsFetched = () => ({
+  type: BACKGROUND_IS_FETCHED,
+});
+
+export const toggleIsFetched = () => ({
+  type: TOGGLE_IS_FETCHED,
 });

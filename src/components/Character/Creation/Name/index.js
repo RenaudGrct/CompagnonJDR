@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNameInput } from 'src/actions/characters';
+import { useEffect } from 'react';
+import { changeNameInput, getBackground } from 'src/actions/characters';
 
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -11,6 +12,10 @@ import CharacterCreation from 'src/components/Character/Creation';
 export default function Name() {
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.characters.character);
+
+  useEffect(() => {
+    dispatch(getBackground());
+  }, []);
 
   return (
 

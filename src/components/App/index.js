@@ -25,10 +25,10 @@ import CharacterEquipment from 'src/components/Character/Details/Equipment';
 import CharacterProficiencies from 'src/components/Character/Details/Proficiencies';
 import CharacterHistory from 'src/components/Character/Details/History';
 
-
 import './styles.css';
 
 import { retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
+// import { getBackground } from 'src/actions/characters';
 
 const theme = createTheme({
 
@@ -39,7 +39,7 @@ const theme = createTheme({
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#ff7a00',
+      main: '#CB7C1E',
     },
     background: {
       paper: '#ffffff',

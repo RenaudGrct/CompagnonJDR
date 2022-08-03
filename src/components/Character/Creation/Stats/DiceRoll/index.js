@@ -43,7 +43,12 @@ export default function DiceRoller({
           {
             stats.map((stat) => (
 
-              <MenuItem value={stat.sourceName}>{stat.localizedName}</MenuItem>
+              <MenuItem
+                key={stat.sourceName}
+                value={stat.sourceName}
+              >
+                {stat.localizedName}
+              </MenuItem>
 
             ))
           }
@@ -68,10 +73,11 @@ DiceRoller.propTypes = {
   result: PropTypes.string.isRequired,
   diceRoll: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  diceResultOne: PropTypes.number.isRequired,
-  diceResultTwo: PropTypes.number.isRequired,
-  diceResultThree: PropTypes.number.isRequired,
-  diceResultFour: PropTypes.number.isRequired,
+  diceResultOne: PropTypes.string.isRequired,
+  diceResultTwo: PropTypes.string.isRequired,
+  diceResultThree: PropTypes.string.isRequired,
+  diceResultFour: PropTypes.string.isRequired,
   isDiceSum: PropTypes.bool.isRequired,
-  statsDropdown: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  statsDropdown: PropTypes.string,
 };

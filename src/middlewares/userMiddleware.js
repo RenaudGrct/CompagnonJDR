@@ -69,7 +69,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('userId', response.data.user.id);
         // setInstanceAuthorization();
-        console.log(response);
       }
       catch (error) {
         store.dispatch(submitError(error.response.data));
@@ -108,7 +107,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(submitRegisterSuccess(response.data));
-          console.log(response);
         })
         .catch((error) => {
           store.dispatch(submitError(error.response.data));
@@ -166,7 +164,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(updateUserProfileSuccess(response.data));
-          console.log(response);
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
@@ -198,7 +195,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           store.dispatch(deleteUserProfileSuccess(response.data));
           localStorage.removeItem('token');
           localStorage.removeItem('userId');
-          console.log(response);
         })
         .catch((error) => {
           store.dispatch(deleteUserProfileError(error.response.data));
@@ -229,7 +225,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(updateUserProfileSuccess(response.data));
-          console.log(response);
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
@@ -261,7 +256,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
           localStorage.setItem('userId', response.data.user.id);
-          console.log(response);
         })
         .catch((error) => {
           store.dispatch(logAsGuestError(error.response.data));
@@ -291,11 +285,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(saveUserProfile(response.data));
-          console.log('cc');
-          console.log(response.data);
-          console.log(response.data.email);
-
-          console.log('cc');
         })
         .catch((error) => {
           console.log(error);
