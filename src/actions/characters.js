@@ -22,6 +22,7 @@ export const RACE_IS_FETCHED = 'RACE_IS_FETCHED';
 export const CLASS_IS_FETCHED = 'CLASS_IS_FETCHED';
 export const BACKGROUND_IS_FETCHED = 'BACKGROUND_IS_FETCHED';
 export const TOGGLE_IS_FETCHED = 'TOGGLE_IS_FETCHED';
+export const SELECT_SKILLS = 'SELECT_SKILLS';
 
 export const changeNameInput = (newValue) => ({
   type: CHANGE_NAME_INPUT,
@@ -130,4 +131,9 @@ export const backgroundIsFetched = () => ({
 
 export const toggleIsFetched = () => ({
   type: TOGGLE_IS_FETCHED,
+});
+
+export const selectSkills = (skill) => ({
+  type: SELECT_SKILLS,
+  skill,
 });
