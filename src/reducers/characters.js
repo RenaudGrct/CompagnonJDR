@@ -20,6 +20,7 @@ import {
   TOGGLE_IS_FETCHED,
   GET_BACKGROUND_SUCCESS,
   BACKGROUND_IS_FETCHED,
+  SELECT_SKILLS,
 } from 'src/actions/characters';
 
 export const initialState = {
@@ -36,15 +37,17 @@ export const initialState = {
     classC: '',
     racialAbility: '',
     classAbility: '',
-    strength: '',
-    charisma: '',
-    dexterity: '',
-    wisdom: '',
+    // featureChoice: {
+    //   id: '',
+    //   name: '',
+    //   description: '',
+    // },
     constitution: '',
     intelligence: '',
     modalIsClosed: true,
     race: '',
     characterClass: '',
+    skills: null,
     backgrounds: '',
 
   },
@@ -346,6 +349,14 @@ const reducer = (state = initialState, action = {}) => {
         raceIsFetched: false,
         classIsFetched: false,
         backgroundIsFetched: false,
+      };
+    case SELECT_SKILLS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          skills: action.skill,
+        },
       };
 
     default:

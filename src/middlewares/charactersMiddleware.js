@@ -8,7 +8,6 @@ import {
   GET_BACKGROUND,
   getBackgroundSuccess,
   backgroundIsFetched,
-
 } from 'src/actions/characters';
 
 import axios from 'axios';
@@ -111,7 +110,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
-
     default:
       next(action);
   }
