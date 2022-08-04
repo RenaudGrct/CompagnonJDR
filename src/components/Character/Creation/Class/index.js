@@ -24,16 +24,16 @@ import classes from 'src/assets/Data/classes.json';
 import {
   selectClass,
   handleModalIsClosed,
-  // selectStat,
+  selectStat,
   getClass,
   toggleIsFetched,
 } from 'src/actions/characters';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-// import Select from '@mui/material/Select';
-// import MenuItem from '@mui/material/MenuItem';
-// import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(121,103,72,0.54)',
@@ -57,7 +57,7 @@ export default function Class() {
 
     classC,
     modalIsClosed,
-    // classAbility,
+    classAbility,
     characterClass,
 
   } = useSelector((state) => state.characters.character);
@@ -194,33 +194,34 @@ export default function Class() {
                                  <p>réinitialisation : {feat.reset}</p>
                                </>
                              ))}
-                             {/* {characterClass.feature.map((feat) => (
-                               feat.choices.map((choice) => (
+                             {characterClass.feature.map((feat) => (
+                               feat.choices?.map((choice) => (
                                  <>
                                    <p>{choice.name}:</p>
                                    <p>{choice.description}</p>
                                  </>
                                ))
-                             ))} */}
+                             ))}
 
-                             {/* <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
-                                 <InputLabel>abilité</InputLabel>
-                                 <Select
-                                   value={characterClassAbility}
-                                   label="stats"
-                                   onChange={(e) =>
-                                    dispatch(selectStat('characterClassAbility', e.target.value))}
-                                   sx={{ width: '10rem', marginTop: '1rem' }}
-                                 >
-                                   {characterClass.feature.map((feat) => (
-                                     feat.choices.map((choice) => (
-                                         <MenuItem value={choice.id}>
-                                           {choice.name}
-                                         </MenuItem>
-                                     ))
-                                   ))}
-                                 </Select>
-                               </FormControl> */}
+                             <FormControl sx={{ width: '100%', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText' }}>
+                               <InputLabel sx={{color: 'primary.contrastText'}}>abilité</InputLabel>
+                               <Select
+                                 value={classAbility}
+                                 label="stats"
+                                 color="secondary"
+                                 backgroundColor="primary.contrastText"
+                                 onChange={(e) => dispatch(selectStat('characterClassAbility', e.target.value))}
+                                 sx={{ width: '10rem', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText' }}
+                               >
+                                 {characterClass.feature.map((feat) => (
+                                   feat.choices?.map((choice) => (
+                                     <MenuItem value={choice.id}>
+                                       {choice.name}
+                                     </MenuItem>
+                                   ))
+                                 ))}
+                               </Select>
+                             </FormControl>
                            </DialogContentText>
                          </DialogContent>
                        </>
