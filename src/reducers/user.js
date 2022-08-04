@@ -13,6 +13,7 @@ import {
   SUBMIT_ERROR,
   HANDLE_IS_REDIRECT,
   HANDLE_IS_SUBMIT_ERROR,
+  HANDLE_IS_SUCCESS,
   SAVE_USER_PROFILE,
   UPDATE_USER_PASSWORD,
   UPDATE_USER_PROFILE,
@@ -164,6 +165,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: false,
+      };
+    case HANDLE_IS_SUCCESS:
+      return {
+        ...state,
+        isSuccess: false,
       };
     case HANDLE_IS_REDIRECT:
       return {

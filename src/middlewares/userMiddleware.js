@@ -84,7 +84,6 @@ const userMiddleware = (store) => (next) => async (action) => {
     case LOG_OUT: {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
-      store.dispatch(logOut());
 
       next(action);
       break;

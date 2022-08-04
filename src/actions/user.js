@@ -3,6 +3,7 @@ export const TOGGLE_IS_READONLY = 'TOGGLE_IS_READONLY';
 export const TOGGLE_IS_CHANGE_PASSWORD = 'TOGGLE_IS_CHANGE_PASSWORD';
 export const VERIFY_PASSWORD = 'VERIFY_PASSWORD';
 export const HANDLE_IS_LOADING = 'HANDLE_IS_LOADING';
+export const HANDLE_IS_SUCCESS = 'HANDLE_IS_SUCCESS';
 export const HANDLE_IS_REDIRECT = 'HANDLE_IS_REDIRECT';
 export const HANDLE_IS_SUBMIT_ERROR = 'HANDLE_IS_SUBMIT_ERROR';
 export const HANDLE_PROFILE_MENU = 'HANDLE_PROFILE_MENU';
@@ -74,6 +75,10 @@ export const handleProfileMenu = () => ({
 
 export const handleIsLoading = () => ({
   type: HANDLE_IS_LOADING,
+});
+
+export const handleIsSuccess = () => ({
+  type: HANDLE_IS_SUCCESS,
 });
 
 export const submitRegister = () => ({

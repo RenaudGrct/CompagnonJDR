@@ -18,7 +18,7 @@ import characterList from 'src/assets/D&D/characterList';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleIsRedirect } from 'src/actions/user';
+import { handleIsRedirect, handleIsSuccess } from 'src/actions/user';
 
 export default function CharacterManagement() {
   const {
@@ -29,6 +29,9 @@ export default function CharacterManagement() {
 
   useEffect(() => {
     dispatch(handleIsRedirect());
+    return () => {
+      dispatch(handleIsSuccess());
+    };
   }, []);
 
   const navigate = useNavigate();
