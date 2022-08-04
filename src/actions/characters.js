@@ -22,6 +22,7 @@ export const RACE_IS_FETCHED = 'RACE_IS_FETCHED';
 export const CLASS_IS_FETCHED = 'CLASS_IS_FETCHED';
 export const BACKGROUND_IS_FETCHED = 'BACKGROUND_IS_FETCHED';
 export const TOGGLE_IS_FETCHED = 'TOGGLE_IS_FETCHED';
+export const SELECT_SKILLS = 'SELECT_SKILLS';
 
 export const SUBMIT_CHARACTER_CREATION = 'SUBMIT_CHARACTER_CREATION';
 export const SUBMIT_CHARACTER_CREATION_SUCCESS = 'SUBMIT_CHARACTER_CREATION_SUCCESS';
@@ -154,4 +155,9 @@ export const submitCharacterDeletion = () => ({
 export const submitCharacterDeletionSuccess = (response) => ({
   type: SUBMIT_CHARACTER_DELETION_SUCCESS,
   response,
+});
+
+export const selectSkills = (skill) => ({
+  type: SELECT_SKILLS,
+  skill,
 });

@@ -14,6 +14,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Chip from '@mui/material/Chip';
+
 import { useEffect } from 'react';
 
 import CharacterCreation from 'src/components/Character/Creation';
@@ -27,6 +31,7 @@ import {
   selectStat,
   getClass,
   toggleIsFetched,
+  selectSkills,
 } from 'src/actions/characters';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -179,12 +184,47 @@ export default function Class() {
                              ))
                            ))
                             }
-
+                             <p>choisit tes skills :</p>
                              {fetchedCharacterClassObject.proficiencies.map((proficiency) => (
-                               proficiency.skills.map((skill) => (
-                                 <p key={skill.name}>{skill.name},</p>
-                               ))
+                               <Autocomplete
+                                 key={proficiency.id}
+                                 sx={{ backgroundColor: 'secondary.main' }}
+                                 multiple
+                                 id="tags-filled"
+                                 options={proficiency.skills.map((option) => option)}
+                                 getOptionLabel={(option) => option.name}
+                                 onChange={(e, newValue) => {
+                                   if (newValue.length <= 2) {
+                                     dispatch(selectSkills(newValue));
+                                   }
+                                   console.log(newValue);
+                                 }}
+                                 //  defaultValue="fait tes choix"
+                                 renderTags={(value, getTagProps) => value.map((option, index) => (
+                                   <Chip
+                                    //  onClick={(e) => dispatch(selectSkills(e.target.value))}
+                                    //  key={option.name}
+                                     variant="outlined"
+                                     label={option.name}
+                                     {...getTagProps({ index })}
+                                    //  onDelete={() => console.log('je delete')}
+                                   />
+                                 ))}
+                                 renderInput={(params) => (
+                                   <TextField
+                                     {...params}
+                                     variant="filled"
+                                     label="skills"
+                                   />
+                                 )}
+                               />
                              ))}
+
+                             {/* {characterClass.proficiencies.map((proficiency) => (
+                                   proficiency.skills.map((skill) => (
+                                     // <p key={skill.name}>{skill.name},</p>
+                                     ))
+                                     ))} */}
 
                              <p>caracteristiques :</p>
                              {fetchedCharacterClassObject.feature.map((feat) => (
@@ -204,20 +244,13 @@ export default function Class() {
                                ))
                              ))}
 
-                             <FormControl sx={{
-                               width: '100%', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText',
-                             }}
-                             >
-                               <InputLabel sx={{ color: 'primary.contrastText' }}>abilité</InputLabel>
+                             <FormControl sx={{ backgroundColor: 'secondary.main' }}>
+                               <InputLabel>abilité</InputLabel>
                                <Select
                                  value={classAbility}
                                  label="stats"
-                                 color="secondary"
-                                 backgroundColor="primary.contrastText"
-                                 onChange={(e) => dispatch(selectStat('characterClassAbility', e.target.value))}
-                                 sx={{
-                                   width: '10rem', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText',
-                                 }}
+                                 onChange={(e) => dispatch(selectStat('classAbility', e.target.value))}
+                                 sx={{ width: '10rem', marginTop: '1rem' }}
                                >
                                  {fetchedCharacterClassObject.feature.map((feat) => (
                                    feat.choices?.map((choice) => (

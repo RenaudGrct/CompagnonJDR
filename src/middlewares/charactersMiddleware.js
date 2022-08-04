@@ -183,7 +183,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
 
     case SUBMIT_CHARACTER_DELETION: {
       const userToken = localStorage.getItem('token');
-      const { characters } = store.getState();
       const { user } = store.getState();
 
       next(action);

@@ -22,6 +22,7 @@ import {
   BACKGROUND_IS_FETCHED,
   SUBMIT_CHARACTER_CREATION_SUCCESS,
   SUBMIT_CHARACTER_DELETION_SUCCESS,
+  SELECT_SKILLS,
 } from 'src/actions/characters';
 
 export const initialState = {
@@ -38,15 +39,17 @@ export const initialState = {
     selectedClass: '',
     racialAbility: '',
     classAbility: '',
-    strength: '',
-    charisma: '',
-    dexterity: '',
-    wisdom: '',
+    // featureChoice: {
+    //   id: '',
+    //   name: '',
+    //   description: '',
+    // },
     constitution: '',
     intelligence: '',
     modalIsClosed: true,
     fetchedCharacterRaceObject: '',
     fetchedCharacterClassObject: '',
+    skills: null,
     backgrounds: '',
 
   },
@@ -424,6 +427,14 @@ const reducer = (state = initialState, action = {}) => {
         raceIsFetched: false,
         classIsFetched: false,
         backgroundIsFetched: false,
+      };
+    case SELECT_SKILLS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          skills: action.skill,
+        },
       };
 
     default:
