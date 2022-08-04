@@ -15,6 +15,7 @@ export const SUBMIT_REGISTER_SUCCESS = 'SUBMIT_REGISTER_SUCCESS';
 
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const RETRIEVE_USER_DATA_FROM_LOCALSTORAGE = 'RETRIEVE_USER_DATA_FROM_LOCALSTORAGE';
+export const RETRIEVE_GUEST_DATA_FROM_LOCALSTORAGE = 'RETRIEVE_GUEST_DATA_FROM_LOCALSTORAGE';
 export const VERIFY_TOKEN = 'VERIFY_TOKEN';
 
 export const LOG_OUT = 'LOG_OUT';
@@ -22,6 +23,8 @@ export const SUBMIT_LOGIN_SUCCESS = 'SUBMIT_LOGIN_SUCCESS';
 
 export const GET_USER_PROFILE = 'GET_USER_PROFILE';
 export const SAVE_USER_PROFILE = 'SAVE_USER_PROFILE';
+export const GET_GUEST_PROFILE = 'GET_GUEST_PROFILE';
+export const SAVE_GUEST_PROFILE = 'SAVE_GUEST_PROFILE';
 
 export const DELETE_USER_PROFILE = 'DELETE_USER_PROFILE';
 export const DELETE_USER_PROFILE_SUCCESS = 'DELETE_USER_PROFILE_SUCCESS';
@@ -98,8 +101,19 @@ export const submitRegisterSuccess = (response) => ({
 export const getUserProfile = () => ({
   type: GET_USER_PROFILE,
 });
+
+
 export const saveUserProfile = (response) => ({
   type: SAVE_USER_PROFILE,
+  ...response,
+});
+
+export const getGuestProfile = () => ({
+  type: GET_GUEST_PROFILE,
+});
+
+export const saveGuestProfile = (response) => ({
+  type: SAVE_GUEST_PROFILE,
   ...response,
 });
 export const deleteUserProfile = () => ({
@@ -167,4 +181,11 @@ export const retrieveUserDataFromLocalStorage = (token, userId) => ({
   type: RETRIEVE_USER_DATA_FROM_LOCALSTORAGE,
   token,
   userId,
+});
+
+export const retrieveGuestDataFromLocalStorage = (token, guestId) => ({
+
+  type: RETRIEVE_GUEST_DATA_FROM_LOCALSTORAGE,
+  token,
+  guestId,
 });

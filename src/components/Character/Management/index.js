@@ -19,6 +19,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleIsRedirect, handleIsSuccess } from 'src/actions/user';
+import { submitCharacterDeletion } from 'src/actions/characters';
 
 export default function CharacterManagement() {
   const {
@@ -35,6 +36,11 @@ export default function CharacterManagement() {
   }, []);
 
   const navigate = useNavigate();
+
+  const handleCharacterDeletion = () => {
+    console.log('je suis le handleCharacterDeletion');
+    dispatch(submitCharacterDeletion());
+  };
 
   return (
     <>
@@ -115,8 +121,14 @@ export default function CharacterManagement() {
                     <IconButton>
                       <ModeEditIcon fontSize="inherit" color="primary" />
                     </IconButton>
-                    <IconButton>
-                      <DeleteForeverIcon fontSize="inherit" color="primary" />
+                    <IconButton
+                      onClick={(e) => handleCharacterDeletion()}
+                    >
+                      <DeleteForeverIcon
+                        fontSize="inherit"
+                        color="primary"
+
+                      />
                     </IconButton>
                   </Box>
                 </CardContent>

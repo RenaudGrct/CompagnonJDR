@@ -15,6 +15,7 @@ import {
   HANDLE_IS_SUBMIT_ERROR,
   HANDLE_IS_SUCCESS,
   SAVE_USER_PROFILE,
+  SAVE_GUEST_PROFILE,
   UPDATE_USER_PASSWORD,
   UPDATE_USER_PROFILE,
   UPDATE_USER_PROFILE_SUCCESS,
@@ -37,6 +38,7 @@ export const initialState = {
   userConfirmPassword: '',
   userNewPassword: '',
   userId: '',
+  guestId: '',
   isLogged: false,
   isLoggedAsGuest: false,
   isReadOnly: true,
@@ -78,6 +80,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         token: action.token,
         userId: action.userId,
+        guestId: action.guestId,
 
       };
 
@@ -190,6 +193,16 @@ const reducer = (state = initialState, action = {}) => {
         isLogged: true,
         isLoading: false,
       };
+
+    case SAVE_GUEST_PROFILE:
+      return {
+        ...state,
+        userName: action.username,
+        userEmail: action.email,
+        guestId: action.id,
+        isLogged: true,
+        isLoading: false,
+      };
     case UPDATE_USER_PASSWORD:
       return {
         ...state,
@@ -249,7 +262,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         isLoggedAsGuest: true,
-        userId: action.user.id,
+        guestId: action.user.id,
         userName: action.user.username,
         userEmail: action.user.email,
         token: action.accesToken,

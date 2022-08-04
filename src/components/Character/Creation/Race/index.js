@@ -44,10 +44,10 @@ export default function Race() {
   }, []);
 
   const {
-    raceC,
+    selectedRace,
     modalIsClosed,
     // racialAbility,
-    race,
+    fetchedCharacterRaceObject,
   } = useSelector((state) => state.characters.character);
   const { raceIsFetched } = useSelector((state) => state.characters);
 
@@ -120,7 +120,7 @@ export default function Race() {
                     <FormControlLabel
                       value={raceSelected.name}
                       label={raceSelected.name}
-                      checked={raceC === raceSelected.name}
+                      checked={selectedRace === raceSelected.name}
                       onClick={(event) => {
                         dispatch(selectRace(event.target.value));
                         dispatch(getRace());
@@ -131,7 +131,7 @@ export default function Race() {
 
                   </Box>
                   <Dialog
-                    open={!modalIsClosed && (raceC === raceSelected.name)}
+                    open={!modalIsClosed && (selectedRace === raceSelected.name)}
                     onClose={handleClose}
                   >
                     { raceIsFetched && (
@@ -143,12 +143,12 @@ export default function Race() {
                         fontFamily: 'monospace',
                       }}
                       >
-                        {race.name}
+                        {fetchedCharacterRaceObject.name}
                         <Avatar alt="User Avatar" src={avatar} sx={{ width: 60, height: 60 }} />
                       </DialogTitle>
                       <DialogContent sx={{ backgroundColor: 'primary.main' }}>
                         <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
-                          {race.racial_ability.map((ability) => (
+                          {fetchedCharacterRaceObject.racial_ability.map((ability) => (
                             <>
                               <p key={ability.racial_ability_name}>{ability.description}</p>
                               {/* <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
@@ -170,16 +170,16 @@ export default function Race() {
                               </FormControl> */}
                             </>
                           ))}
-                          <p>vitesse de: {race.speed}</p>
+                          <p>vitesse de: {fetchedCharacterRaceObject.speed}</p>
                           <p>Bonus de Race</p>
-                          {race.score_modifier.map((score) => (
+                          {fetchedCharacterRaceObject.score_modifier.map((score) => (
                             <p key={score.score_name}>{score.score_name}: {score.score_number}</p>
                           ))}
                           <p>langue parlé :</p>
-                          {race.languages.map((lang) => (
+                          {fetchedCharacterRaceObject.languages.map((lang) => (
                             <p key={lang}>{lang}</p>
                           ))}
-                          <p>langue supplémentaire: {race.extra_language}</p>
+                          <p>langue supplémentaire: {fetchedCharacterRaceObject.extra_language}</p>
                         </DialogContentText>
                       </DialogContent>
                     </>

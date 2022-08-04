@@ -27,7 +27,7 @@ import CharacterHistory from 'src/components/Character/Details/History';
 
 import './styles.css';
 
-import { retrieveUserDataFromLocalStorage, getUserProfile } from 'src/actions/user';
+import { retrieveUserDataFromLocalStorage, getUserProfile, retrieveGuestDataFromLocalStorage, getGuestProfile } from 'src/actions/user';
 // import { getBackground } from 'src/actions/characters';
 
 const theme = createTheme({
@@ -90,10 +90,14 @@ function App() {
       const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId');
 
-      // dispatch(verifyToken(token, userId));
       dispatch(retrieveUserDataFromLocalStorage(token, userId));
       dispatch(getUserProfile());
-      // dispatch(isLogged());
+    } if (localStorage.getItem('token') && localStorage.getItem('guestId')) {
+      const token = localStorage.getItem('token');
+      const guestId = localStorage.getItem('guestId');
+
+      dispatch(retrieveGuestDataFromLocalStorage(token, guestId));
+      dispatch(getGuestProfile());
     }
   }, []);
 

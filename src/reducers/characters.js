@@ -20,6 +20,8 @@ import {
   TOGGLE_IS_FETCHED,
   GET_BACKGROUND_SUCCESS,
   BACKGROUND_IS_FETCHED,
+  SUBMIT_CHARACTER_CREATION_SUCCESS,
+  SUBMIT_CHARACTER_DELETION_SUCCESS,
 } from 'src/actions/characters';
 
 export const initialState = {
@@ -31,9 +33,9 @@ export const initialState = {
   character: {
 
     name: '',
-    raceC: '',
-    backgroundC: '',
-    classC: '',
+    selectedRace: '',
+    selectedBackground: '',
+    selectedClass: '',
     racialAbility: '',
     classAbility: '',
     strength: '',
@@ -43,8 +45,8 @@ export const initialState = {
     constitution: '',
     intelligence: '',
     modalIsClosed: true,
-    race: '',
-    characterClass: '',
+    fetchedCharacterRaceObject: '',
+    fetchedCharacterClassObject: '',
     backgrounds: '',
 
   },
@@ -115,7 +117,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         character: {
           ...state.character,
-          raceC: action.selectedRace,
+          selectedRace: action.selectedRace,
           modalIsClosed: false,
         },
       };
@@ -124,7 +126,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         character: {
           ...state.character,
-          classC: action.selectedClass,
+          selectedClass: action.selectedClass,
           modalIsClosed: false,
         },
       };
@@ -133,7 +135,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         character: {
           ...state.character,
-          backgroundC: action.selectedBackground,
+          selectedBackground: action.selectedBackground,
           modalIsClosed: false,
         },
       };
@@ -303,7 +305,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         character: {
           ...state.character,
-          characterClass: action.response,
+          fetchedCharacterClassObject: action.response,
         },
       };
 
@@ -312,7 +314,83 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         character: {
           ...state.character,
-          race: action.response,
+          fetchedCharacterRaceObject: action.response,
+        },
+      };
+
+    case SUBMIT_CHARACTER_DELETION_SUCCESS:
+      return {
+        ...state,
+      };
+
+    case SUBMIT_CHARACTER_CREATION_SUCCESS:
+      return {
+        ...state,
+
+        raceIsFetched: false,
+        classIsFetched: false,
+        backgroundIsFetched: false,
+
+        character: {
+          ...state.character,
+          name: '',
+          selectedRace: '',
+          selectedBackground: '',
+          selectedClass: '',
+          racialAbility: '',
+          classAbility: '',
+          strength: '',
+          charisma: '',
+          dexterity: '',
+          wisdom: '',
+          constitution: '',
+          intelligence: '',
+          modalIsClosed: true,
+          fetchedCharacterRaceObject: '',
+          fetchedCharacterClassObject: '',
+          backgrounds: '',
+
+          resultDisplay: {
+            ...state.resultDisplay,
+
+            sumOne: '',
+            sumTwo: '',
+            sumThree: '',
+            sumFour: '',
+            sumFive: '',
+            sumSix: '',
+            isDiceSumOne: false,
+            isDiceSumTwo: false,
+            isDiceSumThree: false,
+            isDiceSumFour: false,
+            isDiceSumFive: false,
+            isDiceSumSix: false,
+            miniDice1: '',
+            miniDice2: '',
+            miniDice3: '',
+            miniDice4: '',
+            miniDice5: '',
+            miniDice6: '',
+            miniDice7: '',
+            miniDice8: '',
+            miniDice9: '',
+            miniDice10: '',
+            miniDice11: '',
+            miniDice12: '',
+            miniDice13: '',
+            miniDice14: '',
+            miniDice15: '',
+            miniDice16: '',
+            miniDice17: '',
+            miniDice18: '',
+            miniDice19: '',
+            miniDice20: '',
+            miniDice21: '',
+            miniDice22: '',
+            miniDice23: '',
+            miniDice24: '',
+          },
+
         },
       };
     case GET_BACKGROUND_SUCCESS:

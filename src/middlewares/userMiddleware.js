@@ -25,6 +25,9 @@ import {
   GET_USER_PROFILE,
   saveUserProfile,
 
+  GET_GUEST_PROFILE,
+  saveGuestProfile,
+
   handleIsLoading,
   LOG_OUT,
   logOut,
@@ -254,7 +257,9 @@ const userMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
-          localStorage.setItem('userId', response.data.user.id);
+          localStorage.setItem('guestId', response.data.user.id);
+          console.log(localStorage)
+          console.log(response.data)
         })
         .catch((error) => {
           store.dispatch(logAsGuestError(error.response.data));
@@ -284,6 +289,31 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(saveUserProfile(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+    }
+
+    case GET_GUEST_PROFILE: {
+      const { user } = store.getState();
+
+      const config = {
+
+        method: 'get',
+        //NOUVELLE ROUTE
+        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.guestId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${user.token}`,
+        },
+        withCredentials: true,
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(saveGuestProfile(response.data));
         })
         .catch((error) => {
           console.log(error);

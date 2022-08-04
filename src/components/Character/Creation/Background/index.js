@@ -39,7 +39,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Background() {
   const dispatch = useDispatch();
   const {
-    backgroundC,
+    selectedBackground,
     modalIsClosed,
     backgrounds,
     // backgroundIsFetched,
@@ -127,7 +127,7 @@ export default function Background() {
                       labelPlacement="start"
                       value={background.id}
                       label={background.name}
-                      checked={Number(backgroundC) === background.id}
+                      checked={Number(selectedBackground) === background.id}
                       onClick={(event) => dispatch(selectBackground(event.target.value))}
                       control={<Radio sx={{ color: 'primary.contrastText' }} />}
                       sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
@@ -139,7 +139,7 @@ export default function Background() {
               {backgrounds.map((background) => (
                 <Dialog
                   key={background.id}
-                  open={!modalIsClosed && (Number(backgroundC) === background.id)}
+                  open={!modalIsClosed && (Number(selectedBackground) === background.id)}
                   onClose={handleClose}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"

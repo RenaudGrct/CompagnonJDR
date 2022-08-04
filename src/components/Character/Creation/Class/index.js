@@ -55,10 +55,11 @@ export default function Class() {
 
   const {
 
-    classC,
+    selectedClass,
     modalIsClosed,
     classAbility,
-    characterClass,
+
+    fetchedCharacterClassObject,
 
   } = useSelector((state) => state.characters.character);
   const { classIsFetched } = useSelector((state) => state.characters);
@@ -137,7 +138,7 @@ export default function Class() {
                            labelPlacement="start"
                            value={classSelected.name}
                            label={classSelected.name}
-                           checked={classC === classSelected.name}
+                           checked={selectedClass === classSelected.name}
                            onClick={(event) => {
                              dispatch(selectClass(event.target.value));
                              dispatch(getClass());
@@ -149,7 +150,7 @@ export default function Class() {
                        </Item>
                      </Box>
                      <Dialog
-                       open={!modalIsClosed && (classC === classSelected.name)}
+                       open={!modalIsClosed && (selectedClass === classSelected.name)}
                        onClose={handleClose}
                        aria-labelledby="alert-dialog-title"
                        aria-describedby="alert-dialog-description"
@@ -164,7 +165,7 @@ export default function Class() {
                            fontFamily: 'monospace',
                          }}
                          >
-                           {characterClass.name}
+                           {fetchedCharacterClassObject.name}
                            <Avatar alt="User Avatar" src={avatar} sx={{ width: 60, height: 60 }} />
                          </DialogTitle>
                          <DialogContent sx={{ backgroundColor: 'primary.main' }}>
@@ -172,21 +173,21 @@ export default function Class() {
                              {/* <p>Point de vie : {characterClass.hit_point}</p> */}
                              <p>competence de :</p>
                              {
-                           characterClass.proficiencies.map((proficiency) => (
+                           fetchedCharacterClassObject.proficiencies.map((proficiency) => (
                              proficiency.saving_throws.map((save) => (
                                <p key={save}>{save},</p>
                              ))
                            ))
                             }
 
-                             {characterClass.proficiencies.map((proficiency) => (
+                             {fetchedCharacterClassObject.proficiencies.map((proficiency) => (
                                proficiency.skills.map((skill) => (
                                  <p key={skill.name}>{skill.name},</p>
                                ))
                              ))}
 
                              <p>caracteristiques :</p>
-                             {characterClass.feature.map((feat) => (
+                             {fetchedCharacterClassObject.feature.map((feat) => (
                                <>
                                  <p key={feat.feature_name}>{feat.feature_name} : </p>
                                  <p>{feat.description}</p>
@@ -194,7 +195,7 @@ export default function Class() {
                                  <p>réinitialisation : {feat.reset}</p>
                                </>
                              ))}
-                             {characterClass.feature.map((feat) => (
+                             {fetchedCharacterClassObject.feature.map((feat) => (
                                feat.choices?.map((choice) => (
                                  <>
                                    <p>{choice.name}:</p>
@@ -203,17 +204,22 @@ export default function Class() {
                                ))
                              ))}
 
-                             <FormControl sx={{ width: '100%', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText' }}>
-                               <InputLabel sx={{color: 'primary.contrastText'}}>abilité</InputLabel>
+                             <FormControl sx={{
+                               width: '100%', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText',
+                             }}
+                             >
+                               <InputLabel sx={{ color: 'primary.contrastText' }}>abilité</InputLabel>
                                <Select
                                  value={classAbility}
                                  label="stats"
                                  color="secondary"
                                  backgroundColor="primary.contrastText"
                                  onChange={(e) => dispatch(selectStat('characterClassAbility', e.target.value))}
-                                 sx={{ width: '10rem', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText' }}
+                                 sx={{
+                                   width: '10rem', marginTop: '1rem', backgroundColor: 'pimary.contrastText', color: 'primary.contrastText',
+                                 }}
                                >
-                                 {characterClass.feature.map((feat) => (
+                                 {fetchedCharacterClassObject.feature.map((feat) => (
                                    feat.choices?.map((choice) => (
                                      <MenuItem value={choice.id}>
                                        {choice.name}

@@ -23,6 +23,11 @@ export const CLASS_IS_FETCHED = 'CLASS_IS_FETCHED';
 export const BACKGROUND_IS_FETCHED = 'BACKGROUND_IS_FETCHED';
 export const TOGGLE_IS_FETCHED = 'TOGGLE_IS_FETCHED';
 
+export const SUBMIT_CHARACTER_CREATION = 'SUBMIT_CHARACTER_CREATION';
+export const SUBMIT_CHARACTER_CREATION_SUCCESS = 'SUBMIT_CHARACTER_CREATION_SUCCESS';
+export const SUBMIT_CHARACTER_DELETION = 'SUBMIT_CHARACTER_DELETION';
+export const SUBMIT_CHARACTER_DELETION_SUCCESS = 'SUBMIT_CHARACTER_DELETION_SUCCESS';
+
 export const changeNameInput = (newValue) => ({
   type: CHANGE_NAME_INPUT,
   newValue,
@@ -130,4 +135,23 @@ export const backgroundIsFetched = () => ({
 
 export const toggleIsFetched = () => ({
   type: TOGGLE_IS_FETCHED,
+});
+
+export const submitCharacterCreation = () => ({
+  type: SUBMIT_CHARACTER_CREATION,
+
+});
+export const submitCharacterCreationSuccess = (response) => ({
+  type: SUBMIT_CHARACTER_CREATION_SUCCESS,
+  response,
+
+});
+
+export const submitCharacterDeletion = () => ({
+  type: SUBMIT_CHARACTER_DELETION,
+});
+
+export const submitCharacterDeletionSuccess = (response) => ({
+  type: SUBMIT_CHARACTER_DELETION_SUCCESS,
+  response,
 });

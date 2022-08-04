@@ -8,6 +8,10 @@ import {
   GET_BACKGROUND,
   getBackgroundSuccess,
   backgroundIsFetched,
+  SUBMIT_CHARACTER_CREATION,
+  submitCharacterCreationSuccess,
+  SUBMIT_CHARACTER_DELETION,
+  submitCharacterDeletionSuccess,
 
 } from 'src/actions/characters';
 
@@ -29,7 +33,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'get',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/races/${characters.character.raceC}`,
+        url: `https://api-compagnon-jdr.herokuapp.com/api/races/${characters.character.selectedRace}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -61,7 +65,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'get',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/classes/${characters.character.classC}`,
+        url: `https://api-compagnon-jdr.herokuapp.com/api/classes/${characters.character.selectedClass}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -108,6 +112,103 @@ const charactersMiddleware = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(backgroundIsFetched());
+        });
+      break;
+    }
+
+    case SUBMIT_CHARACTER_CREATION: {
+      const userToken = localStorage.getItem('token');
+      const { characters } = store.getState();
+      const { user } = store.getState();
+
+      // GERER LOGIQUE USER VS GUEST
+
+      next(action);
+
+      const config = {
+
+        method: 'post',
+        url: `https://api-compagnon-jdr.herokuapp.com/api/character/${user.userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${userToken}`,
+        },
+        data: {
+          character: {
+            guest_id: user.userId,
+            user_id: user.userId,
+            name: characters.character.name,
+            race_id: characters.character.fetchedCharacterRaceObject.id,
+            class_id: characters.character.fetchedCharacterClassObject.id,
+            background_id: characters.character.background.id,
+          },
+          // y en a deux
+          skill_id:
+          [characters.character.fetchedCharacterClassObject.proficiencies.skill.id,
+            characters.character.fetchedCharacterClassObject.proficiencies.skill.id,
+          ],
+          // y en a un
+          feature_choice_id: characters.character.fetchedCharacterRaceObject.feature.choices.id,
+
+          /*
+          faudra ajouter les modifiers qui se trouvent dans
+          characters.character.characterRace.score_modifier
+            */
+          ability_score:
+              {
+                strength: characters.character.strength,
+                charisma: characters.character.charisma,
+                dexterity: characters.character.dexterity,
+                wisdom: characters.character.wisdom,
+                constitution: characters.character.constitution,
+                intelligence: characters.character.intelligence,
+
+              },
+        },
+        withCredentials: true,
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(submitCharacterCreationSuccess(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          console.log('yes les tontons, je suis le finally du creation');
+        });
+      break;
+    }
+
+    case SUBMIT_CHARACTER_DELETION: {
+      const userToken = localStorage.getItem('token');
+      const { characters } = store.getState();
+      const { user } = store.getState();
+
+      next(action);
+
+      const config = {
+
+        method: 'delete',
+        url: `https://api-compagnon-jdr.herokuapp.com/api/character/${user.userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${userToken}`,
+        },
+
+        withCredentials: true,
+      };
+
+      axios(config)
+        .then((response) => {
+          store.dispatch(submitCharacterDeletionSuccess(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          console.log('yes les tontons, je suis le finally du deletion');
         });
       break;
     }

@@ -28,8 +28,8 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function CharacterDetails() {
   const {
     name,
-    raceC,
-    classC,
+    selectedRace,
+    selectedClass,
     strength,
     dexterity,
     constitution,
@@ -64,10 +64,10 @@ export default function CharacterDetails() {
             { name }
           </Typography>
           <Typography variant="h5">
-            { raceC }
+            { selectedRace }
           </Typography>
           <Typography variant="h5">
-            { classC }
+            { selectedClass }
           </Typography>
         </Box>
 
