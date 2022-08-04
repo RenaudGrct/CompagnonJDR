@@ -128,27 +128,22 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'post',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/character/${user.userId}`,
+        url: `https://api-compagnon-jdr.herokuapp.com/api/character/user/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${userToken}`,
         },
         data: {
           character: {
-            guest_id: user.userId,
-            user_id: user.userId,
             name: characters.character.name,
-            race_id: characters.character.fetchedCharacterRaceObject.id,
-            class_id: characters.character.fetchedCharacterClassObject.id,
-            background_id: characters.character.background.id,
+            race_id: Number(characters.character.fetchedCharacterRaceObject.id),
+            class_id: Number(characters.character.fetchedCharacterClassObject.id),
+            background_id: Number(characters.character.selectedBackground),
           },
           // y en a deux
-          skill_id:
-          [characters.character.fetchedCharacterClassObject.proficiencies.skill.id,
-            characters.character.fetchedCharacterClassObject.proficiencies.skill.id,
-          ],
+          skill_id: characters.character.skills,
           // y en a un
-          feature_choice_id: characters.character.fetchedCharacterRaceObject.feature.choices.id,
+          feature_choice_id: Number(characters.character.classAbility),
 
           /*
           faudra ajouter les modifiers qui se trouvent dans
@@ -156,17 +151,18 @@ const charactersMiddleware = (store) => (next) => (action) => {
             */
           ability_score:
               {
-                strength: characters.character.strength,
-                charisma: characters.character.charisma,
-                dexterity: characters.character.dexterity,
-                wisdom: characters.character.wisdom,
-                constitution: characters.character.constitution,
-                intelligence: characters.character.intelligence,
+                strength: Number(characters.character.strength),
+                charisma: Number(characters.character.charisma),
+                dexterity: Number(characters.character.dexterity),
+                wisdom: Number(characters.character.wisdom),
+                constitution: Number(characters.character.constitution),
+                intelligence: Number(characters.character.intelligence),
 
               },
         },
         withCredentials: true,
       };
+      console.log(config.data);
 
       axios(config)
         .then((response) => {

@@ -51,10 +51,10 @@ export default function CharacterCreation() {
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
-        <Box>
+        <Box sx={{ borderBottom: 1, borderColor: 'secondary.main' }}>
           <TabList
             centered
-            sx={{ color: 'white' }}
+            sx={{ color: 'secondary' }}
             onChange={handleChange}
             aria-label="character creation tabs"
           >
@@ -63,7 +63,7 @@ export default function CharacterCreation() {
 
               <NavLink key={tab.label} to={`/creation${tab.url}`}>
                 <Tab
-                  sx={{ fontWeight: 'bold', fontStyle: 'italic' }}
+                  sx={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'monospace' }}
                   label={`${tab.label}`}
                   value={`${tab.value}`}
                 />

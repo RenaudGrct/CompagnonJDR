@@ -243,9 +243,9 @@ export default function Class() {
                                  </>
                                ))
                              ))}
-
-                             <FormControl sx={{ backgroundColor: 'secondary.main' }}>
-                               <InputLabel>abilité</InputLabel>
+                             <p>choisit ta caracteristique :</p>
+                             <FormControl variant="standard" sx={{ backgroundColor: 'secondary.main' }}>
+                               <InputLabel> caracteristiques </InputLabel>
                                <Select
                                  value={classAbility}
                                  label="stats"

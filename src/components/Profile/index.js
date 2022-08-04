@@ -97,6 +97,7 @@ export default function Profile() {
               InputProps={{
                 readOnly: true,
               }}
+              variant="filled"
             />
               <TextField
                 sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
@@ -109,6 +110,7 @@ export default function Profile() {
                 InputProps={{
                   readOnly: true,
                 }}
+                variant="filled"
               />
               <Button
                 sx={{

@@ -35,11 +35,16 @@ export default function Name() {
       >
 
         <Typography
-          variant="h4"
-          color="white"
+          variant="h5"
+          color="primary"
           gutterBottom
           component="div"
           fontFamily="monospace"
+          sx={{
+            marginBottom: '10rem',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+          }}
         >
           Choix du Nom
         </Typography>

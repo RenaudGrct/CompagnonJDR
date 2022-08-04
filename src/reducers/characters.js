@@ -47,8 +47,8 @@ export const initialState = {
     constitution: '',
     intelligence: '',
     modalIsClosed: true,
-    fetchedCharacterRaceObject: '',
-    fetchedCharacterClassObject: '',
+    fetchedCharacterRaceObject: [''],
+    fetchedCharacterClassObject: [],
     skills: null,
     backgrounds: '',
 
@@ -433,7 +433,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         character: {
           ...state.character,
-          skills: action.skill,
+          skills: [action.skill[0].id, action.skill[1]?.id],
         },
       };
 

@@ -37,6 +37,7 @@ function Field({
       type={type}
       onChange={handleChange}
       placeholder={placeholder}
+      variant="filled"
     />
   );
 }

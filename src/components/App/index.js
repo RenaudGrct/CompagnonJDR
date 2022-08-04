@@ -27,7 +27,12 @@ import CharacterHistory from 'src/components/Character/Details/History';
 
 import './styles.css';
 
-import { retrieveUserDataFromLocalStorage, getUserProfile, retrieveGuestDataFromLocalStorage, getGuestProfile } from 'src/actions/user';
+import {
+  retrieveUserDataFromLocalStorage,
+  getUserProfile,
+  retrieveGuestDataFromLocalStorage,
+  getGuestProfile,
+} from 'src/actions/user';
 // import { getBackground } from 'src/actions/characters';
 
 const theme = createTheme({

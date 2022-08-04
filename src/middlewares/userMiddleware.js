@@ -258,8 +258,8 @@ const userMiddleware = (store) => (next) => async (action) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
           localStorage.setItem('guestId', response.data.user.id);
-          console.log(localStorage)
-          console.log(response.data)
+          console.log(localStorage);
+          console.log(response.data);
         })
         .catch((error) => {
           store.dispatch(logAsGuestError(error.response.data));
@@ -302,7 +302,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'get',
-        //NOUVELLE ROUTE
+        // NOUVELLE ROUTE
         url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.guestId}`,
         headers: {
           'Content-Type': 'application/json',

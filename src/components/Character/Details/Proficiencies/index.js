@@ -15,7 +15,6 @@ export default function CharacterProficiencies() {
       <CssBaseline />
       <Container sx={{ mt: '2rem' }} maxWidth="sm">
         <Box sx={{ bgcolor: '#fefefe', height: '35vh' }}>
-
           <Typography sx={{ display: 'block' }} variant="h7">
             Points de vie
             DV : 1d10 par niveau de guerrier

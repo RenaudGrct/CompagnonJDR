@@ -122,7 +122,7 @@ export default function CharacterManagement() {
                       <ModeEditIcon fontSize="inherit" color="primary" />
                     </IconButton>
                     <IconButton
-                      onClick={(e) => handleCharacterDeletion()}
+                      onClick={() => handleCharacterDeletion()}
                     >
                       <DeleteForeverIcon
                         fontSize="inherit"
