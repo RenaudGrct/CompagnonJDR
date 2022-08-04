@@ -147,7 +147,7 @@ export default function CharacterDetails() {
                   onChange={handleChange}
                 >
 
-                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Aptitudes" />
+                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Aptitudes race" />
 
                 </TabList>
               </TabContext>
@@ -165,7 +165,7 @@ export default function CharacterDetails() {
                   centered
                   onChange={handleChange}
                 >
-                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Équipement" />
+                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="aptitudes classe" />
 
                 </TabList>
               </TabContext>

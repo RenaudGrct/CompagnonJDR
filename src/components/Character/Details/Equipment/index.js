@@ -17,12 +17,14 @@ export default function Equipment() {
         <Box sx={{ bgcolor: '#fefefe', height: '35vh' }}>
 
           <Typography sx={{ display: 'block' }} variant="h7">
-Vous commencez avec l'équipement suivant, en plus de l'équipement accordé par votre historique :
+            Vous commencez avec l'équipement suivant,
+            en plus de l'équipement accordé par votre historique :
 
-(a) une cotte de mailles ou (b) une armure de cuir, un arc long et 20 flèches
-(a) une arme de guerre et un bouclier ou (b) deux armes de guerre
-(a) une arbalète légère et 20 carreaux ou (b) deux hachettes
-(a) un sac d'exploration souterraine ou (b) un sac d'explorateur                </Typography>
+            (a) une cotte de mailles ou (b) une armure de cuir, un arc long et 20 flèches
+            (a) une arme de guerre et un bouclier ou (b) deux armes de guerre
+            (a) une arbalète légère et 20 carreaux ou (b) deux hachettes
+            (a) un sac d'exploration souterraine ou (b) un sac d'explorateur
+          </Typography>
         </Box>
       </Container>
 

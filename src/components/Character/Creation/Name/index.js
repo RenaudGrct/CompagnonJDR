@@ -23,9 +23,14 @@ export default function Name() {
       <CharacterCreation />
 
       <Container
-        maxWidth="sm"
+        maxwidth="sm"
         sx={{
-          height: '75vh', display: 'flex', gap: '3rem', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          height: '75vh',
+          display: 'flex',
+          gap: '3rem',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
 
@@ -34,6 +39,7 @@ export default function Name() {
           color="white"
           gutterBottom
           component="div"
+          fontFamily="monospace"
         >
           Choix du Nom
         </Typography>

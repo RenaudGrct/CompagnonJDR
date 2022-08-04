@@ -17,19 +17,21 @@ export default function CharacterProficiencies() {
         <Box sx={{ bgcolor: '#fefefe', height: '35vh' }}>
 
           <Typography sx={{ display: 'block' }} variant="h7">
-          Points de vie
-DV : 1d10 par niveau de guerrier
-pv au niveau 1 : 10 + votre modificateur de Constitution
-pv aux niveaux suivants : 1d10 (ou 6) + votre modificateur de Constitution
+            Points de vie
+            DV : 1d10 par niveau de guerrier
+            pv au niveau 1 : 10 + votre modificateur de Constitution
+            pv aux niveaux suivants : 1d10 (ou 6) + votre modificateur de Constitution
 
-Maîtrises
-Armures : toutes les armures, boucliers
-Armes : armes courantes, armes de guerre
-Outils : aucun
-Jets de sauvegarde : Force, Constitution
-Compétences : choisissez deux compétences parmi Acrobaties, Athlétisme, Dressage, Histoire, Intimidation, Intuition, Perception et Survie
+            Maîtrises
+            Armures : toutes les armures, boucliers
+            Armes : armes courantes, armes de guerre
+            Outils : aucun
+            Jets de sauvegarde : Force, Constitution
+            Compétences : choisissez deux compétences parmi Acrobaties,
+            Athlétisme, Dressage, Histoire, Intimidation, Intuition, Perception et Survie
 
-É    </Typography>
+            É
+          </Typography>
         </Box>
       </Container>
 
