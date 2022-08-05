@@ -1,0 +1,31 @@
+.footer{
+  font-family: monospace;
+  margin-top: 30rem;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &_link{
+    &_container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    &_text{
+      margin-top: 1rem;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &_image{
+      margin-top: 0.5rem;
+      border-radius: 100%;
+      width: 3rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
