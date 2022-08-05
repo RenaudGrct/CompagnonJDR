@@ -8,7 +8,7 @@ export default function Footer() {
       bgcolor="text.secondary"
       color="gray"
       sx={{
-        marginTop: 33,
+        marginTop: 37,
       }}
     >
       <Container
