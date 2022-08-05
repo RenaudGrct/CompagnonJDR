@@ -257,7 +257,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
-          localStorage.setItem('guestId', response.data.user.id);
+          localStorage.setItem('guestId', response.data.guest.id);
           console.log(localStorage);
           console.log(response.data);
         })
