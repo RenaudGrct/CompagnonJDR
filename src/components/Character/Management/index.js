@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   handleIsSuccess,
+  handleIsRedirect,
 } from 'src/actions/user';
 import {
   submitCharacterDeletion,
@@ -39,6 +40,7 @@ export default function CharacterManagement() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(handleIsRedirect());
     console.log('hello');
     return () => {
       dispatch(handleIsSuccess());
@@ -75,17 +77,31 @@ export default function CharacterManagement() {
         alignItems: 'center',
       }}
       >
+        <Typography
+          variant="h5"
+          noWrap
+          sx={{
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            // color: 'primary.contrastText',
+            textDecoration: 'none',
+            marginTop: '3rem',
+          }}
+        >Mes Personnages
+        </Typography>
         <Link to="/creation/name">
           <Button
             color="secondary"
             variant="contained"
             type="button"
             sx={{
-              width: '15rem',
+              width: '17rem',
               marginTop: '5rem',
             }}
           >
-            Créer un Personnage
+            Créer Nouveau Personnage
           </Button>
         </Link>
         {myCharacters.length ? (
@@ -100,7 +116,7 @@ export default function CharacterManagement() {
                     src={`images/${character.race}.jpg`}
                     // alt="green iguana"
                     alt={`/images/${character.race},jpg`}
-                    height="300px"
+                    height="200px"
                   />
                   <CardContent>
                     <Typography align="center" gutterBottom variant="h4" component="div">

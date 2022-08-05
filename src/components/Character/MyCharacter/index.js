@@ -28,17 +28,8 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function CharacterDetails() {
+export default function MyCharacterDetails() {
   const {
-    name,
-    selectedRace,
-    selectedClass,
-    strength,
-    dexterity,
-    constitution,
-    intelligence,
-    wisdom,
-    charisma,
     storedCharacterId,
   } = useSelector((state) => state.characters.character);
 
@@ -64,11 +55,6 @@ export default function CharacterDetails() {
 
   const dispatch = useDispatch();
 
-  const [value, setValue] = React.useState('1');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   useEffect(() => {
     dispatch(getCharacter());
   }, [storedCharacterId]);
@@ -109,7 +95,7 @@ export default function CharacterDetails() {
               Force
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {strength}
+              {selectedStrenght}
             </Typography>
           </Item>
         </Grid>
@@ -119,7 +105,7 @@ export default function CharacterDetails() {
               Dexterité
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {dexterity}
+              {selectedDexterity}
             </Typography>
           </Item>
         </Grid>
@@ -129,7 +115,7 @@ export default function CharacterDetails() {
               Intelligence
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {intelligence}
+              {selectedIntelligence}
             </Typography>
           </Item>
         </Grid>
@@ -139,7 +125,7 @@ export default function CharacterDetails() {
               Sagesse
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {wisdom}
+              {selectedWisdom}
             </Typography>
           </Item>
         </Grid>
@@ -149,7 +135,7 @@ export default function CharacterDetails() {
               Charisme
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {charisma}
+              {selectedCharisma}
             </Typography>
           </Item>
         </Grid>
@@ -159,68 +145,22 @@ export default function CharacterDetails() {
               Constitution
             </Typography>
             <Typography sx={{ display: 'block' }} variant="h7">
-              {constitution}
+              {selectedConstitution}
             </Typography>
           </Item>
         </Grid>
 
       </Grid>
-      <Grid sx={{ justifyContent: 'center' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 30, sm: 24, md: 12 }}>
-
-        <Grid item xs={12} sm={7} md={4}>
-          <NavLink to="/character/proficiencies">
-            <Item sx={{ background: 'black', padding: '0.1rem' }}>
-              <TabContext value={value}>
-                <TabList
-                  centered
-                  onChange={handleChange}
-                >
-
-                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="Aptitudes race" />
-
-                </TabList>
-              </TabContext>
-
-            </Item>
-          </NavLink>
-
-        </Grid>
-
-        <Grid item xs={12} sm={7} md={4}>
-          <NavLink to="/character/equipment">
-            <Item sx={{ background: 'black', padding: '0.1rem' }}>
-              <TabContext value={value}>
-                <TabList
-                  centered
-                  onChange={handleChange}
-                >
-                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="aptitudes classe" />
-
-                </TabList>
-              </TabContext>
-
-            </Item>
-          </NavLink>
-        </Grid>
-        <Grid item xs={12} sm={7} md={4}>
-          <NavLink to="/character/history">
-            <Item sx={{ background: 'black', padding: '0.1rem' }}>
-              <TabContext value={value}>
-                <TabList
-                  centered
-                  onChange={handleChange}
-                >
-
-                  <Tab sx={{ color: 'white', fontWeight: 'bold' }} label="historique" />
-
-                </TabList>
-              </TabContext>
-
-            </Item>
-          </NavLink>
-        </Grid>
-
-      </Grid>
+      <Stack sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'space-around' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 36, sm: 24, md: 24 }}>
+        <Item>Aptitudes de Race</Item>
+        {/* {abilityRace.map((abilityR) => (
+          <Paper elevation={3}>
+            {abilityR.description}
+          </Paper>
+        ))} */}
+        <Item>Aptitude de Classe</Item>
+        <Item>Historique</Item>
+      </Stack>
 
     </Container>
 

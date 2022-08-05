@@ -24,6 +24,7 @@ import Character from 'src/components/Character/Details';
 import CharacterEquipment from 'src/components/Character/Details/Equipment';
 import CharacterProficiencies from 'src/components/Character/Details/Proficiencies';
 import CharacterHistory from 'src/components/Character/Details/History';
+import MyCharacterDetails from '../Character/MyCharacter';
 
 import './styles.css';
 
@@ -126,7 +127,7 @@ function App() {
           <Route path="/creation/stats" element={<Stats />} />
           <Route path="/creation/validate" element={<Validate />} />
           <Route path="/creation/avatar" element={<Avatar />} />
-          <Route path="/character/" element={<Character />} />
+          <Route path="/character" element={<MyCharacterDetails />} />
           <Route path="/character/equipment" element={<CharacterEquipment />} />
           <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
           <Route path="/character/history" element={<CharacterHistory />} />

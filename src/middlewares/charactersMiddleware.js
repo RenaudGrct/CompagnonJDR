@@ -291,7 +291,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         axios(config)
           .then((response) => {
             store.dispatch(getCharacterSuccess(response.data));
-            console.log(response.data);
+            console.log(JSON.stringify(response.data));
           })
           .catch((error) => {
             console.log(error);

@@ -25,7 +25,7 @@ import {
   SELECT_SKILLS,
   GET_ALL_CHARACTERS_SUCCESS,
   CLEAR_CHARACTERS,
-  // GET_CHARACTER_SUCCESS,
+  GET_CHARACTER_SUCCESS,
   STORE_CHARACTER_ID,
 } from 'src/actions/characters';
 
@@ -36,7 +36,7 @@ export const initialState = {
   backgroundIsFetched: false,
 
   character: {
-
+    selectedCharacter: [],
     storedCharacterId: '',
     myCharacters: [],
     name: '',
@@ -460,14 +460,33 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
 
-      //     case GET_CHARACTER_SUCCESS:
-      //       return {
-      //         ...state,
-      //         character: {
-      //           ...state.character,
-      //           myCharacters: action.response,
-      //         },
-      // };
+    case GET_CHARACTER_SUCCESS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          view: action.response,
+          selectedCharacter: {
+            selectedCharacterName: action.response.name,
+            selectedCharacterClass: action.response.class.name,
+            proficiencies: action.response.class.proficiencies,
+            features: action.response.class.features,
+            selectedCharacterRace: action.response.race.name,
+            langue: action.response.race.language,
+            abilityRace: action.response.race.racial_ability,
+            selectedCharacterBackground: action.response.background.name,
+            abilityBackground: action.response.background.ability,
+            abilityBackgroundDescription: action.response.background.ability_description,
+            selectedCharacterSkills: action.response.background.skill,
+            selectedStrenght: action.response.ability_score.force,
+            selectedDexterity: action.response.ability_score.dextérité,
+            selectedConstitution: action.response.ability_score.constitution,
+            selectedWisdom: action.response.ability_score.sagesse,
+            selectedIntelligence: action.response.ability_score.intélligence,
+            selectedCharisma: action.response.ability_score.charisme,
+          },
+        },
+      };
     case STORE_CHARACTER_ID:
       return {
         ...state,
