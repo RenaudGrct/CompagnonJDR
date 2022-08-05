@@ -71,6 +71,8 @@ const userMiddleware = (store) => (next) => async (action) => {
         store.dispatch(submitLoginSuccess(response.data));
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('userId', response.data.user.id);
+        localStorage.removeItem('guestId', response.data.user.id);
+
         // setInstanceAuthorization();
       }
       catch (error) {
@@ -109,6 +111,10 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(submitRegisterSuccess(response.data));
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('guestId');
+
         })
         .catch((error) => {
           store.dispatch(submitError(error.response.data));

@@ -97,7 +97,7 @@ function App() {
 
       dispatch(retrieveUserDataFromLocalStorage(token, userId));
       dispatch(getUserProfile());
-    } if (localStorage.getItem('token') && localStorage.getItem('guestId')) {
+    } else if (localStorage.getItem('token') && localStorage.getItem('guestId')) {
       const token = localStorage.getItem('token');
       const guestId = localStorage.getItem('guestId');
 
