@@ -8,14 +8,17 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import avatar from 'src/assets/images/Demi-Orc.jpg';
+
+import { getCharacter } from 'src/actions/characters';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -36,13 +39,19 @@ export default function CharacterDetails() {
     intelligence,
     wisdom,
     charisma,
+    storedCharacterId,
   } = useSelector((state) => state.characters.character);
+
+  const dispatch = useDispatch();
 
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  useEffect(() => {
+    dispatch(getCharacter());
+  }, [storedCharacterId]);
 
   return (
 

@@ -113,8 +113,10 @@ const reducer = (state = initialState, action = {}) => {
         userName: '',
         userEmail: '',
         userPassword: '',
+        token: '',
         isLogged: false,
         isLoggedAsGuest: false,
+
 
       };
     case SUBMIT_REGISTER:
