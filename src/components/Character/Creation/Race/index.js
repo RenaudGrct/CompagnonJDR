@@ -160,12 +160,12 @@ export default function Race() {
                         fontFamily: 'monospace',
                       }}
                       >
-                        {fetchedCharacterRaceObject.name}
+                        {fetchedCharacterRaceObject?.name}
                         <Avatar alt="User Avatar" src={raceSelected.image} sx={{ width: 60, height: 60 }} />
                       </DialogTitle>
                       <DialogContent sx={{ backgroundColor: 'primary.main' }}>
                         <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
-                          {fetchedCharacterRaceObject.racial_ability.map((ability) => (
+                          {fetchedCharacterRaceObject?.racial_ability?.map((ability) => (
                             <>
                               <p key={ability.racial_ability_name}>{ability.description}</p>
                               {/* <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
@@ -187,16 +187,16 @@ export default function Race() {
                               </FormControl> */}
                             </>
                           ))}
-                          <p>vitesse de: {fetchedCharacterRaceObject.speed}</p>
+                          <p>vitesse de: {fetchedCharacterRaceObject?.speed}</p>
                           <p>Bonus de Race</p>
-                          {fetchedCharacterRaceObject.score_modifier.map((score) => (
+                          {fetchedCharacterRaceObject?.score_modifier?.map((score) => (
                             <p key={score.score_name}>{score.score_name}: {score.score_number}</p>
                           ))}
                           <p>langue parlé :</p>
                           {fetchedCharacterRaceObject.languages.map((lang) => (
                             <p key={lang}>{lang}</p>
                           ))}
-                          <p>langue supplémentaire: {fetchedCharacterRaceObject.extra_language}</p>
+                          <p>langue supplémentaire: {fetchedCharacterRaceObject?.extra_language}</p>
                         </DialogContentText>
                       </DialogContent>
                     </>

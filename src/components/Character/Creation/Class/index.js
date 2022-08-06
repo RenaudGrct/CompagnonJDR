@@ -169,7 +169,7 @@ export default function Class() {
                            fontFamily: 'monospace',
                          }}
                          >
-                           {fetchedCharacterClassObject.name}
+                           {fetchedCharacterClassObject?.name}
                            <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 60, height: 60 }} />
                          </DialogTitle>
                          <DialogContent sx={{ backgroundColor: 'primary.main' }}>
@@ -177,14 +177,14 @@ export default function Class() {
                              {/* <p>Point de vie : {characterClass.hit_point}</p> */}
                              <p>jets de sauvegarde :</p>
                              {
-                           fetchedCharacterClassObject.proficiencies.map((proficiency) => (
+                           fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
                              proficiency.saving_throws.map((save) => (
                                <p key={save}>{save},</p>
                              ))
                            ))
                             }
                              <p>choisit tes compétences :</p>
-                             {fetchedCharacterClassObject.proficiencies.map((proficiency) => (
+                             {fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
                                <Autocomplete
                                  key={proficiency.id}
                                  sx={{ backgroundColor: 'secondary.main' }}
@@ -251,7 +251,7 @@ export default function Class() {
                                  onChange={(e) => dispatch(selectStat('classAbility', e.target.value))}
                                  sx={{ width: '10rem', marginTop: '1rem' }}
                                >
-                                 {fetchedCharacterClassObject.feature.map((feat) => (
+                                 {fetchedCharacterClassObject.feature?.map((feat) => (
                                    feat.choices?.map((choice) => (
                                      <MenuItem value={choice.id}>
                                        {choice.name}

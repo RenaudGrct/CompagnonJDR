@@ -40,7 +40,7 @@ export default function DiceRoller({
           value={statsDropdown}
           label="stats"
           onChange={(e) => handleChange(e)}
-          sx={{ width: '10rem', marginTop: '1rem'}}
+          sx={{ width: '10rem', marginTop: '1rem' }}
         >
           {
             stats.map((stat) => (
