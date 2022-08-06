@@ -4,6 +4,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import PropTypes from 'prop-types';
 
+import Button from '@mui/material/Button';
+
 import stats from 'src/assets/Data/stats.json';
 
 import './diceRoll.scss';
@@ -32,8 +34,8 @@ export default function DiceRoller({
           <div className="minicube__face">{diceResultFour}</div>
         </div>
       </div>
-      <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
-        <InputLabel>Statistique</InputLabel>
+      <FormControl variant="standard" sx={{ width: '100%', marginTop: '1rem' }}>
+        <InputLabel>Stat</InputLabel>
         <Select
           value={statsDropdown}
           label="stats"
@@ -56,13 +58,18 @@ export default function DiceRoller({
         </Select>
       </FormControl>
       {!isDiceSum && (
-      <button
-        type="button"
-        className="RollBtn"
-        onClick={diceRoll}
-      >
-        Lancer
-      </button>
+        <Button
+          color="primary"
+          variant="contained"
+          type="button"
+          sx={{
+            width: '5rem',
+            marginTop: '3rem',
+          }}
+          onClick={diceRoll}
+        >
+          Lancer
+        </Button>
       )}
     </div>
 

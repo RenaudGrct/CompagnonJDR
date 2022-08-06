@@ -11,29 +11,45 @@ import Alert from '@mui/material/Alert';
 // import AddIcon from '@mui/icons-material/Add';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-
-import characterList from 'src/assets/D&D/characterList';
-// import avatar from 'src/assets/images/races/Demi-Elfe.jpg';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleIsRedirect, handleIsSuccess } from 'src/actions/user';
-import { submitCharacterDeletion } from 'src/actions/characters';
+import {
+  handleIsSuccess,
+  handleIsRedirect,
+} from 'src/actions/user';
+import {
+  submitCharacterDeletion,
+  getAllCharacters,
+  // getCharacter,
+  storeCharacterId,
+} from 'src/actions/characters';
 
 export default function CharacterManagement() {
   const {
     isSuccess,
+    userId,
   } = useSelector((state) => state.user);
+
+  const {
+    myCharacters,
+  } = useSelector((state) => state.characters.character);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(handleIsRedirect());
+    console.log('hello');
     return () => {
       dispatch(handleIsSuccess());
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getAllCharacters());
+  }, [userId]);
 
   const navigate = useNavigate();
 
@@ -61,84 +77,102 @@ export default function CharacterManagement() {
         alignItems: 'center',
       }}
       >
+        <Typography
+          variant="h5"
+          noWrap
+          sx={{
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            // color: 'primary.contrastText',
+            textDecoration: 'none',
+            marginTop: '3rem',
+          }}
+        >Mes Personnages
+        </Typography>
         <Link to="/creation/name">
           <Button
             color="secondary"
             variant="contained"
             type="button"
             sx={{
-              width: '15rem',
+              width: '17rem',
               marginTop: '5rem',
             }}
           >
-            Créer un Personnage
+            Créer Nouveau Personnage
           </Button>
         </Link>
-        <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
-          {characterList.map((character) => (
+        {myCharacters.length ? (
+          <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
+            {myCharacters.map((character) => (
 
-            <Grid key={character.name} sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
-              <Card>
+              <Grid key={character.name} sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
+                <Card>
 
-                <CardMedia
-                  component="img"
-                  src={`${character.avatar}`}
-                  alt="green iguana"
-                  height="300px"
-                />
-                <CardContent>
-                  <Typography align="center" gutterBottom variant="h4" component="div">
-                    {character.name}
-                  </Typography>
-                  <Typography color={character.class.color} align="center" gutterBottom variant="h5" component="div">
-                    {character.class.name}
-                  </Typography>
-                  <Typography color={character.race.color} align="center" gutterBottom variant="h5" component="div">
-                    {character.race.name}
-                  </Typography>
-                  <Typography align="center" gutterBottom variant="h5" component="div">
-                    {character.level}
-                  </Typography>
-                  <Box sx={{
-                    mt: '0.5rem',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
-                    gap: '1rem',
-                  }}
-                  >
-                    <IconButton
-                      onClick={() => {
-                        navigate('/character');
-                      }}
+                  <CardMedia
+                    component="img"
+                    src={`images/${character.race}.jpg`}
+                    // alt="green iguana"
+                    alt={`/images/${character.race},jpg`}
+                    height="200px"
+                  />
+                  <CardContent>
+                    <Typography align="center" gutterBottom variant="h4" component="div">
+                      {character.name}
+                    </Typography>
+                    <Typography align="center" gutterBottom variant="h5" component="div">
+                      {character.race}
+                    </Typography>
+                    <Typography align="center" gutterBottom variant="h5" component="div">
+                      {character.class}
+                    </Typography>
+                    <Box sx={{
+                      mt: '0.5rem',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-around',
+                      gap: '1rem',
+                    }}
                     >
-                      <VisibilityIcon
-                        fontSize="inherit"
-                        color="primary"
-                      />
-                    </IconButton>
-                    <IconButton>
-                      <ModeEditIcon fontSize="inherit" color="primary" />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => handleCharacterDeletion()}
-                    >
-                      <DeleteForeverIcon
-                        fontSize="inherit"
-                        color="primary"
+                      <IconButton
+                        value={character.id}
+                        onClick={(e) => {
+                          console.log(e.currentTarget.value);
+                          navigate('/character');
+                          dispatch(storeCharacterId(e.currentTarget.value));
+                        }}
+                      >
+                        <VisibilityIcon
+                          fontSize="inherit"
+                          color="primary"
+                        />
+                      </IconButton>
+                      <IconButton>
+                        <ModeEditIcon fontSize="inherit" color="primary" />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => handleCharacterDeletion()}
+                      >
+                        <DeleteForeverIcon
+                          fontSize="inherit"
+                          color="primary"
+                        />
+                      </IconButton>
+                    </Box>
+                  </CardContent>
 
-                      />
-                    </IconButton>
-                  </Box>
-                </CardContent>
+                </Card>
 
-              </Card>
+              </Grid>
 
-            </Grid>
+            ))}
+          </Grid>
+        )
+          : <CircularProgress sx={{ marginTop: '10rem' }} color="secondary" />}
 
-          ))}
-        </Grid>
       </Box>
     </>
   );

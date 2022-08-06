@@ -29,6 +29,13 @@ export const SUBMIT_CHARACTER_CREATION_SUCCESS = 'SUBMIT_CHARACTER_CREATION_SUCC
 export const SUBMIT_CHARACTER_DELETION = 'SUBMIT_CHARACTER_DELETION';
 export const SUBMIT_CHARACTER_DELETION_SUCCESS = 'SUBMIT_CHARACTER_DELETION_SUCCESS';
 
+export const GET_ALL_CHARACTERS = 'GET_ALL_CHARACTERS';
+export const GET_ALL_CHARACTERS_SUCCESS = 'GET_ALL_CHARACTERS_SUCCESS';
+export const CLEAR_CHARACTERS = 'CLEAR_CHARACTERS';
+export const GET_CHARACTER = 'GET_CHARACTER';
+export const GET_CHARACTER_SUCCESS = 'GET_CHARACTER_SUCCESS';
+export const STORE_CHARACTER_ID = 'STORE_CHARACTER_ID';
+
 export const changeNameInput = (newValue) => ({
   type: CHANGE_NAME_INPUT,
   newValue,
@@ -160,4 +167,30 @@ export const submitCharacterDeletionSuccess = (response) => ({
 export const selectSkills = (skill) => ({
   type: SELECT_SKILLS,
   skill,
+});
+
+export const getAllCharacters = () => ({
+  type: GET_ALL_CHARACTERS,
+});
+
+export const getAllCharactersSuccess = (response) => ({
+  type: GET_ALL_CHARACTERS_SUCCESS,
+  response,
+});
+export const clearCharacters = () => ({
+  type: CLEAR_CHARACTERS,
+});
+
+export const storeCharacterId = (id) => ({
+  type: STORE_CHARACTER_ID,
+  id,
+});
+
+export const getCharacter = () => ({
+  type: GET_CHARACTER,
+});
+
+export const getCharacterSuccess = (response) => ({
+  type: GET_CHARACTER_SUCCESS,
+  response,
 });

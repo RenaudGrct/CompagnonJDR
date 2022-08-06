@@ -138,7 +138,7 @@ export default function Class() {
                          width: '20rem',
                        }}
                        >
-                         <Avatar alt="User Avatar" src={avatar} sx={{ width: 54, height: 54 }} />
+                         <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 54, height: 54 }} />
                          <FormControlLabel
                            labelPlacement="start"
                            value={classSelected.name}

@@ -102,7 +102,6 @@ export const getUserProfile = () => ({
   type: GET_USER_PROFILE,
 });
 
-
 export const saveUserProfile = (response) => ({
   type: SAVE_USER_PROFILE,
   ...response,

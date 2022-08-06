@@ -7,11 +7,15 @@ import {
   classIsFetched,
   GET_BACKGROUND,
   getBackgroundSuccess,
-  backgroundIsFetched,
+  // backgroundIsFetched,
   SUBMIT_CHARACTER_CREATION,
   submitCharacterCreationSuccess,
   SUBMIT_CHARACTER_DELETION,
   submitCharacterDeletionSuccess,
+  GET_ALL_CHARACTERS,
+  getAllCharactersSuccess,
+  GET_CHARACTER,
+  getCharacterSuccess,
 
 } from 'src/actions/characters';
 
@@ -109,10 +113,10 @@ const charactersMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          store.dispatch(backgroundIsFetched());
         });
+      // .finally(() => {
+      //   store.dispatch(backgroundIsFetched());
+      // });
       break;
     }
 
@@ -186,7 +190,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'delete',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/character/${user.userId}`,
+        url: `https://api-compagnon-jdr.herokuapp.com/api/character/user/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${userToken}`,
@@ -205,9 +209,124 @@ const charactersMiddleware = (store) => (next) => (action) => {
         .finally(() => {
           console.log('yes les tontons, je suis le finally du deletion');
         });
+    }
+      break;
+
+    case GET_ALL_CHARACTERS: {
+      const token = localStorage.getItem('token');
+      const { user } = store.getState();
+      next(action);
+      if (!user.guestId) {
+        const config = {
+
+          method: 'get',
+          url: `https://api-compagnon-jdr.herokuapp.com/api/character/user/${user.userId}`,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+          },
+
+          withCredentials: true,
+        };
+        axios(config)
+          .then((response) => {
+            console.log(user.userId);
+            store.dispatch(getAllCharactersSuccess(response.data));
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log(`userId: ${user.userId}`);
+            console.log(`url ${config.url}`);
+            console.log('yes les tontons, je suis le finally du get_all_characters user');
+          });
+      }
+      else if (user.guestId) {
+        const config = {
+
+          method: 'get',
+          url: `https://api-compagnon-jdr.herokuapp.com/api/character/guest/${user.guestId}`,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+          },
+
+          withCredentials: true,
+        };
+        axios(config)
+          .then((response) => {
+            store.dispatch(getAllCharactersSuccess(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log(`userId: ${user.guestId}`);
+            console.log(`url ${config.url}`);
+            console.log('yes les tontons, je suis le finally du get_all_characters guest');
+          });
+      }
       break;
     }
 
+    case GET_CHARACTER: {
+      const token = localStorage.getItem('token');
+      const { user } = store.getState();
+      const { characters } = store.getState();
+      next(action);
+      if (!user.guestId) {
+        const config = {
+
+          method: 'get',
+          url: `https://api-compagnon-jdr.herokuapp.com/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+          },
+
+          withCredentials: true,
+        };
+        axios(config)
+          .then((response) => {
+            store.dispatch(getCharacterSuccess(response.data));
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log(`url ${config.url}`);
+            console.log('yes les tontons, je suis le finally du get_character user');
+          });
+      }
+      else if (user.guestId) {
+        const config = {
+
+          method: 'get',
+          url: `https://api-compagnon-jdr.herokuapp.com/api/guest/${characters.character.storedCharacterId}/guest/${user.guestId}`,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+          },
+
+          withCredentials: true,
+        };
+        axios(config)
+          .then((response) => {
+            store.dispatch(getCharacterSuccess(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log(`url ${config.url}`);
+            console.log('yes les tontons, je suis le finally du get_character guest');
+          });
+      }
+      break;
+    }
     default:
       next(action);
   }

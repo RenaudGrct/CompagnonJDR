@@ -27,6 +27,7 @@ import {
   LOG_AS_GUEST_ERROR,
   VERIFY_TOKEN,
   RETRIEVE_USER_DATA_FROM_LOCALSTORAGE,
+  RETRIEVE_GUEST_DATA_FROM_LOCALSTORAGE,
 
 } from 'src/actions/user';
 
@@ -80,9 +81,15 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         token: action.token,
         userId: action.userId,
-        guestId: action.guestId,
 
       };
+    case RETRIEVE_GUEST_DATA_FROM_LOCALSTORAGE:
+      return {
+        ...state,
+        token: action.token,
+        guestId: action.guestId,
+      };
+      
 
     case SUBMIT_LOGIN_SUCCESS:
       return {
@@ -93,6 +100,7 @@ const reducer = (state = initialState, action = {}) => {
         userName: action.user.username,
         userEmail: action.user.email,
         userPassword: '',
+        guestId: '',
         isRedirect: true,
         submitError: false,
         errorMessage: '',
@@ -105,8 +113,10 @@ const reducer = (state = initialState, action = {}) => {
         userName: '',
         userEmail: '',
         userPassword: '',
+        token: '',
         isLogged: false,
         isLoggedAsGuest: false,
+
 
       };
     case SUBMIT_REGISTER:
@@ -123,6 +133,7 @@ const reducer = (state = initialState, action = {}) => {
         userName: '',
         userEmail: '',
         userPassword: '',
+        guestId: '',
         userConfirmPassword: '',
         isLoggedAsGuest: false,
         isSamePassword: false,
@@ -265,7 +276,7 @@ const reducer = (state = initialState, action = {}) => {
         guestId: action.guest.id,
         userName: action.guest.username,
         userEmail: action.guest.email,
-        token: action.accesToken,
+        token: action.accessToken,
         userPassword: '',
         submitError: false,
         errorMessage: '',

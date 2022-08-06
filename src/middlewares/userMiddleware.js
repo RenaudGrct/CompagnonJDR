@@ -38,6 +38,8 @@ import {
 
 } from 'src/actions/user';
 
+import { clearCharacters } from 'src/actions/characters';
+
 const instance = axios.create({
   baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/',
   withCredentials: true,
@@ -71,6 +73,8 @@ const userMiddleware = (store) => (next) => async (action) => {
         store.dispatch(submitLoginSuccess(response.data));
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('userId', response.data.user.id);
+        localStorage.removeItem('guestId', response.data.user.id);
+
         // setInstanceAuthorization();
       }
       catch (error) {
@@ -87,6 +91,7 @@ const userMiddleware = (store) => (next) => async (action) => {
     case LOG_OUT: {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
+      store.dispatch(clearCharacters());
 
       next(action);
       break;
@@ -109,6 +114,9 @@ const userMiddleware = (store) => (next) => async (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(submitRegisterSuccess(response.data));
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('guestId');
         })
         .catch((error) => {
           store.dispatch(submitError(error.response.data));
@@ -257,7 +265,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
-          localStorage.setItem('guestId', response.data.user.id);
+          localStorage.setItem('guestId', response.data.guest.id);
           console.log(localStorage);
           console.log(response.data);
         })

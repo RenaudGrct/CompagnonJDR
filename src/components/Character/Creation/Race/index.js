@@ -116,7 +116,7 @@ export default function Race() {
                       justifyContent: 'center',
                     }}
                   >
-                    <Avatar alt="User Avatar" src={avatar} sx={{ width: 84, height: 84 }} />
+                    <Avatar alt="User Avatar" src={raceSelected.image} sx={{ width: 84, height: 84 }} />
                     <FormControlLabel
                       value={raceSelected.name}
                       label={raceSelected.name}

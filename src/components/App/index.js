@@ -25,6 +25,8 @@ import CharacterEquipment from 'src/components/Character/Details/Equipment';
 import CharacterProficiencies from 'src/components/Character/Details/Proficiencies';
 import CharacterHistory from 'src/components/Character/Details/History';
 import NotFound from 'src/components/404';
+import MyCharacterDetails from '../Character/MyCharacter';
+
 
 import './styles.css';
 
@@ -98,7 +100,8 @@ function App() {
 
       dispatch(retrieveUserDataFromLocalStorage(token, userId));
       dispatch(getUserProfile());
-    } if (localStorage.getItem('token') && localStorage.getItem('guestId')) {
+    }
+    else if (localStorage.getItem('token') && localStorage.getItem('guestId')) {
       const token = localStorage.getItem('token');
       const guestId = localStorage.getItem('guestId');
 
@@ -126,7 +129,7 @@ function App() {
           <Route path="/creation/stats" element={<Stats />} />
           <Route path="/creation/validate" element={<Validate />} />
           <Route path="/creation/avatar" element={<Avatar />} />
-          <Route path="/character/" element={<Character />} />
+          <Route path="/character" element={<MyCharacterDetails />} />
           <Route path="/character/equipment" element={<CharacterEquipment />} />
           <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
           <Route path="/character/history" element={<CharacterHistory />} />

@@ -19,10 +19,14 @@ import {
   CLASS_IS_FETCHED,
   TOGGLE_IS_FETCHED,
   GET_BACKGROUND_SUCCESS,
-  BACKGROUND_IS_FETCHED,
+  // BACKGROUND_IS_FETCHED,
   SUBMIT_CHARACTER_CREATION_SUCCESS,
   SUBMIT_CHARACTER_DELETION_SUCCESS,
   SELECT_SKILLS,
+  GET_ALL_CHARACTERS_SUCCESS,
+  CLEAR_CHARACTERS,
+  GET_CHARACTER_SUCCESS,
+  STORE_CHARACTER_ID,
 } from 'src/actions/characters';
 
 export const initialState = {
@@ -32,7 +36,9 @@ export const initialState = {
   backgroundIsFetched: false,
 
   character: {
-
+    selectedCharacter: [],
+    storedCharacterId: '',
+    myCharacters: [],
     name: '',
     selectedRace: '',
     selectedBackground: '',
@@ -47,7 +53,7 @@ export const initialState = {
     constitution: '',
     intelligence: '',
     modalIsClosed: true,
-    fetchedCharacterRaceObject: [''],
+    fetchedCharacterRaceObject: [],
     fetchedCharacterClassObject: [],
     skills: null,
     backgrounds: '',
@@ -415,11 +421,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         classIsFetched: true,
       };
-    case BACKGROUND_IS_FETCHED:
-      return {
-        ...state,
-        backgroundIsFetched: true,
-      };
+      // case BACKGROUND_IS_FETCHED:
+      //   return {
+      //     ...state,
+      //     backgroundIsFetched: true,
+      //   };
 
     case TOGGLE_IS_FETCHED:
       return {
@@ -436,7 +442,59 @@ const reducer = (state = initialState, action = {}) => {
           skills: [action.skill[0].id, action.skill[1]?.id],
         },
       };
+    case GET_ALL_CHARACTERS_SUCCESS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          myCharacters: action.response,
+        },
+      };
 
+    case CLEAR_CHARACTERS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          myCharacters: [],
+        },
+      };
+
+    case GET_CHARACTER_SUCCESS:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          view: action.response,
+          selectedCharacter: {
+            selectedCharacterName: action.response.name,
+            selectedCharacterClass: action.response.class.name,
+            proficiencies: action.response.class.proficiencies,
+            features: action.response.class.features,
+            selectedCharacterRace: action.response.race.name,
+            langue: action.response.race.language,
+            abilityRace: action.response.race.racial_ability,
+            selectedCharacterBackground: action.response.background.name,
+            abilityBackground: action.response.background.ability,
+            abilityBackgroundDescription: action.response.background.ability_description,
+            selectedCharacterSkills: action.response.background.skill,
+            selectedStrenght: action.response.ability_score.force,
+            selectedDexterity: action.response.ability_score.dextérité,
+            selectedConstitution: action.response.ability_score.constitution,
+            selectedWisdom: action.response.ability_score.sagesse,
+            selectedIntelligence: action.response.ability_score.intélligence,
+            selectedCharisma: action.response.ability_score.charisme,
+          },
+        },
+      };
+    case STORE_CHARACTER_ID:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          storedCharacterId: action.id,
+        },
+      };
     default:
       return state;
   }
