@@ -11,7 +11,6 @@ import Alert from '@mui/material/Alert';
 // import AddIcon from '@mui/icons-material/Add';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -35,6 +34,7 @@ export default function CharacterManagement() {
 
   const {
     myCharacters,
+    storedCharacterId,
   } = useSelector((state) => state.characters.character);
 
   const dispatch = useDispatch();
@@ -53,8 +53,9 @@ export default function CharacterManagement() {
 
   const navigate = useNavigate();
 
-  const handleCharacterDeletion = () => {
+  const handleCharacterDeletion = (e) => {
     console.log('je suis le handleCharacterDeletion');
+    dispatch(storeCharacterId(e.currentTarget.value));
     dispatch(submitCharacterDeletion());
   };
 
@@ -154,7 +155,8 @@ export default function CharacterManagement() {
                         <ModeEditIcon fontSize="inherit" color="primary" />
                       </IconButton>
                       <IconButton
-                        onClick={() => handleCharacterDeletion()}
+                        value={character.id}
+                        onClick={(e) => handleCharacterDeletion(e)}
                       >
                         <DeleteForeverIcon
                           fontSize="inherit"
@@ -171,7 +173,7 @@ export default function CharacterManagement() {
             ))}
           </Grid>
         )
-          : <CircularProgress sx={{ marginTop: '10rem' }} color="secondary" />}
+          : <Alert sx={{ marginTop: '5rem' }} severity="info">Vous n'avez pas de personnages</Alert>}
 
       </Box>
     </>
