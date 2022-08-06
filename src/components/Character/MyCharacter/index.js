@@ -1,28 +1,20 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
-
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import avatar from 'src/assets/images/Demi-Orc.jpg';
 
 import { getCharacter } from 'src/actions/characters';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
+  ...theme.typography.body1,
   padding: theme.spacing(2),
   textAlign: 'center',
   color: theme.palette.text.secondary,
@@ -51,7 +43,7 @@ export default function MyCharacterDetails() {
     selectedWisdom,
     selectedIntelligence,
     selectedCharisma,
-  } = useSelector((state) => state.characters.character.selectedCharacter);
+  } = useSelector((state) => state.characters.character);
 
   const dispatch = useDispatch();
 
@@ -71,7 +63,7 @@ export default function MyCharacterDetails() {
 
         <Avatar
           alt="User Avatar"
-          src={avatar}
+          src={`/images/${selectedCharacterRace}.jpg`}
           sx={{ width: 100, height: 100 }}
         />
 
@@ -90,7 +82,13 @@ export default function MyCharacterDetails() {
       <Grid sx={{ justifyContent: 'center' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 36, sm: 24, md: 24 }}>
 
         <Grid item xs={12} sm={4} md={4}>
-          <Item sx={{ padding: '0.25rem' }}>
+          <Item sx={{
+            padding: '0.25rem',
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            fontFamily: 'monospace',
+          }}
+          >
             <Typography variant="h7">
               Force
             </Typography>
@@ -100,7 +98,13 @@ export default function MyCharacterDetails() {
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Item sx={{ padding: '0.25rem' }}>
+          <Item sx={{
+            padding: '0.25rem',
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            fontFamily: 'monospace',
+          }}
+          >
             <Typography variant="h7">
               Dexterité
             </Typography>
@@ -110,7 +114,13 @@ export default function MyCharacterDetails() {
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Item sx={{ padding: '0.25rem' }}>
+          <Item sx={{
+            padding: '0.25rem',
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            fontFamily: 'monospace',
+          }}
+          >
             <Typography variant="h7">
               Intelligence
             </Typography>
@@ -120,7 +130,13 @@ export default function MyCharacterDetails() {
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Item sx={{ padding: '0.25rem' }}>
+          <Item sx={{
+            padding: '0.25rem',
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            fontFamily: 'monospace',
+          }}
+          >
             <Typography variant="h7">
               Sagesse
             </Typography>
@@ -130,7 +146,13 @@ export default function MyCharacterDetails() {
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Item sx={{ padding: '0.25rem' }}>
+          <Item sx={{
+            padding: '0.25rem',
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            fontFamily: 'monospace',
+          }}
+          >
             <Typography variant="h7">
               Charisme
             </Typography>
@@ -140,7 +162,13 @@ export default function MyCharacterDetails() {
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Item sx={{ padding: '0.25rem' }}>
+          <Item sx={{
+            padding: '0.25rem',
+            backgroundColor: 'primary.main',
+            color: 'primary.contrastText',
+            fontFamily: 'monospace',
+          }}
+          >
             <Typography variant="h7">
               Constitution
             </Typography>
@@ -152,14 +180,215 @@ export default function MyCharacterDetails() {
 
       </Grid>
       <Stack sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'space-around' }} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 36, sm: 24, md: 24 }}>
-        <Item>Aptitudes de Race</Item>
-        {/* {abilityRace.map((abilityR) => (
-          <Paper elevation={3}>
-            {abilityR.description}
+        <Item sx={{
+          backgroundColor: 'secondary.main',
+          fontFamily: 'monospace',
+        }}
+        >Race
+        </Item>
+        {abilityRace?.map((ability) => (
+          <>
+            <Paper
+              sx={{
+                backgroundColor: 'primary.main',
+                fontFamily: 'monospace',
+                color: 'primary.contrastText',
+                padding: '1rem',
+                textAlign: 'center',
+              }}
+              elevation={24}
+            >
+              {ability.racial_ability_name}
+            </Paper>
+            <Paper
+              sx={{
+                backgroundColor: 'secondary.dark',
+                fontFamily: 'monospace',
+                padding: '0.5rem',
+              }}
+              elevation={3}
+            >
+              {ability.description}
+            </Paper>
+            <Paper sx={{
+              backgroundColor: 'primary.main',
+              fontFamily: 'monospace',
+              color: 'primary.contrastText',
+              padding: '1rem',
+              textAlign: 'center',
+            }}
+            >
+              langues connues
+            </Paper>
+            {langue.map((l) => (
+              <Paper sx={{
+                backgroundColor: 'secondary.dark',
+                fontFamily: 'monospace',
+                padding: '0.5rem',
+              }}
+              >
+                { l }
+              </Paper>
+            ))}
+          </>
+
+        ))}
+        <Item sx={{
+          backgroundColor: 'secondary.main',
+          fontFamily: 'monospace',
+        }}
+        >Classe
+        </Item>
+        {features?.map((feat) => (
+          <>
+            <Paper sx={{
+              backgroundColor: 'primary.main',
+              fontFamily: 'monospace',
+              color: 'primary.contrastText',
+              padding: '1rem',
+              textAlign: 'center',
+            }}
+            >
+              {feat.name}
+            </Paper>
+            <Paper sx={{
+              backgroundColor: 'secondary.dark',
+              fontFamily: 'monospace',
+              padding: '0.5rem',
+            }}
+            >
+              {feat.description}
+            </Paper>
+            {feat.choice?.map((c) => (
+              <>
+                <Paper sx={{
+                  backgroundColor: 'primary.main',
+                  fontFamily: 'monospace',
+                  color: 'primary.contrastText',
+                  padding: '1rem',
+                  textAlign: 'center',
+                }}
+                >
+                  {c.name}
+                </Paper>
+                <Paper sx={{
+                  backgroundColor: 'secondary.dark',
+                  fontFamily: 'monospace',
+                  padding: '0.5rem',
+                }}
+                >
+                  {c.description}
+                </Paper>
+              </>
+            ))}
+          </>
+        ))}
+
+        <Paper sx={{
+          backgroundColor: 'primary.main',
+          fontFamily: 'monospace',
+          color: 'primary.contrastText',
+          padding: '1rem',
+          textAlign: 'center',
+        }}
+        >
+          jets de sauvegarde
+        </Paper>
+        {proficiencies?.map((proficiency) => (
+          proficiency.saving_throws.map((t) => (
+            <Paper sx={{
+              backgroundColor: 'secondary.dark',
+              fontFamily: 'monospace',
+              padding: '0.5rem',
+            }}
+            >
+              {t}
+            </Paper>
+
+          ))
+        ))}
+
+        <Paper sx={{
+          backgroundColor: 'primary.main',
+          fontFamily: 'monospace',
+          color: 'primary.contrastText',
+          padding: '1rem',
+          textAlign: 'center',
+        }}
+        >
+          aptitudes de classe
+        </Paper>
+        {proficiencies?.map((proficiency) => (
+          proficiency.skills.map((skill) => (
+            <Paper sx={{
+              backgroundColor: 'secondary.dark',
+              fontFamily: 'monospace',
+              padding: '0.5rem',
+            }}
+            >
+              {skill.name}
+            </Paper>
+
+          ))
+        ))}
+
+        <Item
+          sx={{
+            backgroundColor: 'secondary.main',
+            fontFamily: 'monospace',
+          }}
+          centered
+        >
+          Historique
+        </Item>
+        <Paper sx={{
+          backgroundColor: 'primary.main',
+          fontFamily: 'monospace',
+          color: 'primary.contrastText',
+          padding: '1rem',
+          textAlign: 'center',
+        }}
+        >
+          {selectedCharacterBackground}
+        </Paper>
+        <Paper sx={{
+          backgroundColor: 'primary.main',
+          fontFamily: 'monospace',
+          color: 'primary.contrastText',
+          padding: '1rem',
+          textAlign: 'center',
+        }}
+        >
+          {abilityBackground}
+        </Paper>
+        <Paper sx={{
+          backgroundColor: 'secondary.dark',
+          fontFamily: 'monospace',
+          padding: '0.5rem',
+        }}
+        >
+          {abilityBackgroundDescription}
+        </Paper>
+        <Paper sx={{
+          backgroundColor: 'primary.main',
+          fontFamily: 'monospace',
+          color: 'primary.contrastText',
+          padding: '1rem',
+          textAlign: 'center',
+        }}
+        >
+          aptitudes d'historique
+        </Paper>
+        {selectedCharacterSkills?.map((skill) => (
+          <Paper sx={{
+            backgroundColor: 'secondary.dark',
+            fontFamily: 'monospace',
+            padding: '0.5rem',
+          }}
+          >
+            {skill}
           </Paper>
-        ))} */}
-        <Item>Aptitude de Classe</Item>
-        <Item>Historique</Item>
+        ))}
       </Stack>
 
     </Container>

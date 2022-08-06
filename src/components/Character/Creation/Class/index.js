@@ -22,7 +22,6 @@ import { useEffect } from 'react';
 
 import CharacterCreation from 'src/components/Character/Creation';
 
-import avatar from 'src/assets/images/guerrier.png';
 import classes from 'src/assets/Data/classes.json';
 
 import {
@@ -171,12 +170,12 @@ export default function Class() {
                          }}
                          >
                            {fetchedCharacterClassObject.name}
-                           <Avatar alt="User Avatar" src={avatar} sx={{ width: 60, height: 60 }} />
+                           <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 60, height: 60 }} />
                          </DialogTitle>
                          <DialogContent sx={{ backgroundColor: 'primary.main' }}>
                            <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
                              {/* <p>Point de vie : {characterClass.hit_point}</p> */}
-                             <p>competence de :</p>
+                             <p>jets de sauvegarde :</p>
                              {
                            fetchedCharacterClassObject.proficiencies.map((proficiency) => (
                              proficiency.saving_throws.map((save) => (
@@ -184,7 +183,7 @@ export default function Class() {
                              ))
                            ))
                             }
-                             <p>choisit tes skills :</p>
+                             <p>choisit tes compétences :</p>
                              {fetchedCharacterClassObject.proficiencies.map((proficiency) => (
                                <Autocomplete
                                  key={proficiency.id}
@@ -214,7 +213,7 @@ export default function Class() {
                                    <TextField
                                      {...params}
                                      variant="filled"
-                                     label="skills"
+                                     label="compétences"
                                    />
                                  )}
                                />

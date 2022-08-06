@@ -46,6 +46,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#CB7C1E',
+      dark: '#b7afa2',
     },
     background: {
       paper: '#ffffff',
@@ -62,9 +63,6 @@ const theme = createTheme({
     success: {
       main: '#149418',
     },
-    // text: {
-    //   primary: 'rgba(255,255,255,0.87)',
-    // },
   },
 });
 

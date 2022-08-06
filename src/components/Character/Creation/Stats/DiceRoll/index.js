@@ -35,12 +35,12 @@ export default function DiceRoller({
         </div>
       </div>
       <FormControl variant="standard" sx={{ width: '100%', marginTop: '1rem' }}>
-        <InputLabel>Stat</InputLabel>
+        <InputLabel sx={{ color: 'primary.contrastText' }}>Stat</InputLabel>
         <Select
           value={statsDropdown}
           label="stats"
           onChange={(e) => handleChange(e)}
-          sx={{ width: '10rem', marginTop: '1rem' }}
+          sx={{ width: '10rem', marginTop: '1rem'}}
         >
           {
             stats.map((stat) => (
