@@ -105,7 +105,7 @@ export default function Login() {
         >
           {isLoading && <CircularProgress color="secondary" />}
 
-          {isSuccess && <Alert severity="success">{registerMessage}</Alert>}
+          {isSuccess && <Alert severity="success">{registerMessage.successMessage}</Alert>}
 
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
           <Field
