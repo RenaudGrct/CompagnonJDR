@@ -93,7 +93,7 @@ export default function Login() {
             padding: '1rem',
             gap: '2rem',
             backgroundColor: 'primary.main',
-            opacity: [0.7, 0.7, 0.7],
+            opacity: [0.7, 0.7, 0.6],
           }}
           noValidate
           autoComplete="off"

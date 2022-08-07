@@ -190,7 +190,7 @@ export default function Class() {
                                  sx={{ backgroundColor: 'secondary.main' }}
                                  multiple
                                  id="tags-filled"
-                                 options={proficiency.skills.map((option) => option)}
+                                 options={proficiency?.skills?.map((option) => option)}
                                  getOptionLabel={(option) => option.name}
                                  onChange={(e, newValue) => {
                                    if (newValue.length <= 2) {

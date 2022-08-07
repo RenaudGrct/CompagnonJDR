@@ -49,7 +49,7 @@ export default function CharacterCreation() {
   ];
 
   return (
-    <Box fixed sx={{ width: '100%', typography: 'body1' }}>
+    <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'secondary.main' }}>
           <TabList

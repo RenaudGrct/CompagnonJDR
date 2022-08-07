@@ -88,7 +88,7 @@ export default function Background() {
                 textDecoration: 'none',
                 marginBottom: '5rem',
               }}
-            >Choix de l'Histoire
+            >Choix de l'Historique
             </Typography>
             {backgrounds.length ? (
 
