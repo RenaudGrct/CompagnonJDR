@@ -35,7 +35,7 @@ function NotFound() {
             fontFamily: 'monospace',
           }}
         >
-          Nous ne trouvons pas cette page
+          Vous êtes arrivé devant une impasse!
         </Typography>
         <Typography
           variant="body1"
@@ -46,7 +46,7 @@ function NotFound() {
             fontFamily: 'monospace',
           }}
         >
-          Partez vite avant que Vecna vous attrape !
+          Rebroussez chemin avant que Vecna ne vous trouve!
         </Typography>
         <Button
           href="/"
