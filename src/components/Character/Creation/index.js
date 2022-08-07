@@ -55,7 +55,13 @@ export default function CharacterCreation() {
           <TabList
             centered
             fixed
-            sx={{ color: 'secondary', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', width: '100vw'}}
+            sx={{
+              color: 'secondary',
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              width: '100vw',
+            }}
             onChange={handleChange}
             aria-label="character creation tabs"
           >

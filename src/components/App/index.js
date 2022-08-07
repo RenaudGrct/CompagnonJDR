@@ -27,7 +27,6 @@ import CharacterHistory from 'src/components/Character/Details/History';
 import NotFound from 'src/components/404';
 import MyCharacterDetails from '../Character/MyCharacter';
 
-
 import './styles.css';
 
 import {
@@ -131,7 +130,7 @@ function App() {
           <Route path="/character/equipment" element={<CharacterEquipment />} />
           <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
           <Route path="/character/history" element={<CharacterHistory />} />
-          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
 
         </Routes>
         <Footer />

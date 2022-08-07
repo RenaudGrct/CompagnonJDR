@@ -20,8 +20,8 @@ function NotFound() {
           variant="h1"
           color="gainsboro"
           sx={{
-            fontFamily: 'fantasy',
             p: 10,
+            marginTop: '8rem',
           }}
         >
           404
@@ -30,9 +30,9 @@ function NotFound() {
           variant="h5"
           color="gainsboro"
           sx={{
-            fontFamily: 'fantasy',
             fontWeight: 'bold',
             marginBottom: 2,
+            fontFamily: 'monospace',
           }}
         >
           Nous ne trouvons pas cette page
@@ -41,9 +41,9 @@ function NotFound() {
           variant="body1"
           color="gainsboro"
           sx={{
-            fontFamily: 'fantasy',
             p: 1.5,
             marginLeft: 1,
+            fontFamily: 'monospace',
           }}
         >
           Partez vite avant que Vecna vous attrape !

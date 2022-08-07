@@ -27,8 +27,8 @@ export default function Footer() {
             href="/"
             underline="hover"
             sx={{
-              color: 'gray',
               p: 2,
+              color: 'primary.contrastText',
             }}
           >
             Contact
@@ -37,7 +37,7 @@ export default function Footer() {
             href="/"
             underline="hover"
             sx={{
-              color: 'gray',
+              color: 'primary.contrastText',
               p: 2,
             }}
           >
@@ -49,10 +49,21 @@ export default function Footer() {
             paddingBottom: 2,
           }}
         >
-          Compagnon-JDR est un contenu de fan non officiel autorisé dans le cadre de la Politique
-          des contenus de fans. Ni approuvé, ni promu par Wizards of the Coast.
-          Certaines parties des matériaux utilisés sont la propriété de Wizards of the Coast.
-          ©Wizards of the Coast LLC.
+          <Link
+            href="https://company.wizards.com/fr/legal/fancontentpolicy"
+            target="_blank"
+            sx={{
+              color: 'primary.contrastText',
+              fontSize: '0.5rem',
+              textAlign: 'center',
+            }}
+            underline="hover"
+          >
+            Compagnon-JDR est un contenu de fan non officiel autorisé dans le cadre de la Politique
+            des contenus de fans. Ni approuvé, ni promu par Wizards of the Coast.
+            Certaines parties des matériaux utilisés sont la propriété de Wizards of the Coast.
+            ©Wizards of the Coast LLC.
+          </Link>
         </Box>
       </Container>
     </Box>
