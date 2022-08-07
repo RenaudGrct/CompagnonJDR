@@ -26,7 +26,7 @@ export default function DiceRoller({
     <div className="result_diceRoll">
 
       <div className="result_diceRoll_container">
-        <p> {result}</p>
+        <p className="result_diceRoll_container_title"> {result}</p>
         <div className="result_dice_container">
           <div className="minicube__face">{diceResultOne}</div>
           <div className="minicube__face">{diceResultTwo}</div>
@@ -40,7 +40,7 @@ export default function DiceRoller({
           value={statsDropdown}
           label="stats"
           onChange={(e) => handleChange(e)}
-          sx={{ width: '10rem', marginTop: '1rem' }}
+          sx={{ width: '10rem', marginTop: '1rem', color: 'primary.contrastText' }}
         >
           {
             stats.map((stat) => (

@@ -70,13 +70,13 @@ export default function CharacterDetails() {
         />
 
         <Box sx={{ width: '100%', maxWidth: 500 }}>
-          <Typography variant="h4">
+          <Typography variant="h4" sx={{ color: 'primary.contrastText' }}>
             { name}
           </Typography>
-          <Typography variant="h5">
+          <Typography variant="h5" sx={{ color: 'primary.contrastText' }}>
             { selectedRace }
           </Typography>
-          <Typography variant="h5">
+          <Typography variant="h5" sx={{ color: 'primary.contrastText' }}>
             { selectedClass}
           </Typography>
         </Box>

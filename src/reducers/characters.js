@@ -21,6 +21,7 @@ import {
   GET_BACKGROUND_SUCCESS,
   // BACKGROUND_IS_FETCHED,
   SUBMIT_CHARACTER_CREATION_SUCCESS,
+  SUBMIT_CHARACTER_DELETION,
   SUBMIT_CHARACTER_DELETION_SUCCESS,
   SELECT_SKILLS,
   GET_ALL_CHARACTERS_SUCCESS,
@@ -34,6 +35,7 @@ export const initialState = {
   raceIsFetched: false,
   classIsFetched: false,
   backgroundIsFetched: false,
+  characterIsDelete: false,
 
   character: {
     selectedCharacter: [],
@@ -327,9 +329,16 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
 
+    case SUBMIT_CHARACTER_DELETION:
+      return {
+        ...state,
+        characterIsDelete: false,
+      };
+
     case SUBMIT_CHARACTER_DELETION_SUCCESS:
       return {
         ...state,
+        characterIsDelete: true,
       };
 
     case SUBMIT_CHARACTER_CREATION_SUCCESS:
@@ -478,12 +487,12 @@ const reducer = (state = initialState, action = {}) => {
           abilityBackground: action.response.background.ability,
           abilityBackgroundDescription: action.response.background.ability_description,
           selectedCharacterSkills: action.response.background.skill,
-          selectedStrenght: action.response.ability_score.force,
-          selectedDexterity: action.response.ability_score.dextérité,
+          selectedStrenght: action.response.ability_score.strength,
+          selectedDexterity: action.response.ability_score.dexterity,
           selectedConstitution: action.response.ability_score.constitution,
-          selectedWisdom: action.response.ability_score.sagesse,
-          selectedIntelligence: action.response.ability_score.intélligence,
-          selectedCharisma: action.response.ability_score.charisme,
+          selectedWisdom: action.response.ability_score.wisdom,
+          selectedIntelligence: action.response.ability_score.intelligence,
+          selectedCharisma: action.response.ability_score.charisma,
 
         },
       };
