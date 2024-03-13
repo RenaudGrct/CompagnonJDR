@@ -41,7 +41,7 @@ import {
 import { clearCharacters } from 'src/actions/characters';
 
 const instance = axios.create({
-  baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/',
+  baseURL: 'http://localhost:4000/api/',
   withCredentials: true,
 });
 
@@ -104,7 +104,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         const config = {
 
           method: 'post',
-          url: 'https://api-compagnon-jdr.herokuapp.com/api/auth/register',
+          url: 'http://localhost:4000/api/auth/register',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -132,7 +132,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         const config = {
 
           method: 'post',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/guest/${user.guestId}/confirm-register`,
+          url: `http://localhost:4000/api/guest/${user.guestId}/confirm-register`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${user.token}`,
@@ -191,7 +191,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'patch',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -225,7 +225,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'delete',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -256,7 +256,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'patch',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -286,7 +286,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'post',
-        url: 'https://api-compagnon-jdr.herokuapp.com/api/auth/guest',
+        url: 'http://localhost:4000/api/auth/guest',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -319,7 +319,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'get',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -344,7 +344,7 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         method: 'get',
         // NOUVELLE ROUTE
-        url: `https://api-compagnon-jdr.herokuapp.com/api/guest/${user.guestId}`,
+        url: `http://localhost:4000/api/guest/${user.guestId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -390,7 +390,7 @@ export default userMiddleware;
 // const config = {
 
 //   method: 'post',
-//   url: `https://api-compagnon-jdr.herokuapp.com/api/profile/${user.userId}`,
+//   url: `http://localhost:4000/api/profile/${user.userId}`,
 //   headers: {
 //     'Content-Type': 'application/json',
 //     Authorization: `bearer ${user.token}`,

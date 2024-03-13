@@ -22,7 +22,7 @@ import {
 import axios from 'axios';
 
 // const instance = axios.create({
-//   baseURL: 'https://api-compagnon-jdr.herokuapp.com/api/',
+//   baseURL: 'http://localhost:4000/api/',
 //   withCredentials: true,
 //   headers: { Authorization: localStorage.getItem('token') },
 // });
@@ -37,7 +37,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'get',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/races/${characters.character.selectedRace}`,
+        url: `http://localhost:4000/api/races/${characters.character.selectedRace}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -69,7 +69,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'get',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/classes/${characters.character.selectedClass}`,
+        url: `http://localhost:4000/api/classes/${characters.character.selectedClass}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
@@ -99,7 +99,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'get',
-        url: 'https://api-compagnon-jdr.herokuapp.com/api/backgrounds',
+        url: 'http://localhost:4000/api/backgrounds',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user}`,
@@ -132,7 +132,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         const config = {
 
           method: 'post',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/character/user/${user.userId}`,
+          url: `http://localhost:4000/api/character/user/${user.userId}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${userToken}`,
@@ -183,7 +183,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         const config = {
 
           method: 'post',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/character/guest/${user.guestId}`,
+          url: `http://localhost:4000/api/character/guest/${user.guestId}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${userToken}`,
@@ -243,7 +243,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const config = {
 
         method: 'delete',
-        url: `https://api-compagnon-jdr.herokuapp.com/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
+        url: `http://localhost:4000/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${userToken}`,
@@ -273,7 +273,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         const config = {
 
           method: 'get',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/character/user/${user.userId}`,
+          url: `http://localhost:4000/api/character/user/${user.userId}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${token}`,
@@ -300,7 +300,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         const config = {
 
           method: 'get',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/character/guest/${user.guestId}`,
+          url: `http://localhost:4000/api/character/guest/${user.guestId}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${token}`,
@@ -333,7 +333,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         const config = {
 
           method: 'get',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
+          url: `http://localhost:4000/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${token}`,
@@ -358,7 +358,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
         const config = {
 
           method: 'get',
-          url: `https://api-compagnon-jdr.herokuapp.com/api/character/${characters.character.storedCharacterId}/guest/${user.guestId}`,
+          url: `http://localhost:4000/api/character/${characters.character.storedCharacterId}/guest/${user.guestId}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `bearer ${token}`,
