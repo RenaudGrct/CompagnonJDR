@@ -21,11 +21,10 @@ import {
 
 import axios from 'axios';
 
-// const instance = axios.create({
-//   baseURL: 'http://localhost:4000/api/',
-//   withCredentials: true,
-//   headers: { Authorization: localStorage.getItem('token') },
-// });
+const instance = axios.create({
+  baseURL: 'https://10.22.16.54:4000/api/',
+  withCredentials: true
+});
 
 const charactersMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -35,17 +34,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
 
       const config = {
-
         method: 'get',
-        url: `http://localhost:4000/api/races/${characters.character.selectedRace}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`,
-        },
-        withCredentials: true,
+          Authorization: `bearer ${user.token}`
+        }
       };
 
-      axios(config)
+      instance(`races/${characters.character.selectedRace}`, config)
         .then((response) => {
           console.log(response.data);
           store.dispatch(getRaceSuccess(response.data));
@@ -67,17 +63,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
 
       const config = {
-
         method: 'get',
-        url: `http://localhost:4000/api/classes/${characters.character.selectedClass}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`,
-        },
-        withCredentials: true,
+          Authorization: `bearer ${user.token}`
+        }
       };
 
-      axios(config)
+      instance(`classes/${characters.character.selectedClass}`, config)
         .then((response) => {
           console.log(response.data);
           store.dispatch(getClassSuccess(response.data));
@@ -97,17 +90,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
 
       const config = {
-
         method: 'get',
-        url: 'http://localhost:4000/api/backgrounds',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user}`,
-        },
-        withCredentials: true,
+          Authorization: `bearer ${user}`
+        }
       };
 
-      axios(config)
+      instance('backgrounds', config)
         .then((response) => {
           store.dispatch(getBackgroundSuccess(response.data));
         })
@@ -130,19 +120,17 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
       if (!user.guestId) {
         const config = {
-
           method: 'post',
-          url: `http://localhost:4000/api/character/user/${user.userId}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${userToken}`,
+            Authorization: `bearer ${userToken}`
           },
           data: {
             character: {
               name: characters.character.name,
               race_id: Number(characters.character.fetchedCharacterRaceObject.id),
               class_id: Number(characters.character.fetchedCharacterClassObject.id),
-              background_id: Number(characters.character.selectedBackground),
+              background_id: Number(characters.character.selectedBackground)
             },
             // y en a deux
             skill_id: characters.character.skills,
@@ -160,15 +148,13 @@ const charactersMiddleware = (store) => (next) => (action) => {
                 dexterity: Number(characters.character.dexterity),
                 wisdom: Number(characters.character.wisdom),
                 constitution: Number(characters.character.constitution),
-                intelligence: Number(characters.character.intelligence),
-
-              },
-          },
-          withCredentials: true,
+                intelligence: Number(characters.character.intelligence)
+              }
+          }
         };
         console.log(config.data);
 
-        axios(config)
+        instance(`character/user/${user.userId}`, config)
           .then((response) => {
             store.dispatch(submitCharacterCreationSuccess(response.data));
           })
@@ -181,19 +167,17 @@ const charactersMiddleware = (store) => (next) => (action) => {
       }
       else if (user.guestId) {
         const config = {
-
           method: 'post',
-          url: `http://localhost:4000/api/character/guest/${user.guestId}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${userToken}`,
+            Authorization: `bearer ${userToken}`
           },
           data: {
             character: {
               name: characters.character.name,
               race_id: Number(characters.character.fetchedCharacterRaceObject.id),
               class_id: Number(characters.character.fetchedCharacterClassObject.id),
-              background_id: Number(characters.character.selectedBackground),
+              background_id: Number(characters.character.selectedBackground)
             },
             // y en a deux
             skill_id: characters.character.skills,
@@ -211,15 +195,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
                   dexterity: Number(characters.character.dexterity),
                   wisdom: Number(characters.character.wisdom),
                   constitution: Number(characters.character.constitution),
-                  intelligence: Number(characters.character.intelligence),
+                  intelligence: Number(characters.character.intelligence)
 
-                },
-          },
-          withCredentials: true,
+                }
+          }
         };
         console.log(config.data);
 
-        axios(config)
+        instance(`character/guest/${user.guestId}`, config)
           .then((response) => {
             store.dispatch(submitCharacterCreationSuccess(response.data));
           })
@@ -241,18 +224,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
 
       const config = {
-
         method: 'delete',
-        url: `http://localhost:4000/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${userToken}`,
-        },
-
-        withCredentials: true,
+          Authorization: `bearer ${userToken}`
+        }
       };
 
-      axios(config)
+      instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
         .then((response) => {
           store.dispatch(submitCharacterDeletionSuccess(response.data));
         })
@@ -271,17 +250,13 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
       if (!user.guestId) {
         const config = {
-
           method: 'get',
-          url: `http://localhost:4000/api/character/user/${user.userId}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`,
-          },
-
-          withCredentials: true,
+            Authorization: `bearer ${token}`
+          }
         };
-        axios(config)
+        instance(`character/user/${user.userId}`, config)
           .then((response) => {
             console.log(user.userId);
             store.dispatch(getAllCharactersSuccess(response.data));
@@ -298,17 +273,13 @@ const charactersMiddleware = (store) => (next) => (action) => {
       }
       else if (user.guestId) {
         const config = {
-
           method: 'get',
-          url: `http://localhost:4000/api/character/guest/${user.guestId}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`,
-          },
-
-          withCredentials: true,
+            Authorization: `bearer ${token}`
+          }
         };
-        axios(config)
+        instance(`character/guest/${user.guestId}`, config)
           .then((response) => {
             store.dispatch(getAllCharactersSuccess(response.data));
           })
@@ -331,17 +302,13 @@ const charactersMiddleware = (store) => (next) => (action) => {
       next(action);
       if (!user.guestId) {
         const config = {
-
           method: 'get',
-          url: `http://localhost:4000/api/character/${characters.character.storedCharacterId}/user/${user.userId}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`,
-          },
-
-          withCredentials: true,
+            Authorization: `bearer ${token}`
+          }
         };
-        axios(config)
+        instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
           .then((response) => {
             store.dispatch(getCharacterSuccess(response.data));
             console.log(response.data);
@@ -356,17 +323,13 @@ const charactersMiddleware = (store) => (next) => (action) => {
       }
       else if (user.guestId) {
         const config = {
-
           method: 'get',
-          url: `http://localhost:4000/api/character/${characters.character.storedCharacterId}/guest/${user.guestId}`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`,
-          },
-
-          withCredentials: true,
+            Authorization: `bearer ${token}`
+          }
         };
-        axios(config)
+        instance(`character/${characters.character.storedCharacterId}/guest/${user.guestId}`, config)
           .then((response) => {
             store.dispatch(getCharacterSuccess(response.data));
           })

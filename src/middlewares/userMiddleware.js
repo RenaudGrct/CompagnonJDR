@@ -41,7 +41,7 @@ import {
 import { clearCharacters } from 'src/actions/characters';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:4000/api/',
+  baseURL: 'https://10.22.16.54:4000/api/',
   withCredentials: true,
 });
 
@@ -102,17 +102,14 @@ const userMiddleware = (store) => (next) => async (action) => {
 
       if (!user.guestId) {
         const config = {
-
           method: 'post',
-          url: 'http://localhost:4000/api/auth/register',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          data: { email: user.userEmail, username: user.userName, password: user.userPassword },
-          withCredentials: true,
+          data: { email: user.userEmail, username: user.userName, password: user.userPassword }
         };
 
-        axios(config)
+        instance('auth/register', config)
           .then((response) => {
             store.dispatch(submitRegisterSuccess(response.data));
             localStorage.removeItem('token');
@@ -132,16 +129,14 @@ const userMiddleware = (store) => (next) => async (action) => {
         const config = {
 
           method: 'post',
-          url: `http://localhost:4000/api/guest/${user.guestId}/confirm-register`,
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${user.token}`,
+            Authorization: `bearer ${user.token}`
           },
-          data: { email: user.userEmail, username: user.userName, password: user.userPassword },
-          withCredentials: true,
+          data: { email: user.userEmail, username: user.userName, password: user.userPassword }
         };
 
-        axios(config)
+        instance(`guest/${user.guestId}/confirm-register`, config)
           .then((response) => {
             store.dispatch(submitRegisterSuccess(response.data));
             localStorage.removeItem('token');
@@ -191,20 +186,18 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'patch',
-        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`,
+          Authorization: `bearer ${user.token}`
         },
         data: {
           email: user.userEmail,
           username: user.userName,
-          password: user.userPassword,
-        },
-        withCredentials: true,
+          password: user.userPassword
+        }
       };
 
-      axios(config)
+      instance(`profile/${user.userId}`, config)
         .then((response) => {
           store.dispatch(updateUserProfileSuccess(response.data));
         })
@@ -225,15 +218,13 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'delete',
-        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`,
-        },
-        withCredentials: true,
+          Authorization: `bearer ${user.token}`
+        }
       };
 
-      axios(config)
+      instance(`profile/${user.userId}`, config)
         .then((response) => {
           store.dispatch(deleteUserProfileSuccess(response.data));
           localStorage.removeItem('token');
@@ -256,16 +247,14 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'patch',
-        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
         },
-        data: { password: user.userPassword, newPassword: user.userNewPassword },
-        withCredentials: true,
+        data: { password: user.userPassword, newPassword: user.userNewPassword }
       };
 
-      axios(config)
+      instance(`profile/${user.userId}`, config)
         .then((response) => {
           store.dispatch(updateUserProfileSuccess(response.data));
         })
@@ -286,15 +275,13 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'post',
-        url: 'http://localhost:4000/api/auth/guest',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
-        },
-        withCredentials: true,
+        }
       };
 
-      axios(config)
+      instance('auth/guest', config)
         .then((response) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
@@ -319,15 +306,13 @@ const userMiddleware = (store) => (next) => async (action) => {
       const config = {
 
         method: 'get',
-        url: `http://localhost:4000/api/profile/${user.userId}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`,
-        },
-        withCredentials: true,
+          Authorization: `bearer ${user.token}`
+        }
       };
 
-      axios(config)
+      instance(`profile/${user.userId}`, config)
         .then((response) => {
           store.dispatch(saveUserProfile(response.data));
         })
@@ -344,15 +329,13 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         method: 'get',
         // NOUVELLE ROUTE
-        url: `http://localhost:4000/api/guest/${user.guestId}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`,
-        },
-        withCredentials: true,
+          Authorization: `bearer ${user.token}`
+        }
       };
 
-      axios(config)
+      instance(`guest/${user.guestId}`, config)
         .then((response) => {
           store.dispatch(saveGuestProfile(response.data));
         })
@@ -390,7 +373,7 @@ export default userMiddleware;
 // const config = {
 
 //   method: 'post',
-//   url: `http://localhost:4000/api/profile/${user.userId}`,
+//   url: `http://10.22.16.54:4000/api/profile/${user.userId}`,
 //   headers: {
 //     'Content-Type': 'application/json',
 //     Authorization: `bearer ${user.token}`,
