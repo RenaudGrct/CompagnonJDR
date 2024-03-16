@@ -139,7 +139,9 @@ export default function Race() {
                         checked={selectedRace === raceSelected.name}
                         onClick={(event) => {
                           dispatch(selectRace(event.target.value));
-                          dispatch(getRace());
+                          if (selectedRace !== '') {
+                            dispatch(getRace());
+                          }
                         }}
                         control={<Radio sx={{ color: 'primary.contrastText' }} />}
                         labelPlacement="top"

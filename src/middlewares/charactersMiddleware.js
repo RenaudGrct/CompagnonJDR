@@ -58,7 +58,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
     case GET_CLASS: {
       const { characters } = store.getState();
       const { user } = store.getState();
-      console.log(`token ${user.token}`);
 
       next(action);
 
