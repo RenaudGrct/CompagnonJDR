@@ -20,10 +20,12 @@ import {
 } from 'src/actions/characters';
 
 import axios from 'axios';
+import dotenvFlow from 'dotenv-flow';
+dotenvFlow.config();
 
 const instance = axios.create({
-  baseURL: 'https://10.22.16.54:4000/api/',
-  withCredentials: true
+  baseURL: process.env.API_BASE_URL,
+  withCredentials: process.env.NODE_ENV == 'prod' ? true : false
 });
 
 const charactersMiddleware = (store) => (next) => (action) => {
@@ -161,7 +163,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
             console.log(error);
           })
           .finally(() => {
-            console.log('yes les tontons, je suis le finally du creation');
           });
       }
       else if (user.guestId) {
@@ -199,7 +200,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
                 }
           }
         };
-        console.log(config.data);
 
         instance(`character/guest/${user.guestId}`, config)
           .then((response) => {
@@ -209,7 +209,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
             console.log(error);
           })
           .finally(() => {
-            console.log('yes les tontons, je suis le finally du creation');
           });
       }
       break;
@@ -238,7 +237,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
           console.log(error);
         })
         .finally(() => {
-          console.log('yes les tontons, je suis le finally du deletion');
         });
     }
       break;
@@ -257,17 +255,12 @@ const charactersMiddleware = (store) => (next) => (action) => {
         };
         instance(`character/user/${user.userId}`, config)
           .then((response) => {
-            console.log(user.userId);
             store.dispatch(getAllCharactersSuccess(response.data));
-            console.log(response.data);
           })
           .catch((error) => {
             console.log(error);
           })
           .finally(() => {
-            console.log(`userId: ${user.userId}`);
-            console.log(`url ${config.url}`);
-            console.log('yes les tontons, je suis le finally du get_all_characters user');
           });
       }
       else if (user.guestId) {
@@ -286,9 +279,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
             console.log(error);
           })
           .finally(() => {
-            console.log(`userId: ${user.guestId}`);
-            console.log(`url ${config.url}`);
-            console.log('yes les tontons, je suis le finally du get_all_characters guest');
           });
       }
       break;
@@ -310,14 +300,12 @@ const charactersMiddleware = (store) => (next) => (action) => {
         instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
           .then((response) => {
             store.dispatch(getCharacterSuccess(response.data));
-            console.log(response.data);
           })
           .catch((error) => {
             console.log(error);
           })
           .finally(() => {
             console.log(`url ${config.url}`);
-            console.log('yes les tontons, je suis le finally du get_character user');
           });
       }
       else if (user.guestId) {
@@ -336,8 +324,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
             console.log(error);
           })
           .finally(() => {
-            console.log(`url ${config.url}`);
-            console.log('yes les tontons, je suis le finally du get_character guest');
           });
       }
       break;

@@ -40,9 +40,12 @@ import {
 
 import { clearCharacters } from 'src/actions/characters';
 
+import dotenvFlow from 'dotenv-flow';
+dotenvFlow.config();
+
 const instance = axios.create({
-  baseURL: 'https://10.22.16.54:4000/api/',
-  withCredentials: true,
+  baseURL: process.env.API_BASE_URL,
+  withCredentials: process.env.NODE_ENV == 'prod' ? true : false
 });
 
 // instance.interceptors.response.use(() => {
@@ -286,8 +289,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           store.dispatch(logAsGuestSuccess(response.data));
           localStorage.setItem('token', response.data.accessToken);
           localStorage.setItem('guestId', response.data.guest.id);
-          console.log(localStorage);
-          console.log(response.data);
         })
         .catch((error) => {
           store.dispatch(logAsGuestError(error.response.data));
