@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -15,6 +16,7 @@ module.exports = merge(common, {
     }),
     // Stats bundle
     new BundleStatsWebpackPlugin(),
+    new Dotenv()
   ],
   module: {
     rules: [

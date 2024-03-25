@@ -20,12 +20,10 @@ import {
 } from 'src/actions/characters';
 
 import axios from 'axios';
-import dotenvFlow from 'dotenv-flow';
-dotenvFlow.config();
 
 const instance = axios.create({
   baseURL: process.env.API_BASE_URL,
-  withCredentials: process.env.NODE_ENV == 'prod' ? true : false
+  withCredentials: process.env.NODE_ENV === 'production',
 });
 
 const charactersMiddleware = (store) => (next) => (action) => {
