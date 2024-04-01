@@ -37,8 +37,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`
-        }
+          Authorization: `bearer ${user.token}`,
+        },
       };
 
       instance(`races/${characters.character.selectedRace}`, config)
@@ -65,8 +65,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`
-        }
+          Authorization: `bearer ${user.token}`,
+        },
       };
 
       instance(`classes/${characters.character.selectedClass}`, config)
@@ -92,8 +92,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user}`
-        }
+          Authorization: `bearer ${user}`,
+        },
       };
 
       instance('backgrounds', config)
@@ -122,14 +122,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${userToken}`
+            Authorization: `bearer ${userToken}`,
           },
           data: {
             character: {
               name: characters.character.name,
               race_id: Number(characters.character.fetchedCharacterRaceObject.id),
               class_id: Number(characters.character.fetchedCharacterClassObject.id),
-              background_id: Number(characters.character.selectedBackground)
+              background_id: Number(characters.character.selectedBackground),
             },
             // y en a deux
             skill_id: characters.character.skills,
@@ -147,11 +147,10 @@ const charactersMiddleware = (store) => (next) => (action) => {
                 dexterity: Number(characters.character.dexterity),
                 wisdom: Number(characters.character.wisdom),
                 constitution: Number(characters.character.constitution),
-                intelligence: Number(characters.character.intelligence)
-              }
-          }
+                intelligence: Number(characters.character.intelligence),
+              },
+          },
         };
-        console.log(config.data);
 
         instance(`character/user/${user.userId}`, config)
           .then((response) => {
@@ -168,14 +167,14 @@ const charactersMiddleware = (store) => (next) => (action) => {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${userToken}`
+            Authorization: `bearer ${userToken}`,
           },
           data: {
             character: {
               name: characters.character.name,
               race_id: Number(characters.character.fetchedCharacterRaceObject.id),
               class_id: Number(characters.character.fetchedCharacterClassObject.id),
-              background_id: Number(characters.character.selectedBackground)
+              background_id: Number(characters.character.selectedBackground),
             },
             // y en a deux
             skill_id: characters.character.skills,
@@ -193,10 +192,10 @@ const charactersMiddleware = (store) => (next) => (action) => {
                   dexterity: Number(characters.character.dexterity),
                   wisdom: Number(characters.character.wisdom),
                   constitution: Number(characters.character.constitution),
-                  intelligence: Number(characters.character.intelligence)
+                  intelligence: Number(characters.character.intelligence),
 
-                }
-          }
+                },
+          },
         };
 
         instance(`character/guest/${user.guestId}`, config)
@@ -223,8 +222,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${userToken}`
-        }
+          Authorization: `bearer ${userToken}`,
+        },
       };
 
       instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
@@ -248,8 +247,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`
-          }
+            Authorization: `bearer ${token}`,
+          },
         };
         instance(`character/user/${user.userId}`, config)
           .then((response) => {
@@ -266,8 +265,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`
-          }
+            Authorization: `bearer ${token}`,
+          },
         };
         instance(`character/guest/${user.guestId}`, config)
           .then((response) => {
@@ -292,8 +291,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`
-          }
+            Authorization: `bearer ${token}`,
+          },
         };
         instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
           .then((response) => {
@@ -311,8 +310,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`
-          }
+            Authorization: `bearer ${token}`,
+          },
         };
         instance(`character/${characters.character.storedCharacterId}/guest/${user.guestId}`, config)
           .then((response) => {

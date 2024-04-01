@@ -119,161 +119,164 @@ export default function Class() {
             }}
           >
             {
-                 classes.map((classSelected) => (
-                   <>
-                     <Box
-                       key={classSelected.name}
-                       sx={{
-                         display: 'flex',
-                         flexDirection: 'column',
-                         alignItems: 'center',
-                         justifyContent: 'center',
-                       }}
-                     >
-                       <Item sx={{
-                         display: 'flex',
-                         justifyContent: 'space-between',
-                         padding: '1rem',
-                         width: '20rem',
-                       }}
-                       >
-                         <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 54, height: 54 }} />
-                         <FormControlLabel
-                           labelPlacement="start"
-                           value={classSelected.name}
-                           label={classSelected.name}
-                           checked={selectedClass === classSelected.name}
-                           onClick={(event) => {
-                             dispatch(selectClass(event.target.value));
-                             dispatch(getClass());
-                           }}
-                           control={<Radio sx={{ color: 'primary.contrastText' }} />}
-                           sx={{ display: 'flex', justifyContent: 'space-between' }}
-                         />
+              classes.map((classSelected) => (
+                <>
+                  <Box
+                    key={classSelected.name}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Item sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      padding: '1rem',
+                      width: '20rem',
+                    }}
+                    >
+                      <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 54, height: 54 }} />
+                      <FormControlLabel
+                        labelPlacement="start"
+                        value={classSelected.name}
+                        label={classSelected.name}
+                        checked={selectedClass === classSelected.name}
+                        onClick={(event) => {
+                          console.log(event);
+                          dispatch(selectClass(event.target.value));
+                          dispatch(getClass());
+                          if (selectedClass !== '') {
+                            dispatch(getClass());
+                          }
+                        }}
+                        control={<Radio sx={{ color: 'primary.contrastText' }} />}
+                        sx={{ display: 'flex', justifyContent: 'space-between' }}
+                      />
 
-                       </Item>
-                     </Box>
-                     <Dialog
-                       open={!modalIsClosed && (selectedClass === classSelected.name)}
-                       onClose={handleClose}
-                       aria-labelledby="alert-dialog-title"
-                       aria-describedby="alert-dialog-description"
-                     >
+                    </Item>
+                  </Box>
+                  <Dialog
+                    open={!modalIsClosed && (selectedClass === classSelected.name)}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
 
-                       { classIsFetched && (
-                       <>
-                         <DialogTitle sx={{
-                           backgroundColor: 'secondary.main',
-                           display: 'flex',
-                           justifyContent: 'space-between',
-                           fontFamily: 'monospace',
-                         }}
-                         >
-                           {fetchedCharacterClassObject?.name}
-                           <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 60, height: 60 }} />
-                         </DialogTitle>
-                         <DialogContent sx={{ backgroundColor: 'primary.main' }}>
-                           <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
-                             {/* <p>Point de vie : {characterClass.hit_point}</p> */}
-                             <p>jets de sauvegarde :</p>
-                             {
-                           fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
-                             proficiency.saving_throws.map((save) => (
-                               <p key={save}>{save},</p>
-                             ))
-                           ))
-                            }
-                             <p>choisit tes compétences :</p>
-                             {fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
-                               <Autocomplete
-                                 key={proficiency.id}
-                                 sx={{ backgroundColor: 'secondary.main' }}
-                                 multiple
-                                 id="tags-filled"
-                                 options={proficiency?.skills?.map((option) => option)}
-                                 getOptionLabel={(option) => option.name}
-                                 onChange={(e, newValue) => {
-                                   if (newValue.length <= 2) {
-                                     dispatch(selectSkills(newValue));
-                                   }
-                                   console.log(newValue);
-                                 }}
-                                 //  defaultValue="fait tes choix"
-                                 renderTags={(value, getTagProps) => value.map((option, index) => (
-                                   <Chip
-                                    //  onClick={(e) => dispatch(selectSkills(e.target.value))}
-                                    //  key={option.name}
-                                     variant="outlined"
-                                     label={option.name}
-                                     {...getTagProps({ index })}
-                                    //  onDelete={() => console.log('je delete')}
-                                   />
-                                 ))}
-                                 renderInput={(params) => (
-                                   <TextField
-                                     {...params}
-                                     variant="filled"
-                                     label="compétences"
-                                   />
-                                 )}
-                               />
-                             ))}
+                    { classIsFetched && (
+                      <>
+                        <DialogTitle sx={{
+                          backgroundColor: 'secondary.main',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          fontFamily: 'monospace',
+                        }}
+                        >
+                          {fetchedCharacterClassObject?.name}
+                          <Avatar alt="User Avatar" src={classSelected.image} sx={{ width: 60, height: 60 }} />
+                        </DialogTitle>
+                        <DialogContent sx={{ backgroundColor: 'primary.main' }}>
+                          <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
+                            {/* <p>Point de vie : {characterClass.hit_point}</p> */}
+                            <p>jets de sauvegarde :</p>
+                            {
+                          fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
+                            proficiency.saving_throws.map((save) => (
+                              <p key={save}>{save},</p>
+                            ))
+                          ))
+                          }
+                            <p>choisit tes compétences :</p>
+                            {fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
+                              <Autocomplete
+                                key={proficiency.id}
+                                sx={{ backgroundColor: 'secondary.main' }}
+                                multiple
+                                id="tags-filled"
+                                options={proficiency?.skills?.map((option) => option)}
+                                getOptionLabel={(option) => option.name}
+                                onChange={(e, newValue) => {
+                                  if (newValue.length <= 2) {
+                                    dispatch(selectSkills(newValue));
+                                  }
+                                  console.log(newValue);
+                                }}
+                                //  defaultValue="fait tes choix"
+                                renderTags={(value, getTagProps) => value.map((option, index) => (
+                                  <Chip
+                                  //  onClick={(e) => dispatch(selectSkills(e.target.value))}
+                                  //  key={option.name}
+                                    variant="outlined"
+                                    label={option.name}
+                                    {...getTagProps({ index })}
+                                  //  onDelete={() => console.log('je delete')}
+                                  />
+                                ))}
+                                renderInput={(params) => (
+                                  <TextField
+                                    {...params}
+                                    variant="filled"
+                                    label="compétences"
+                                  />
+                                )}
+                              />
+                            ))}
 
-                             {/* {characterClass.proficiencies.map((proficiency) => (
-                                   proficiency.skills.map((skill) => (
-                                     // <p key={skill.name}>{skill.name},</p>
-                                     ))
-                                     ))} */}
+                            {/* {characterClass.proficiencies.map((proficiency) => (
+                                  proficiency.skills.map((skill) => (
+                                    // <p key={skill.name}>{skill.name},</p>
+                                    ))
+                                    ))} */}
 
-                             <p>caracteristiques :</p>
-                             {fetchedCharacterClassObject.feature.map((feat) => (
-                               <>
-                                 <p key={feat.feature_name}>{feat.feature_name} : </p>
-                                 <p>{feat.description}</p>
-                                 <p>nombre d'utilistation: {feat.number_of_use}</p>
-                                 <p>réinitialisation : {feat.reset}</p>
-                               </>
-                             ))}
-                             {fetchedCharacterClassObject.feature.map((feat) => (
-                               feat.choices?.map((choice) => (
-                                 <>
-                                   <p>{choice.name}:</p>
-                                   <p>{choice.description}</p>
-                                 </>
-                               ))
-                             ))}
-                             <p>choisit ta caracteristique :</p>
-                             <FormControl variant="standard" sx={{ backgroundColor: 'secondary.main' }}>
-                               <InputLabel> caracteristiques </InputLabel>
-                               <Select
-                                 value={classAbility}
-                                 label="stats"
-                                 onChange={(e) => dispatch(selectStat('classAbility', e.target.value))}
-                                 sx={{ width: '10rem', marginTop: '1rem' }}
-                               >
-                                 {fetchedCharacterClassObject.feature?.map((feat) => (
-                                   feat.choices?.map((choice) => (
-                                     <MenuItem value={choice.id}>
-                                       {choice.name}
-                                     </MenuItem>
-                                   ))
-                                 ))}
-                               </Select>
-                             </FormControl>
-                           </DialogContentText>
-                         </DialogContent>
-                       </>
-                       )}
-                       <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
-                         <Button onClick={handleClose} autoFocus>
-                           OK
-                         </Button>
-                       </DialogActions>
-                     </Dialog>
-                   </>
-                 ))
-          }
-
+                            <p>caracteristiques :</p>
+                            {fetchedCharacterClassObject.feature.map((feat) => (
+                              <>
+                                <p key={feat.feature_name}>{feat.feature_name} : </p>
+                                <p>{feat.description}</p>
+                                <p>nombre d'utilistation: {feat.number_of_use}</p>
+                                <p>réinitialisation : {feat.reset}</p>
+                              </>
+                            ))}
+                            {fetchedCharacterClassObject.feature.map((feat) => (
+                              feat.choices?.map((choice) => (
+                                <>
+                                  <p>{choice.name}:</p>
+                                  <p>{choice.description}</p>
+                                </>
+                              ))
+                            ))}
+                            <p>choisit ta caracteristique :</p>
+                            <FormControl variant="standard" sx={{ backgroundColor: 'secondary.main' }}>
+                              <InputLabel> caracteristiques </InputLabel>
+                              <Select
+                                value={classAbility}
+                                label="stats"
+                                onChange={(e) => dispatch(selectStat('classAbility', e.target.value))}
+                                sx={{ width: '10rem', marginTop: '1rem' }}
+                              >
+                                {fetchedCharacterClassObject.feature?.map((feat) => (
+                                  feat.choices?.map((choice) => (
+                                    <MenuItem value={choice.id}>
+                                      {choice.name}
+                                    </MenuItem>
+                                  ))
+                                ))}
+                              </Select>
+                            </FormControl>
+                          </DialogContentText>
+                        </DialogContent>
+                      </>
+                    )}
+                    <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
+                      <Button onClick={handleClose} autoFocus>
+                        OK
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </>
+              ))
+            }
           </RadioGroup>
         </FormControl>
       </Container>

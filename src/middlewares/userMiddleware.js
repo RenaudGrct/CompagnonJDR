@@ -44,7 +44,6 @@ const instance = axios.create({
   baseURL: process.env.API_BASE_URL,
   withCredentials: process.env.NODE_ENV === 'production',
 });
-console.log("BASE URL DE L'API : ", process.env.API_BASE_URL);
 // instance.interceptors.response.use(() => {
 //   console.log('cc');
 // });
