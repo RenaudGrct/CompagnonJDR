@@ -303,7 +303,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
             console.log(error);
           })
           .finally(() => {
-            console.log(`url ${config.url}`);
           });
       }
       else if (user.guestId) {
