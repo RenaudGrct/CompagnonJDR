@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 // import Avatar from 'src/components/Character/Creation/Name/Avatar';
 
-import CharacterCreation from 'src/components/Character/Creation';
-
 export default function Name() {
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.characters.character);
@@ -15,7 +13,6 @@ export default function Name() {
   return (
 
     <>
-      <CharacterCreation />
 
       <Container
         maxwidth="sm"

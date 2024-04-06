@@ -91,7 +91,7 @@ export default function CharacterManagement() {
           }}
         >Mes Personnages
         </Typography>
-        <Link to="/creation/name">
+        <Link to="/creation">
           <Button
             color="secondary"
             variant="contained"

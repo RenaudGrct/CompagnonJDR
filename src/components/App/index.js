@@ -117,12 +117,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/characters" element={<CharacterManagement />} />
           <Route path="/creation" element={<CharacterCreation />} />
-          <Route path="/creation/name" element={<Name />} />
-          <Route path="/creation/class" element={<Class />} />
-          <Route path="/creation/race" element={<Race />} />
-          <Route path="/creation/background" element={<Background />} />
-          <Route path="/creation/stats" element={<Stats />} />
-          <Route path="/creation/validate" element={<Validate />} />
           <Route path="/creation/avatar" element={<Avatar />} />
           <Route path="/character" element={<MyCharacterDetails />} />
           {/* <Route path="/character/equipment" element={<CharacterEquipment />} />

@@ -20,8 +20,6 @@ import Chip from '@mui/material/Chip';
 
 import { useEffect } from 'react';
 
-import CharacterCreation from 'src/components/Character/Creation';
-
 import classes from 'src/assets/Data/classes.json';
 
 import {
@@ -74,7 +72,6 @@ export default function Class() {
 
   return (
     <>
-      <CharacterCreation />
       <Container
         sx={{
           display: 'flex',

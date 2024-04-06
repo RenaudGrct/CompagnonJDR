@@ -1,4 +1,3 @@
-import CharacterCreation from 'src/components/Character/Creation';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -66,7 +65,6 @@ export default function Race() {
   return (
 
     <>
-      <CharacterCreation />
       <Container
         sx={{
           display: 'flex',

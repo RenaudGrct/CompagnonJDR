@@ -48,7 +48,6 @@ export default function CharacterDetails() {
 
   const handleCreationSubmit = (e) => {
     e.preventDefault();
-    console.log('a la bien cousin');
     dispatch(submitCharacterCreation());
     navigate('/characters');
   };

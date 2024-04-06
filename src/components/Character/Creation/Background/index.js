@@ -25,8 +25,6 @@ import {
   getBackground,
 } from 'src/actions/characters';
 
-import CharacterCreation from 'src/components/Character/Creation';
-
 // import backgrounds from 'src/assets/Data/backgrounds.json';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -57,7 +55,6 @@ export default function Background() {
   return (
 
     <>
-      <CharacterCreation />
       <Container
         sx={{
           display: 'flex',
