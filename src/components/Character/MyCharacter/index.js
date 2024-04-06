@@ -187,7 +187,7 @@ export default function MyCharacterDetails() {
         >Race
         </Item>
         {abilityRace?.map((ability) => (
-          <>
+          <div>
             <Paper
               sx={{
                 backgroundColor: 'primary.main',
@@ -220,7 +220,7 @@ export default function MyCharacterDetails() {
             >
               langues connues
             </Paper>
-            {langue.map((l) => (
+            {langue?.map((l) => (
               <Paper sx={{
                 backgroundColor: 'secondary.dark',
                 fontFamily: 'monospace',
@@ -230,7 +230,7 @@ export default function MyCharacterDetails() {
                 { l }
               </Paper>
             ))}
-          </>
+          </div>
 
         ))}
         <Item sx={{
@@ -295,7 +295,7 @@ export default function MyCharacterDetails() {
           jets de sauvegarde
         </Paper>
         {proficiencies?.map((proficiency) => (
-          proficiency.saving_throws.map((t) => (
+          proficiency.saving_throws?.map((t) => (
             <Paper sx={{
               backgroundColor: 'secondary.dark',
               fontFamily: 'monospace',
@@ -319,7 +319,7 @@ export default function MyCharacterDetails() {
           aptitudes de classe
         </Paper>
         {proficiencies?.map((proficiency) => (
-          proficiency.skills.map((skill) => (
+          proficiency.skills?.map((skill) => (
             <Paper sx={{
               backgroundColor: 'secondary.dark',
               fontFamily: 'monospace',

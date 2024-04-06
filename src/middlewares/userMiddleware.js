@@ -114,7 +114,6 @@ const userMiddleware = (store) => (next) => async (action) => {
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             localStorage.removeItem('guestId');
-            console.log('submit user register succes');
           })
           .catch((error) => {
             store.dispatch(submitError(error.response.data));
@@ -141,8 +140,6 @@ const userMiddleware = (store) => (next) => async (action) => {
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             localStorage.removeItem('guestId');
-            console.log(response.data);
-            console.log('submit guest register succes');
           })
           .catch((error) => {
             store.dispatch(submitError(error.response.data));

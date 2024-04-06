@@ -42,7 +42,6 @@ export default function CharacterManagement() {
 
   useEffect(() => {
     dispatch(handleIsRedirect());
-    console.log('hello');
     return () => {
       dispatch(handleIsSuccess());
     };
@@ -55,7 +54,6 @@ export default function CharacterManagement() {
   const navigate = useNavigate();
 
   const handleCharacterDeletion = (e) => {
-    console.log('je suis le handleCharacterDeletion');
     dispatch(storeCharacterId(e.currentTarget.value));
     dispatch(submitCharacterDeletion());
   };
@@ -142,7 +140,6 @@ export default function CharacterManagement() {
                       <IconButton
                         value={character.id}
                         onClick={(e) => {
-                          console.log(e.currentTarget.value);
                           navigate('/character');
                           dispatch(storeCharacterId(e.currentTarget.value));
                         }}

@@ -43,7 +43,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
 
       instance(`races/${characters.character.selectedRace}`, config)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(getRaceSuccess(response.data));
         })
         .catch((error) => {
@@ -71,7 +70,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
 
       instance(`classes/${characters.character.selectedClass}`, config)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(getClassSuccess(response.data));
         })
         .catch((error) => {
@@ -250,17 +248,18 @@ const charactersMiddleware = (store) => (next) => (action) => {
             Authorization: `bearer ${token}`,
           },
         };
-        instance(`character/user/${user.userId}`, config)
-          .then((response) => {
-            store.dispatch(getAllCharactersSuccess(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
-      }
-      else if (user.guestId) {
+        if (user.userId) {
+          instance(`character/user/${user.userId}`, config)
+            .then((response) => {
+              store.dispatch(getAllCharactersSuccess(response.data));
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+            .finally(() => {
+            });
+        }
+      } else {
         const config = {
           method: 'get',
           headers: {
@@ -268,15 +267,17 @@ const charactersMiddleware = (store) => (next) => (action) => {
             Authorization: `bearer ${token}`,
           },
         };
-        instance(`character/guest/${user.guestId}`, config)
-          .then((response) => {
-            store.dispatch(getAllCharactersSuccess(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
+        if (user.guestId) {
+          instance(`character/guest/${user.guestId}`, config)
+            .then((response) => {
+              store.dispatch(getAllCharactersSuccess(response.data));
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+            .finally(() => {
+            });
+        }
       }
       break;
     }

@@ -76,17 +76,15 @@ function App() {
   //   const userId = localStorage.getItem('userId');
   //   const guest = localStorage.getItem('guest');
 
-  //   // if (token && userId && guest) {
-  //   //   dispatch(getUserProfile());
-  //   //   // coder une autre methode pour le guest
-  //   //   dispatch(retrieveUserDataFromLocalStorage(token, userId));
-  //   //   console.log('je suis le guest');
-  //   // }
+  // if (token && userId && guest) {
+  //   dispatch(getUserProfile());
+  // coder une autre methode pour le guest
+  //   dispatch(retrieveUserDataFromLocalStorage(token, userId));
+  // }
 
   //   if (token && userId) {
   //     dispatch(getUserProfile());
   //     dispatch(retrieveUserDataFromLocalStorage(token, userId));
-  //     console.log('je suis le user');
   //   }
   // }, []);
 

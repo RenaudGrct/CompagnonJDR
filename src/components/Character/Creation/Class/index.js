@@ -230,7 +230,7 @@ export default function Class() {
                                     ))} */}
 
                             <p>caracteristiques :</p>
-                            {fetchedCharacterClassObject.feature.map((feat) => (
+                            {fetchedCharacterClassObject.feature?.map((feat) => (
                               <>
                                 <p key={feat.feature_name}>{feat.feature_name} : </p>
                                 <p>{feat.description}</p>
@@ -238,7 +238,7 @@ export default function Class() {
                                 <p>réinitialisation : {feat.reset}</p>
                               </>
                             ))}
-                            {fetchedCharacterClassObject.feature.map((feat) => (
+                            {fetchedCharacterClassObject.feature?.map((feat) => (
                               feat.choices?.map((choice) => (
                                 <>
                                   <p>{choice.name}:</p>

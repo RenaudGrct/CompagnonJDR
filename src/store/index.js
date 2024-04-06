@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-
 import reducer from 'src/reducers';
 import charactersMiddleware from '../middlewares/charactersMiddleware';
 import userMiddleware from '../middlewares/userMiddleware';
