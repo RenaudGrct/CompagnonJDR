@@ -186,8 +186,9 @@ export const storeCharacterId = (id) => ({
   id,
 });
 
-export const getCharacter = () => ({
+export const getCharacter = (id) => ({
   type: GET_CHARACTER,
+  id,
 });
 
 export const getCharacterSuccess = (response) => ({

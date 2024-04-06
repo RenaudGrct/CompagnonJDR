@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getCharacter } from 'src/actions/characters';
+import { useParams } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,9 +22,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function MyCharacterDetails() {
+  const { id } = useParams();
   const {
-    storedCharacterId,
-  } = useSelector((state) => state.characters.character);
+    userId,
+  } = useSelector((state) => state.user);
 
   const {
     selectedCharacterName,
@@ -48,8 +50,8 @@ export default function MyCharacterDetails() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCharacter());
-  }, [storedCharacterId]);
+    dispatch(getCharacter(id));
+  }, [id, userId]);
 
   return (
 

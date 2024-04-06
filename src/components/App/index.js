@@ -118,7 +118,7 @@ function App() {
           <Route path="/characters" element={<CharacterManagement />} />
           <Route path="/creation" element={<CharacterCreation />} />
           <Route path="/creation/avatar" element={<Avatar />} />
-          <Route path="/character" element={<MyCharacterDetails />} />
+          <Route path="/character/:id" element={<MyCharacterDetails />} />
           {/* <Route path="/character/equipment" element={<CharacterEquipment />} />
           <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
           <Route path="/character/history" element={<CharacterHistory />} /> */}

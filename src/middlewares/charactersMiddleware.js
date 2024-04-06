@@ -285,7 +285,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
     case GET_CHARACTER: {
       const token = localStorage.getItem('token');
       const { user } = store.getState();
-      const { characters } = store.getState();
       next(action);
       if (!user.guestId) {
         const config = {
@@ -295,7 +294,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
             Authorization: `bearer ${token}`,
           },
         };
-        instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
+        instance(`character/${action.id}/user/${user.userId}`, config)
           .then((response) => {
             store.dispatch(getCharacterSuccess(response.data));
           })
@@ -313,7 +312,7 @@ const charactersMiddleware = (store) => (next) => (action) => {
             Authorization: `bearer ${token}`,
           },
         };
-        instance(`character/${characters.character.storedCharacterId}/guest/${user.guestId}`, config)
+        instance(`character/${action.id}/guest/${user.guestId}`, config)
           .then((response) => {
             store.dispatch(getCharacterSuccess(response.data));
           })

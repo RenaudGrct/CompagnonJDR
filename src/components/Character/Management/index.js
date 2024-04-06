@@ -8,7 +8,6 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
-// import AddIcon from '@mui/icons-material/Add';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
@@ -22,7 +21,6 @@ import {
 import {
   submitCharacterDeletion,
   getAllCharacters,
-  // getCharacter,
   storeCharacterId,
 } from 'src/actions/characters';
 
@@ -140,7 +138,7 @@ export default function CharacterManagement() {
                       <IconButton
                         value={character.id}
                         onClick={(e) => {
-                          navigate('/character');
+                          navigate(`/character/${character.id}`);
                           dispatch(storeCharacterId(e.currentTarget.value));
                         }}
                       >

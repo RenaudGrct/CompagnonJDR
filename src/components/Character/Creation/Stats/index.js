@@ -179,169 +179,166 @@ export default function Stats() {
   };
 
   return (
-    <>
-      <Container
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '5rem',
+      }}
+    >
+      <Typography
+        variant="h5"
+        noWrap
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          flexGrow: 1,
+          fontFamily: 'monospace',
+          fontWeight: 700,
+          letterSpacing: '.2rem',
+          // color: 'primary.contrastText',
+          textDecoration: 'none',
+          marginBottom: '5rem',
+        }}
+      >Choix des Statistiques
+      </Typography>
+      <div className="maxiscene">
+        <div className="maxicube show-1">
+          <div className="maxicube__face maxicube__face--1">2</div>
+          <div className="maxicube__face maxicube__face--2">1</div>
+          <div className="maxicube__face maxicube__face--3">3</div>
+          <div className="maxicube__face maxicube__face--4">4</div>
+          <div className="maxicube__face maxicube__face--5">5</div>
+          <div className="maxicube__face maxicube__face--6">6</div>
+        </div>
+      </div>
+      <div className="diceContainer">
+        <div className="scene">
+          <div value="diceResult1" className={`cube show-${diceResultOne}`}>
+            <div className="cube__face cube__face--1">1</div>
+            <div className="cube__face cube__face--2">2</div>
+            <div className="cube__face cube__face--3">3</div>
+            <div className="cube__face cube__face--4">4</div>
+            <div className="cube__face cube__face--5">5</div>
+            <div className="cube__face cube__face--6">6</div>
+          </div>
+        </div>
+
+        <div className="scene">
+          <div value="diceResult2" className={`cube show-${diceResultTwo}`}>
+            <div className="cube__face cube__face--1">1</div>
+            <div className="cube__face cube__face--2">2</div>
+            <div className="cube__face cube__face--3">3</div>
+            <div className="cube__face cube__face--4">4</div>
+            <div className="cube__face cube__face--5">5</div>
+            <div className="cube__face cube__face--6">6</div>
+          </div>
+        </div>
+
+        <div className="scene">
+          <div value="diceResult3" className={`cube show-${diceResultThree}`}>
+            <div className="cube__face cube__face--1">1</div>
+            <div className="cube__face cube__face--2">2</div>
+            <div className="cube__face cube__face--3">3</div>
+            <div className="cube__face cube__face--4">4</div>
+            <div className="cube__face cube__face--5">5</div>
+            <div className="cube__face cube__face--6">6</div>
+          </div>
+        </div>
+
+        <div className="scene">
+          <div value="diceResult4" className={`cube show-${diceResultFour}`}>
+            <div className="cube__face cube__face--1">1</div>
+            <div className="cube__face cube__face--2">2</div>
+            <div className="cube__face cube__face--3">3</div>
+            <div className="cube__face cube__face--4">4</div>
+            <div className="cube__face cube__face--5">5</div>
+            <div className="cube__face cube__face--6">6</div>
+          </div>
+        </div>
+      </div>
+      <Button
+        color="secondary"
+        variant="contained"
+        type="button"
+        sx={{
+          width: '15rem',
           marginTop: '5rem',
         }}
+        onClick={() => {
+          dispatch(resetThrows());
+        }}
       >
-        <Typography
-          variant="h5"
-          noWrap
-          sx={{
-            flexGrow: 1,
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.2rem',
-            // color: 'primary.contrastText',
-            textDecoration: 'none',
-            marginBottom: '5rem',
-          }}
-        >Choix des Statistiques
-        </Typography>
-        <div className="maxiscene">
-          <div className="maxicube show-1">
-            <div className="maxicube__face maxicube__face--1">2</div>
-            <div className="maxicube__face maxicube__face--2">1</div>
-            <div className="maxicube__face maxicube__face--3">3</div>
-            <div className="maxicube__face maxicube__face--4">4</div>
-            <div className="maxicube__face maxicube__face--5">5</div>
-            <div className="maxicube__face maxicube__face--6">6</div>
-          </div>
-        </div>
-        <div className="diceContainer">
-          <div className="scene">
-            <div value="diceResult1" className={`cube show-${diceResultOne}`}>
-              <div className="cube__face cube__face--1">1</div>
-              <div className="cube__face cube__face--2">2</div>
-              <div className="cube__face cube__face--3">3</div>
-              <div className="cube__face cube__face--4">4</div>
-              <div className="cube__face cube__face--5">5</div>
-              <div className="cube__face cube__face--6">6</div>
-            </div>
-          </div>
+        Relancés les Dés
+      </Button>
 
-          <div className="scene">
-            <div value="diceResult2" className={`cube show-${diceResultTwo}`}>
-              <div className="cube__face cube__face--1">1</div>
-              <div className="cube__face cube__face--2">2</div>
-              <div className="cube__face cube__face--3">3</div>
-              <div className="cube__face cube__face--4">4</div>
-              <div className="cube__face cube__face--5">5</div>
-              <div className="cube__face cube__face--6">6</div>
-            </div>
-          </div>
+      <div className="result_dice">
 
-          <div className="scene">
-            <div value="diceResult3" className={`cube show-${diceResultThree}`}>
-              <div className="cube__face cube__face--1">1</div>
-              <div className="cube__face cube__face--2">2</div>
-              <div className="cube__face cube__face--3">3</div>
-              <div className="cube__face cube__face--4">4</div>
-              <div className="cube__face cube__face--5">5</div>
-              <div className="cube__face cube__face--6">6</div>
-            </div>
-          </div>
+        <DiceRoll
+          handleChange={(e) => dispatch(selectStat(e.target.value, sumOne))}
+          result={sumOne}
+          diceRoll={handleDiceRollOnClickOne}
+          diceResultOne={miniDice1}
+          diceResultTwo={miniDice2}
+          diceResultThree={miniDice3}
+          diceResultFour={miniDice4}
+          isDiceSum={isDiceSumOne}
+        />
+        <DiceRoll
+          handleChange={(e) => dispatch(selectStat(e.target.value, sumTwo))}
+          result={sumTwo}
+          diceRoll={handleDiceRollOnClickTwo}
+          diceResultOne={miniDice5}
+          diceResultTwo={miniDice6}
+          diceResultThree={miniDice7}
+          diceResultFour={miniDice8}
+          isDiceSum={isDiceSumTwo}
+        />
+        <DiceRoll
+          handleChange={(e) => dispatch(selectStat(e.target.value, sumThree))}
+          result={sumThree}
+          diceRoll={handleDiceRollOnClickThree}
+          diceResultOne={miniDice9}
+          diceResultTwo={miniDice10}
+          diceResultThree={miniDice11}
+          diceResultFour={miniDice12}
+          isDiceSum={isDiceSumThree}
+        />
+        <DiceRoll
+          handleChange={(e) => dispatch(selectStat(e.target.value, sumFour))}
+          result={sumFour}
+          diceRoll={handleDiceRollOnClickFour}
+          diceResultOne={miniDice13}
+          diceResultTwo={miniDice14}
+          diceResultThree={miniDice15}
+          diceResultFour={miniDice16}
+          isDiceSum={isDiceSumFour}
 
-          <div className="scene">
-            <div value="diceResult4" className={`cube show-${diceResultFour}`}>
-              <div className="cube__face cube__face--1">1</div>
-              <div className="cube__face cube__face--2">2</div>
-              <div className="cube__face cube__face--3">3</div>
-              <div className="cube__face cube__face--4">4</div>
-              <div className="cube__face cube__face--5">5</div>
-              <div className="cube__face cube__face--6">6</div>
-            </div>
-          </div>
-        </div>
-        <Button
-          color="secondary"
-          variant="contained"
-          type="button"
-          sx={{
-            width: '15rem',
-            marginTop: '5rem',
-          }}
-          onClick={() => {
-            dispatch(resetThrows());
-          }}
-        >
-          Relancés les Dés
-        </Button>
+        />
+        <DiceRoll
+          handleChange={(e) => dispatch(selectStat(e.target.value, sumFive))}
+          result={sumFive}
+          diceRoll={handleDiceRollOnClickFive}
+          diceResultOne={miniDice17}
+          diceResultTwo={miniDice18}
+          diceResultThree={miniDice19}
+          diceResultFour={miniDice20}
+          isDiceSum={isDiceSumFive}
 
-        <div className="result_dice">
+        />
+        <DiceRoll
+          handleChange={(e) => dispatch(selectStat(e.target.value, sumSix))}
+          result={sumSix}
+          diceRoll={handleDiceRollOnClickSix}
+          diceResultOne={miniDice21}
+          diceResultTwo={miniDice22}
+          diceResultThree={miniDice23}
+          diceResultFour={miniDice24}
+          isDiceSum={isDiceSumSix}
 
-          <DiceRoll
-            handleChange={(e) => dispatch(selectStat(e.target.value, sumOne))}
-            result={sumOne}
-            diceRoll={handleDiceRollOnClickOne}
-            diceResultOne={miniDice1}
-            diceResultTwo={miniDice2}
-            diceResultThree={miniDice3}
-            diceResultFour={miniDice4}
-            isDiceSum={isDiceSumOne}
-          />
-          <DiceRoll
-            handleChange={(e) => dispatch(selectStat(e.target.value, sumTwo))}
-            result={sumTwo}
-            diceRoll={handleDiceRollOnClickTwo}
-            diceResultOne={miniDice5}
-            diceResultTwo={miniDice6}
-            diceResultThree={miniDice7}
-            diceResultFour={miniDice8}
-            isDiceSum={isDiceSumTwo}
-          />
-          <DiceRoll
-            handleChange={(e) => dispatch(selectStat(e.target.value, sumThree))}
-            result={sumThree}
-            diceRoll={handleDiceRollOnClickThree}
-            diceResultOne={miniDice9}
-            diceResultTwo={miniDice10}
-            diceResultThree={miniDice11}
-            diceResultFour={miniDice12}
-            isDiceSum={isDiceSumThree}
-          />
-          <DiceRoll
-            handleChange={(e) => dispatch(selectStat(e.target.value, sumFour))}
-            result={sumFour}
-            diceRoll={handleDiceRollOnClickFour}
-            diceResultOne={miniDice13}
-            diceResultTwo={miniDice14}
-            diceResultThree={miniDice15}
-            diceResultFour={miniDice16}
-            isDiceSum={isDiceSumFour}
+        />
 
-          />
-          <DiceRoll
-            handleChange={(e) => dispatch(selectStat(e.target.value, sumFive))}
-            result={sumFive}
-            diceRoll={handleDiceRollOnClickFive}
-            diceResultOne={miniDice17}
-            diceResultTwo={miniDice18}
-            diceResultThree={miniDice19}
-            diceResultFour={miniDice20}
-            isDiceSum={isDiceSumFive}
-
-          />
-          <DiceRoll
-            handleChange={(e) => dispatch(selectStat(e.target.value, sumSix))}
-            result={sumSix}
-            diceRoll={handleDiceRollOnClickSix}
-            diceResultOne={miniDice21}
-            diceResultTwo={miniDice22}
-            diceResultThree={miniDice23}
-            diceResultFour={miniDice24}
-            isDiceSum={isDiceSumSix}
-
-          />
-
-        </div>
-      </Container>
-    </>
-
+      </div>
+    </Container>
   );
 }

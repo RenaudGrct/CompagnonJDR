@@ -38,6 +38,7 @@ export default function DiceRoller({
         <InputLabel sx={{ color: 'primary.contrastText' }}>Stat</InputLabel>
         <Select
           value={statsDropdown}
+          defaultValue=""
           label="stats"
           onChange={(e) => handleChange(e)}
           sx={{ width: '10rem', marginTop: '1rem', color: 'primary.contrastText' }}
