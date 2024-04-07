@@ -45,15 +45,12 @@ const instance = axios.create({
   withCredentials: process.env.NODE_ENV === 'production',
 });
 // instance.interceptors.response.use(() => {
-//   console.log('cc');
 // });
 
 // const setInstanceAuthorization = () => {
 //   if (localStorage.getItem('token')) {
-//     console.log(localStorage);
 //     const token = localStorage.getItem('token');
 //     instance.defaults.headers.common.authorization = token;
-//     console.log(instance.defaults.headers.common);
 //   }
 // };
 // setInstanceAuthorization();
@@ -78,7 +75,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       }
       catch (error) {
         store.dispatch(submitError(error.response.data));
-        console.log(error);
       }
       store.dispatch(handleIsLoading());
 
@@ -117,7 +113,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           })
           .catch((error) => {
             store.dispatch(submitError(error.response.data));
-            console.log(error);
           })
           .finally(() => {
             store.dispatch(handleIsLoading());
@@ -143,7 +138,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           })
           .catch((error) => {
             store.dispatch(submitError(error.response.data));
-            console.log(error);
           })
           .finally(() => {
             store.dispatch(handleIsLoading());
@@ -164,11 +158,9 @@ const userMiddleware = (store) => (next) => async (action) => {
     //     store.dispatch(deleteUserProfileSuccess(response.data));
     //     localStorage.removeItem('token');
     //     localStorage.removeItem('userId');
-    //     console.log(response);
     //   }
     //   catch (error) {
     //     store.dispatch(deleteUserProfileError());
-    //     console.log(error);
     //   }
 
     //   store.dispatch(logOut());
@@ -199,7 +191,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
@@ -228,7 +219,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(deleteUserProfileError(error.response.data));
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(logOut());
@@ -256,7 +246,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(updateUserProfileError(error.response.data));
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
@@ -285,7 +274,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           store.dispatch(logAsGuestError(error.response.data));
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(handleIsLoading());
@@ -305,14 +293,14 @@ const userMiddleware = (store) => (next) => async (action) => {
           Authorization: `bearer ${user.token}`
         }
       };
-
-      instance(`profile/${user.userId}`, config)
-        .then((response) => {
-          store.dispatch(saveUserProfile(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (user.userID) {
+        instance(`profile/${user.userId}`, config)
+          .then((response) => {
+            store.dispatch(saveUserProfile(response.data));
+          })
+          .catch((error) => {
+          });
+      }
       break;
     }
 
@@ -328,14 +316,14 @@ const userMiddleware = (store) => (next) => async (action) => {
           Authorization: `bearer ${user.token}`
         }
       };
-
-      instance(`guest/${user.guestId}`, config)
-        .then((response) => {
-          store.dispatch(saveGuestProfile(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (user.guestId) {
+        instance(`guest/${user.guestId}`, config)
+          .then((response) => {
+            store.dispatch(saveGuestProfile(response.data));
+          })
+          .catch((error) => {
+          });
+      }
       break;
     }
 
@@ -344,12 +332,9 @@ const userMiddleware = (store) => (next) => async (action) => {
 
     //   try {
     //     const response = await instance.get(`${user.userId}`);
-    //     console.log(response);
     //     store.dispatch(saveUserProfile(response.data));
-    //     console.log(`User email is ${response.data.email}`);
     //   }
     //   catch (error) {
-    //     console.log(error);
     //   }
     // }
     //   break;
@@ -378,10 +363,8 @@ export default userMiddleware;
 // axios(config)
 //   .then((response) => {
 //     store.dispatch(saveUserProfile(response.data));
-//     console.log(response);
 //   })
 //   .catch((error) => {
-//     console.log(error);
 
 //   })
 

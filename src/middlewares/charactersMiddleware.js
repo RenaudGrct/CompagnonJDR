@@ -46,7 +46,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
           store.dispatch(getRaceSuccess(response.data));
         })
         .catch((error) => {
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(raceIsFetched());
@@ -73,7 +72,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
           store.dispatch(getClassSuccess(response.data));
         })
         .catch((error) => {
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(classIsFetched());
@@ -99,7 +97,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
           store.dispatch(getBackgroundSuccess(response.data));
         })
         .catch((error) => {
-          console.log(error);
         });
       // .finally(() => {
       //   store.dispatch(backgroundIsFetched());
@@ -149,18 +146,17 @@ const charactersMiddleware = (store) => (next) => (action) => {
               },
           },
         };
-
-        instance(`character/user/${user.userId}`, config)
-          .then((response) => {
-            store.dispatch(submitCharacterCreationSuccess(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
-      }
-      else if (user.guestId) {
+        if (user.userId) {
+          instance(`character/user/${user.userId}`, config)
+            .then((response) => {
+              store.dispatch(submitCharacterCreationSuccess(response.data));
+            })
+            .catch((error) => {
+            })
+            .finally(() => {
+            });
+        }
+      } else {
         const config = {
           method: 'post',
           headers: {
@@ -195,16 +191,16 @@ const charactersMiddleware = (store) => (next) => (action) => {
                 },
           },
         };
-
-        instance(`character/guest/${user.guestId}`, config)
-          .then((response) => {
-            store.dispatch(submitCharacterCreationSuccess(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
+        if (user.guestId) {
+          instance(`character/guest/${user.guestId}`, config)
+            .then((response) => {
+              store.dispatch(submitCharacterCreationSuccess(response.data));
+            })
+            .catch((error) => {
+            })
+            .finally(() => {
+            });
+        }
       }
       break;
     }
@@ -229,7 +225,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
           store.dispatch(submitCharacterDeletionSuccess(response.data));
         })
         .catch((error) => {
-          console.log(error);
         })
         .finally(() => {
         });
@@ -254,7 +249,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
               store.dispatch(getAllCharactersSuccess(response.data));
             })
             .catch((error) => {
-              console.log(error);
             })
             .finally(() => {
             });
@@ -273,7 +267,6 @@ const charactersMiddleware = (store) => (next) => (action) => {
               store.dispatch(getAllCharactersSuccess(response.data));
             })
             .catch((error) => {
-              console.log(error);
             })
             .finally(() => {
             });
@@ -294,17 +287,17 @@ const charactersMiddleware = (store) => (next) => (action) => {
             Authorization: `bearer ${token}`,
           },
         };
-        instance(`character/${action.id}/user/${user.userId}`, config)
-          .then((response) => {
-            store.dispatch(getCharacterSuccess(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
-      }
-      else if (user.guestId) {
+        if (user.userId) {
+          instance(`character/${action.id}/user/${user.userId}`, config)
+            .then((response) => {
+              store.dispatch(getCharacterSuccess(response.data));
+            })
+            .catch((error) => {
+            })
+            .finally(() => {
+            });
+        }
+      } else {
         const config = {
           method: 'get',
           headers: {
@@ -312,15 +305,16 @@ const charactersMiddleware = (store) => (next) => (action) => {
             Authorization: `bearer ${token}`,
           },
         };
-        instance(`character/${action.id}/guest/${user.guestId}`, config)
-          .then((response) => {
-            store.dispatch(getCharacterSuccess(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
-          });
+        if (user.guestId) {
+          instance(`character/${action.id}/guest/${user.guestId}`, config)
+            .then((response) => {
+              store.dispatch(getCharacterSuccess(response.data));
+            })
+            .catch((error) => {
+            })
+            .finally(() => {
+            });
+        }
       }
       break;
     }
