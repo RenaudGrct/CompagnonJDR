@@ -13,17 +13,7 @@ import HomePage from 'src/components/HomePage';
 import Profile from 'src/components/Profile';
 import Footer from 'src/components/Footer';
 import CharacterCreation from 'src/components/Character/Creation';
-import Name from 'src/components/Character/Creation/Name';
-import Class from 'src/components/Character/Creation/Class';
-import Race from 'src/components/Character/Creation/Race';
-import Background from 'src/components/Character/Creation/Background';
-import Stats from 'src/components/Character/Creation/Stats';
-import Validate from 'src/components/Character/Creation/Validate';
 import Avatar from 'src/components/Character/Creation/Name/Avatar';
-// import Character from 'src/components/Character/Details';
-// import CharacterEquipment from 'src/components/Character/Details/Equipment';
-// import CharacterProficiencies from 'src/components/Character/Details/Proficiencies';
-// import CharacterHistory from 'src/components/Character/Details/History';
 import NotFound from 'src/components/404';
 import MyCharacterDetails from 'src/components/Character/MyCharacter';
 
@@ -35,7 +25,6 @@ import {
   retrieveGuestDataFromLocalStorage,
   getGuestProfile,
 } from 'src/actions/user';
-// import { getBackground } from 'src/actions/characters';
 
 const theme = createTheme({
 
@@ -71,23 +60,6 @@ const theme = createTheme({
 function App() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   const userId = localStorage.getItem('userId');
-  //   const guest = localStorage.getItem('guest');
-
-  // if (token && userId && guest) {
-  //   dispatch(getUserProfile());
-  // coder une autre methode pour le guest
-  //   dispatch(retrieveUserDataFromLocalStorage(token, userId));
-  // }
-
-  //   if (token && userId) {
-  //     dispatch(getUserProfile());
-  //     dispatch(retrieveUserDataFromLocalStorage(token, userId));
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (localStorage.getItem('token') && localStorage.getItem('userId')) {
       const token = localStorage.getItem('token');
@@ -119,9 +91,6 @@ function App() {
           <Route path="/creation" element={<CharacterCreation />} />
           <Route path="/creation/avatar" element={<Avatar />} />
           <Route path="/character/:id" element={<MyCharacterDetails />} />
-          {/* <Route path="/character/equipment" element={<CharacterEquipment />} />
-          <Route path="/character/proficiencies" element={<CharacterProficiencies />} />
-          <Route path="/character/history" element={<CharacterHistory />} /> */}
           <Route path="*" element={<NotFound />} />
 
         </Routes>
@@ -131,5 +100,4 @@ function App() {
   );
 }
 
-// == Export
 export default App;

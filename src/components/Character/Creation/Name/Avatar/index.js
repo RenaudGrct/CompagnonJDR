@@ -13,7 +13,6 @@ export default function Avatar() {
   const handleClose = () => setOpen(false);
 
   const handleImageSelection = (event) => {
-    console.log(event.target);
     handleClose();
   };
 

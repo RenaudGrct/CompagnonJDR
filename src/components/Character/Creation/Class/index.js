@@ -48,11 +48,8 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Class() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('hello');
-    return () => {
-      dispatch(toggleIsFetched());
-    };
+  useEffect(() => () => {
+    dispatch(toggleIsFetched());
   }, []);
 
   const {
@@ -71,51 +68,49 @@ export default function Class() {
   };
 
   return (
-    <>
-      <Container
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '5rem',
+      }}
+    >
+      <FormControl
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
           justifyContent: 'center',
-          marginTop: '5rem',
+          alignItems: 'center',
         }}
       >
-        <FormControl
+        <Typography
+          variant="h5"
+          noWrap
           sx={{
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            textDecoration: 'none',
+            marginBottom: '5rem',
+          }}
+        >Choix de la Classe
+        </Typography>
+        <RadioGroup
+          // row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          sx={{
+            gap: '3rem',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <Typography
-            variant="h5"
-            noWrap
-            sx={{
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              // color: 'primary.contrastText',
-              textDecoration: 'none',
-              marginBottom: '5rem',
-            }}
-          >Choix de la Classe
-          </Typography>
-          <RadioGroup
-          // row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            sx={{
-              gap: '3rem',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {
+          {
               classes.map((classSelected) => (
                 <>
                   <Box
@@ -141,7 +136,6 @@ export default function Class() {
                         label={classSelected.name}
                         checked={selectedClass === classSelected.name}
                         onClick={(event) => {
-                          console.log(event);
                           dispatch(selectClass(event.target.value));
                           dispatch(getClass());
                           if (selectedClass !== '') {
@@ -175,7 +169,7 @@ export default function Class() {
                         </DialogTitle>
                         <DialogContent sx={{ backgroundColor: 'primary.main' }}>
                           <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
-                            {/* <p>Point de vie : {characterClass.hit_point}</p> */}
+                            {}
                             <p>jets de sauvegarde :</p>
                             {
                           fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
@@ -197,17 +191,12 @@ export default function Class() {
                                   if (newValue.length <= 2) {
                                     dispatch(selectSkills(newValue));
                                   }
-                                  console.log(newValue);
                                 }}
-                                //  defaultValue="fait tes choix"
                                 renderTags={(value, getTagProps) => value.map((option, index) => (
                                   <Chip
-                                  //  onClick={(e) => dispatch(selectSkills(e.target.value))}
-                                  //  key={option.name}
                                     variant="outlined"
                                     label={option.name}
                                     {...getTagProps({ index })}
-                                  //  onDelete={() => console.log('je delete')}
                                   />
                                 ))}
                                 renderInput={(params) => (
@@ -220,11 +209,7 @@ export default function Class() {
                               />
                             ))}
 
-                            {/* {characterClass.proficiencies.map((proficiency) => (
-                                  proficiency.skills.map((skill) => (
-                                    // <p key={skill.name}>{skill.name},</p>
-                                    ))
-                                    ))} */}
+                            {}
 
                             <p>caracteristiques :</p>
                             {fetchedCharacterClassObject.feature?.map((feat) => (
@@ -274,9 +259,8 @@ export default function Class() {
                 </>
               ))
             }
-          </RadioGroup>
-        </FormControl>
-      </Container>
-    </>
+        </RadioGroup>
+      </FormControl>
+    </Container>
   );
 }

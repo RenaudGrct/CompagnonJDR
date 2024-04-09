@@ -22,8 +22,8 @@ import {
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://api-compagnonjdr.onrender.com/api',
-  withCredentials: true,
+  baseURL: process.env.API_BASE_URL,
+  withCredentials: process.env.NODE_ENV === 'production',
 });
 
 const charactersMiddleware = (store) => (next) => (action) => {
@@ -156,7 +156,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
             .finally(() => {
             });
         }
-      } else {
+      }
+      else {
         const config = {
           method: 'post',
           headers: {
@@ -209,6 +210,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
       const userToken = localStorage.getItem('token');
       const { user } = store.getState();
       const { characters } = store.getState();
+      console.log('User Store : ', user);
+      console.log('Character store : ', characters);
 
       next(action);
 
@@ -219,15 +222,26 @@ const charactersMiddleware = (store) => (next) => (action) => {
           Authorization: `bearer ${userToken}`,
         },
       };
-
-      instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
-        .then((response) => {
-          store.dispatch(submitCharacterDeletionSuccess(response.data));
-        })
-        .catch((error) => {
-        })
-        .finally(() => {
-        });
+      if (user.userId) {
+        instance(`character/${characters.character.storedCharacterId}/user/${user.userId}`, config)
+          .then((response) => {
+            store.dispatch(submitCharacterDeletionSuccess(response.data));
+          })
+          .catch((error) => {
+          })
+          .finally(() => {
+          });
+      }
+      else {
+        instance(`character/${characters.character.storedCharacterId}/guest/${user.guestId}`, config)
+          .then((response) => {
+            store.dispatch(submitCharacterDeletionSuccess(response.data));
+          })
+          .catch((error) => {
+          })
+          .finally(() => {
+          });
+      }
     }
       break;
 
@@ -253,7 +267,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
             .finally(() => {
             });
         }
-      } else {
+      }
+      else {
         const config = {
           method: 'get',
           headers: {
@@ -297,7 +312,8 @@ const charactersMiddleware = (store) => (next) => (action) => {
             .finally(() => {
             });
         }
-      } else {
+      }
+      else {
         const config = {
           method: 'get',
           headers: {

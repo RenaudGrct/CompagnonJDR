@@ -43,11 +43,8 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Race() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('hello');
-    return () => {
-      dispatch(toggleIsFetched());
-    };
+  useEffect(() => () => {
+    dispatch(toggleIsFetched());
   }, []);
 
   const {
@@ -64,92 +61,91 @@ export default function Race() {
 
   return (
 
-    <>
-      <Container
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '5rem',
+      }}
+    >
+      <FormControl
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
           justifyContent: 'center',
-          marginTop: '5rem',
+          alignItems: 'center',
         }}
       >
-        <FormControl
+        <Typography
+          variant="h5"
+          noWrap
           sx={{
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            // color: 'primary.contrastText',
+            textDecoration: 'none',
+            marginBottom: '5rem',
+          }}
+        >Choix de la Race
+        </Typography>
+        <RadioGroup
+          // row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          sx={{
+            // color: 'primary.contrastText',
+            gap: '6rem',
             display: 'flex',
-            justifyContent: 'center',
+            flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'center',
+            width: '60%',
           }}
         >
-          <Typography
-            variant="h5"
-            noWrap
-            sx={{
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              // color: 'primary.contrastText',
-              textDecoration: 'none',
-              marginBottom: '5rem',
-            }}
-          >Choix de la Race
-          </Typography>
-          <RadioGroup
-          // row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            sx={{
-            // color: 'primary.contrastText',
-              gap: '6rem',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '60%',
-            }}
-          >
-            <>
-              {races.map((raceSelected) => (
+          <>
+            {races.map((raceSelected) => (
 
-                <>
-                  <Box
-                    key={raceSelected.name}
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
+              <>
+                <Box
+                  key={raceSelected.name}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Item sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '1rem',
+                    width: '20rem',
+                  }}
                   >
-                    <Item sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '1rem',
-                      width: '20rem',
-                    }}
-                    >
-                      <Avatar alt="User Avatar" src={raceSelected.image} sx={{ width: 84, height: 84 }} />
-                      <FormControlLabel
-                        value={raceSelected.name}
-                        label={raceSelected.name}
-                        checked={selectedRace === raceSelected.name}
-                        onClick={(event) => {
-                          dispatch(selectRace(event.target.value));
-                          dispatch(getRace());
-                        }}
-                        control={<Radio sx={{ color: 'primary.contrastText' }} />}
-                        labelPlacement="top"
-                      />
-                    </Item>
+                    <Avatar alt="User Avatar" src={raceSelected.image} sx={{ width: 84, height: 84 }} />
+                    <FormControlLabel
+                      value={raceSelected.name}
+                      label={raceSelected.name}
+                      checked={selectedRace === raceSelected.name}
+                      onClick={(event) => {
+                        dispatch(selectRace(event.target.value));
+                        dispatch(getRace());
+                      }}
+                      control={<Radio sx={{ color: 'primary.contrastText' }} />}
+                      labelPlacement="top"
+                    />
+                  </Item>
 
-                  </Box>
-                  <Dialog
-                    open={!modalIsClosed && (selectedRace === raceSelected.name)}
-                    onClose={handleClose}
-                  >
-                    { raceIsFetched && (
+                </Box>
+                <Dialog
+                  open={!modalIsClosed && (selectedRace === raceSelected.name)}
+                  onClose={handleClose}
+                >
+                  { raceIsFetched && (
                     <>
                       <DialogTitle sx={{
                         backgroundColor: 'secondary.main',
@@ -166,23 +162,7 @@ export default function Race() {
                           {fetchedCharacterRaceObject?.racial_ability?.map((ability) => (
                             <>
                               <p key={ability.racial_ability_name}>{ability.description}</p>
-                              {/* <FormControl sx={{ width: '100%', marginTop: '1rem' }}>
-                                <InputLabel>abilité</InputLabel>
-                                 <Select
-                                  value={racialAbility}
-                                  label="stats"
-                                  onChange={(e) =>
-                                    dispatch(selectStat('racialAbility', e.target.value))}
-                                  sx={{ width: '10rem', marginTop: '1rem' }}
-                                >
-                                  {ability.choice.map((choosen) => (
-
-                                    <MenuItem value={choosen}>{choosen}</MenuItem>
-
-                                  ))}
-
-                                </Select>
-                              </FormControl> */}
+                              {}
                             </>
                           ))}
                           <p>vitesse de: {fetchedCharacterRaceObject?.speed}</p>
@@ -198,21 +178,20 @@ export default function Race() {
                         </DialogContentText>
                       </DialogContent>
                     </>
-                    )}
-                    <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
-                      <Button onClick={handleClose} autoFocus>
-                        OK
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                </>
-              ))}
-            </>
+                  )}
+                  <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
+                    <Button onClick={handleClose} autoFocus>
+                      OK
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </>
+            ))}
+          </>
 
-          </RadioGroup>
-        </FormControl>
-      </Container>
-    </>
+        </RadioGroup>
+      </FormControl>
+    </Container>
 
   );
 }

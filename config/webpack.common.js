@@ -37,7 +37,7 @@ module.exports = {
       favicon: paths.assets + '/favicon.ico',
       template: paths.assets + '/index.html',
     }),
-    // new Dotenv()
+    new Dotenv()
   ],
 
   module: {

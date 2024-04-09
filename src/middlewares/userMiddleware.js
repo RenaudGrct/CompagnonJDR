@@ -41,8 +41,8 @@ import {
 import { clearCharacters } from 'src/actions/characters';
 
 const instance = axios.create({
-  baseURL: 'https://api-compagnonjdr.onrender.com/api',
-  withCredentials: true,
+  baseURL: process.env.API_BASE_URL,
+  withCredentials: process.env.NODE_ENV === 'production',
 });
 // instance.interceptors.response.use(() => {
 // });
@@ -99,9 +99,9 @@ const userMiddleware = (store) => (next) => async (action) => {
         const config = {
           method: 'post',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
-          data: { email: user.userEmail, username: user.userName, password: user.userPassword }
+          data: { email: user.userEmail, username: user.userName, password: user.userPassword },
         };
 
         instance('auth/register', config)
@@ -118,15 +118,14 @@ const userMiddleware = (store) => (next) => async (action) => {
             store.dispatch(handleIsLoading());
           });
       }
-      else if (user.guestId) {
+      else {
         const config = {
-
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `bearer ${user.token}`
+            Authorization: `bearer ${user.token}`,
           },
-          data: { email: user.userEmail, username: user.userName, password: user.userPassword }
+          data: { email: user.userEmail, username: user.userName, password: user.userPassword },
         };
 
         instance(`guest/${user.guestId}/confirm-register`, config)
@@ -176,13 +175,13 @@ const userMiddleware = (store) => (next) => async (action) => {
         method: 'patch',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`
+          Authorization: `bearer ${user.token}`,
         },
         data: {
           email: user.userEmail,
           username: user.userName,
-          password: user.userPassword
-        }
+          password: user.userPassword,
+        },
       };
 
       instance(`profile/${user.userId}`, config)
@@ -207,8 +206,8 @@ const userMiddleware = (store) => (next) => async (action) => {
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`
-        }
+          Authorization: `bearer ${user.token}`,
+        },
       };
 
       instance(`profile/${user.userId}`, config)
@@ -237,7 +236,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
         },
-        data: { password: user.userPassword, newPassword: user.userNewPassword }
+        data: { password: user.userPassword, newPassword: user.userNewPassword },
       };
 
       instance(`profile/${user.userId}`, config)
@@ -263,7 +262,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${user.token}`,
-        }
+        },
       };
 
       instance('auth/guest', config)
@@ -290,8 +289,8 @@ const userMiddleware = (store) => (next) => async (action) => {
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`
-        }
+          Authorization: `bearer ${user.token}`,
+        },
       };
       if (user.userID) {
         instance(`profile/${user.userId}`, config)
@@ -313,8 +312,8 @@ const userMiddleware = (store) => (next) => async (action) => {
         // NOUVELLE ROUTE
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${user.token}`
-        }
+          Authorization: `bearer ${user.token}`,
+        },
       };
       if (user.guestId) {
         instance(`guest/${user.guestId}`, config)
@@ -327,46 +326,9 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
     }
 
-    // case GET_USER_PROFILE2: {
-    //   const { user } = store.getState();
-
-    //   try {
-    //     const response = await instance.get(`${user.userId}`);
-    //     store.dispatch(saveUserProfile(response.data));
-    //   }
-    //   catch (error) {
-    //   }
-    // }
-    //   break;
-
     default:
       next(action);
   }
 };
 
 export default userMiddleware;
-
-// case GET_USER_PROFILE: {
-//   const { user } = store.getState();
-
-// const config = {
-
-//   method: 'post',
-//   url: `http://10.22.16.54:4000/api/profile/${user.userId}`,
-//   headers: {
-//     'Content-Type': 'application/json',
-//     Authorization: `bearer ${user.token}`,
-//   },
-//   withCredentials: true,
-// };
-
-// axios(config)
-//   .then((response) => {
-//     store.dispatch(saveUserProfile(response.data));
-//   })
-//   .catch((error) => {
-
-//   })
-
-// break;
-// }
