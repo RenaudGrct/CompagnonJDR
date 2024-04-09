@@ -22,8 +22,8 @@ import {
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.API_BASE_URL,
-  withCredentials: process.env.NODE_ENV === 'production',
+  baseURL: 'https://api-compagnonjdr.onrender.com/api',
+  withCredentials: true,
 });
 
 const charactersMiddleware = (store) => (next) => (action) => {
