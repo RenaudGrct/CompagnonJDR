@@ -158,13 +158,10 @@ export const logAsGuest = () => ({
   type: LOG_AS_GUEST,
 });
 
-export const logAsGuestSuccess = (response) => {
-  console.log(response);
-  return {
-    type: LOG_AS_GUEST_SUCCESS,
-    ...response,
-  };
-};
+export const logAsGuestSuccess = (response) => ({
+  type: LOG_AS_GUEST_SUCCESS,
+  ...response,
+});
 
 export const logAsGuestError = (response) => ({
   type: LOG_AS_GUEST_ERROR,

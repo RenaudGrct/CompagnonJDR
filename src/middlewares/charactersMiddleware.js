@@ -22,7 +22,7 @@ import {
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.API_BASE_URL,
+  baseURL: 'https://api-compagnonjdr.onrender.com/',
   withCredentials: process.env.NODE_ENV === 'production',
 });
 
