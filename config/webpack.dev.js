@@ -2,7 +2,7 @@ const paths = require('./paths');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
 
 const port = 8080;
 
@@ -12,7 +12,7 @@ module.exports = merge(common, {
   plugins: [
     // Recharge uniquement ce qu'il y a besoin
     new webpack.HotModuleReplacementPlugin(),
-    new Dotenv()
+    // new Dotenv()
   ],
   module: {
     rules: [
