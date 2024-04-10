@@ -64,7 +64,7 @@ export default function Profile() {
   return (
     <div id="profile">
       <CssBaseline />
-      <Container fixed="true">
+      <Container fixed="true" centered="true">
         <Box
           component="form"
           sx={{
