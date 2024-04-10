@@ -32,16 +32,16 @@ function Homepage() {
   }, []);
 
   useEffect(() => {
-    if (isLogged) {
+    if (isLogged || isLoggedAsGuest) {
       navigate('/characters');
     }
-  }, [isLogged]);
+  }, [isLogged, isLoggedAsGuest]);
 
-  useEffect(() => {
-    if (isLoggedAsGuest) {
-      navigate('/characters');
-    }
-  }, [isLoggedAsGuest]);
+  // useEffect(() => {
+  //   if (isLoggedAsGuest) {
+  //     navigate('/characters');
+  //   }
+  // }, [isLoggedAsGuest]);
 
   return (
 
