@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import ProfileDeleteAlert from 'src/components/Profile/ProfileDeleteAlert';
+import './style.scss';
 
 import Field from 'src/components/InputField';
 
@@ -86,7 +87,7 @@ export default function Profile() {
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
 
           { isReadOnly && !isChangePassword && (
-            <div>
+            <div id="profile_info">
               <TextField
                 sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
                 color="secondary"
