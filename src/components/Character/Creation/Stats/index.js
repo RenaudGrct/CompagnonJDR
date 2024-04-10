@@ -276,64 +276,64 @@ export default function Stats() {
 
         <DiceRoll
           handleChange={(e) => dispatch(selectStat(e.target.value, sumOne))}
-          result={sumOne}
+          result={sumOne.toString()}
           diceRoll={handleDiceRollOnClickOne}
-          diceResultOne={miniDice1}
-          diceResultTwo={miniDice2}
-          diceResultThree={miniDice3}
-          diceResultFour={miniDice4}
+          diceResultOne={miniDice1.toString()}
+          diceResultTwo={miniDice2.toString()}
+          diceResultThree={miniDice3.toString()}
+          diceResultFour={miniDice4.toString()}
           isDiceSum={isDiceSumOne}
         />
         <DiceRoll
           handleChange={(e) => dispatch(selectStat(e.target.value, sumTwo))}
-          result={sumTwo}
+          result={sumTwo.toString()}
           diceRoll={handleDiceRollOnClickTwo}
-          diceResultOne={miniDice5}
-          diceResultTwo={miniDice6}
-          diceResultThree={miniDice7}
-          diceResultFour={miniDice8}
+          diceResultOne={miniDice5.toString()}
+          diceResultTwo={miniDice6.toString()}
+          diceResultThree={miniDice7.toString()}
+          diceResultFour={miniDice8.toString()}
           isDiceSum={isDiceSumTwo}
         />
         <DiceRoll
           handleChange={(e) => dispatch(selectStat(e.target.value, sumThree))}
-          result={sumThree}
+          result={sumThree.toString()}
           diceRoll={handleDiceRollOnClickThree}
-          diceResultOne={miniDice9}
-          diceResultTwo={miniDice10}
-          diceResultThree={miniDice11}
-          diceResultFour={miniDice12}
+          diceResultOne={miniDice9.toString()}
+          diceResultTwo={miniDice10.toString()}
+          diceResultThree={miniDice11.toString()}
+          diceResultFour={miniDice12.toString()}
           isDiceSum={isDiceSumThree}
         />
         <DiceRoll
           handleChange={(e) => dispatch(selectStat(e.target.value, sumFour))}
-          result={sumFour}
+          result={sumFour.toString()}
           diceRoll={handleDiceRollOnClickFour}
-          diceResultOne={miniDice13}
-          diceResultTwo={miniDice14}
-          diceResultThree={miniDice15}
-          diceResultFour={miniDice16}
+          diceResultOne={miniDice13.toString()}
+          diceResultTwo={miniDice14.toString()}
+          diceResultThree={miniDice15.toString()}
+          diceResultFour={miniDice16.toString()}
           isDiceSum={isDiceSumFour}
 
         />
         <DiceRoll
           handleChange={(e) => dispatch(selectStat(e.target.value, sumFive))}
-          result={sumFive}
+          result={sumFive.toString()}
           diceRoll={handleDiceRollOnClickFive}
-          diceResultOne={miniDice17}
-          diceResultTwo={miniDice18}
-          diceResultThree={miniDice19}
-          diceResultFour={miniDice20}
+          diceResultOne={miniDice17.toString()}
+          diceResultTwo={miniDice18.toString()}
+          diceResultThree={miniDice19.toString()}
+          diceResultFour={miniDice20.toString()}
           isDiceSum={isDiceSumFive}
 
         />
         <DiceRoll
           handleChange={(e) => dispatch(selectStat(e.target.value, sumSix))}
-          result={sumSix}
+          result={sumSix.toString()}
           diceRoll={handleDiceRollOnClickSix}
-          diceResultOne={miniDice21}
-          diceResultTwo={miniDice22}
-          diceResultThree={miniDice23}
-          diceResultFour={miniDice24}
+          diceResultOne={miniDice21.toString()}
+          diceResultTwo={miniDice22.toString()}
+          diceResultThree={miniDice23.toString()}
+          diceResultFour={miniDice24.toString()}
           isDiceSum={isDiceSumSix}
 
         />

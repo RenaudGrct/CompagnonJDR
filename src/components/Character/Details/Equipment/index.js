@@ -9,7 +9,7 @@ import CharacterCreation from 'src/components/Character/Creation';
 export default function Equipment() {
   return (
 
-    <>
+    <div id="Equipment">
       <CharacterCreation />
       <Details />
       <CssBaseline />
@@ -28,6 +28,6 @@ export default function Equipment() {
         </Box>
       </Container>
 
-    </>
+    </div>
   );
 }

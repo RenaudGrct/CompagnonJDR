@@ -54,9 +54,9 @@ export default function Register() {
   }, []);
 
   return (
-    <>
+    <div id="register">
       <CssBaseline />
-      <Container fixed>
+      <Container fixed="true">
         {isLoading && <CircularProgress />}
         <Box
           component="form"
@@ -122,6 +122,6 @@ export default function Register() {
 
         </Box>
       </Container>
-    </>
+    </div>
   );
 }

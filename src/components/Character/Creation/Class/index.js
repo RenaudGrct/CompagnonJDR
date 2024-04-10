@@ -112,7 +112,7 @@ export default function Class() {
         >
           {
               classes.map((classSelected) => (
-                <>
+                <div key={classSelected.name}>
                   <Box
                     key={classSelected.name}
                     sx={{
@@ -145,7 +145,6 @@ export default function Class() {
                         control={<Radio sx={{ color: 'primary.contrastText' }} />}
                         sx={{ display: 'flex', justifyContent: 'space-between' }}
                       />
-
                     </Item>
                   </Box>
                   <Dialog
@@ -154,9 +153,8 @@ export default function Class() {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                   >
-
                     { classIsFetched && (
-                      <>
+                      <div id="classFetched">
                         <DialogTitle sx={{
                           backgroundColor: 'secondary.main',
                           display: 'flex',
@@ -169,7 +167,6 @@ export default function Class() {
                         </DialogTitle>
                         <DialogContent sx={{ backgroundColor: 'primary.main' }}>
                           <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
-                            {}
                             <p>jets de sauvegarde :</p>
                             {
                           fetchedCharacterClassObject?.proficiencies?.map((proficiency) => (
@@ -208,24 +205,21 @@ export default function Class() {
                                 )}
                               />
                             ))}
-
-                            {}
-
                             <p>caracteristiques :</p>
                             {fetchedCharacterClassObject.feature?.map((feat) => (
-                              <>
+                              <div key={feat.name}>
                                 <p key={feat.feature_name}>{feat.feature_name} : </p>
                                 <p>{feat.description}</p>
                                 <p>nombre d'utilistation: {feat.number_of_use}</p>
                                 <p>réinitialisation : {feat.reset}</p>
-                              </>
+                              </div>
                             ))}
                             {fetchedCharacterClassObject.feature?.map((feat) => (
                               feat.choices?.map((choice) => (
-                                <>
+                                <div key={choice.name}>
                                   <p>{choice.name}:</p>
                                   <p>{choice.description}</p>
-                                </>
+                                </div>
                               ))
                             ))}
                             <p>choisit ta caracteristique :</p>
@@ -248,7 +242,7 @@ export default function Class() {
                             </FormControl>
                           </DialogContentText>
                         </DialogContent>
-                      </>
+                      </div>
                     )}
                     <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
                       <Button onClick={handleClose} autoFocus>
@@ -256,7 +250,7 @@ export default function Class() {
                       </Button>
                     </DialogActions>
                   </Dialog>
-                </>
+                </div>
               ))
             }
         </RadioGroup>

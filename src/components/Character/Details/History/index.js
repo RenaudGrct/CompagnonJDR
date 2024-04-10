@@ -9,7 +9,7 @@ import CharacterCreation from 'src/components/Character/Creation';
 export default function History() {
   return (
 
-    <>
+    <div id="history">
       <CharacterCreation />
       <Details />
       <CssBaseline />
@@ -22,6 +22,6 @@ export default function History() {
         </Box>
       </Container>
 
-    </>
+    </div>
   );
 }

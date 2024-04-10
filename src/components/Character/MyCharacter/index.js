@@ -188,8 +188,8 @@ export default function MyCharacterDetails() {
         }}
         >Race
         </Item>
-        {abilityRace?.map((ability) => (
-          <div>
+        {abilityRace?.map((ability, index) => (
+          <div key={`${ability.racial_ability_name}${index}`}>
             <Paper
               sx={{
                 backgroundColor: 'primary.main',
@@ -242,7 +242,7 @@ export default function MyCharacterDetails() {
         >Classe
         </Item>
         {features?.map((feat) => (
-          <>
+          <div key={feat.name}>
             <Paper sx={{
               backgroundColor: 'primary.main',
               fontFamily: 'monospace',
@@ -262,7 +262,7 @@ export default function MyCharacterDetails() {
               {feat.description}
             </Paper>
             {feat.choice?.map((c) => (
-              <>
+              <div key={c.name}>
                 <Paper sx={{
                   backgroundColor: 'primary.main',
                   fontFamily: 'monospace',
@@ -281,9 +281,9 @@ export default function MyCharacterDetails() {
                 >
                   {c.description}
                 </Paper>
-              </>
+              </div>
             ))}
-          </>
+          </div>
         ))}
 
         <Paper sx={{
@@ -339,7 +339,6 @@ export default function MyCharacterDetails() {
             backgroundColor: 'secondary.main',
             fontFamily: 'monospace',
           }}
-          centered
         >
           Historique
         </Item>

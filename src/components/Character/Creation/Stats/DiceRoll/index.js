@@ -44,10 +44,9 @@ export default function DiceRoller({
           sx={{ width: '10rem', marginTop: '1rem', color: 'primary.contrastText' }}
         >
           {
-            stats.map((stat) => (
-
+            stats.map((stat, index) => (
               <MenuItem
-                key={stat.sourceName}
+                key={`${stat.sourceName}${index}`}
                 value={stat.sourceName}
               >
                 {stat.localizedName}

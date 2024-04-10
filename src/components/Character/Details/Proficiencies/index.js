@@ -9,7 +9,7 @@ import CharacterCreation from 'src/components/Character/Creation';
 export default function CharacterProficiencies() {
   return (
 
-    <>
+    <div id="proficiencies">
       <CharacterCreation />
       <CharacterDetails />
       <CssBaseline />
@@ -34,6 +34,6 @@ export default function CharacterProficiencies() {
         </Box>
       </Container>
 
-    </>
+    </div>
   );
 }

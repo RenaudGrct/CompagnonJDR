@@ -71,7 +71,7 @@ export default function Background() {
           alignItems: 'center',
         }}
       >
-        <>
+        <div>
           <Typography
             variant="h5"
             noWrap
@@ -102,7 +102,6 @@ export default function Background() {
             >
 
               {backgrounds.map((background) => (
-
                 <Box
                   key={background.name}
                   sx={{
@@ -119,7 +118,6 @@ export default function Background() {
                     width: '20rem',
                   }}
                   >
-
                     <FormControlLabel
                       labelPlacement="start"
                       value={background.id}
@@ -129,7 +127,6 @@ export default function Background() {
                       control={<Radio sx={{ color: 'primary.contrastText' }} />}
                       sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
                     />
-
                   </Item>
                 </Box>
               ))}
@@ -155,10 +152,6 @@ export default function Background() {
                       <p>capacité : {background.ability}</p>
                       <p>{background.ability_description}</p>
                       <p>langue additionnelle : {background.additional_language}</p>
-                      {/* {background.skills.map((skill) => (
-                      <p key={skill}>{skill},</p>
-                    ))} */}
-
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
@@ -172,7 +165,7 @@ export default function Background() {
             </RadioGroup>
           )
             : <CircularProgress sx={{ marginTop: '10rem' }} color="secondary" />}
-        </>
+        </div>
         {/* )} */}
       </FormControl>
     </Container>

@@ -41,7 +41,7 @@ import {
 import { clearCharacters } from 'src/actions/characters';
 
 const instance = axios.create({
-  baseURL: process.env.API_BASE_URL || 'https://api-compagnonjdr.onrender.com/api',
+  baseURL: process.env.API_BASE_URL,
   withCredentials: process.env.NODE_ENV === 'production',
 });
 // instance.interceptors.response.use(() => {

@@ -45,9 +45,10 @@ function Homepage() {
 
   return (
 
-    <>
+    <div id="homepage">
       <CssBaseline />
       <Container
+        centered
         fixed
         sx={{
           display: 'flex',
@@ -113,7 +114,7 @@ function Homepage() {
 
         </Box>
       </Container>
-    </>
+    </div>
   );
 }
 

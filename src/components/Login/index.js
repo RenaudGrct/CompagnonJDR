@@ -71,11 +71,11 @@ export default function Login() {
   const handleClose = () => setOpen(false);
 
   return (
-    <>
-
+    <div id="login">
       <CssBaseline />
       <Container
-        fixed
+        centered="true"
+        fixed="true"
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -172,7 +172,7 @@ export default function Login() {
         </Modal>
       </div>
       )}
-    </>
+    </div>
 
   );
 }

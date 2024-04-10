@@ -62,9 +62,9 @@ export default function Profile() {
   }
 
   return (
-    <>
+    <div id="profile">
       <CssBaseline />
-      <Container fixed>
+      <Container fixed="true">
         <Box
           component="form"
           sx={{
@@ -86,19 +86,20 @@ export default function Profile() {
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
 
           { isReadOnly && !isChangePassword && (
-            <><TextField
-              sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
-              color="secondary"
-              disabled
-              id="outlined-disabled"
-              label="Nom d'utilisateur"
-              name="userName"
-              value={userName}
-              InputProps={{
-                readOnly: true,
-              }}
-              variant="filled"
-            />
+            <div>
+              <TextField
+                sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
+                color="secondary"
+                disabled
+                id="outlined-disabled"
+                label="Nom d'utilisateur"
+                name="userName"
+                value={userName}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="filled"
+              />
               <TextField
                 sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
                 color="secondary"
@@ -135,25 +136,26 @@ export default function Profile() {
                 Modifier mot de passe
               </Button>
               <ProfileDeleteAlert />
-            </>
+            </div>
           )}
 
           {!isReadOnly && (
-          <><Field
-            required
-            id="outlined-required"
-            label="Nom d'utilisateur"
-            name="userName"
-            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-            value={userName}
-          /><Field
-            required
-            id="outlined-required"
-            label="Email"
-            name="userEmail"
-            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-            value={userEmail}
-          />
+          <div id="information">
+            <Field
+              required
+              id="outlined-required"
+              label="Nom d'utilisateur"
+              name="userName"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userName}
+            /><Field
+              required
+              id="outlined-required"
+              label="Email"
+              name="userEmail"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userEmail}
+            />
             <Field
               required
               id="outlined-required"
@@ -163,20 +165,21 @@ export default function Profile() {
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={userPassword}
             />
-          </>
+          </div>
 
           )}
           {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identiques !</Alert>}
           {isChangePassword && (
-          <><Field
-            required
-            id="outlined-required"
-            label="Mot de passe"
-            type="password"
-            name="userPassword"
-            onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
-            value={userPassword}
-          />
+          <div>
+            <Field
+              required
+              id="outlined-required"
+              label="Mot de passe"
+              type="password"
+              name="userPassword"
+              onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
+              value={userPassword}
+            />
             <Field
               required
               id="outlined-required"
@@ -195,7 +198,7 @@ export default function Profile() {
               onChange={(newValue, fieldName) => dispatch(changeInputField(newValue, fieldName))}
               value={userConfirmPassword}
             />
-          </>
+          </div>
           )}
 
           { !isReadOnly && (
@@ -240,6 +243,6 @@ export default function Profile() {
           )}
         </Box>
       </Container>
-    </>
+    </div>
   );
 }

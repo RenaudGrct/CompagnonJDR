@@ -58,7 +58,7 @@ export default function CharacterManagement() {
   };
 
   return (
-    <>
+    <div id="management">
       {isSuccess && <Alert severity="success">Votre Profil a bien été mis a jour !</Alert>}
       <IconButton
         sx={{ transform: 'scale(3)' }}
@@ -105,11 +105,9 @@ export default function CharacterManagement() {
         </Link>
         {myCharacters.length ? (
           <Grid sx={{ display: 'flex', justifyContent: 'center' }} container spacing={2}>
-            {myCharacters.map((character) => (
-
-              <Grid key={character.name} sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
+            {myCharacters.map((character, index) => (
+              <Grid key={`${character.name}${index}`} sx={{ transform: 'scale(0.6)' }} item xs={7} sm={6} md={3}>
                 <Card>
-
                   <CardMedia
                     component="img"
                     src={`images/${character.race}.jpg`}
@@ -172,6 +170,6 @@ export default function CharacterManagement() {
           : <Alert sx={{ marginTop: '5rem' }} severity="info">Vous n'avez pas de personnages</Alert>}
 
       </Box>
-    </>
+    </div>
   );
 }

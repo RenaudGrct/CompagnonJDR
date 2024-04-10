@@ -112,7 +112,6 @@ export default function Header() {
             >
 
               {isLoggedSettings.map((setting) => (
-
                 <Link key={setting.label} to={setting.url}>
                   <MenuItem
                     key={setting.label}
@@ -161,7 +160,6 @@ export default function Header() {
             >
 
               {isGuestSettings.map((setting) => (
-
                 <Link key={setting.label} to={setting.url}>
                   <MenuItem
                     onClick={handleCloseUserMenu}

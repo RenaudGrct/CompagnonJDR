@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectRace,
   handleModalIsClosed,
-  // selectStat,
   getRace,
   toggleIsFetched,
 } from 'src/actions/characters';
@@ -105,10 +104,9 @@ export default function Race() {
             width: '60%',
           }}
         >
-          <>
+          <div>
             {races.map((raceSelected) => (
-
-              <>
+              <div key={raceSelected.name}>
                 <Box
                   key={raceSelected.name}
                   sx={{
@@ -146,7 +144,7 @@ export default function Race() {
                   onClose={handleClose}
                 >
                   { raceIsFetched && (
-                    <>
+                    <div id="raceIsFetched">
                       <DialogTitle sx={{
                         backgroundColor: 'secondary.main',
                         display: 'flex',
@@ -160,10 +158,7 @@ export default function Race() {
                       <DialogContent sx={{ backgroundColor: 'primary.main' }}>
                         <DialogContentText sx={{ color: 'primary.contrastText', fontFamily: 'monospace' }}>
                           {fetchedCharacterRaceObject?.racial_ability?.map((ability) => (
-                            <>
-                              <p key={ability.racial_ability_name}>{ability.description}</p>
-                              {}
-                            </>
+                            <p key={ability.racial_ability_name}>{ability.description}</p>
                           ))}
                           <p>vitesse de: {fetchedCharacterRaceObject?.speed}</p>
                           <p>Bonus de Race</p>
@@ -177,7 +172,7 @@ export default function Race() {
                           <p>langue supplémentaire: {fetchedCharacterRaceObject?.extra_language}</p>
                         </DialogContentText>
                       </DialogContent>
-                    </>
+                    </div>
                   )}
                   <DialogActions sx={{ backgroundColor: 'secondary.main' }}>
                     <Button onClick={handleClose} autoFocus>
@@ -185,9 +180,9 @@ export default function Race() {
                     </Button>
                   </DialogActions>
                 </Dialog>
-              </>
+              </div>
             ))}
-          </>
+          </div>
 
         </RadioGroup>
       </FormControl>
