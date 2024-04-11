@@ -63,7 +63,7 @@ export default function Profile() {
   }
 
   return (
-    <div id="profile">
+    <div className="profile_info">
       <CssBaseline />
       <Container fixed="true" centered="true">
         <Box
@@ -87,7 +87,7 @@ export default function Profile() {
           {submitError && <Alert severity="error">{errorMessage}!</Alert>}
 
           { isReadOnly && !isChangePassword && (
-            <div id="profile_info">
+            <div className="profile_info">
               <TextField
                 sx={{ input: { color: 'primary', backgroundColor: 'primary.contrastText' } }}
                 color="secondary"
@@ -141,7 +141,7 @@ export default function Profile() {
           )}
 
           {!isReadOnly && (
-          <div id="information">
+          <div className="profile_info">
             <Field
               required
               id="outlined-required"
@@ -171,7 +171,7 @@ export default function Profile() {
           )}
           {isSamePassword && <Alert severity="error">Les mots de passe ne sont pas identiques !</Alert>}
           {isChangePassword && (
-          <div>
+          <div className="profile_info">
             <Field
               required
               id="outlined-required"
